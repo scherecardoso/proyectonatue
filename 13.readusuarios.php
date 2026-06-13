@@ -19,8 +19,8 @@ if ($resultado->num_rows > 0) {
         echo $fila['CI']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']."<br>";
         $CI=$fila['CI'];
         echo "<a href='12.readusuario.php'><button>Mostrar</button></a>"
-        echo "<a href='14.formeditarusuario.php'><button>Editar</button></a>"
-        echo "<a href='16.eliminarusuario.php'><button>Editar</button></a>"
+        echo "<a href='14formeditarusuariophp'><button>Editar</button></a>"
+        echo "<a href='16.eliminarusuario.php'><button>eliminar</button></a>"
     }
 }
 $conn->close();

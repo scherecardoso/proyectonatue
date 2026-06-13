@@ -143,8 +143,7 @@ input.error{
 
     <div class="menu-registro">
     <a href="09.register.php">Iniciar sesión</a>
-
-    <a href="10.formusuario.html" class="activo">Registrarse</a>
+    <a href="10.formusuario.php" class="activo">Registrarse</a>
 </div>
 
     <h2>Crear cuenta</h2>

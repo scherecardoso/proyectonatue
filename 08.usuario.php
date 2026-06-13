@@ -219,7 +219,7 @@ td{
 <header>
     <div class="logo">Natué</div>
     <div class="iconos"><a href="formUsuarios"><i class="fa-solid fa-user"></i></a>
-    <a href="formProductos"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i></a>
     </div>
 </header>
 

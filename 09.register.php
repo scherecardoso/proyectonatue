@@ -140,8 +140,7 @@ input.error{
 <form class="caja-login" method="post" id="iniciarsesion">
 
     <div class="menu-login">
-        <a href="login.php" class="activo">Iniciar sesión</a>
-        <a href="formUsuarios.php">Registrarse</a>
+        <a href="10.formusuario.php">Registrarse</a>
     </div>
 
     <h1 class="titulo">Bienvenida</h1>

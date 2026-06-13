@@ -156,7 +156,11 @@ input.error{
         <p>Actualiza la información del usuario</p>
     </div>
 
+<<<<<<< HEAD:14.formeditarusuario.php
     <form action="15.actualizarusuario.php" method="post" id="valieditarus">
+=======
+    <form action="14.actualizarusuario.php" method="post" id="valieditarus">
+>>>>>>> 19750247a25495b946007d7f962f839b51e61ea1:13.formeditarusuario.php
 
        <label class="campo">
         <i class="fa-solid fa-user-pen"></i>

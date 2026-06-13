@@ -453,14 +453,14 @@ td{
 </div>
   <div class="logo">Natué</div>
   <nav class="nav">
-    <a href="#">Inicio</a>
-    <a href="#">Cuidado</a>
-    <a href="#">Cosméticos</a>
-    <a href="#">Nosotros</a>
+    <a href="#02.inicio.php">Inicio</a>
+    <a href="#03.productos.php">Cuidado</a>
+    <a href="#04.productos2.php">Cosméticos</a>
+    <a href="#05.acercade.php">Nosotros</a>
   </nav>
   <div class="icons">
-    <a href="#"><i class="fa-solid fa-user"></i></a>
-    <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="#10.formusuarios.php"><i class="fa-solid fa-user"></i></a>
+    <a href="#16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
   </div>
 </header>
 <div class="pepcuerpo">

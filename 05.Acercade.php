@@ -180,14 +180,14 @@ nav a.activo:after {
    <li><a href="02.inicio.php" >Inicio</a></li>
    <li><a href="03.productos.php">Cuidado</a></li>
    <li><a href="04.productos2.php">Cosmeticos</a></li>
-   <li><a href="05.Acercade.php"class="activo">Nosotros</a></li>
+   <li><a href="05.acercade.php"class="activo">Nosotros</a></li>
    </ul>
   </nav>
 
 
   <div class="iconos-barra">
    <a href="09.register.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-   <a href="formProductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
+   <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
   </div>
 </header>
 <section class="contenido" style="display:flex; flex-direction:column; align-items:center; gap:60px; padding:60px 0;">

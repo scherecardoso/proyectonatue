@@ -254,14 +254,14 @@ div{
     <li><a href="02.inicio.php">Inicio</a></li>
     <li><a href="03.productos.php">Cuidado</a></li>
     <li><a href="04.productos2.php">Cosmeticos</a></li>
-    <li><a href="05.Acercade.php">Nosotros</a></li>
+    <li><a href="05.acercade.php">Nosotros</a></li>
     </ul>
 </nav>
 
 
     <div class="iconos-barra">
-    <a href="formUsuarios.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-    <a href="formProductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="10.formusuario.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
+    <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
     </div>
 </header>
 
@@ -269,11 +269,11 @@ div{
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
     <a href="06.admin.php"><div><i class="fa-solid fa-house"></i> Inicio</div></a>
-    <a href="readUsuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+    <a href="11.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
     <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <a href="readProducto.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
+    <a href="17.readproductos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
     <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
@@ -281,6 +281,68 @@ div{
 
 <div class="contenedor"><h1>Lista de Usuarios</h1>
 
+<<<<<<< HEAD:13.readusuarios.php
+=======
+<?php
+
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
+
+$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+
+if ($conn->connect_error) {
+    die("Error");
+}
+
+$sql = "SELECT * FROM usuario";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    echo "<table>";
+
+    echo "
+    <tr>
+        <th>CI</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Celular</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    ";
+
+    while($fila = $result->fetch_assoc()) {
+
+        $CI = $fila["CI"];
+
+        echo "<tr>
+            <td>{$fila['CI']}</td>
+            <td>{$fila['nombre']}</td>
+            <td>{$fila['direccion']}</td>
+            <td>{$fila['celular']}</td>
+            <td>{$fila['rol']}</td>
+            <td>{$fila['estado']}</td>
+            <td>
+                <a class='btn editar' href='13.formeditarusuario.php?CI=$CI'>Editar</a>
+                <a class='btn eliminar' href='15.eliminarusuario.php?CI=$CI'>Eliminar</a>
+            </td>
+        </tr>";
+    }
+
+    echo "</table>";
+} else {
+    echo "<p class='sin-datos'>No hay usuarios</p>";
+}
+
+$conn->close();
+
+?>
+
+>>>>>>> 19750247a25495b946007d7f962f839b51e61ea1:11.readusuario.php
 </div>
 </body>
 </html>

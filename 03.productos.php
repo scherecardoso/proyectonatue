@@ -240,21 +240,21 @@ h3{
    <li><a href="02.inicio.php">Inicio</a></li>
    <li><a href="03.productos.php" class="activo">Cuidado</a></li>
    <li><a href="04.productos2.php">Cosmeticos</a></li>
-   <li><a href="05.Acercade.php">Nosotros</a></li>
+   <li><a href="05.acercade.php">Nosotros</a></li>
    </ul>
   </nav>
 
 
   <div class="iconos-barra">
    <a href="09.register.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-   <a href="formProductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
+   <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
   </div>
 </header>
 
 
 <h2 id="titulo1"></h2>
 <div class="caja" id="caja1">
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr2.jpeg" alt="" class=""  >
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr2.jpeg" alt="" class=""  >
       <h3>Serum de Coco</h3>
       <h3>Codigo:PRD-001</h3>   
       <h3>Precio:45Bs</h3>
@@ -263,37 +263,37 @@ h3{
       
       
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr6.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr6.jpeg" alt="" class="">
     <h3>Despigmentante de Achachairu</h3>
     <h3>Codigo: PRD-002</h3>
     <h3>Precio: 55 Bs</h3></div>
     </a>
 
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr19.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr19.jpeg" alt="" class="">
     <h3>Serum de Tamarindo</h3>
     <h3>Codigo: PRD-003</h3>
     <h3>Precio: 48 Bs</h3></div>
     </a>
 
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr16.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr16.jpeg" alt="" class="">
     <h3>Aceite Antiestres de Cacao</h3>
     <h3>Codigo: PRD-004</h3>
     <h3>Precio: 40 Bs</h3></div>
     </a>
 
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr18.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr18.jpeg" alt="" class="">
     <h3>Serum de Chirimoya</h3>
     <h3>Codigo: PRD-005</h3>
     <h3>Precio: 47 Bs</h3></div>
     </a>
 
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr21.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr21.jpeg" alt="" class="">
     <h3>Flores de Kantuta</h3>
     <h3>Codigo: PRD-006</h3>
     <h3>Precio: 35 Bs</h3></div>
     </a>
 
-   <a href="formProductos.php"> <div class="producto"><img src="./img/zpr22.jpeg" alt="" class="">
+   <a href="16.formproductos.php"> <div class="producto"><img src="./img/zpr22.jpeg" alt="" class="">
     <h3>Aceite de Copaiba</h3>
     <h3>Codigo: PRD-007</h3>
     <h3>Precio: 50 Bs</h3></div>
@@ -302,31 +302,31 @@ h3{
 
 <h2 id="titulo2"></h2>
 <div class="caja" id="caja2">
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr11.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr11.jpeg" alt="" class="">
     <h3>Gel de Quinua</h3>
     <h3>Codigo: PRD-008</h3>
     <h3>Precio: 33 Bs</h3></div>
 </a>
 
-     <a href="formProductos.php"><div class="producto"><img src="./img/zpr5.jpeg" alt="" class="">
+     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr5.jpeg" alt="" class="">
     <h3>Gel de Pepino</h3>
     <h3>Codigo: PRD-009</h3>
     <h3>Precio: 30 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr7.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr7.jpeg" alt="" class="">
     <h3>Gel de Sabila</h3>
     <h3>Codigo: PRD-010</h3>
     <h3>Precio: 28 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr14.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr14.jpeg" alt="" class="">
     <h3>Aceite de Coco</h3>
     <h3>Codigo: PRD-011</h3>
     <h3>Precio: 38 Bs</h3></div>
     </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr24.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr24.jpeg" alt="" class="">
     <h3>Bruma de Eucalipto</h3>
     <h3>Codigo: PRD-012</h3>
     <h3>Precio: 32 Bs</h3></div>
@@ -334,31 +334,31 @@ h3{
 
 <h2 id="titulo3"></h2>
 <div class="caja" id="caja3">
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr3.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr3.jpeg" alt="" class="">
     <h3>Suavizante de Papaya</h3>
     <h3>Codigo: PRD-013</h3>
     <h3>Precio: 30 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr4.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr4.jpeg" alt="" class="">
     <h3>Balsamo de Matico</h3>
     <h3>Codigo: PRD-014</h3>
     <h3>Precio: 42 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr8.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr8.jpeg" alt="" class="">
     <h3>Crema de Maracuya y Sabila</h3>
     <h3>Codigo: PRD-015</h3>
     <h3>Precio: 37 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr23.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr23.jpeg" alt="" class="">
     <h3>Exfoliente de Cafe</h3>
     <h3>Codigo: PRD-016</h3>
     <h3>Precio: 34 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr25.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr25.jpeg" alt="" class="">
     <h3>Crema Matificante</h3>
     <h3>Codigo: PRD-017</h3>
     <h3>Precio: 39 Bs</h3></div>
@@ -367,31 +367,31 @@ h3{
 
 <h2 id="titulo4"></h2>
 <div class="caja" id="caja4">
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr9.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr9.jpeg" alt="" class="">
     <h3>Jabon de Semilla de Tarwi</h3>
     <h3>Codigo: PRD-018</h3>
     <h3>Precio: 18 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr44.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr44.jpeg" alt="" class="">
     <h3>Jabon de Avena y Miel</h3>
     <h3>Codigo: PRD-019</h3>
     <h3>Precio: 20 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr45.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr45.jpeg" alt="" class="">
     <h3>Jabon de Rosa Mosqueta</h3>
     <h3>Codigo: PRD-020</h3>
     <h3>Precio: 22 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr46.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr46.jpeg" alt="" class="">
     <h3>Jabon de Curcuma y Manzanilla</h3>
     <h3>Codigo: PRD-021</h3>
     <h3>Precio: 20 Bs</h3></div>
 </a>
 
-    <a href="formProductos.php"><div class="producto"><img src="./img/zpr47.jpeg" alt="" class="">
+    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr47.jpeg" alt="" class="">
     <h3>Jabon de Carbon Activado</h3>
     <h3>Codigo: PRD-022</h3>
     <h3>Precio: 22 Bs</h3></div>

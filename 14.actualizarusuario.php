@@ -10,15 +10,18 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_POST['codigo'];
+$CI = $_POST['CI'];
 $nombre = $_POST['nombre'];
-$descripcion = $_POST['descripcion'];
-$precio = $_POST['precio'];
-$costo = $_POST['costo'];
-$stock = $_POST['stock'];
-$sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo','$nombre', '$descripcion', '$precio',  '$costo','$stock')";
+$direccion = $_POST['direccion'];
+$celular = $_POST['celular'];
+$rol = $_POST['rol'];
+$estado = $_POST['estado'];
+
+$sql = "UPDATE usuario SET nombre='$nombre', direccion='$direccion', celular='$celular', rol='$rol', estado='$estado' WHERE CI=$CI";
+
 if ($conn->query($sql) === TRUE) {
-    header("Location: 17.readproductos.php");
+    echo "Usuario actualizado exitosamente";
+    header("Location: 11.readusuario.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

@@ -3,7 +3,7 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
+$baseDeDatos ="shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     if ($conn->connect_error) {
         echo "hubo un error :(";
     }
-    $idproductos=$_GET['productos'];
+    $codigo=$_GET['codigo'];
     $sql ="SELECT * FROM productos WHERE codigo=$codigo";
     $resultado = $conn->query($sql);
     if($resultado->num_rows > 0){
@@ -36,7 +36,7 @@ if ($conn->connect_error) {
 
 </head>
 <body>
-    <form action="updateproductos.php" method="post">
+    <form action="20.actualizarproductos.php" method="post">
         <label for="codigo">Nombre:</label>
         <input type="hidden" name="codigo" value='<?=$codigo?>'>
         <input type="text" name="nombreproducto" value='<?=$nombreproducto?>'><br>

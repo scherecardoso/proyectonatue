@@ -2,7 +2,7 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
+$baseDeDatos ="shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -16,7 +16,7 @@ $sql = "DELETE FROM usuario WHERE CI=$CI";
 
 if ($conn->query($sql) === TRUE) {
     echo "Usuario eliminado exitosamente";
-    header("Location: readUsuario.php");
+    header("Location: 11.readusuario.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

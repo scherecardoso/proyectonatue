@@ -3,7 +3,7 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
+$baseDeDatos ="shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -164,7 +164,7 @@ input.error{
         <p>Actualiza la información del producto</p>
     </div>
 
-    <form action="actualizarProducto.php" method="post" id="valieditarpro">
+    <form action="20.actualizarproductos.php" method="post" id="valieditarpro">
 
         <input type="hidden" name="codigo" value="<?=$codigo?>">
 

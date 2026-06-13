@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
-$baseDeDatos = "db_natue";
+$baseDeDatos = "shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -44,12 +44,12 @@ if ($result && $result->num_rows > 0) {
             <td>
 
                 <a class='btn editar'
-                href='formEditarProductos.php?codigo=$codigo'>
+                href='19.formeditarproductos.php?codigo=$codigo'>
                 Editar
                 </a>
 
                 <a class='btn eliminar'
-                href='eliminarProducto.php?codigo=$codigo'>
+                href='21.eliminarproductos.php?codigo=$codigo'>
                 Eliminar
                 </a>
 
@@ -346,10 +346,10 @@ h1{
 <li><a href="02.inicio.php">Inicio</a></li>
 <li><a href="03.productos.php">Cuidado</a></li>
 <li><a href="04.productos2.php">Cosmeticos</a></li>
-<li><a href="05.Acercade.php">Nosotros</a></li>
+<li><a href="05.acercade.php">Nosotros</a></li>
 </ul>
 </nav>
-<div class="iconos-barra"><a href="formUsuarios.php"><i class="fa-solid fa-user"></i></a><a href="formProductos.php"><i class="fa-solid fa-bag-shopping"></i></a></div>
+<div class="iconos-barra"><a href="10.formusuarios.php"><i class="fa-solid fa-user"></i></a><a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a></div>
 </header>
 
 
@@ -358,13 +358,13 @@ h1{
 <div class="titulo-menu">MENU ADMINISTRADOR</div>
 
 <a href="06.admin.php"><div><i class="fa-solid fa-house"></i> Inicio</div></a>
-<a href="readUsuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+<a href="11.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
 
  <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
  <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
  <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
 
-<a href="readProducto.php">
+<a href="17.readproductos.php">
  <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
  <div><i class="fa-solid fa-gear"></i> Configuración</div>
  <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>

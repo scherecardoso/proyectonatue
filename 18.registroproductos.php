@@ -2,7 +2,7 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
+$baseDeDatos ="shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -18,7 +18,7 @@ $costo = $_POST['costo'];
 $stock = $_POST['stock'];
 $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo','$nombre', '$descripcion', '$precio',  '$costo','$stock')";
 if ($conn->query($sql) === TRUE) {
-    header("Location: readProducto.php");
+    header("Location: 17.readproductos.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

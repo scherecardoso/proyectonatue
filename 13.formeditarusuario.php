@@ -164,7 +164,7 @@ input.error{
         <p>Actualiza la información del usuario</p>
     </div>
 
-    <form action="actualizarUsuario.php" method="post" id="valieditarus">
+    <form action="14.actualizarusuario.php" method="post" id="valieditarus">
 
        <label class="campo">
         <i class="fa-solid fa-user-pen"></i>

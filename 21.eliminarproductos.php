@@ -2,8 +2,8 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
-
+$baseDeDatos ="shena";
+    
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
 if ($conn->connect_error) {
@@ -16,7 +16,7 @@ $sql = "DELETE * FROM productos WHERE codigo=$codigo";
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto eliminado exitosamente";
-    header("Location: readProducto.php");
+    header("Location: 17.readproductos.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

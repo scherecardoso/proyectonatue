@@ -2,7 +2,7 @@
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
-$baseDeDatos ="db_natue";
+$baseDeDatos ="shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -21,7 +21,7 @@ $sql = "UPDATE productos SET codigo='$codigo', nombre='$nombre', descripcion='$d
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto actualizado exitosamente";
-    header("Location: readProducto.php");
+    header("Location: 17.readproductos.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

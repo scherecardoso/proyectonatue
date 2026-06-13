@@ -113,7 +113,7 @@ input.error{
     <h2>Registro</h2>
     <p>Datos del producto</p>
 
-    <form action="registroProducto.php" method="post" id="valipro">
+    <form action="18.registroproductos.php" method="post" id="valipro">
 
         <label class="campo">
             <i class="fa-solid fa-barcode"></i>

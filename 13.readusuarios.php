@@ -1,3 +1,32 @@
+<?php
+
+$direccion = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
+
+$conn = new mysqli($direccion, $usuario, $contra, $baseDeDatos);
+
+if ($conn->error) {
+    echo "Error";
+}
+
+$sql = "SELECT * FROM usuario";
+$resultado = $conn->query($sql);
+
+if ($resultado->num_rows > 0) {
+    while($fila=$resultado->fetch_assoc()){
+        echo $fila['CI']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']."<br>";
+        $CI=$fila['CI'];
+        echo "<a href='12.readusuario.php'><button>Mostrar</button></a>"
+        echo "<a href='14.formeditarusuario.php'><button>Editar</button></a>"
+        echo "<a href='16.eliminarusuario.php'><button>Editar</button></a>"
+    }
+}
+$conn->close();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -251,65 +280,6 @@ div{
 </aside>
 
 <div class="contenedor"><h1>Lista de Usuarios</h1>
-
-<?php
-
-$servidor = "localhost";
-$usuario = "root";
-$contra = "";
-$baseDeDatos = "shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
-if ($conn->connect_error) {
-    die("Error");
-}
-
-$sql = "SELECT * FROM usuario";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    echo "<table>";
-
-    echo "
-    <tr>
-        <th>CI</th>
-        <th>Nombre</th>
-        <th>Dirección</th>
-        <th>Celular</th>
-        <th>Rol</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-    </tr>
-    ";
-
-    while($fila = $result->fetch_assoc()) {
-
-        $CI = $fila["CI"];
-
-        echo "<tr>
-            <td>{$fila['CI']}</td>
-            <td>{$fila['nombre']}</td>
-            <td>{$fila['direccion']}</td>
-            <td>{$fila['celular']}</td>
-            <td>{$fila['rol']}</td>
-            <td>{$fila['estado']}</td>
-            <td>
-                <a class='btn editar' href='formEditarUsuario.php?CI=$CI'>Editar</a>
-                <a class='btn eliminar' href='eliminarUsuario.php?CI=$CI'>Eliminar</a>
-            </td>
-        </tr>";
-    }
-
-    echo "</table>";
-} else {
-    echo "<p class='sin-datos'>No hay usuarios</p>";
-}
-
-$conn->close();
-
-?>
 
 </div>
 </body>

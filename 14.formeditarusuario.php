@@ -1,36 +1,28 @@
 <?php
-    
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
+$direccion="localhost";
+$usuario="root";
+$contra="";
+$baseDeDatos="shena";
 
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+$conn = new mysqli($direccion, $usuario, $contra, $baseDeDatos);
 
-if ($conn->connect_error) {
-    die("Conexion fallida: " . $conn->connect_error);
+if ($conn->error) {
+    echo "No se conecto a la base de datos."
 }
 
-$CI = $_GET['CI'];
-
-$sql ="SELECT * FROM usuario WHERE CI=$CI"; 
-
-$resultado = $conn->query($sql);
-
-if($resultado->num_rows > 0){
-
-    while($fila = $resultado->fetch_assoc()){
-
-        $nombre = $fila['nombre'];
-        $direccion = $fila['direccion'];
-        $celular = $fila['celular'];
-        $rol = $fila['rol'];
-        $estado = $fila['estado'];
+$CI=$_POST['CI']:
+$sql= "SELECT * FROM usuario WHERE CI='$CI'"; 
+$resultado= $conn->query($sql);
+if ($resultado->num_rows>0){
+    while($fila=$resultado->fetch_assoc()){
+        $CI=$fila['CI'];
+        $nombre=$fila['nombre'];
+        $direccion=$fila['direccion'];
+        $celular=$fila['celular'];
+        $rol=$fila['rol'];
+        $estado=$fila['estado'];
     }
 }
-
-$conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -164,36 +156,36 @@ input.error{
         <p>Actualiza la información del usuario</p>
     </div>
 
-    <form action="actualizarUsuario.php" method="post" id="valieditarus">
+    <form action="15.actualizarusuario.php" method="post" id="valieditarus">
 
        <label class="campo">
         <i class="fa-solid fa-user-pen"></i>
-        <input type="number" name="CI" value="<?=$CI?>"  placeholder="Cédula de identidad">
+        <input type="hidden" name="CI" value=<?=$CI?> placeholder="Cédula de identidad">
        </label> 
 
         <label class="campo">
             <i class="fa-solid fa-user"></i>
-            <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre completo" required>
+            <input type="text" name="nombre" value=<?=$nombre?> placeholder="Nombre completo" required>
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-location-dot"></i>
-            <input type="text" name="direccion" value="<?=$direccion?>" placeholder="Dirección" required>
+            <input type="text" name="direccion" value=<?=$direccion?> placeholder="Dirección" required>
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-phone"></i>
-            <input type="number" name="celular" value="<?=$celular?>" placeholder="Celular" required>
+            <input type="number" name="celular" value=<?=$celular?> placeholder="Celular" required>
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-briefcase"></i>
-            <input type="text" name="rol" value="<?=$rol?>" placeholder="Rol" required>
+            <input type="text" name="rol" value=<?=$rol?> placeholder="Rol" required>
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-circle-check"></i>
-            <input type="text" name="estado" value="<?=$estado?>" placeholder="Estado" required>
+            <input type="text" name="estado" value=<?=$estado?> placeholder="Estado" required>
         </label>
 
     <button>Actualizar usuario</button>

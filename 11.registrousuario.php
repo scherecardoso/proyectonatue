@@ -1,13 +1,13 @@
 <?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
+$direccion="localhost";
+$usuario="root";
+$contra="";
+$baseDeDatos="shena";
 
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+$conn = new mysqli($direccion, $usuario, $contra, $baseDeDatos);
 
-if ($conn->connect_error) {
-    die("Conexion fallida: " . $conn->connect_error);
+if ($conn->error) {
+    echo "No se conecto a la base de datos."
 }
 
 $CI = $_POST['CI'];
@@ -19,9 +19,9 @@ $estado = $_POST['estado'];
 
 $sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado) VALUES ('$CI','$nombre', '$direccion', '$celular', '$rol','$estado')";
 
-if ($conn->query($sql) === TRUE) {
+if ($conn->query($sql)===TRUE) {
     echo "Nuevo usuario creado exitosamente";
-    header("Location: 08.usuario.php");
+    header("Location: 12readusuario.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

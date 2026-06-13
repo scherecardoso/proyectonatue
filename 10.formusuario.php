@@ -148,7 +148,7 @@ input.error{
 
     <h2>Crear cuenta</h2>
 
-    <form action="08.usuario.php" method="post" id="formusuarios">
+    <form action="11.registrousuario.php" method="post" id="formusuarios">
 
         
         <input type="number" name="CI" placeholder="Carnet de Indentidad" required>

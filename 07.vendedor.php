@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SESSION['rol'] != "vendedor") {
-    header("Location: 25.loguser.php");
+    echo "Acceso denegado";
     exit();
 }
 ?>

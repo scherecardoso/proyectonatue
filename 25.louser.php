@@ -6,10 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="23.autenticar.php" method="post">
+    <form action="23.autenticar.php" method="get">
 
-    <label>CI:</label>
-    <input type="number" name="CI" required>
+    <h2>Iniciar sesión</h2>
+
+    <input type="number" name="CI" placeholder="CI" required>
 
     <button type="submit">Ingresar</button>
 

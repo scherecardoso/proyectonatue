@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SESSION['rol'] != "usuario") {
-    header("Location: 25.loguser.php");
+    echo "Acceso denegado";
     exit();
 }
 ?>

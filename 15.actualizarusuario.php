@@ -7,7 +7,7 @@ $baseDeDatos="shena";
 $conn = new mysqli($direccion, $usuario, $contra, $baseDeDatos);
 
 if ($conn->error) {
-    echo "No se conecto a la base de datos."
+    echo "No se conecto a la base de datos.";
 }
 
 $CI = $_POST['CI'];
@@ -21,7 +21,7 @@ $sql = "UPDATE usuario SET CI='$CI', nombre='$nombre', direccion='$direccion', c
 
 if ($conn->query($sql)===TRUE) {
     echo "Se edito exitosamente";
-    header("Location: 12readusuario.php");
+    header("Location: 13.readusuario.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

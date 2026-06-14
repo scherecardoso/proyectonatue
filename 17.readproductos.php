@@ -276,7 +276,7 @@ h1{
 <li><a href="05.acercade.php">Nosotros</a></li>
 </ul>
 </nav>
-<div class="iconos-barra"><a href="10.formusuarios.php"><i class="fa-solid fa-user"></i></a><a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a></div>
+<div class="iconos-barra"><a href="10.formusuario.php"><i class="fa-solid fa-user"></i></a><a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a></div>
 </header>
 
 

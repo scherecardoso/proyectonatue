@@ -1,31 +1,3 @@
-<?php
-
-$direccion = "localhost";
-$usuario = "root";
-$contra = "";
-$baseDeDatos = "shena";
-
-$conn = new mysqli($direccion, $usuario, $contra, $baseDeDatos);
-
-if ($conn->error) {
-    echo "Error";
-}
-
-$sql = "SELECT * FROM usuario";
-$resultado = $conn->query($sql);
-
-if ($resultado->num_rows > 0) {
-    while($fila=$resultado->fetch_assoc()){
-        echo $fila['CI']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']."<br>";
-        $CI=$fila['CI'];
-        echo "<a href='12.readusuario.php'><button>Mostrar</button></a>"
-        echo "<a href='14formeditarusuariophp'><button>Editar</button></a>"
-        echo "<a href='16.eliminarusuario.php'><button>eliminar</button></a>"
-    }
-}
-$conn->close();
-
-?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,11 +15,11 @@ body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
+    grid-template-columns: 260px 1fr;
     grid-template-rows: 70px 1fr;   
     grid-template-areas:
-        "barra barra barra"
-        "menu info act";
+      "barra barra"
+      "menu info";
     gap: 10px;
     height: 100vh;
     background: #ffffff
@@ -121,16 +93,16 @@ nav a.activo:after {
 }
 
 
-.menu {
+.menu{
     grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 15px;
-    margin-top: 27px;
-    width: 330px;
-    border-right: 1px solid #ececec;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:#fff;
+    padding:15px;
+    margin-top:27px;
+    width:100%;
+    border-right:1px solid #ececec;
 }
 
 .titulo-menu {
@@ -155,19 +127,21 @@ nav a.activo:after {
 
 
 .contenedor{
-    width:1100px;
-    margin-top:40px;
-    margin-left:250px;
+    width:100%;
+    max-width:1200px;
+    margin:40px auto;
     background:white;
     padding:35px;
     border-radius:28px;
     box-shadow:0 10px 35px rgba(0,0,0,0.08);
     border:1px solid #f3f3f3;
+    overflow-x:auto;
 }
 
 
 table{
     width:100%;
+    min-width:800px;
     border-collapse:separate;
     border-spacing:0 12px;
 }
@@ -206,10 +180,13 @@ tr:hover td{
 }
 
 .btn{
+    display:inline-block;
+    text-decoration:none;
     padding:8px 15px;
     border-radius:12px;
     font-size:13px;
     font-weight:500;
+    margin:2px;
 }
 .editar{
     background:#ffe4ef;
@@ -269,7 +246,7 @@ div{
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
     <a href="06.admin.php"><div><i class="fa-solid fa-house"></i> Inicio</div></a>
-    <a href="11.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+    <a href="13.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
     <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
@@ -280,9 +257,6 @@ div{
 </aside>
 
 <div class="contenedor"><h1>Lista de Usuarios</h1>
-
-<<<<<<< HEAD:13.readusuarios.php
-=======
 <?php
 
 $servidor = "localhost";
@@ -327,8 +301,8 @@ if ($result->num_rows > 0) {
             <td>{$fila['rol']}</td>
             <td>{$fila['estado']}</td>
             <td>
-                <a class='btn editar' href='13.formeditarusuario.php?CI=$CI'>Editar</a>
-                <a class='btn eliminar' href='15.eliminarusuario.php?CI=$CI'>Eliminar</a>
+                <a class='btn editar' href='14.formeditarusuario.php?CI=$CI'>Editar</a>
+                <a class='btn eliminar' href='16.eliminarusuario.php?CI=$CI'>Eliminar</a>
             </td>
         </tr>";
     }
@@ -341,8 +315,6 @@ if ($result->num_rows > 0) {
 $conn->close();
 
 ?>
-
->>>>>>> 19750247a25495b946007d7f962f839b51e61ea1:11.readusuario.php
 </div>
 </body>
 </html>

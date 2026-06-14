@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['CI'])){
+    header("Location: 25.loguser.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -218,7 +226,7 @@ td{
 
 <header>
     <div class="logo">Natué</div>
-    <div class="iconos"><a href="formUsuarios"><i class="fa-solid fa-user"></i></a>
+    <div class="iconos"><a href="10.formusuario.php"><i class="fa-solid fa-user"></i></a>
     <a href="16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i></a>
     </div>
 </header>
@@ -240,7 +248,9 @@ td{
 <main class="contenido">
 <section class="bienvenida">
 <div class="foto"><img src="sheshe.png"></div>
-    <div class="texto"><h2>BIENVENIDA</h2><p>Aquí puedes revisar tus pedidos,favoritos y administrar tu cuenta.</p></div>
+<div class="texto">
+    <h2>BIENVENIDA <?php echo $_SESSION['nombre']; ?></h2>
+    <p>Aquí puedes revisar tus pedidos, favoritos y administrar tu cuenta.</p>
 </section>
 
 

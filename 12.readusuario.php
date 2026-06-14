@@ -22,7 +22,7 @@ if ($resultado->num_rows > 0) {
         $CI = $fila['CI'];
 
         echo "<a href='12.readusuario.php'><button>Mostrar</button></a>";
-        echo "<a href='14formeditarusuario.php'><button>Editar</button></a>";
+        echo "<a href='14.formeditarusuario.php'><button>Editar</button></a>";
         echo "<a href='16.eliminarusuario.php'><button>Eliminar</button></a>";
 
     }

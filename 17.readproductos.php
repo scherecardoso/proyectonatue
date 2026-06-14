@@ -1,76 +1,3 @@
-<?php
-$servidor = "localhost";
-$usuario = "root";
-$contra = "";
-$baseDeDatos = "shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
-if ($conn->connect_error) {
-    die("Error de conexión");
-}
-
-$sql = "SELECT * FROM productos";
-$result = $conn->query($sql);
-
-if ($result && $result->num_rows > 0) {
-
-    echo "<table>";
-    echo "
-    <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Precio</th>
-        <th>Costo</th>
-        <th>Stock</th>
-        <th>Acciones</th>
-    </tr>
-    ";
-
-    while($fila = $result->fetch_assoc()) {
-
-        $codigo = $fila['codigo'];
-
-        echo "
-        <tr>
-            <td>{$fila['codigo']}</td>
-            <td>{$fila['nombre']}</td>
-            <td>{$fila['descripcion']}</td>
-            <td>$ {$fila['precio']}</td>
-            <td>$ {$fila['costo']}</td>
-            <td>{$fila['stock']}</td>
-
-            <td>
-
-                <a class='btn editar'
-                href='19.formeditarproductos.php?codigo=$codigo'>
-                Editar
-                </a>
-
-                <a class='btn eliminar'
-                href='21.eliminarproductos.php?codigo=$codigo'>
-                Eliminar
-                </a>
-
-            </td>
-        </tr>
-        ";
-    }
-
-    echo "</table>";
-
-} else {
-
-    echo "<p class='sin-datos'>
-    No hay productos registrados
-    </p>";
-
-}
-
-$conn->close();
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -87,7 +14,7 @@ body{
     display:grid;
     margin:0;
     font-family:Arial, sans-serif;
-    grid-template-columns:198px 1fr;
+    grid-template-columns:300px 1fr;
     grid-template-rows:70px 1fr;
     grid-template-areas:
     "barra barra"
@@ -374,7 +301,83 @@ h1{
 
 
 <div class="contenedor"><h1>Lista de Productos</h1>
+<div class="contenedor">
+    <h1>Lista de Productos</h1>
 
+<?php
+
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
+
+$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+
+if ($conn->connect_error) {
+    die("Error de conexión");
+}
+
+$sql = "SELECT * FROM productos";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+
+    echo "<table>";
+    echo "
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Costo</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+    </tr>
+    ";
+
+    while($fila = $result->fetch_assoc()) {
+
+        $codigo = $fila['codigo'];
+
+        echo "
+        <tr>
+            <td>{$fila['codigo']}</td>
+            <td>{$fila['nombre']}</td>
+            <td>{$fila['descripcion']}</td>
+            <td>$ {$fila['precio']}</td>
+            <td>$ {$fila['costo']}</td>
+            <td>{$fila['stock']}</td>
+
+            <td>
+                <a class='btn editar'
+                href='19.formeditarproductos.php?codigo=$codigo'>
+                Editar
+                </a>
+
+                <a class='btn eliminar'
+                href='21.eliminarproductos.php?codigo=$codigo'>
+                Eliminar
+                </a>
+            </td>
+        </tr>
+        ";
+    }
+
+    echo "</table>";
+
+} else {
+
+    echo "<p class='sin-datos'>
+    No hay productos registrados
+    </p>";
+
+}
+
+$conn->close();
+
+?>
+
+</div>
 
 </div>
 </body>

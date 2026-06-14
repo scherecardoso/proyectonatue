@@ -18,7 +18,7 @@ $costo = $_POST['costo'];
 $stock = $_POST['stock'];
 $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo','$nombre', '$descripcion', '$precio',  '$costo','$stock')";
 if ($conn->query($sql) === TRUE) {
-    header("Location: 17.readproductos.php");
+    header("Location: 22.readproductos.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

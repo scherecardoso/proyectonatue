@@ -16,9 +16,12 @@ $direccion = $_POST['direccion'];
 $celular = $_POST['celular'];
 $rol = $_POST['rol'];
 $estado = $_POST['estado'];
-$sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado) VALUES ('$CI','$nombre', '$direccion', '$celular', '$rol','$estado')";
+
+$sql = "UPDATE usuario SET CI='$CI', nombre='$nombre', direccion='$direccion', celular='$celular', rol='$rol', estado='$estado' WHERE CI=$CI";
+
 if ($conn->query($sql) === TRUE) {
-    header("Location: 13.readusuarios .php");
+    echo "Usuario actualizado exitosamente";
+    header("Location: 12.readusuarios.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

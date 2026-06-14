@@ -21,7 +21,7 @@ $sql = "UPDATE productos SET codigo='$codigo', nombre='$nombre', descripcion='$d
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto actualizado exitosamente";
-    header("Location: 17.readproductos.php");
+    header("Location: 22.readproductos.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

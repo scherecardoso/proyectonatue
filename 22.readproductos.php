@@ -350,12 +350,12 @@ if ($result && $result->num_rows > 0) {
 
             <td>
                 <a class='btn editar'
-                href='19.formeditarproductos.php?codigo=$codigo'>
+                href='18.formeditarproductos.php?codigo=$codigo'>
                 Editar
                 </a>
 
                 <a class='btn eliminar'
-                href='21.eliminarproductos.php?codigo=$codigo'>
+                href='20.eliminarproductos.php?codigo=$codigo'>
                 Eliminar
                 </a>
             </td>

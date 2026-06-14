@@ -36,7 +36,7 @@ if ($conn->connect_error) {
 
 </head>
 <body>
-    <form action="20.actualizarproductos.php" method="post">
+    <form action="19.actualizarproductos.php" method="post">
         <label for="codigo">Nombre:</label>
         <input type="hidden" name="codigo" value='<?=$codigo?>'>
         <input type="text" name="nombreproducto" value='<?=$nombreproducto?>'><br>

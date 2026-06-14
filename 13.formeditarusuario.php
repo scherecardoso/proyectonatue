@@ -11,9 +11,9 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_GET['codigo'];
+$CI = $_GET['CI'];
 
-$sql ="SELECT * FROM productos WHERE codigo=$codigo";
+$sql ="SELECT * FROM usuario WHERE CI=$CI"; 
 
 $resultado = $conn->query($sql);
 
@@ -21,16 +21,16 @@ if($resultado->num_rows > 0){
 
     while($fila = $resultado->fetch_assoc()){
 
-        $codigo = $fila['codigo'];
         $nombre = $fila['nombre'];
-        $descripcion = $fila['descripcion'];
-        $precio = $fila['precio'];
-        $costo = $fila['costo'];
-        $stock = $fila['stock'];
+        $direccion = $fila['direccion'];
+        $celular = $fila['celular'];
+        $rol = $fila['rol'];
+        $estado = $fila['estado'];
     }
 }
 
 $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ $conn->close();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Editar Producto</title>
+<title>Editar Usuario</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -60,7 +60,6 @@ body{
     justify-content:center;
     align-items:center;
     background:#ffffff;
-    padding:20px;
 }
 
 .contenedor{
@@ -140,6 +139,7 @@ button:hover{
 label.error{
     color:#a01045;
     font-size:13px;
+   
     margin-bottom:10px;
     margin-left:15px;
 }
@@ -156,49 +156,47 @@ input.error{
 <div class="contenedor">
 
     <div class="logo">
-        <i class="fa-solid fa-box-open"></i>
+        <i class="fa-solid fa-user-pen"></i>
     </div>
 
     <div class="titulo">
-        <h2>Editar Producto</h2>
-        <p>Actualiza la información del producto</p>
+        <h2>Editar Usuario</h2>
+        <p>Actualiza la información del usuario</p>
     </div>
 
-    <form action="20.actualizarproductos.php" method="post" id="valieditarpro">
+    <form action="14.actualizarusuario.php" method="post" id="valieditarus">
 
-        <input type="hidden" name="codigo" value="<?=$codigo?>">
+       <label class="campo">
+        <i class="fa-solid fa-user-pen"></i>
+        <input type="number" name="CI" value="<?=$CI?>"  placeholder="Cédula de identidad">
+       </label> 
 
         <label class="campo">
-            <i class="fa-solid fa-barcode"></i>
-            <input type="number" name="codigo" value="<?=$codigo?>" placeholder="Código">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre completo" required>
         </label>
 
         <label class="campo">
-            <i class="fa-solid fa-box"></i>
-            <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre del producto">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" name="direccion" value="<?=$direccion?>" placeholder="Dirección" required>
         </label>
 
         <label class="campo">
-            <i class="fa-solid fa-file-lines"></i>
-            <input type="text" name="descripcion" value="<?=$descripcion?>" placeholder="Descripción">
+            <i class="fa-solid fa-phone"></i>
+            <input type="number" name="celular" value="<?=$celular?>" placeholder="Celular" required>
         </label>
 
         <label class="campo">
-            <i class="fa-solid fa-dollar-sign"></i>
-            <input type="number" name="precio" value="<?=$precio?>" placeholder="Precio">
+            <i class="fa-solid fa-briefcase"></i>
+            <input type="text" name="rol" value="<?=$rol?>" placeholder="Rol" required>
         </label>
 
         <label class="campo">
-            <i class="fa-solid fa-money-bill"></i>
-            <input type="number" name="costo" value="<?=$costo?>" placeholder="Costo">
+            <i class="fa-solid fa-circle-check"></i>
+            <input type="text" name="estado" value="<?=$estado?>" placeholder="Estado" required>
         </label>
 
-        <label class="campo">
-            <i class="fa-solid fa-warehouse"></i>
-            <input type="number" name="stock" value="<?=$stock?>" placeholder="Stock">
-        </label>
-
-        <button>Actualizar producto</button>
+    <button>Actualizar usuario</button>
 
     </form>
 </div>
@@ -207,57 +205,60 @@ input.error{
 
 $(document).ready(function(){
 
-    $("#valieditarpro").validate({
+    $("#valieditarus").validate({
 
         rules:{
-            codigo:{
+            CI:{
                 required:true,
-                number:true
+                number:true,
+                minlength:8
             },
             nombre:{
                 required:true
             },
-            descripcion:{
+            direccion:{
                 required:true
             },
-            precio:{
+            celular:{
                 required:true,
-                number:true
+                number:true,
+                minlength:8
             },
-            costo:{
-                required:true,
-                number:true
+            rol:{
+                required:true
             },
-            stock:{
-                required:true,
-                number:true
+            estado:{
+                required:true
             }
         },
+
         messages:{
-            codigo:{
+            CI:{
                 required:"Este campo no puede ir vacío",
-                number:"Solo se aceptan números"
+                number:"Solo se aceptan números",
+                minlength:"El CI debe tener al menos 8 números"
             },
             nombre:{
                 required:"El nombre es obligatorio"
             },
-            descripcion:{
-                required:"La descripción es obligatoria"
+            direccion:{
+                required:"Este campo no puede ir vacío"
             },
-            precio:{
-                required:"El precio es obligatorio",
-                number:"Solo se aceptan números"
+            celular:{
+                required:"Este campo no puede ir vacío",
+                number:"Solo se aceptan números",
+                minlength:"El celular debe tener al menos 8 números"
             },
-            costo:{
-                required:"El costo es obligatorio",
-                number:"Solo se aceptan números"
+            rol:{
+                required:"El campo es obligatorio"
             },
-            stock:{
-                required:"El stock es obligatorio",
-                number:"Solo se aceptan números"
+            estado:{
+                required:"El campo es obligatorio"
             }
         }
+
     });
+
 });
 </script>
 

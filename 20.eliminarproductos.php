@@ -16,8 +16,8 @@ $sql = "DELETE  FROM productos WHERE codigo=$codigo";
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto eliminado exitosamente";
-    header("Location: 17.readproductos.php");
-} else {
+    header("Location: 22.readproductos.php");
+} else { 
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 $conn->close();

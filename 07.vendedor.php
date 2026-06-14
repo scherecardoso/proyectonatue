@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION['rol'] != "vendedor") {
+    echo "Acceso denegado";
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

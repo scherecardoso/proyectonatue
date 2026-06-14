@@ -19,6 +19,10 @@ $estado = $_POST['estado'];
 $sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado) VALUES ('$CI','$nombre', '$direccion', '$celular', '$rol','$estado')";
 if ($conn->query($sql) === TRUE) {
     header("Location: 13.readusuarios .php");
+
+    header("Location: 23.autenticar.php");
+
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

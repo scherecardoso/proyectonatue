@@ -12,11 +12,13 @@ if ($conn->connect_error) {
 
 $CI = $_GET['CI'];
 
-$sql = "DELETE FROM usuario WHERE CI=$CI";
+$sql = "DELETE FROM usuario WHERE CI='$CI'";
 
 if ($conn->query($sql) === TRUE) {
+
     echo "Usuario eliminado exitosamente";
     header("Location: 12.readusuarios.php");
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

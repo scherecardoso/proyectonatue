@@ -149,24 +149,23 @@ input.error{
 
     <h2>Crear cuenta</h2>
 
-    <form action="11.registrousuario.php" method="post" id="formusuarios">
+    <form action="11.registrousuario.php" method="post">
 
-        
-        <input type="number" name="CI" placeholder="Carnet de Indentidad" required>
+    <input type="number" name="CI" placeholder="CI" required>
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="direccion" placeholder="Dirección" required>
+    <input type="number" name="celular" placeholder="Celular" required>
 
-        <input type="text" name="nombre" placeholder="Nombre Completo" required>
+    <select name="rol">
+        <option value="usuario">Usuario</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="administrador">Administrador</option>
+    </select>
 
-        <input type="text" name="direccion" placeholder="Dirección" required>
+    <input type="text" name="estado" placeholder="Estado" required>
 
-        <input type="number" name="celular" placeholder="Celular" required>
-
-        <input type="text" name="rol" placeholder="Rol" required>
-
-        <input type="text" name="estado" placeholder="Estado" required>
-
-        <button>Guardar usuario</button>
-
-    </form>
+    <button type="submit">Registrar</button>
+</form>
 
 </div>
 

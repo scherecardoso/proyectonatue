@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION['rol'] != "administrador") {
+    echo "Acceso denegado";
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -520,11 +528,11 @@ div{
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
-    <a href="readUsuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+    <a href="13.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
     <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <a href="readProducto.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
+    <a href="14.readproducto.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
     <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>

@@ -137,7 +137,7 @@ input.error{
 
 <body>
 
-<form class="caja-login" method="post" id="iniciarsesion">
+<form class="caja-login" action="23.autenticar.php" method="post" id="iniciarsesion">
 
     <div class="menu-login">
         <a href="09.register.php" class="activo">Iniciar sesión</a>

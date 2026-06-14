@@ -23,7 +23,7 @@ VALUES ('$CI','$nombre','$direccion','$celular','$rol','$estado')";
 
 if ($conn->query($sql) === TRUE) {
 
-    header("Location: 13.readusuario.php");
+    header("Location: 23.autenticar.php");
 
 } else {
 

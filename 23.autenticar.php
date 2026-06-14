@@ -1,24 +1,14 @@
 <?php
 session_start();
 
-$servidor = "localhost";
-$usuario = "root";
-$contra = "";
-$baseDeDatos = "shena";
+$conn = new mysqli("localhost", "root", "", "shena");
 
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+$CI = $_POST['CI'];
 
-if ($conn->connect_error) {
-    die("Error de conexión");
-}
-
-$nombre = $_POST['nombre'];
-
-$sql = "SELECT * FROM usuario WHERE nombre='$nombre'";
-
+$sql = "SELECT * FROM usuario WHERE CI='$CI'";
 $resultado = $conn->query($sql);
 
-if($resultado->num_rows > 0){
+if ($resultado->num_rows > 0) {
 
     $fila = $resultado->fetch_assoc();
 
@@ -26,14 +16,11 @@ if($resultado->num_rows > 0){
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol'] = $fila['rol'];
 
-    header("Location: 08.usuario.php");
+    echo "LOGIN OK<br>";
+    echo "ROL: " . $fila['rol'];
     exit();
 
-}else{
-
-    echo "Usuario no encontrado";
-
+} else {
+    echo "NO EXISTE";
 }
-
-$conn->close();
 ?>

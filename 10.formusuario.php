@@ -159,7 +159,11 @@ input.error{
 
         <input type="number" name="celular" placeholder="Celular" required>
 
-        <input type="text" name="rol" placeholder="Rol" required>
+        <select name="rol">
+               <option value="usuario">Usuario</option>
+               <option value="vendedor">Vendedor</option>
+               <option value="administrador">Administrador</option>
+        </select>
 
         <input type="text" name="estado" placeholder="Estado" required>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['CI'])){
+if ($_SESSION['rol'] != "usuario") {
     header("Location: 25.loguser.php");
     exit();
 }

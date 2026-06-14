@@ -6,13 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="23.autenticar.php" method="post">
 
-            <form action="23.autenticar.php" method="post">
+    <label>CI:</label>
+    <input type="number" name="CI" required>
 
-    <label>Nombre:</label>
-    <input type="text" name="nombre" required>
+    <button type="submit">Ingresar</button>
 
-    <input type="submit" value="Iniciar Sesión">
+</form>
 
 </form>
 </body>

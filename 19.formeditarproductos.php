@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$idproductos = $_GET['codigo'];
+$codigo = $_GET['codigo'];
 
 $sql ="SELECT * FROM productos WHERE codigo=$codigo";
 

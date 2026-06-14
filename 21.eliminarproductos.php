@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 $codigo = $_GET['codigo'];
 
-$sql = "DELETE * FROM productos WHERE codigo=$codigo";
+$sql = "DELETE  FROM productos WHERE codigo=$codigo";
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto eliminado exitosamente";

@@ -502,9 +502,7 @@ footer {
 
 
   <section class="carrusel"><img src="./img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
-    <div class="caja-correo">
-    <input type="email" class="input-correo" placeholder="Ingresa tu Gmail">
-    <button class="boton-enviar">Enviar</button></div>
+   
   </section>
 
 

@@ -1,44 +1,43 @@
 <?php
+$servidor ="localhost";
+$usuario ="root";
+$contra ="";
+$baseDeDatos ="shena";
+
+$conexion= new mysqli ($servidor, $usuario, $contra, $baseDeDatos);
+if ($conexion-> error){ 
+    echo"hubo un error";
+}
+
+$CI = $_POST['CI']; 
+$direccion = $_POST['direccion'];
+$rol = $_POST['rol'] ?? ''; 
+
+$sql=" SELECT * FROM usuario
+        WHERE CI ='$CI'
+         AND direccion='$direccion'"; 
+$resultado=$conexion->query($sql);
+if ($resultado-> num_rows>0){ 
+  $fila = $resultado->fetch_assoc(); 
 session_start();
 
-$conn = new mysqli("localhost", "root", "", "shena");
 
-if ($conn->connect_error) {
-    die("Error de conexion");
-}
+   $_SESSION ['CI']=$fila['CI'];
+   $_SESSION['rol']=$fila['rol'];
 
-$CI = $_GET['CI'];
+ if($_SESSION['rol']=="vendedor"){ 
 
-$sql = "SELECT * FROM usuario WHERE CI='$CI'";
-$resultado = $conn->query($sql);
-
-if ($resultado->num_rows > 0) {
-
-    $fila = $resultado->fetch_assoc();
-
-    $_SESSION['CI'] = $fila['CI'];
-    $_SESSION['nombre'] = $fila['nombre'];
-    $_SESSION['rol'] = $fila['rol'];
-
-    if ($fila['rol'] == "administrador") {
+    header("Location:07.vendedor.php"); 
+ }elseif ($_SESSION['rol'] == "administrador") {
         header("Location: 06.admin.php");
         exit();
+    } else { 
+                echo "Rol no reconocido.";
     }
-
-    if ($fila['rol'] == "vendedor") {
-        header("Location: 07.vendedor.php");
-        exit();
-    }
-
-    if ($fila['rol'] == "usuario") {
-        header("Location: 24.inicio.php");
-        exit();
-    }
-
-    header("Location: 24.inicio.php");
-    exit();
 
 } else {
-    echo "NO EXISTE EL USUARIO";
+    echo "Usuario o datos incorrectos";
 }
+
+
 ?>

@@ -114,6 +114,14 @@ input.error{
     border:1px solid #a01045;
 }
 
+h2{
+    text-align:center;
+    font-size:42px;
+    font-family:serif;
+    color:#222;
+    margin-bottom:10px;
+}
+
 @media(max-width:768px){
 
     .caja-login{
@@ -136,16 +144,37 @@ input.error{
 </head>
 
 <body>
+<<<<<<< HEAD
     <form action="23.autenticar.php" method="get" id="iniciarsesion">
+=======
+<div class="caja-login">
+>>>>>>> 58b25295e9122c2ddeae20bb46b33c22cb9f125a
 
     <div class="menu-login">
+<<<<<<< HEAD
+    <a href="09.register.php" class="activo">Iniciar sesión</a>
+
+    <a href=" 10.formusuario.php" >Registrarse</a>
+</div>
+
+
+   <form action="23.autenticar.php" method="get">
+   <h2>Iniciar sesión</h2>
+   <input type="text" name="direccion" placeholder="direccion" required>
+=======
         <a href="09.register.php" class="activo">Iniciar sesión</a>
         <a href="10.formusuario.php">Registrarse</a>
     </div>
+<<<<<<< HEAD
 
     <input type="number" name="CI" placeholder="CI" required>
     <input type="text" name="direccion" placeholder="direccion" required>
 
+=======
+<input type="text" name="direccion" placeholder="direccion" required>
+>>>>>>> 37d435b913713e9f67dc0184d626ffe3c048e123
+    <input type="number" name="CI" placeholder="CI" required>
+>>>>>>> 58b25295e9122c2ddeae20bb46b33c22cb9f125a
     <button type="submit">Ingresar</button>
 
 </form>

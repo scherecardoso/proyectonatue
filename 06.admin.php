@@ -528,7 +528,7 @@ div{
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
-    <a href="13.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+    <a href="13.formeditarusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
     <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>

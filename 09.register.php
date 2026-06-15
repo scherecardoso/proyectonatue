@@ -138,7 +138,10 @@ input.error{
 <body>
     <form action="23.autenticar.php" method="get">
 
-    <h2>Iniciar sesión</h2>
+    <div class="menu-login">
+        <a href="09.register.php" class="activo">Iniciar sesión</a>
+        <a href="10.formusuario.php">Registrarse</a>
+    </div>
 <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
 

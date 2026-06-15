@@ -162,7 +162,7 @@ select {
 
     <h2>Crear cuenta</h2>
 
-    <form action="11.registrousuario.php" method="post">
+    <form action="11.registrousuario.php" method="post" id="formusuarios">
 
     <input type="number" name="CI" placeholder="CI" required>
     <input type="text" name="nombre" placeholder="Nombre" required>

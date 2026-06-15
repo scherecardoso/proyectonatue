@@ -136,14 +136,15 @@ input.error{
 </head>
 
 <body>
-    <form action="23.autenticar.php" method="get">
+    <form action="23.autenticar.php" method="get" id="iniciarsesion">
 
     <div class="menu-login">
         <a href="09.register.php" class="activo">Iniciar sesión</a>
         <a href="10.formusuario.php">Registrarse</a>
     </div>
-<input type="text" name="direccion" placeholder="direccion" required>
+
     <input type="number" name="CI" placeholder="CI" required>
+    <input type="text" name="direccion" placeholder="direccion" required>
 
     <button type="submit">Ingresar</button>
 
@@ -156,24 +157,24 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-            correo:{
-                required:true,
-                email:true
+            direccion:{
+                required:true
             },
-            password:{
-                required:true,
-                minlength:6
+            CI:{
+               required:true,
+               number:true,
+               minlength:8
             }
         },
 
         messages:{
-            correo:{
-                required:"Por favor, ingresa tu correo electrónico",
-                email:"Por favor, ingresa un correo electrónico válido"
+            direccion:{
+                required:"Este campo no puede ir vacío"
             },
             password:{
-                required:"Por favor, ingresa tu contraseña",
-                minlength:"La contraseña debe tener al menos 6 caracteres"
+                required:"Este campo no puede ir vacío",
+                number:"Solo se aceptan números",
+                minlength:"El CI debe tener al menos 8 números"
             }
         }
 

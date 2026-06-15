@@ -1,32 +1,48 @@
 <?php
 session_start();
 
-$CI = $_SESSION['CI'];
-
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
-if ($conn->connect_error) {
-    die("Conexion fallida");
+if(!isset($_SESSION['CI'])){
+    header("Location:09.register.php");
+    exit();
 }
 
-$sql = "SELECT * FROM usuario WHERE CI='$CI'";
-$resultado = $conn->query($sql);
+$CI=$_SESSION['CI'];
 
-if ($resultado->num_rows > 0) {
+$servidor="localhost";
+$usuario="root";
+$contra="";
+$baseDeDatos="shena";
 
-    $fila = $resultado->fetch_assoc();
+$conn=new mysqli($servidor,$usuario,$contra,$baseDeDatos);
 
-    $_SESSION['datos'] =
-        $fila['CI']." ".
-        $fila['nombre']." ".
-        $fila['direccion']." ".
-        $fila['celular']." ".
-        $fila['rol']." ".
-        $fila['estado'];
+if($conn->connect_error){
+    die("Error de conexión");
 }
+
+$stmt=$conn->prepare("SELECT * FROM usuario WHERE CI=?");
+$stmt->bind_param("s",$CI);
+
+$stmt->execute();
+
+$resultado=$stmt->get_result();
+
+if($resultado->num_rows>0){
+
+    $fila=$resultado->fetch_assoc();
+
+    $_SESSION['datos']=array(
+
+        "CI"=>$fila['CI'],
+        "nombre"=>$fila['nombre'],
+        "direccion"=>$fila['direccion'],
+        "celular"=>$fila['celular'],
+        "rol"=>$fila['rol'],
+        "estado"=>$fila['estado']
+
+    );
+
+}
+
+$stmt->close();
+$conn->close();
 ?>

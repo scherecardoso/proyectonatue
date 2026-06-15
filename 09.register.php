@@ -163,10 +163,6 @@ h2{
    <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
 
-    <input type="number" name="CI" placeholder="CI" required>
-    <input type="text" name="direccion" placeholder="direccion" required>
-
-
     <button type="submit">Ingresar</button>
 
 </form>

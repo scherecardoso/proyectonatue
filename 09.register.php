@@ -145,22 +145,32 @@ h2{
 
 <body>
 
-<div class="caja-login">
-
-
     <form action="23.autenticar.php" method="get" id="iniciarsesion">
 
 <div class="caja-login">
+
     <div class="menu-login">
+
     <a href="09.register.php" class="activo">Iniciar sesión</a>
+
     <a href=" 10.formusuario.php" >Registrarse</a>
 </div>
-
 
 
    <form action="23.autenticar.php" method="get">
    <h2>Iniciar sesión</h2>
    <input type="text" name="direccion" placeholder="direccion" required>
+
+        <a href="09.register.php" class="activo">Iniciar sesión</a>
+        <a href="10.formusuario.php">Registrarse</a>
+    </div>
+
+
+    <input type="number" name="CI" placeholder="CI" required>
+    <input type="text" name="direccion" placeholder="direccion" required>
+
+<input type="text" name="direccion" placeholder="direccion" required>
+
     <input type="number" name="CI" placeholder="CI" required>
 
     <button type="submit">Ingresar</button>
@@ -174,43 +184,24 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-
-            correo:{
-                required:true,
-                email:true
+            direccion:{
+                required:true
             },
-            password:{
-                required:true,
-                minlength:6
-
             CI:{
                required:true,
                number:true,
                minlength:8
-            },
-            direccion:{
-               required:true,
             }
         },
-}
-        messages:{
 
-            correo:{
-                required:"Por favor, ingresa tu correo electrónico",
-                email:"Por favor, ingresa un correo electrónico válido"
+        messages:{
+            direccion:{
+                required:"Este campo no puede ir vacío"
             },
             password:{
-                required:"Por favor, ingresa tu contraseña",
-                minlength:"La contraseña debe tener al menos 6 caracteres"
-
-            CI:{
                 required:"Este campo no puede ir vacío",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
-            },
-            direccion:{
-                required:"Este campo no puede ir vacío",
-
             }
         }
 

@@ -147,7 +147,6 @@ h2{
 <div class="caja-login">
 
     <div class="menu-login">
-<<<<<<< HEAD
     <a href="09.register.php" class="activo">Iniciar sesión</a>
 
     <a href=" 10.formusuario.php" >Registrarse</a>
@@ -157,12 +156,6 @@ h2{
    <form action="23.autenticar.php" method="get">
    <h2>Iniciar sesión</h2>
    <input type="text" name="direccion" placeholder="direccion" required>
-=======
-        <a href="09.register.php" class="activo">Iniciar sesión</a>
-        <a href="10.formusuario.php">Registrarse</a>
-    </div>
-<input type="text" name="direccion" placeholder="direccion" required>
->>>>>>> 37d435b913713e9f67dc0184d626ffe3c048e123
     <input type="number" name="CI" placeholder="CI" required>
     <button type="submit">Ingresar</button>
 

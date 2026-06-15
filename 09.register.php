@@ -144,19 +144,29 @@ h2{
 </head>
 
 <body>
+
 <div class="caja-login">
 
+
+    <form action="23.autenticar.php" method="get" id="iniciarsesion">
+
+<div class="caja-login">
     <div class="menu-login">
     <a href="09.register.php" class="activo">Iniciar sesión</a>
-
     <a href=" 10.formusuario.php" >Registrarse</a>
 </div>
+
 
 
    <form action="23.autenticar.php" method="get">
    <h2>Iniciar sesión</h2>
    <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
+
+    <input type="number" name="CI" placeholder="CI" required>
+    <input type="text" name="direccion" placeholder="direccion" required>
+
+
     <button type="submit">Ingresar</button>
 
 </form>
@@ -168,6 +178,7 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
+<<<<<<< HEAD
             correo:{
                 required:true,
                 email:true
@@ -175,10 +186,20 @@ $(document).ready(function(){
             password:{
                 required:true,
                 minlength:6
+=======
+            CI:{
+               required:true,
+               number:true,
+               minlength:8
+            },
+            direccion:{
+               required:true,
+>>>>>>> 53d59baee8db16468562edf522e55d1490381167
             }
         },
 
         messages:{
+<<<<<<< HEAD
             correo:{
                 required:"Por favor, ingresa tu correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"
@@ -186,6 +207,15 @@ $(document).ready(function(){
             password:{
                 required:"Por favor, ingresa tu contraseña",
                 minlength:"La contraseña debe tener al menos 6 caracteres"
+=======
+            CI:{
+                required:"Este campo no puede ir vacío",
+                number:"Solo se aceptan números",
+                minlength:"El CI debe tener al menos 8 números"
+            },
+            direccion:{
+                required:"Este campo no puede ir vacío",
+>>>>>>> 53d59baee8db16468562edf522e55d1490381167
             }
         }
 

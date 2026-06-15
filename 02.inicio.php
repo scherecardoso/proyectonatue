@@ -496,7 +496,7 @@ footer {
 
   <div class="iconos-barra">
     <a href="09.register.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-    <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="17.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
   </div>
   </header>
 

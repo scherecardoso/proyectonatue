@@ -136,19 +136,11 @@ input.error{
 </head>
 
 <body>
+    <form action="23.autenticar.php" method="get">
 
-<form class="caja-login" action="23.autenticar.php" method="post" id="iniciarsesion">
-
-    <div class="menu-login">
-        <a href="09.register.php" class="activo">Iniciar sesión</a>
-        <a href="10.formusuario.php">Registrarse</a>
-    </div>
-
-    <h1 class="titulo">Bienvenida</h1>
-
-    <input type="email" name="correo" placeholder="Correo electrónico" required>
-
-    <input type="password" name="password" placeholder="Contraseña" required>
+    <h2>Iniciar sesión</h2>
+<input type="text" name="direccion" placeholder="direccion" required>
+    <input type="number" name="CI" placeholder="CI" required>
 
     <button type="submit">Ingresar</button>
 

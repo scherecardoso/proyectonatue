@@ -134,6 +134,19 @@ input.error{
     border:1px solid #a01045;
 }
 
+select {
+    width:100%;
+    height:58px;
+    color: #777;
+    border:1px solid #f5a3d5;
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    padding:20px;
+    margin-bottom:18px;
+    background:#fafafa;
+}
+
 </style>
 </head>
 

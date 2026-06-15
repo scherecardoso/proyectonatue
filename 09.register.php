@@ -114,6 +114,14 @@ input.error{
     border:1px solid #a01045;
 }
 
+h2{
+    text-align:center;
+    font-size:42px;
+    font-family:serif;
+    color:#222;
+    margin-bottom:10px;
+}
+
 @media(max-width:768px){
 
     .caja-login{
@@ -136,12 +144,19 @@ input.error{
 </head>
 
 <body>
-    <form action="23.autenticar.php" method="get">
+<div class="caja-login">
 
-    <h2>Iniciar sesión</h2>
-<input type="text" name="direccion" placeholder="direccion" required>
+    <div class="menu-login">
+    <a href="09.register.php" class="activo">Iniciar sesión</a>
+
+    <a href=" 10.formusuario.php" >Registrarse</a>
+</div>
+
+
+   <form action="23.autenticar.php" method="get">
+   <h2>Iniciar sesión</h2>
+   <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
-
     <button type="submit">Ingresar</button>
 
 </form>

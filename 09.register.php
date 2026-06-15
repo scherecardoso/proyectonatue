@@ -148,30 +148,13 @@ h2{
     <form action="23.autenticar.php" method="get" id="iniciarsesion">
 
 <div class="caja-login">
-
     <div class="menu-login">
-
     <a href="09.register.php" class="activo">Iniciar sesión</a>
-
     <a href=" 10.formusuario.php" >Registrarse</a>
 </div>
 
-
-   <form action="23.autenticar.php" method="get">
-   <h2>Iniciar sesión</h2>
-   <input type="text" name="direccion" placeholder="direccion" required>
-
-        <a href="09.register.php" class="activo">Iniciar sesión</a>
-        <a href="10.formusuario.php">Registrarse</a>
-    </div>
-
-
     <input type="number" name="CI" placeholder="CI" required>
     <input type="text" name="direccion" placeholder="direccion" required>
-
-<input type="text" name="direccion" placeholder="direccion" required>
-
-    <input type="number" name="CI" placeholder="CI" required>
 
     <button type="submit">Ingresar</button>
 
@@ -184,24 +167,24 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-            direccion:{
-                required:true
-            },
             CI:{
                required:true,
                number:true,
                minlength:8
+            },
+            direccion:{
+               required:true,
             }
         },
 
         messages:{
-            direccion:{
-                required:"Este campo no puede ir vacío"
-            },
-            password:{
+            CI:{
                 required:"Este campo no puede ir vacío",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
+            },
+            direccion:{
+                required:"Este campo no puede ir vacío",
             }
         }
 

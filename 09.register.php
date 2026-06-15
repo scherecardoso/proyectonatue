@@ -178,7 +178,7 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-<<<<<<< HEAD
+
             correo:{
                 required:true,
                 email:true
@@ -186,7 +186,7 @@ $(document).ready(function(){
             password:{
                 required:true,
                 minlength:6
-=======
+
             CI:{
                required:true,
                number:true,
@@ -194,12 +194,11 @@ $(document).ready(function(){
             },
             direccion:{
                required:true,
->>>>>>> 53d59baee8db16468562edf522e55d1490381167
             }
         },
-
+}
         messages:{
-<<<<<<< HEAD
+
             correo:{
                 required:"Por favor, ingresa tu correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"
@@ -207,7 +206,7 @@ $(document).ready(function(){
             password:{
                 required:"Por favor, ingresa tu contraseña",
                 minlength:"La contraseña debe tener al menos 6 caracteres"
-=======
+
             CI:{
                 required:"Este campo no puede ir vacío",
                 number:"Solo se aceptan números",
@@ -215,7 +214,7 @@ $(document).ready(function(){
             },
             direccion:{
                 required:"Este campo no puede ir vacío",
->>>>>>> 53d59baee8db16468562edf522e55d1490381167
+
             }
         }
 

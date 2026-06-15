@@ -43,7 +43,7 @@ body{
     display:flex;
     justify-content:center;
     gap:40px;
-    margin-bottom:40px;
+    margin-bottom:20px;
 }
 
 .menu-login a{
@@ -58,7 +58,7 @@ body{
     padding-bottom:8px;
 }
 
-.titulo{
+h2{
     text-align:center;
     font-size:42px;
     font-family:serif;
@@ -114,14 +114,6 @@ input.error{
     border:1px solid #a01045;
 }
 
-h2{
-    text-align:center;
-    font-size:42px;
-    font-family:serif;
-    color:#222;
-    margin-bottom:10px;
-}
-
 @media(max-width:768px){
 
     .caja-login{
@@ -130,7 +122,7 @@ h2{
         padding:30px;
     }
 
-    .titulo{
+    h2{
         font-size:35px;
     }
 
@@ -145,18 +137,24 @@ h2{
 
 <body>
 
-    <form action="23.autenticar.php" method="get" id="iniciarsesion">
+<form action="23.autenticar.php" method="get" id="iniciarsesion">
 
-<div class="caja-login">
-    <div class="menu-login">
-    <a href="09.register.php" class="activo">Iniciar sesión</a>
-    <a href=" 10.formusuario.php" >Registrarse</a>
-</div>
+    <div class="caja-login">
 
-    <input type="number" name="CI" placeholder="CI" required>
-    <input type="text" name="direccion" placeholder="direccion" required>
+        <div class="menu-login">
+            <a href="09.register.php" class="activo">Iniciar sesión</a>
+            <a href="10.formusuario.php">Registrarse</a>
+        </div>
 
-    <button type="submit">Ingresar</button>
+        <h2>Iniciar sesión</h2>
+
+        <input type="number" name="CI" placeholder="CI">
+
+        <input type="text" name="direccion" placeholder="Dirección">
+
+        <button type="submit">Ingresar</button>
+
+    </div>
 
 </form>
 
@@ -168,12 +166,12 @@ $(document).ready(function(){
 
         rules:{
             CI:{
-               required:true,
-               number:true,
-               minlength:8
+                required:true,
+                number:true,
+                minlength:8
             },
             direccion:{
-               required:true,
+                required:true
             }
         },
 
@@ -184,7 +182,7 @@ $(document).ready(function(){
                 minlength:"El CI debe tener al menos 8 números"
             },
             direccion:{
-                required:"Este campo no puede ir vacío",
+                required:"Este campo no puede ir vacío"
             }
         }
 

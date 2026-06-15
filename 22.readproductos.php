@@ -291,7 +291,7 @@ h1{
  <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
  <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
 
-<a href="17.readproductos.php">
+<a href="22.readproductos.php">
  <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
  <div><i class="fa-solid fa-gear"></i> Configuración</div>
  <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>

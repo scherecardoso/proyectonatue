@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Iniciar Sesión</title>
+<title></title> 
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
@@ -28,9 +29,10 @@ body{
     justify-content:center;
     align-items:center;
     background:#f5f3f2;
+    
 }
 
-.caja-login{
+.contenedor{
     width:500px;
     background:white;
     padding:40px;
@@ -39,48 +41,49 @@ body{
     border:2px solid #f8c6e5;
 }
 
-.menu-login{
+.menu-registro{
     display:flex;
     justify-content:center;
     gap:40px;
     margin-bottom:40px;
 }
 
-.menu-login a{
+.menu-registro a{
     text-decoration:none;
     color:#777;
     font-size:18px;
 }
 
-.menu-login .activo{
+.menu-registro .activo{
     color:#111;
     border-bottom:2px solid #111;
     padding-bottom:8px;
 }
 
-.titulo{
+h2{
     text-align:center;
     font-size:42px;
     font-family:serif;
     color:#222;
-    margin-bottom:25px;
+    margin-bottom:10px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
 }
 
 input{
     width:100%;
     height:58px;
-    color:#777;
+    color: #777;
     border:1px solid #f5a3d5;
     border-radius:40px;
+    display:flex;
+    align-items:center;
     padding:20px;
     margin-bottom:18px;
     background:#fafafa;
-    outline:none;
-    font-size:15px;
-}
-
-input::placeholder{
-    color:#777;
 }
 
 button{
@@ -97,40 +100,19 @@ button{
 }
 
 button:hover{
-    transform:scale(1.03);
+    transform: scale(1.03);
     background:#f765c6;
-}
-
-label.error{
-    color:#a01045;
-    font-size:13px;
-    display:block;
-    margin-top:-10px;
-    margin-bottom:10px;
-    margin-left:15px;
-}
-
-input.error{
-    border:1px solid #a01045;
-}
-
-h2{
-    text-align:center;
-    font-size:42px;
-    font-family:serif;
-    color:#222;
-    margin-bottom:10px;
 }
 
 @media(max-width:768px){
 
-    .caja-login{
+    .contenedor{
         width:100%;
         max-width:430px;
         padding:30px;
     }
 
-    .titulo{
+    h2{
         font-size:35px;
     }
 
@@ -140,88 +122,125 @@ h2{
 
 }
 
+label.error{
+    color:#a01045;
+    font-size:13px;
+   
+    margin-bottom:10px;
+    margin-left:15px;
+}
+
+input.error{
+    border:1px solid #a01045;
+}
+
+select {
+    width:100%;
+    height:58px;
+    color: #777;
+    border:1px solid #f5a3d5;
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    padding:20px;
+    margin-bottom:18px;
+    background:#fafafa;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="caja-login">
+<div class="contenedor">
 
+    <div class="menu-registro">
+    <a href="09.register.php">Iniciar sesión</a>
 
-    <form action="23.autenticar.php" method="get" id="iniciarsesion">
-
-<div class="caja-login">
-    <div class="menu-login">
-    <a href="09.register.php" class="activo">Iniciar sesión</a>
-    <a href=" 10.formusuario.php" >Registrarse</a>
+    <a href=" 10.formusuario.php" class="activo">Registrarse</a>
 </div>
 
+    <h2>Crear cuenta</h2>
 
+    <form action="11.registrousuario.php" method="post" id="formusuarios">
 
-   <form action="23.autenticar.php" method="get">
-   <h2>Iniciar sesión</h2>
-   <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="direccion" placeholder="Dirección" required>
+    <input type="number" name="celular" placeholder="Celular" required>
 
-    <button type="submit">Ingresar</button>
+    <select name="rol">
+        <option value="">Seleccione un rol</option>
+        <option value="usuario">Usuario</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="administrador">Administrador</option>
+    </select>
 
+    <input type="text" name="estado" placeholder="Estado" required>
+
+    <button type="submit">Registrar</button>
 </form>
+
+</div>
 
 <script>
 
 $(document).ready(function(){
 
-    $("#iniciarsesion").validate({
+    $("#formusuarios").validate({
 
         rules:{
-
-            correo:{
-                required:true,
-                email:true
-            },
-            password:{
-                required:true,
-                minlength:6
-
             CI:{
-               required:true,
-               number:true,
-               minlength:8
+                required:true,
+                number:true,
+                minlength:8
+            },
+            nombre:{
+                required:true
             },
             direccion:{
-               required:true,
+                required:true
+            },
+            celular:{
+                required:true,
+                number:true,
+                minlength:8
+            },
+            rol:{
+                required:true
+            },
+            estado:{
+                required:true
             }
         },
-}
+
         messages:{
-
-            correo:{
-                required:"Por favor, ingresa tu correo electrónico",
-                email:"Por favor, ingresa un correo electrónico válido"
-            },
-            password:{
-                required:"Por favor, ingresa tu contraseña",
-                minlength:"La contraseña debe tener al menos 6 caracteres"
-
             CI:{
                 required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
             },
+            nombre:{
+                required:"El nombre es obligatorio"
+            },
             direccion:{
-<<<<<<< HEAD
                 required:"Ingrese su dirección"
-=======
-                required:"Este campo no puede ir vacío",
-
->>>>>>> 273ebf419bb3706703ee5e370e031a8f3885ca76
+            },
+            celular:{
+                required:"Ingresa un número de celular",
+                number:"Solo se aceptan números",
+                minlength:"El número debe tener al menos 8 números"
+            },
+            rol:{
+                required:"Selecciona un rol para continuar"
+            },
+            estado:{
+                required:"Indica el estado correspondiente"
             }
         }
 
     });
-
 });
-
 </script>
 
 </body>

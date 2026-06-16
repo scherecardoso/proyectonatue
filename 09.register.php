@@ -160,8 +160,7 @@ h2{
         <a href="09.register.php" class="activo">Iniciar sesión</a>
         <a href="10.formusuario.php">Registrarse</a>
     </div>
-<input type="text" name="direccion" placeholder="direccion" required>
-
+    <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
     <button type="submit">Ingresar</button>
 

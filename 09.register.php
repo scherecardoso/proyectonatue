@@ -147,7 +147,6 @@ h2{
 <div class="caja-login">
 
     <div class="menu-login">
-<<<<<<< HEAD
     <a href="09.register.php" class="activo">Iniciar sesión</a>
 
     <a href=" 10.formusuario.php" >Registrarse</a>

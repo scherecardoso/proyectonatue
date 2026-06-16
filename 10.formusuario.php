@@ -161,7 +161,7 @@ select {
 
     <h2>Crear cuenta</h2>
 
-    <form action="11.registrousuario.php" method="post">
+    <form action="11.registrousuario.php" method="post" id="formusuarios">
 
     <input type="number" name="CI" placeholder="CI" required>
     <input type="text" name="nombre" placeholder="Nombre" required>
@@ -169,6 +169,7 @@ select {
     <input type="number" name="celular" placeholder="Celular" required>
 
     <select name="rol">
+         <option value="">Seleccione un rol</option>
         <option value="usuario">Usuario</option>
         <option value="vendedor">Vendedor</option>
         <option value="administrador">Administrador</option>
@@ -214,7 +215,7 @@ $(document).ready(function(){
 
         messages:{
             CI:{
-                required:"Este campo no puede ir vacío",
+                required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
             },
@@ -222,7 +223,7 @@ $(document).ready(function(){
                 required:"El nombre es obligatorio"
             },
             direccion:{
-                required:"Este campo no puede ir vacío"
+                required:"Ingrese su dirección"
             },
             celular:{
                 required:"Este campo no puede ir vacío",
@@ -230,7 +231,7 @@ $(document).ready(function(){
                 minlength:"El celular debe tener al menos 8 números"
             },
             rol:{
-                required:"El campo es obligatorio"
+                required:"Selecciona un rol para continuar"
             },
             estado:{
                 required:"El campo es obligatorio"

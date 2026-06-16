@@ -177,12 +177,12 @@ $(document).ready(function(){
 
         messages:{
             CI:{
-                required:"Este campo no puede ir vacío",
+                required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
             },
             direccion:{
-                required:"Este campo no puede ir vacío"
+                required:"Ingrese su dirección"
             }
         }
 

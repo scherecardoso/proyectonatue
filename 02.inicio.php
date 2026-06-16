@@ -25,72 +25,6 @@ body {
 
 }
 
-header {
-  grid-area: barra;
-  background-color: #ffffffb5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 120px;
-  top: 0;
-  position: sticky;
-  height: 60px;
-  z-index: 100;
-  }
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 13px;
-  color: #000000;
-  margin: 0;
-  }
-
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  }
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-
-  }
-
-
-nav a {
-  text-decoration: none;
-  color: #2b2b2b;
-  font-weight: 500px;
-  font-size: 15px;
-  position: relative;
-  }
-
-nav a.activo:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background-color: #333333;
-  }
-
-.iconos-barra {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  }
-
-.iconos-barra a {
-  color: #2b2b2b;
-  text-decoration: none;
-  font-size: 18px;
-  position: relative;
-  }
-
 h2 {
     font-size: 28px;
 }
@@ -119,36 +53,6 @@ h3{
   width: 300px;
   height: 100px;
 
-}
-
- .caja-correo {
-  position: absolute;
-  top: 55%;      
-  left:10%;
-  display: flex;
-  gap: 15px;          
-
-}
-
-.input-correo {
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.666);
-  background-color: rgba(255, 255, 255, 0.308);
-  color: #ffffff;
-  font-size: 18px;
-  text-align: center;
-  width: 500px;
-  height: 80px;
-}
-
-.boton-enviar {
-  width: 100px;
-  height: 80px;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.666);
-  background-color: rgba(255, 255, 255, 0.308);
-  cursor: pointer;
- 
 }
 
 .imagenes img:hover {
@@ -255,77 +159,9 @@ h3{
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-footer {
-  grid-area: pie;
-  padding:60px;
-  }
-
-.contenedor-pie {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 40px;
-  }
-
-.seccion-pie {
-  min-width: 250px;
-  }
-
-.seccion-pie h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: #000000;
-  margin-bottom: 10px;
-  font-weight: 600;
-  }
-
-.seccion-pie p {
-  color: #000000;
-  font-weight: 400;
-  font-size: 14px;
-  }
-
-.iconos-redes {
-  display: flex;
-  gap: 20px;
-  margin-top: 10px;
-  }
-
-.iconos-redes a {
-  color: #2b2b2b;
-  font-size: 18px;
-  transition: color 0.3s ease;
-  }
-
 
 
 @media (max-width: 768px) {
-
-
- header {
-    padding: 20px;
-    gap: 0px;
-    height: 130px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   
-  }
-
-  .iconos-barra {
-    display: flex;
-    flex-direction: row;
- 
-  }
-
-  .iconos-barra a {
-    display: flex;
-    flex-direction: row;
-    gap: -100px;
-
-  }
 
   .carrusel {
     height: auto;
@@ -349,25 +185,7 @@ footer {
     width: 100%;
     height: auto;
   }
-  .caja-correo {
-    width: 100%;
-    left: 0;
-    top: 65%;
-    justify-content: center;
-    padding: 0 15px;
-    box-sizing: border-box;
-  }
 
-  .input-correo {
-    width: 70%;
-    height: 50px;
-    font-size: 15px;
-  }
-
-  .boton-enviar {
-    width: 80px;
-    height: 50px;
-  }
   .titulo-productos {
     width: 100%;
     left: 0;
@@ -441,38 +259,6 @@ footer {
     max-width: 320px;
     height: auto;
   }
-  footer {
-    padding: 30px 20px;
-    height: auto;
-  }
-
-
-  .contenedor-pie {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 25px;
-  }
-
-
-  .seccion-pie {
-    width: 100%;
-  }
-
-
-  .seccion-pie h4 {
-    font-size: 16px;
-  }
-
-
-  .seccion-pie p {
-    font-size: 13px;
-  }
-
-
-  .iconos-redes {
-    justify-content: center;
-  }
 }
 
 
@@ -482,24 +268,7 @@ footer {
 
 <body>
 
-  <header>
-    <div class="logo">
-    <h1>Natué</h1></div>
-  <nav>
-    <ul>
-    <li><a href="02.inicio.php" class="activo">Inicio</a></li>
-    <li><a href="03.productos.php" >Cuidado</a></li>
-    <li><a href="04.productos2.php">Cosmeticos</a></li>
-    <li><a href="05.acercade.php">Nosotros</a></li>
-    </ul>
-  </nav>
-
-  <div class="iconos-barra">
-    <a href="09.register.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-    <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
-  </div>
-  </header>
-
+<?php include("header.php"); ?>
 
   <section class="carrusel"><img src="./img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
    
@@ -546,20 +315,6 @@ footer {
     <img src="./img/nos.png" alt="Orgánico y natural" class="img-contenido">
 </section>
 
-<footer>
-  <div class="contenedor-pie">
- <div class="seccion-pie"></div> 
-
-  <div class="seccion-pie">
-   <h4>Síguenos</h4>
-  <div class="iconos-redes">
-    <a ><i class="fab fa-instagram"></i></a>
-    <a ><i class="fab fa-tiktok"></i></a>
-    <a ><i class="fab fa-facebook-f"></i></a>
-  </div>
-  </div>
-
-</footer>
-
+<?php include("footer.php"); ?>
 </body>
 </html>

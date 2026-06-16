@@ -152,12 +152,17 @@ select {
 
 <form action="23.autenticar.php" method="POST" id="iniciarsesion">
 
+    <div class="menu-login">
+    <a href="09.register.php" class="activo">Iniciar sesión</a>
+
+
     <div class="caja-login">
 
         <div class="menu-login">
             <a href="09.register.php" class="activo">Iniciar sesión</a>
             <a href="10.formusuario.php">Registrarse</a>
         </div>
+
 
         <h2>Iniciar sesión</h2>
 
@@ -175,7 +180,19 @@ select {
 
         <button type="submit">Ingresar</button>
 
+   <form action="23.autenticar.php" method="get">
+   <h2>Iniciar sesión</h2>
+   <input type="text" name="direccion" placeholder="direccion" required>
+
+
     </div>
+
+
+<input type="text" name="direccion" placeholder="direccion" required>
+
+    <input type="number" name="CI" placeholder="CI" required>
+    <button type="submit">Ingresar</button>
+
 </form>
 
 <script>

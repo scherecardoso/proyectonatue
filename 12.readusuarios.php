@@ -14,68 +14,91 @@
 }
 
 body{
-    background:#fff;
-    padding:20px;
+    background:#f3f3f3;
+    padding:30px;
 }
 
 .contenedor{
-    max-width:900px;
+    width:95%;
     margin:auto;
-    background:#fff;
-    border:1px solid #ddd;
-    padding:20px;
-    border-radius:10px;
 }
 
 h1{
-    text-align:center;
-    margin-bottom:20px;
-    font-size:22px;
-    color:#c0c0c0;
+    text-align:left;
+    margin-bottom:30px;
+    font-size:50px;
+    color:black;
 }
 
 table{
     width:100%;
-    border-collapse:collapse;
+    border-collapse:separate;
+    border-spacing:0 15px;
 }
 
 th{
-    background:#f5f5f5;
-    padding:10px;
-    font-size:14px;
-    border:1px solid #ddd;
+    background:#f7e8ee;
+    color:#ff4f8b;
+    padding:20px;
+    font-size:18px;
+    border:none;
+}
+
+th:first-child{
+    border-radius:10px 0 0 10px;
+}
+
+th:last-child{
+    border-radius:0 10px 10px 0;
 }
 
 td{
-    padding:10px;
-    font-size:14px;
-    border:1px solid #eee;
+    background:white;
+    padding:18px;
+    font-size:18px;
+    border-top:1px solid #e5e5e5;
+    border-bottom:1px solid #e5e5e5;
     text-align:center;
 }
 
+tr td:first-child{
+    border-left:1px solid #e5e5e5;
+    border-radius:20px 0 0 20px;
+}
+
+tr td:last-child{
+    border-right:1px solid #e5e5e5;
+    border-radius:0 20px 20px 0;
+}
+
 .btn{
-    padding:6px 10px;
-    border:none;
-    border-radius:6px;
-    color:white;
+    padding:10px 20px;
+    border-radius:15px;
     text-decoration:none;
-    font-size:12px;
-    margin:2px;
+    font-size:15px;
+    margin:3px;
     display:inline-block;
 }
 
 .editar{
-    background:#4caf50;
+    background:#f7d9e5;
+    color:#ff4f8b;
 }
 
 .eliminar{
-    background:#e74c3c;
+    background:#f6e5e5;
+    color:#ff5b5b;
+}
+
+.btn:hover{
+    opacity:0.8;
 }
 
 .sin-datos{
     text-align:center;
     margin-top:20px;
     color:#777;
+    font-size:18px;
 }
 
 </style>

@@ -149,7 +149,7 @@ h2{
 
 
   
-<form action="23.autenticar.php" method="post">
+<form action="23.autenticar.php" method="get">
     <div class="menu-login">
     <a href="09.register.php" class="activo">Iniciar sesión</a>
     <a href=" 10.formusuario.php" >Registrarse</a>
@@ -159,7 +159,7 @@ h2{
 
     <input type="number" name="CI" placeholder="CI" required>
 
-    <input type="text" name="direccion" placeholder="Dirección" required>
+    <input type="text" name="direccion" placeholder="dirección" required>
 
     <select name="rol" required>
         <option value="administrador">Administrador</option>

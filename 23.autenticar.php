@@ -12,9 +12,9 @@ if ($conn->connect_error) {
     die("Error de conexión");
 }
 
-$CI = $_POST['CI'];
-$direccion = $_POST['direccion'];
-$rol = $_POST['rol'];
+$CI = $_GET['CI'];
+$direccion = $_GET['direccion'];
+$rol = $_GET['rol'];
 
 $sql = "SELECT * FROM usuario
         WHERE CI='$CI'

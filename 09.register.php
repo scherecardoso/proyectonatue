@@ -43,7 +43,7 @@ body{
     display:flex;
     justify-content:center;
     gap:40px;
-    margin-bottom:20px;
+    margin-bottom:40px;
 }
 
 .menu-login a{
@@ -58,7 +58,7 @@ body{
     padding-bottom:8px;
 }
 
-h2{
+.titulo{
     text-align:center;
     font-size:42px;
     font-family:serif;
@@ -114,6 +114,14 @@ input.error{
     border:1px solid #a01045;
 }
 
+h2{
+    text-align:center;
+    font-size:42px;
+    font-family:serif;
+    color:#222;
+    margin-bottom:10px;
+}
+
 @media(max-width:768px){
 
     .caja-login{
@@ -122,7 +130,7 @@ input.error{
         padding:30px;
     }
 
-    h2{
+    .titulo{
         font-size:35px;
     }
 
@@ -137,24 +145,25 @@ input.error{
 
 <body>
 
-<form action="23.autenticar.php" method="POST" id="iniciarsesion">
+<div class="caja-login">
 
-    <div class="caja-login">
 
-        <div class="menu-login">
-            <a href="09.register.php" class="activo">Iniciar sesión</a>
-            <a href="10.formusuario.php">Registrarse</a>
-        </div>
+    <form action="23.autenticar.php" method="get" id="iniciarsesion">
 
-        <h2>Iniciar sesión</h2>
+<div class="caja-login">
+    <div class="menu-login">
+    <a href="09.register.php" class="activo">Iniciar sesión</a>
+    <a href=" 10.formusuario.php" >Registrarse</a>
+</div>
 
-        <input type="number" name="CI" placeholder="CI">
 
-        <input type="text" name="direccion" placeholder="Dirección">
 
-        <button type="submit">Ingresar</button>
+   <form action="23.autenticar.php" method="get">
+   <h2>Iniciar sesión</h2>
+   <input type="text" name="direccion" placeholder="direccion" required>
+    <input type="number" name="CI" placeholder="CI" required>
 
-    </div>
+    <button type="submit">Ingresar</button>
 
 </form>
 
@@ -165,24 +174,47 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-            CI:{
+
+            correo:{
                 required:true,
-                number:true,
-                minlength:8
+                email:true
+            },
+            password:{
+                required:true,
+                minlength:6
+
+            CI:{
+               required:true,
+               number:true,
+               minlength:8
             },
             direccion:{
-                required:true
+               required:true,
             }
         },
-
+}
         messages:{
+
+            correo:{
+                required:"Por favor, ingresa tu correo electrónico",
+                email:"Por favor, ingresa un correo electrónico válido"
+            },
+            password:{
+                required:"Por favor, ingresa tu contraseña",
+                minlength:"La contraseña debe tener al menos 6 caracteres"
+
             CI:{
                 required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 8 números"
             },
             direccion:{
+<<<<<<< HEAD
                 required:"Ingrese su dirección"
+=======
+                required:"Este campo no puede ir vacío",
+
+>>>>>>> 273ebf419bb3706703ee5e370e031a8f3885ca76
             }
         }
 

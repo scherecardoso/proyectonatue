@@ -152,10 +152,17 @@ input.error{
 
         <input type="text" name="direccion" placeholder="Dirección">
 
+        <select name="rol" required>
+        <option value="">Seleccione un rol</option>
+        <option value="administrador">Administrador</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="usuario">Usuario</option>
+
+    </select>
+
         <button type="submit">Ingresar</button>
 
     </div>
-
 </form>
 
 <script>
@@ -172,6 +179,9 @@ $(document).ready(function(){
             },
             direccion:{
                 required:true
+            },
+            rol{
+                required:true
             }
         },
 
@@ -183,9 +193,11 @@ $(document).ready(function(){
             },
             direccion:{
                 required:"Ingrese su dirección"
-            }
+            },
+             rol:{
+                required:"Selecciona un rol para continuar"
         }
-
+      }
     });
 
 });

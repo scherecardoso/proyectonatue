@@ -148,20 +148,24 @@ h2{
 <div class="caja-login">
 
 
-    <form action="23.autenticar.php" method="get" id="iniciarsesion">
-
-<div class="caja-login">
+  
+<form action="23.autenticar.php" method="post">
     <div class="menu-login">
     <a href="09.register.php" class="activo">Iniciar sesión</a>
     <a href=" 10.formusuario.php" >Registrarse</a>
 </div>
 
+    
 
-
-   <form action="23.autenticar.php" method="get">
-   <h2>Iniciar sesión</h2>
-   <input type="text" name="direccion" placeholder="direccion" required>
     <input type="number" name="CI" placeholder="CI" required>
+
+    <input type="text" name="direccion" placeholder="Dirección" required>
+
+    <select name="rol" required>
+        <option value="administrador">Administrador</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="usuario">Usuario</option>
+    </select>
 
     <button type="submit">Ingresar</button>
 

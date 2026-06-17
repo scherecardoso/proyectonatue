@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 $sql = "SELECT * FROM carrito";
 $resultado = $conn->query($sql);
-if ($result && $result->num_rows > 0) {
+if ($resultado && $resultado->num_rows > 0) {
 echo "<h2>Lista Carrito</h2>";
 
 echo "<table>";
@@ -25,7 +25,7 @@ echo "
 ";
 
 while($fila = $resultado->fetch_assoc()){
-
+$codigo = $fila['codigo'];
 echo "
 <tr>
 <td>".$fila['codigo']."</td>
@@ -34,8 +34,8 @@ echo "
 <td>".$fila['costototal']."</td>
 
 <td>
- a class='btn eliminar' href='30.eliminarcarrito.php?codigo=$codigo'>Eliminar</a>
- a class='btn editar' href='30.editarcarrito.php?codigo=$codigo'>Editar</a>
+ a class='btn eliminar' href='32.eliminarcarrito.php?codigo=$codigo'>Eliminar</a>
+ a class='btn editar' href='31.editarcarrito.php?codigo=$codigo'>Editar</a>
  </td>
 </tr>
 ";

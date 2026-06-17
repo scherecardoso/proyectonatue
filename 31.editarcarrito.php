@@ -33,11 +33,10 @@ if($resultado->num_rows > 0){
 <body>
     
     <form action="32.updatecarrito.php" method="post">
-<h1>Editar Carrito</h1>
- <label for="codigo">Nombre:</label>
-        <input type="hidden" name="codigo" value='<?=$codigo?>'>
-        <input type="text" name="nombreproducto" value='<?=$nombreproducto?>'><br>
-        <label for="id">ID</label>
+      <h1>Editar Carrito</h1>
+      <label for="codigo">codigo</label>
+        <input type="hidden" name="codigo" value='<?=$codigo?>'><br>
+        <label for="id">id</label>
         <input type="number" name="id" value='<?=$id?>'><br>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" value='<?=$cantidad?>'><br>

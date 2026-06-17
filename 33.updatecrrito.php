@@ -11,14 +11,15 @@ if ($conn->connect_error) {
 }
 
 $codigo = $_POST['codigo'];
-$nombre = $_POST['nombre'];
-$descripcion = $_POST['descripcion'];
-$precio = $_POST['precio'];
-$costo = $_POST['costo'];
-$stock = $_POST['stock'];
-$sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo', '$nombre', '$descripcion', '$precio',  '$costo','$stock')";
+$id = $_POST['id'];
+$cantidad = $_POST['cantidad'];
+$costototal = $_POST['costototal'];
+
+$sql = "UPDATE carrito SET codigo='$codigo', id='$id', cantidad='$cantidad', costototal='$costototal' WHERE codigo=$codigo";
+
 if ($conn->query($sql) === TRUE) {
-    header("Location: 22.readproductos.php");
+    echo "carrito actualizado exitosamente";
+    header("Location: 30.readcarrito.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

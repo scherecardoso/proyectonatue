@@ -25,7 +25,8 @@ body {
     "titulo4"
     "caja4"
     "titulo5"
-    "caja5";
+    "caja5"
+    "pie";
  gap: 10px;
 
 }
@@ -133,7 +134,7 @@ h3{
 </head>
 <body>
 
-<? include("header.php");?>
+<?php include("header.php");?>
 <h2 id="titulo1"></h2>
 <div class="caja" id="caja1">
     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr2.jpeg" alt="" class=""  >
@@ -279,6 +280,6 @@ h3{
     <h3>Precio: 22 Bs</h3></div>
 </a>
 </div>
-
+<?php include("footer.php");?>
 </body>
 </html>

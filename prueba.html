@@ -1,11 +1,3 @@
-<?php
-session_start();
-
-if ($_SESSION['rol'] != "vendedor") {
-    echo "Acceso denegado";
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -547,8 +539,8 @@ nav a {
    </ul>
    </nav>
   <section class="iconos">
-    <a href="09.register.php"><i class="fa-solid fa-user"></i> </a>
-   <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping" style="margin-right: 20px;"></i></a>
+    <a href="fromclientes.php"><i class="fa-solid fa-user"></i> </a>
+   <a href="formulario.php"><i class="fa-solid fa-bag-shopping" style="margin-right: 20px;"></i></a>
   </section>
 </header>
 <aside class="menu-lateral">
@@ -559,7 +551,7 @@ nav a {
   <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
   <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
-  <a href="26.cerrarsesion.php">Cerrar Sesión</a>
+  <a href="">Cerrar Sesión</a>
 </aside>
 <main class="principal">
     <section class="bienvenida">
@@ -668,7 +660,7 @@ nav a {
   <section class="redes">
     <a href=""><i class="fa-solid fa-location-dot"></i></a>
     <a href=""><i class="fa-brands fa-facebook"></i></a>
-    <a href="https://www.instagram.com/natue_cpp/"><i class="fa-brands fa-square-instagram"></i></a>
+    <a href=""><i class="fa-brands fa-square-instagram"></i></a>
     <a href=""><i class="fa-brands fa-twitter"></i></a>
   </section>
 </footer>

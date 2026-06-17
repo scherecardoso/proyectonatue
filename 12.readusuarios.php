@@ -109,6 +109,7 @@ tr td:last-child{
 <div class="contenedor">
 
 <h1>Lista de Usuarios</h1>
+<a class='btn volver' href='09.register.php?CI=$CI'>Volver</a>
 
 <?php
 

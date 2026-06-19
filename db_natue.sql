@@ -47,9 +47,11 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `shena`.`carrito` (
   `pedidos_id` INT NOT NULL,
   `productos_codigo` INT NOT NULL,
+  `cantidad` INT NULL,
+  `costototal` INT NULL,
   PRIMARY KEY (`pedidos_id`, `productos_codigo`),
   INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC),
-  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC),
+  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC) ,
   CONSTRAINT `fk_pedidos_has_productos_pedidos`
     FOREIGN KEY (`pedidos_id`)
     REFERENCES `shena`.`pedidos` (`id`)

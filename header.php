@@ -59,7 +59,6 @@ nav a.activo::after {
 
 .iconos-barra a {
   color: #2b2b2b;
-  text-decoration: none;
   font-size: 18px;
   position: relative;
 }

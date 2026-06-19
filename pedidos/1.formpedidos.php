@@ -1,8 +1,6 @@
 <?php
 session_start();
-    $vendedor=$_SESSION['vendedor'];
-    
-    
+$vendedor = $_SESSION['nombre'];
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +18,14 @@ session_start();
     <input type="text" name="nombre"><br><br>
 
     Fecha:
-    <input type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>" readonly><br><br>
+    <input type="date" name="fecha"
+           value="<?php echo date('Y-m-d'); ?>" readonly><br><br>
 
     <input type="hidden" name="estado" value="En Proceso">
 
     Nombre Vendedor:
-    <input type="text" name="vendedor" value="<?php echo $vendedor?>" readonly><br><br>
-
+    <input type="text" name="vendedor"
+           value="<?php echo $vendedor; ?>" readonly><br><br>
 
     <input type="submit" value="Nuevo Pedido">
 
@@ -34,3 +33,4 @@ session_start();
 
 </body>
 </html>
+

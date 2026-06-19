@@ -16,10 +16,10 @@ $fecha = $_POST["fecha"];
 $estado = $_POST["estado"];
 $vendedor = $_POST["vendedor"];
 
-$sql = "INSERT INTO pedidos (Nombre, Fecha, Estado, vendedor) VALUES ('$nombre', '$fecha', '$estado', '$vendedor')";
+$sql = "INSERT INTO pedidos (nombre, fecha, estado, vendedor) VALUES ('$nombre', '$fecha', '$estado', '$vendedor')";
 
 if($conn->query($sql)){
-    header("location:                ".$conn->insert_id);
+    header("location: 28.micarrito.php ".$conn->insert_id);
 }else{
     echo "Error: " . $conn->error;
 }

@@ -1,6 +1,7 @@
 <?php
 session_start();
-    $vendedor=$_SESSION['nombre'];
+    $vendedor=$_SESSION['vendedor'];
+    
     
 ?>
 
@@ -13,7 +14,7 @@ session_start();
 
 <h2>Generar Pedido</h2>
 
-<form action="nuevopedido.php" method="POST">
+<form action="2.nuevopedido.php" method="POST">
 
     Nombre:
     <input type="text" name="nombre"><br><br>
@@ -25,6 +26,7 @@ session_start();
 
     Nombre Vendedor:
     <input type="text" name="vendedor" value="<?php echo $vendedor?>" readonly><br><br>
+
 
     <input type="submit" value="Nuevo Pedido">
 

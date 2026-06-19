@@ -10,9 +10,9 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_GET['codigo'];
+$productos_codigo = $_GET['productos_codigo'];
 
-$sql = "DELETE  FROM carrito WHERE codigo=$codigo";
+$sql = "DELETE  FROM carrito WHERE productos_codigo=$productos_codigo";
 
 if ($conn->query($sql) === TRUE) {
     echo "Producto eliminado exitosamente";

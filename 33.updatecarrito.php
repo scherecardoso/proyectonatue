@@ -10,12 +10,12 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_POST['codigo'];
-$id = $_POST['id'];
+$productos_codigo = $_POST['productos_codigo'];
+$pedidos_id = $_POST['pedidos_id'];
 $cantidad = $_POST['cantidad'];
 $costototal = $_POST['costototal'];
 
-$sql = "UPDATE carrito SET codigo='$codigo', id='$id', cantidad='$cantidad', costototal='$costototal' WHERE codigo=$codigo";
+$sql = "UPDATE carrito SET productos_codigo='$productos_codigo', pedidos_id='$pedidos_id', cantidad='$cantidad', costototal='$costototal' WHERE productos_codigo=$productos_codigo";
 
 if ($conn->query($sql) === TRUE) {
     echo "carrito actualizado exitosamente";

@@ -10,22 +10,24 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_POST['codigo'];
-$id = $_POST['id'];
-$cantidad = $_POST['cantidad'];
-$precio = $_POST['precio'];
-$costototal = $cantidad * $precio;
+$productos_codigo = $_POST["productos_codigo"];
+$pedidos_id = $_POST["pedidos_id"];
+$cantidad = $_POST["cantidad"];
+$precio = $_POST["precio"];
+$costototal=$precio*$cantidad;
 
-$sql = "INSERT INTO carrito (codigo, id, cantidad, costototal) VALUES('$codigo', '$id', '$cantidad', '$costototal')";
+$sql = "INSERT INTO carrito
+(productos_codigo, pedidos_id, cantidad, costototal)
+VALUES
+('$productos_codigo','$pedidos_id','$cantidad','$costototal')";
 
-if($conn->query($sql)==TRUE){
+if($conn->query($sql)){
     echo "Producto agregado al carrito";
-    header("Location: 28.micarrito.php?id=$id".$id);
+    header("location: 28.micarrito.php?idPedido=".$pedidos_id);
 }else{
-    echo "el producto ya se agrego al carrito";
-    echo "<a href='28.micarrito.php?id=$id'>
-    <button>Volver al carrito</button>
-    </a>";
+    echo "El producto ya se agregó";
+    echo "<a href='28.micarrito.php?idPedido=$pedidos_id'>
+        <button>Volver a Pedidos</button>
+      </a>";
 }
-$conn->close();
 ?>

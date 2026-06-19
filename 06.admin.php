@@ -27,77 +27,11 @@ body {
     grid-template-rows: 70px 1fr;   
     grid-template-areas:
         "barra barra barra"
-        "menu info act";
+        "menu info act"
+        "pie pie pie";
     gap: 10px;
     height: 100vh;
     background: #ffffff
-}
-
-
-
-header {
-    grid-area: barra;
-    background-color: #ffffffb5;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 120px;
-    top: 0;
-    position: sticky;
-    height: 60px;
-    z-index: 100;
-}
-
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    color: #000000;
-    margin: 0;
-}
-
-
-nav {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #2b2b2b;
-    font-weight: 500px;
-    font-size: 15px;
-    position: relative;
-}
-
-nav a.activo:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 1px;
-    background-color: #333333;
-}
-
-.iconos-barra {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.iconos-barra a {
-    color: #2b2b2b;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
 }
 
 
@@ -438,22 +372,6 @@ div{
       "info";
   }
 
-  header {
-    padding: 20px;
-    gap: 0px;
-    height: 130px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   
-  }
-
-  nav {
-    width: 100%;
-    justify-content: center;
-  }
-
   .menu,
   .act {
     display: none;
@@ -504,27 +422,7 @@ div{
 </style>
 </head>
 <body>
-
-<header>
-    <div class="logo"><h1>Natué</h1></div>
-
-<nav>
-    <ul>
-    <li><a href="02.inicio.php">Inicio</a></li>
-    <li><a href="03.productos.php">Cuidado</a></li>
-    <li><a href="04.productos2.php">Cosmeticos</a></li>
-    <li><a href="05.acercade.php">Nosotros</a></li>
-    </ul>
-</nav>
-
-
-  <div class="iconos-barra">
-    <a href="10.formusuarios.php"><i class="fa-solid fa-user"></i> <span style="font-size:14px; margin-left:5px;"></span></a>
-    <a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a>
-  </div>
-</header>
-
-
+<?php include("header.php"); ?>
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
@@ -543,13 +441,13 @@ div{
     <div class="texto"><h2>BIENVENIDO</h2><p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p></div></seccion>
 
 
-<seccion class="cards">
+<section class="cards">
     <article class="card"><div class="icono"><i class="fa-solid fa-users"></i></div><h3>24</h3><p>Usuarios Registrados</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-shield"></i></div><h3>2</h3><p>Roles Activos</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3>156</h3><p>Productos Registrados</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3>128</h3><p>Pedidos este mes</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3>$3.805</h3><p>Ventas este mes</p></article>
-</seccion>
+</section>
 
 
 <section class="contenido">
@@ -597,7 +495,6 @@ div{
   </section>
 </section>
 
-
 <aside class="act">
   <section class="acciones"><h3 class="titulo-caja">ACCIONES RAPIDAS</h3>
   <ul class="lista-acciones">
@@ -628,7 +525,6 @@ div{
     </ul>
   </section>
 </aside>
-
-
+</main>
 </body>
 </html>

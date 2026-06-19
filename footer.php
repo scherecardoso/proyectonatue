@@ -1,94 +1,77 @@
 <style>
-    footer {
+footer {
   grid-area: pie;
-  padding:60px;
-  }
+  padding: 60px;
+}
 
 .contenedor-pie {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 40px;
-  }
-
-.seccion-pie {
-  min-width: 250px;
-  }
+  justify-content: center;
+  text-align: center;
+}
 
 .seccion-pie h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: #000000;
-  margin-bottom: 10px;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 15px;
   font-weight: 600;
-  }
-
-.seccion-pie p {
-  color: #000000;
-  font-weight: 400;
-  font-size: 14px;
-  }
+}
 
 .iconos-redes {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  gap: 30px;
   margin-top: 10px;
-  }
+}
 
 .iconos-redes a {
   color: #2b2b2b;
-  font-size: 18px;
-  transition: color 0.3s ease;
-  }
+  font-size: 35px;
+  transition: transform 0.3s ease;
+}
 
-@media {
-     footer {
+.iconos-redes a:hover {
+  transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+
+  footer {
     padding: 30px 20px;
-    height: auto;
   }
-
-
-  .contenedor-pie {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 25px;
-  }
-
-
-  .seccion-pie {
-    width: 100%;
-  }
-
 
   .seccion-pie h4 {
-    font-size: 16px;
+    font-size: 22px;
   }
 
-
-  .seccion-pie p {
-    font-size: 13px;
-  }
-
-
-  .iconos-redes {
-    justify-content: center;
+  .iconos-redes a {
+    font-size: 32px;
   }
 }
 </style>
 
 <footer>
   <div class="contenedor-pie">
- <div class="seccion-pie"></div> 
 
-  <div class="seccion-pie">
-   <h4>Síguenos</h4>
-  <div class="iconos-redes">
-    <a ><i class="fab fa-instagram"></i></a>
-    <a ><i class="fab fa-tiktok"></i></a>
-    <a ><i class="fab fa-facebook-f"></i></a>
-  </div>
-  </div>
+    <div class="seccion-pie">
+      <h4>Contactanos</h4>
 
+      <div class="iconos-redes">
+        <a href="https://www.instagram.com/natue_cpp/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+
+        <a href="https://wa.link/fm1yti" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <a href="https://maps.app.goo.gl/2hDiP1BoJQG7hdNK6" target="_blank">
+          <i class="fa-solid fa-location-dot"></i>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
 </footer>

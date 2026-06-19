@@ -25,11 +25,11 @@ echo "
 ";
 
 while($fila = $resultado->fetch_assoc()){
-$codigo = $fila['codigo'];
+$codigo = $fila['productos_codigo'];
 echo "
 <tr>
-<td>".$fila['codigo']."</td>
-<td>".$fila['id']."</td>
+<td>".$fila['productos_codigo']."</td>
+<td>".$fila['pedidos_id']."</td>
 <td>".$fila['cantidad']."</td>
 <td>".$fila['costototal']."</td>
 

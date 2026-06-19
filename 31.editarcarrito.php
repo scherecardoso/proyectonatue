@@ -10,14 +10,14 @@ if ($conn->connect_error) {
     die("Error de conexión");
 }
 
-$codigo = $_GET['codigo'];
-$sql = "SELECT * FROM carrito WHERE codigo='$codigo'";
+$productos_codigo = $_POST['productos_codigo'];
+$sql = "SELECT * FROM carrito WHERE productos_codigo='$productos_codigo'";
 $resultado = $conn->query($sql);
 $fila = $resultado->fetch_assoc();
 if($resultado->num_rows > 0){
         while($fila=$resultado->fetch_assoc()){
-            $codigo = $fila['codigo'];
-            $id = $fila['id'];
+            $productos_codigo = $fila['productos_codigo'];
+            $pedidos_id = $fila['pedidos_id'];
             $cantidad = $fila['cantidad'];
             $costototal = $fila['costototal'];
         }
@@ -32,12 +32,12 @@ if($resultado->num_rows > 0){
 </head>
 <body>
     
-    <form action="32.updatecarrito.php" method="post">
+    <form action="33.updatecarrito.php" method="post">
       <h1>Editar Carrito</h1>
-      <label for="codigo">codigo</label>
-        <input type="hidden" name="codigo" value='<?=$codigo?>'><br>
-        <label for="id">id</label>
-        <input type="number" name="id" value='<?=$id?>'><br>
+      <label for="productos_codigo">Código del Producto:</label>
+        <input type="hidden" name="productos_codigo" value='<?=$productos_codigo?>'><br>
+        <label for="pedidos_id">ID del Pedido:</label>
+        <input type="number" name="pedidos_id" value='<?=$pedidos_id?>'><br>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" value='<?=$cantidad?>'><br>
         <label for="costototal">Costo Total:</label>

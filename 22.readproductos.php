@@ -22,72 +22,6 @@ body{
     background:#ffffff;
 }
 
-
-header {
-    grid-area: barra;
-    background-color: #ffffffb5;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 120px;
-    top: 0;
-    position: sticky;
-    height: 60px;
-    z-index: 100;
-}
-
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    color: #000000;
-    margin: 0;
-}
-
-
-nav {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #2b2b2b;
-    font-weight: 500px;
-    font-size: 15px;
-    position: relative;
-}
-
-nav a.activo:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 1px;
-    background-color: #333333;
-}
-
-.iconos-barra {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.iconos-barra a {
-    color: #2b2b2b;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
-}
-
 .menu{
     grid-area:menu;
     display:flex;
@@ -212,36 +146,16 @@ body{
     flex-direction:column;
 }
 
-
-
-header{
-    flex-direction:column;
-    height:auto;
-    padding:20px;
-    gap:10px;
-}
-
-nav ul{
-    flex-wrap:wrap;
-    justify-content:center;
-    padding:0;
-}
-
-
-
 .menu{
     width:100%;
     border-right:none;
 }
-
-
 
 .contenedor{
     width:95%;
     padding:15px;
     margin:20px auto;
 }
-
 
 table{
     font-size:12px;
@@ -262,24 +176,7 @@ h1{
 </head>
 
 <body>
-
-
-<header>
-
-<div class="logo"><h1>Natué</h1></div>
-
-<nav>
-<ul>
-<li><a href="02.inicio.php">Inicio</a></li>
-<li><a href="03.productos.php">Cuidado</a></li>
-<li><a href="04.productos2.php">Cosmeticos</a></li>
-<li><a href="05.acercade.php">Nosotros</a></li>
-</ul>
-</nav>
-<div class="iconos-barra"><a href="10.formusuario.php"><i class="fa-solid fa-user"></i></a><a href="16.formproductos.php"><i class="fa-solid fa-bag-shopping"></i></a></div>
-</header>
-
-
+<?php include("header.php"); ?>
 <aside class="menu">
 
 <div class="titulo-menu">MENU ADMINISTRADOR</div>

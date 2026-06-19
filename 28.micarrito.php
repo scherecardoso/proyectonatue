@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 session_start();
 
-$pedidos_id = $_GET['pedidos_id'];
+$pedidos_id = $_GET['id'];
 
 $sql = "SELECT * FROM productos";
 $resultado = $conn->query($sql);
@@ -46,7 +46,7 @@ echo "<tr>
 
 while ($fila = $resultado->fetch_assoc()) {
 
-    echo "<form action='28.registrocarrito.php' method='post'>";
+    echo "<form action='29.registrocarrito.php' method='post'>";
     echo "<tr>";
 
     echo "<td>".$fila["codigo"]."</td>";
@@ -55,12 +55,12 @@ while ($fila = $resultado->fetch_assoc()) {
     echo "<td>".$fila["precio"]."</td>";
 
     echo "<td>
-            <a href='22.readproductos.php?productos_codigo=".$fila["productos_codigo"]."'>
+            <a href='22.readproductos.php?productos_codigo=".$fila["codigo"]."'>
                 <button type='button'>Mostrar</button>
             </a>
           </td>";
 
-    echo "<input type='hidden' name='productos_codigo' value='".$fila["productos_codigo"]."'>";
+    echo "<input type='hidden' name='productos_codigo' value='".$fila["codigo"]."'>";
     echo "<input type='hidden' name='pedidos_id' value='".$pedidos_id."'>";
     echo "<input type='hidden' name='precio' value='".$fila["precio"]."'>";
 

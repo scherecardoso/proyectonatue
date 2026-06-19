@@ -19,7 +19,7 @@ $vendedor = $_POST["vendedor"];
 $sql = "INSERT INTO pedidos (nombre, fecha, estado, vendedor) VALUES ('$nombre', '$fecha', '$estado', '$vendedor')";
 
 if($conn->query($sql)){
-    header("location: 28.micarrito.php ".$conn->insert_id);
+    header("location: ../28.micarrito.php?id=" . $conn->insert_id);
 }else{
     echo "Error: " . $conn->error;
 }

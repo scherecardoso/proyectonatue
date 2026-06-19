@@ -121,6 +121,18 @@ h2{
     color:#222;
     margin-bottom:10px;
 }
+select {
+    width:100%;
+    height:58px;
+    color: #777;
+    border:1px solid #f5a3d5;
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    padding:20px;
+    margin-bottom:18px;
+    background:#fafafa;
+}
 
 @media(max-width:768px){
 
@@ -143,9 +155,9 @@ h2{
 </style>
 </head>
 
-<body
+<body>
 
-<form action="23.autenticar.php" method="get" id="iniciarsesion">
+<form action="23.autenticar.php" method="post" id="iniciarsesion">
  <div class="caja-login">
 <div class="menu-login">
 <a href="09.register.php" class="activo">Iniciar sesión</a>

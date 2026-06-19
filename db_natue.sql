@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `shena`.`pedidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shena`.`pedidos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `fecha` DATE NULL,
   `estado` VARCHAR(45) NULL,

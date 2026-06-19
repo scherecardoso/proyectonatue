@@ -1,4 +1,4 @@
-```php
+
 <?php
 $servidor = "localhost";
 $usuario = "root";
@@ -29,7 +29,7 @@ if ($resultado->num_rows > 0) {
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['direccion'] = $fila['direccion'];
     $_SESSION['rol'] = $fila['rol'];
-    $_SESSION['vendedor'] = $fila['nombre'];
+    $_SESSION['nombre'] = $fila['nombre'];
 
     if ($_SESSION['rol'] == "vendedor") {
 

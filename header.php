@@ -62,6 +62,30 @@ nav a.activo::after {
   font-size: 18px;
   position: relative;
 }
+
+@media(max-width: 768px){
+    header {
+    padding: 20px;
+    gap: 0px;
+    height: 130px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .iconos-barra {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .iconos-barra a {
+    display: flex;
+    flex-direction: row;
+    gap: -100px;
+  }
+
+}
 </style>
 
 <header>
@@ -75,6 +99,7 @@ nav a.activo::after {
       <li><a href="03.productos.php">Cuidado</a></li>
       <li><a href="04.productos2.php">Cosmeticos</a></li>
       <li><a href="05.acercade.php">Nosotros</a></li>
+       <li><a href="005.contactanos.php">Contactanos</a></li>
     </ul>
   </nav>
 

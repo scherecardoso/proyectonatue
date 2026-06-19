@@ -16,7 +16,7 @@ $descripcion = $_POST['descripcion'];
 $precio = $_POST['precio'];
 $costo = $_POST['costo'];
 $stock = $_POST['stock'];
-$sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo','$nombre', '$descripcion', '$precio',  '$costo','$stock')";
+$sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo', '$nombre', '$descripcion', '$precio',  '$costo','$stock')";
 if ($conn->query($sql) === TRUE) {
     header("Location: 22.readproductos.php");
 } else {

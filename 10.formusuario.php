@@ -153,7 +153,6 @@ select {
 <body>
 
 <div class="contenedor">
-
     <div class="menu-registro">
     <a href="09.register.php">Iniciar sesión</a>
     <a href=" 10.formusuario.php" class="activo">Registrarse</a>

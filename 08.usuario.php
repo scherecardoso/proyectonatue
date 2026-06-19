@@ -31,41 +31,11 @@ body{
     grid-template-rows:70px 1fr;
     grid-template-areas:
     "barra barra"
-    "menu contenido";
+    "menu contenido"
+    "pie pie";
     height:100vh;
     background:#fff;
 }
-
-
-
-header{
-    grid-area:barra;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 60px;
-    border-bottom:2px solid #ff5ca8;
-    background:#fff;
-}
-
-.logo{
-    font-size:28px;
-    color:black;
-    font-weight:bold;
-}
-
-.iconos{
-    display:flex;
-    gap:25px;
-}
-
-.iconos a{
-    color:#444;
-    font-size:20px;
-    text-decoration:none;
-}
-
-
 
 .menu{
     grid-area:menu;
@@ -222,17 +192,7 @@ td{
 </head>
 
 <body>
-
-
-<header>
-    <div class="logo">Natué</div>
-    <div class="iconos"><a href="10.formusuario.php"><i class="fa-solid fa-user"></i></a>
-    <a href="16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i></a>
-    </div>
-</header>
-
-
-
+<?php include("header.php"); ?>
 <aside class="menu">
     <h3>MENU USUARIO</h3>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
@@ -288,8 +248,8 @@ td{
         <td>Procesando</td>
     </tr>
 </table>
-
 </section>
 </main>
+<?php include("footer.php"); ?>
 </body>
 </html>

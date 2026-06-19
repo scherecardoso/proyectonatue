@@ -166,6 +166,21 @@ h2{
     <input type="number" name="CI" placeholder="CI" required>
     <button type="submit">Ingresar</button>
 
+<<<<<<< HEAD
+=======
+        <option value="">Seleccione un rol</option>
+        <option value="administrador">Administrador</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="usuario">Usuario</option>
+
+    </select>
+
+        <button type="submit">Ingresar</button>
+        
+
+
+    </div>
+>>>>>>> 8462f3dc8b52665b0034d7d3d91b3fdf798c0442
 </form>
 
 <script>

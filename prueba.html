@@ -1,11 +1,3 @@
-<?php
-session_start();
-
-if ($_SESSION['rol'] != "vendedor") {
-    echo "Acceso denegado";
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,15 +14,60 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   grid-template-areas:
-    "barra barra"
+    "encabezado encabezado"
     "menu-lateral principal"
-    "pie pie";
+    "footer footer";
   grid-template-columns: 320px 1fr;
   grid-template-rows: 70px 1fr 70px;
   min-height: 100vh;
   gap: 5px;
 }
-
+header {
+  grid-area: encabezado;
+  background-color: #ffffffb5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 60px;
+  top: 0;
+  position: sticky;
+  height: 60px;
+  z-index: 100;
+  }
+.natue {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: #000000;
+  margin: 0;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  }
+nav a {
+  text-decoration: none;
+  color: #2b2b2b;
+  font-weight: 500px;
+  font-size: 15px;
+  position: relative;
+  }
+.iconos {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.iconos a {
+  color: #2b2b2b;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+}
 .menu-lateral {
    grid-area: menu-lateral;
   display: flex;
@@ -276,7 +313,25 @@ body {
   color: #d87093;
   font-weight: bold;
 }
-
+.footer {
+  grid-area: footer;
+  background: linear-gradient(white, pink);
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.redes {
+  display: flex;
+  gap: 20px;
+}
+.redes a {
+  text-decoration: none;
+  color: #d87093;
+  font-weight: bold;
+}
 @keyframes cambiarImagen{
     0%{
         opacity: 0;
@@ -297,14 +352,48 @@ body {
 @media (max-width: 768px) {
   body {
     grid-template-areas:
-      "barra"
+      "encabezado"
       "menu-lateral"
       "principal"
-      "pie";
+      "footer";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
-  
+  .encabezado {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    gap: 18px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #ff5ca8;
+    box-sizing: border-box;
+  }
+  .natue h1 {
+    font-size: 42px;
+    margin: 0;
+  }
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  nav a {
+    font-size: 15px;
+  }
+  .iconos {
+    gap: 20px;
+  }
+  .iconos a {
+    font-size: 20px;
+  }
   .menu-lateral {
    display: none;
   }
@@ -421,6 +510,16 @@ body {
   .acceso-rapido {
     width: 100%;
   }
+  .footer {
+    height: auto;
+    padding: 20px;
+  }
+  .redes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
   .slider-bienvenida{
     width: 220px;
     height: 180px;
@@ -429,7 +528,21 @@ body {
 </style>
 </head>
 <body>
-<?php include("header.php"); ?>
+<header class="encabezado">
+  <section class="natue"><h1>Natué</h1></section>
+  <nav>
+   <ul>
+   <li><a href="02.inicio.php">Inicio</a></li>
+   <li><a href="03.productos.php" >Cuidado</a></li>
+   <li><a href="04.productos2.php">Cosmeticos</a></li>
+   <li><a href="05.Acercade.php">Nosotros</a></li>
+   </ul>
+   </nav>
+  <section class="iconos">
+    <a href="fromclientes.php"><i class="fa-solid fa-user"></i> </a>
+   <a href="formulario.php"><i class="fa-solid fa-bag-shopping" style="margin-right: 20px;"></i></a>
+  </section>
+</header>
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href=""><i class="fa-solid fa-house"></i> Registrar Ventas</a>
@@ -438,7 +551,7 @@ body {
   <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
   <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
-  <a href="26.cerrarsesion.php">Cerrar Sesión</a>
+  <a href="">Cerrar Sesión</a>
 </aside>
 <main class="principal">
     <section class="bienvenida">
@@ -542,6 +655,14 @@ body {
   </section>
 </section>
 </main>
-<?php include("footer.php"); ?>
+<footer class="footer">
+  Siguenos en nuestras redes sociales <br>
+  <section class="redes">
+    <a href=""><i class="fa-solid fa-location-dot"></i></a>
+    <a href=""><i class="fa-brands fa-facebook"></i></a>
+    <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+    <a href=""><i class="fa-brands fa-twitter"></i></a>
+  </section>
+</footer>
 </body>
 </html>

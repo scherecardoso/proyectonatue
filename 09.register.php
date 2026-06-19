@@ -43,7 +43,7 @@ body{
     display:flex;
     justify-content:center;
     gap:40px;
-    margin-bottom:20px;
+    margin-bottom:40px;
 }
 
 .menu-login a{
@@ -58,7 +58,7 @@ body{
     padding-bottom:8px;
 }
 
-h2{
+.titulo{
     text-align:center;
     font-size:42px;
     font-family:serif;
@@ -114,17 +114,12 @@ input.error{
     border:1px solid #a01045;
 }
 
-select {
-    width:100%;
-    height:58px;
-    color: #777;
-    border:1px solid #f5a3d5;
-    border-radius:40px;
-    display:flex;
-    align-items:center;
-    padding:20px;
-    margin-bottom:18px;
-    background:#fafafa;
+h2{
+    text-align:center;
+    font-size:42px;
+    font-family:serif;
+    color:#222;
+    margin-bottom:10px;
 }
 
 @media(max-width:768px){
@@ -135,7 +130,7 @@ select {
         padding:30px;
     }
 
-    h2{
+    .titulo{
         font-size:35px;
     }
 
@@ -149,71 +144,58 @@ select {
 </head>
 
 <body>
+<div class="caja-login">
 
-<form action="23.autenticar.php" method="POST" id="valisesion">
+<div class="menu-login">
+<a href="09.register.php" class="activo">Iniciar sesión</a>
 
-    <div class="caja-login">
-
-        <div class="menu-login">
-            <a href="09.register.php" class="activo">Iniciar sesión</a>
-            <a href="10.formusuario.php">Registrarse</a>
-        </div>
+<a href=" 10.formusuario.php" >Registrarse</a>
+</div>
 
 
-        <h2>Iniciar sesión</h2>
+<form action="23.autenticar.php" method="get">
+<h2>Iniciar sesión</h2>
 
-        <input type="number" name="CI" placeholder="CI">
+<input type="text" name="direccion" placeholder="direccion" required>
+<a href="09.register.php" class="activo">Iniciar sesión</a>
+<a href="10.formusuario.php">Registrarse</a>
+</div>
 
-        <input type="text" name="direccion" placeholder="Dirección">
+<input type="text" name="direccion" placeholder="direccion" required>
 
-        <select name="rol" required>
+    <input type="number" name="CI" placeholder="CI" required>
+    <button type="submit">Ingresar</button>
 
-        <option value="">Seleccione un rol</option>
-        <option value="administrador">Administrador</option>
-        <option value="vendedor">Vendedor</option>
-        <option value="usuario">Usuario</option>
-
-    </select>
-
-        <button type="submit">Ingresar</button>
-
-
-    </div>
 </form>
 
 <script>
 
 $(document).ready(function(){
 
-    $("#valisesion").validate({
+    $("#iniciarsesion").validate({
 
         rules:{
-            CI:{
+            correo:{
                 required:true,
-                number:true,
-                minlength:8
+                email:true
             },
-            direccion:{
-                required:true
-            },
-            rol:{
-                required:true
+            password:{
+                required:true,
+                minlength:6
             }
         },
 
         messages:{
-            CI:{
-                required:"Por favor, ingresa tu CI",
-                number:"Solo se aceptan números",
-                minlength:"El CI debe tener al menos 8 números"
+            correo:{
+                required:"Por favor, ingresa tu correo electrónico",
+                email:"Por favor, ingresa un correo electrónico válido"
             },
-            direccion:{
-                required:"Ingrese su dirección"
-            },
-             rol:{
-                required:"Selecciona un rol para continuar"
+            password:{
+                required:"Por favor, ingresa tu contraseña",
+                minlength:"La contraseña debe tener al menos 6 caracteres"
+            }
         }
-      }
+
     });
 
 });

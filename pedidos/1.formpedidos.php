@@ -1,6 +1,6 @@
 <?php
 session_start();
-    $vendedor=$_SESSION['nombre'];
+    $vendedor=$_SESSION['vendedor'];
     
 ?>
 

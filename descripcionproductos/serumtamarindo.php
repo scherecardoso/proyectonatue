@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Despigmentante de Achachairu - Natue</title>
+<title>Serum de Tamarindo - Natue</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
@@ -111,28 +111,31 @@ body{
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src=".././img/zpr6.jpeg" alt="Despigmentante de Achachairu">
+        <img src=".././img/zpr19.jpeg" alt="Serum de Tamarindo">
     </div>
 
     <div class="info-producto">
 
-            <h1>Despigmentante de Achachairú</h1>
+        <h1>Serum de Tamarindo</h1>
 
-<p class="codigo"><strong>Código:</strong> PRD-002</p>
+<p class="codigo"><strong>Código:</strong> PRD-003</p>
 
-<p class="precio">55 Bs</p>
+<p class="precio">48 Bs</p>
 
 <div class="descripcion">
     <p>
-        El Despigmentante de Achachairú Natue está elaborado con extractos
-        naturales de achachairú, conocidos por sus propiedades antioxidantes
-        y regeneradoras que ayudan a mejorar el aspecto uniforme de la piel.
+        El Sérum de Tamarindo Natue está elaborado con extracto natural
+        de tamarindo, conocido por sus propiedades hidratantes y
+        antioxidantes que ayudan a mantener la piel fresca, suave y saludable.
+        Su fórmula ligera permite una rápida absorción, brindando hidratación
+        sin dejar sensación grasosa.
     </p>
 
     <p>
-        Su fórmula contribuye a disminuir la apariencia de manchas causadas
-        por el sol, la edad o el acné, brindando una piel más luminosa,
-        suave y saludable con el uso constante.
+        Gracias a sus nutrientes naturales, este sérum contribuye a mejorar
+        la textura de la piel, aportando luminosidad y ayudando a protegerla
+        de los efectos causados por factores externos. Con el uso diario,
+        la piel luce más revitalizada, uniforme y con una apariencia radiante.
     </p>
 </div>
 
@@ -141,27 +144,27 @@ body{
     <h2>Beneficios</h2>
 
     <ul>
-        <li>Ayuda a reducir manchas y pigmentaciones.</li>
-        <li>Favorece un tono de piel más uniforme.</li>
-        <li>Aporta luminosidad natural al rostro.</li>
+        <li>Hidratación profunda y duradera.</li>
+        <li>Ayuda a suavizar la textura de la piel.</li>
+        <li>Aporta luminosidad natural.</li>
         <li>Contiene antioxidantes de origen natural.</li>
-        <li>Contribuye a la regeneración de la piel.</li>
-        <li>Apto para uso diario.</li>
+        <li>Favorece una apariencia fresca y revitalizada.</li>
+        <li>Textura ligera y rápida absorción.</li>
     </ul>
 
     <h2>Modo de uso</h2>
 
     <p>
-        Aplicar una pequeña cantidad sobre la piel limpia y seca,
-        especialmente en las zonas con manchas. Masajear suavemente
-        hasta su completa absorción. Utilizar preferentemente por la
-        noche y complementar con protector solar durante el día.
+        Aplicar de 2 a 3 gotas sobre el rostro limpio y seco.
+        Masajear suavemente con movimientos circulares hasta su
+        completa absorción. Utilizar por la mañana y por la noche
+        para mejores resultados.
     </p>
 
-        </div>
+</div>
 
         <a href="../03.productos.php" class="boton">Volver</a>
-         <a href="../ " class="boton">Agregar a carrito</a> 
+        <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
 
     </div>
 

@@ -150,13 +150,13 @@ h3{
     <h3>Precio: 55 Bs</h3></div>
     </a>
 
-     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr19.jpeg" alt="" class="">
+     <a href="descripcionproductos/serumtamarindo.php"><div class="producto"><img src="./img/zpr19.jpeg" alt="" class="">
     <h3>Serum de Tamarindo</h3>
     <h3>Codigo: PRD-003</h3>
     <h3>Precio: 48 Bs</h3></div>
     </a>
 
-     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr16.jpeg" alt="" class="">
+     <a href="descripcionproductos/aceitecacao.php"><div class="producto"><img src="./img/zpr16.jpeg" alt="" class="">
     <h3>Aceite Antiestres de Cacao</h3>
     <h3>Codigo: PRD-004</h3>
     <h3>Precio: 40 Bs</h3></div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Despigmentante de Achachairu - Natue</title>
+<title>Aceite antiestres de Cacao - Natue</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
@@ -111,57 +111,52 @@ body{
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src=".././img/zpr6.jpeg" alt="Despigmentante de Achachairu">
+        <img src=".././img/zpr16.jpeg" alt="Aceite antiestres de Cacao">
     </div>
 
     <div class="info-producto">
 
-            <h1>Despigmentante de Achachairú</h1>
+        <h1>Aceite antiestres de Cacao</h1>
 
-<p class="codigo"><strong>Código:</strong> PRD-002</p>
+        <p class="codigo"><strong>Código:</strong> PRD-004</p>
 
-<p class="precio">55 Bs</p>
+        <p class="precio">40 Bs</p>
 
-<div class="descripcion">
-    <p>
-        El Despigmentante de Achachairú Natue está elaborado con extractos
-        naturales de achachairú, conocidos por sus propiedades antioxidantes
-        y regeneradoras que ayudan a mejorar el aspecto uniforme de la piel.
-    </p>
+        <div class="descripcion">
+            <p>
+                Ideal para masajes o para complementar la rutina de cuidado personal,
+                 este aceite contribuye a mantener la piel acondicionada mientras favorece
+                  una experiencia de bienestar que ayuda a aliviar la tensión acumulada después
+                   de un día agitado.
+            </p>
+        </div>
 
-    <p>
-        Su fórmula contribuye a disminuir la apariencia de manchas causadas
-        por el sol, la edad o el acné, brindando una piel más luminosa,
-        suave y saludable con el uso constante.
-    </p>
-</div>
+        <div class="caracteristicas">
 
-<div class="caracteristicas">
+            <h2>Beneficios</h2>
 
-    <h2>Beneficios</h2>
+            <ul>
+               <li>Brinda una sensación de relajación y bienestar.</li>
+                <li>Ideal para masajes corporales.</li>
+                 <li>Ayuda a disminuir la sensación de tensión.</li>
+                  <li>Deja la piel suave al tacto.</li> 
+                  <li>Aroma agradable y reconfortante.</li> 
+                  <li>Fácil aplicación y rápida absorción.</li>
+            </ul>
 
-    <ul>
-        <li>Ayuda a reducir manchas y pigmentaciones.</li>
-        <li>Favorece un tono de piel más uniforme.</li>
-        <li>Aporta luminosidad natural al rostro.</li>
-        <li>Contiene antioxidantes de origen natural.</li>
-        <li>Contribuye a la regeneración de la piel.</li>
-        <li>Apto para uso diario.</li>
-    </ul>
+            <h2>Modo de uso</h2>
 
-    <h2>Modo de uso</h2>
-
-    <p>
-        Aplicar una pequeña cantidad sobre la piel limpia y seca,
-        especialmente en las zonas con manchas. Masajear suavemente
-        hasta su completa absorción. Utilizar preferentemente por la
-        noche y complementar con protector solar durante el día.
-    </p>
+            <p>
+                Aplicar una cantidad moderada sobre la piel y masajear 
+                con movimientos suaves hasta su absorción. Puede utilizarse
+                 en hombros, cuello, brazos o cualquier zona donde se desee 
+                 una sensación de relajación.
+            </p>
 
         </div>
 
         <a href="../03.productos.php" class="boton">Volver</a>
-         <a href="../ " class="boton">Agregar a carrito</a> 
+        <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
 
     </div>
 

@@ -167,7 +167,7 @@ select {
 <h2>Iniciar sesión</h2>
 
     <input type="number" name="CI" placeholder="CI" required>
-    <input type="text" name="direccion" placeholder="Correo electronico" required>
+    <input type="email" name="direccion" placeholder="Correo electronico" required>
 
    <select name="rol">
          <option value="">Seleccione un rol</option>
@@ -189,24 +189,32 @@ $(document).ready(function(){
     $("#iniciarsesion").validate({
 
         rules:{
-            correo:{
+            CI:{
+                required:true,
+                number:true,
+                minlength:6
+            },
+            direccion:{
                 required:true,
                 email:true
             },
-            password:{
+            rol:{
                 required:true,
-                minlength:6
             }
         },
 
         messages:{
-            correo:{
+            CI:{
+                required:"Por favor, ingresa tu CI",
+                number:"Solo se aceptan números",
+                minlength:"El CI debe tener al menos 6 números"
+            },
+            direccion:{
                 required:"Por favor, ingresa tu correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"
             },
-            password:{
-                required:"Por favor, ingresa tu contraseña",
-                minlength:"La contraseña debe tener al menos 6 caracteres"
+            rol:{
+                required:"Por favor, seleccione un rol"
             }
         }
 

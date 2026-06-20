@@ -164,7 +164,7 @@ select {
 
     <input type="number" name="CI" placeholder="CI" required>
     <input type="text" name="nombre" placeholder="Nombre" required>
-    <input type="text" name="direccion" placeholder="Dirección" required>
+    <input type="email" name="direccion" placeholder="Correo electronico" required>
     <input type="number" name="celular" placeholder="Celular" required>
 
     <select name="rol">
@@ -191,13 +191,14 @@ $(document).ready(function(){
             CI:{
                 required:true,
                 number:true,
-                minlength:8
+                minlength:6
             },
             nombre:{
                 required:true
             },
             direccion:{
-                required:true
+                required:true,
+                email:true
             },
             celular:{
                 required:true,
@@ -216,13 +217,14 @@ $(document).ready(function(){
             CI:{
                 required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
-                minlength:"El CI debe tener al menos 8 números"
+                minlength:"El CI debe tener al menos 6 números"
             },
             nombre:{
                 required:"El nombre es obligatorio"
             },
             direccion:{
-                required:"Ingrese su dirección"
+                required:"Por favor, ingresa tu correo electrónico",
+                email:"Por favor, ingresa un correo electrónico válido"
             },
             celular:{
                 required:"Este campo no puede ir vacío",

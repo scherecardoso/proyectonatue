@@ -434,7 +434,7 @@ body {
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href=""><i class="fa-solid fa-house"></i> Registrar Ventas</a>
   <a href=""><i class="fa-solid fa-box"></i> Stock de Productos</a>
-  <a href="./pedidos/1.formpedidos.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
+  <a href="28.micarrito.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
   <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>

@@ -111,7 +111,7 @@ body{
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src="./img/serumcoco.jpg" alt="Serum de Coco">
+        <img src="./img/zpr2.jpeg" alt="Serum de Coco">
     </div>
 
     <div class="info-producto">
@@ -159,7 +159,7 @@ body{
 
         </div>
 
-        <a href="contactanos.php" class="boton">Consultar producto</a>
+        <a href="03.productos.php" class="boton">Volver</a>
 
     </div>
 

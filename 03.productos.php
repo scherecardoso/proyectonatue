@@ -137,7 +137,7 @@ h3{
 <?php include("header.php");?>
 <h2 id="titulo1"></h2>
 <div class="caja" id="caja1">
-    <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr2.jpeg" alt="" class=""  >
+    <a href="serumdecoco.php"><div class="producto"><img src="./img/zpr2.jpeg" alt="" class=""  >
       <h3>Serum de Coco</h3>
       <h3>Codigo:PRD-001</h3>   
       <h3>Precio:45Bs</h3>

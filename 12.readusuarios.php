@@ -154,7 +154,7 @@ if ($result && $result->num_rows > 0) {
             <td>{$fila['rol']}</td>
             <td>{$fila['estado']}</td>
             <td>
-                <a class='btn editar' href='16.editarusuario.php?CI=$CI'>Editar</a>
+                <a class='btn editar' href='13.formeditarusuario.php?CI=$CI'>Editar</a>
                 <a class='btn eliminar' href='15.eliminarusuario.php?CI=$CI'>Eliminar</a>
             </td>
         </tr>";

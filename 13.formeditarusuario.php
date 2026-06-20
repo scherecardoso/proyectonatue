@@ -27,7 +27,9 @@ if($resultado->num_rows > 0){
         $rol = $fila['rol'];
         $estado = $fila['estado'];
     }
-}
+} else {
+    echo "Usuario no encontrado";
+}   
 
 $conn->close();
 

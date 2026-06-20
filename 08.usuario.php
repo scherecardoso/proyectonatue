@@ -202,7 +202,7 @@ td{
     <div><i class="fa-solid fa-location-dot"></i> Direcciones</div>
     <div><i class="fa-solid fa-credit-card"></i> Pagos</div>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
-    <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
+    <div><a href="26.cerrarsesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></div>
 </aside>
 
 <main class="contenido">

@@ -197,7 +197,7 @@ h1{
 </aside>
 
 
-<div class="contenedor"><h1>Lista de Productos</h1>
+
 <div class="contenedor">
     <h1>Lista de Productos</h1>
 

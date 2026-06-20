@@ -315,8 +315,7 @@ h3{
 <body>
 
 <?php include("header.php"); ?>
-  <section class="carrusel"><img src="./img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
-   
+  <section><img src="./img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
   </section>
 
 

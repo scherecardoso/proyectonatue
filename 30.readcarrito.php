@@ -34,14 +34,13 @@ echo "
 <td>".$fila['costototal']."</td>
 
 <td>
- a class='btn eliminar' href='32.eliminarcarrito.php?productos_codigo=$codigo'>Eliminar</a>
- a class='btn editar' href='31.editarcarrito.php?productos_codigo=$codigo'>Editar</a>
+ <a class='btn eliminar' href='32.eliminarcarrito.php?productos_codigo=$codigo'>Eliminar</a>
+ <a class='btn editar' href='31.editarcarrito.php?productos_codigo=$codigo'>Editar</a>
  </td>
 </tr>
 ";
 
 }
-
 echo "</table>";
 }else{
 echo "No hay productos en el carrito";

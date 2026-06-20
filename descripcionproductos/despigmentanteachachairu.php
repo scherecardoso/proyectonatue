@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Serum de Coco - Natue</title>
+<title>Despigmentante de Achachairu - Natue</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
@@ -106,66 +106,66 @@ body{
 </head>
 <body>
 
-<?php include("header.php"); ?>
+<?php include("../header.php"); ?>
 
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src="./img/zpr2.jpeg" alt="Serum de Coco">
+        <img src=".././img/zpr6.jpeg" alt="Despigmentante de Achachairu">
     </div>
 
     <div class="info-producto">
 
-        <h1>Serum de Coco</h1>
+            <h1>Despigmentante de Achachairú</h1>
 
-        <p class="codigo"><strong>Código:</strong> PRD-001</p>
+<p class="codigo"><strong>Código:</strong> PRD-002</p>
 
-        <p class="precio">45 Bs</p>
+<p class="precio">55 Bs</p>
 
-        <div class="descripcion">
-            <p>
-                El Serum de Coco Natue está formulado para proporcionar una
-                hidratación profunda y duradera, ayudando a mantener la piel
-                suave, luminosa y protegida frente a la resequedad.
-            </p>
+<div class="descripcion">
+    <p>
+        El Despigmentante de Achachairú Natue está elaborado con extractos
+        naturales de achachairú, conocidos por sus propiedades antioxidantes
+        y regeneradoras que ayudan a mejorar el aspecto uniforme de la piel.
+    </p>
 
-            <p>
-                Gracias a las propiedades nutritivas del coco, este sérum
-                contribuye a mejorar la elasticidad de la piel y aporta una
-                sensación de frescura inmediata después de su aplicación.
-            </p>
+    <p>
+        Su fórmula contribuye a disminuir la apariencia de manchas causadas
+        por el sol, la edad o el acné, brindando una piel más luminosa,
+        suave y saludable con el uso constante.
+    </p>
+</div>
+
+<div class="caracteristicas">
+
+    <h2>Beneficios</h2>
+
+    <ul>
+        <li>Ayuda a reducir manchas y pigmentaciones.</li>
+        <li>Favorece un tono de piel más uniforme.</li>
+        <li>Aporta luminosidad natural al rostro.</li>
+        <li>Contiene antioxidantes de origen natural.</li>
+        <li>Contribuye a la regeneración de la piel.</li>
+        <li>Apto para uso diario.</li>
+    </ul>
+
+    <h2>Modo de uso</h2>
+
+    <p>
+        Aplicar una pequeña cantidad sobre la piel limpia y seca,
+        especialmente en las zonas con manchas. Masajear suavemente
+        hasta su completa absorción. Utilizar preferentemente por la
+        noche y complementar con protector solar durante el día.
+    </p>
+
         </div>
 
-        <div class="caracteristicas">
-
-            <h2>Beneficios</h2>
-
-            <ul>
-                <li>Hidratación profunda.</li>
-                <li>Ayuda a suavizar la piel.</li>
-                <li>Mejora la elasticidad.</li>
-                <li>Aporta luminosidad natural.</li>
-                <li>Textura ligera y rápida absorción.</li>
-                <li>Apto para uso diario.</li>
-            </ul>
-
-            <h2>Modo de uso</h2>
-
-            <p>
-                Aplicar de 2 a 3 gotas sobre el rostro limpio y seco.
-                Masajear suavemente hasta su completa absorción.
-                Utilizar por la mañana y por la noche.
-            </p>
-
-        </div>
-
-        <a href="03.productos.php" class="boton">Volver</a>
+        <a href="../03.productos.php" class="boton">Volver</a>
+         <a href="../ " class="boton">Agregar a carrito</a> //despues de el ../ hay que poner a dodne se ira para que funcione
 
     </div>
 
 </div>
-
-<?php include("footer.php"); ?>
 
 </body>
 </html>

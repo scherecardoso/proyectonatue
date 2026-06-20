@@ -161,8 +161,7 @@ body{
         </div>
 
         <a href="../03.productos.php" class="boton">Volver</a>
-         <a href="../29.registrocarrito.php" class="boton">Agregar a carrito</a> //despues de el ../ hay que poner a dodne se ira para que funcione
-
+         <a href="../29.registrocarrito.php" class="boton">Agregar a carrito</a>
     </div>
 
 </div>

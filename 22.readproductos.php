@@ -192,7 +192,7 @@ h1{
  <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
  <div><i class="fa-solid fa-gear"></i> Configuración</div>
  <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
- <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
+ <div><a href="26.cerrarsesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></div>
 
 </aside>
 

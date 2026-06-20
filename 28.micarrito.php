@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 session_start();
 
-$pedidos_id = $_GET['id'];
+$pedidos_id = $_POST['id'];
 
 $sql = "SELECT * FROM productos";
 $resultado = $conn->query($sql);

@@ -41,7 +41,7 @@ if ($resultado->num_rows > 0) {
         header("Location: 06.admin.php");
         exit();
 
-    } elseif ($_SESSION['rol'] == "USUARIO") {
+    } elseif ($_SESSION['rol'] == "usuario") {
 
         header("Location: 08.usuario.php");
         exit();

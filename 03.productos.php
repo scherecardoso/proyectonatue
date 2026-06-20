@@ -162,19 +162,19 @@ h3{
     <h3>Precio: 40 Bs</h3></div>
     </a>
 
-     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr18.jpeg" alt="" class="">
+     <a href="descripcionproductos/serumchirimoya.php"><div class="producto"><img src="./img/zpr18.jpeg" alt="" class="">
     <h3>Serum de Chirimoya</h3>
     <h3>Codigo: PRD-005</h3>
     <h3>Precio: 47 Bs</h3></div>
     </a>
 
-     <a href="16.formproductos.php"><div class="producto"><img src="./img/zpr21.jpeg" alt="" class="">
+     <a href="descripcionproductos/floreskantuta.php"><div class="producto"><img src="./img/zpr21.jpeg" alt="" class="">
     <h3>Flores de Kantuta</h3>
     <h3>Codigo: PRD-006</h3>
     <h3>Precio: 35 Bs</h3></div>
     </a>
 
-   <a href="16.formproductos.php"> <div class="producto"><img src="./img/zpr22.jpeg" alt="" class="">
+   <a href="descripcionproductos/aceitecopaiba.php"> <div class="producto"><img src="./img/zpr22.jpeg" alt="" class="">
     <h3>Aceite de Copaiba</h3>
     <h3>Codigo: PRD-007</h3>
     <h3>Precio: 50 Bs</h3></div>

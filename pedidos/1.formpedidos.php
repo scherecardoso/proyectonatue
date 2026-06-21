@@ -12,7 +12,7 @@ $vendedor = $_SESSION['nombre'];
 
 <h2>Generar Pedido</h2>
 
-<form action="2.nuevopedido.php" method="POST">
+<form action="../pedidos/2.nuevopedido.php" method="POST">
 
     Nombre:
     <input type="text" name="nombre"><br><br>

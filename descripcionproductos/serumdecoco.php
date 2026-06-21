@@ -106,12 +106,12 @@ body{
 </head>
 <body>
 
-<?php include("../header.php"); ?>
+<?php include("../includes/header.php"); ?>
 
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src=".././img/zpr2.jpeg" alt="Serum de Coco">
+        <img src="../img/zpr2.jpeg" alt="Serum de Coco">
     </div>
 
     <div class="info-producto">
@@ -159,8 +159,8 @@ body{
 
         </div>
 
-        <a href="../03.productos.php" class="boton">Volver</a>
-        <a href="../28.micarrito.php?id=" class="boton">Agregar a carrito</a>//despues de el ../ hay que poner a dodne se ira para que funcione
+        <a href="../pagina/03.productos.php" class="boton">Volver</a>
+        <a href="../pedidos/1.formpedidos.php" class="boton">Agregar a carrito</a>//despues de el ../ hay que poner a dodne se ira para que funcione
 
     </div>
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aceite antiestres de Cacao - Natue</title>
+<title>Flores de Kantuta - Natue</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
@@ -111,24 +111,24 @@ body{
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src="../img/zpr16.jpeg" alt="Aceite antiestres de Cacao">
+        <img src="../img/zpr21.jpeg" alt="Flores de Kantuta">
     </div>
 
     <div class="info-producto">
 
-        <h1>Aceite antiestres de Cacao</h1>
+        <h1>Flores de Kantuta</h1>
 
-        <p class="codigo"><strong>Código:</strong> PRD-004</p>
+        <p class="codigo"><strong>Código:</strong> PRD-006</p>
 
-        <p class="precio">40 Bs</p>
+        <p class="precio">35 Bs</p>
 
         <div class="descripcion">
-            <p>
-                Ideal para masajes o para complementar la rutina de cuidado personal,
-                 este aceite contribuye a mantener la piel acondicionada mientras favorece
-                  una experiencia de bienestar que ayuda a aliviar la tensión acumulada después
-                   de un día agitado.
-            </p>
+           <p> 
+           Gracias a su agradable textura, este sérum ayuda a mantener la piel
+            con una apariencia más luminosa y equilibrada. Es ideal para quienes
+             desean incorporar un producto inspirado en ingredientes naturales
+              dentro de su rutina de cuidado personal.
+           </p>
         </div>
 
         <div class="caracteristicas">
@@ -136,21 +136,20 @@ body{
             <h2>Beneficios</h2>
 
             <ul>
-               <li>Brinda una sensación de relajación y bienestar.</li>
-                <li>Ideal para masajes corporales.</li>
-                 <li>Ayuda a disminuir la sensación de tensión.</li>
-                  <li>Deja la piel suave al tacto.</li> 
-                  <li>Aroma agradable y reconfortante.</li> 
-                  <li>Fácil aplicación y rápida absorción.</li>
+              <li>Proporciona una sensación refrescante.</li>
+              <li>Ayuda a conservar la suavidad de la piel.</li>
+              <li>Aporta un aspecto más luminoso y uniforme.</li>
+              <li>Textura ligera para uso cotidiano.</li> 
+              <li>Favorece una apariencia saludable del rostro.</li>
+              <li>Fácil de integrar en la rutina facial diaria.</li>
             </ul>
 
             <h2>Modo de uso</h2>
 
             <p>
-                Aplicar una cantidad moderada sobre la piel y masajear 
-                con movimientos suaves hasta su absorción. Puede utilizarse
-                 en hombros, cuello, brazos o cualquier zona donde se desee 
-                 una sensación de relajación.
+                Aplicar unas gotas sobre la piel limpia y seca. Extender suavemente 
+                por el rostro y cuello hasta que el producto se absorba por completo. 
+                Puede utilizarse por la mañana o por la noche.
             </p>
 
         </div>

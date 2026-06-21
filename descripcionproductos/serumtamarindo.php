@@ -106,12 +106,12 @@ body{
 </head>
 <body>
 
-<?php include("../header.php"); ?>
+<?php include("../includes/header.php"); ?>
 
 <div class="contenedor">
 
     <div class="imagen-producto">
-        <img src=".././img/zpr19.jpeg" alt="Serum de Tamarindo">
+        <img src="../img/zpr19.jpeg" alt="Serum de Tamarindo">
     </div>
 
     <div class="info-producto">
@@ -163,8 +163,8 @@ body{
 
 </div>
 
-        <a href="../03.productos.php" class="boton">Volver</a>
-        <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
+        <a href="../pagina/03.productos.php" class="boton">Volver</a>
+        <a href="../pedidos/1.formpedidos.php" class="boton">Agregar a carrito</a>
 
     </div>
 

@@ -21,7 +21,7 @@ $sql = "UPDATE usuario SET CI='$CI', nombre='$nombre', direccion='$direccion', c
 
 if ($conn->query($sql) === TRUE) {
     echo "Usuario actualizado exitosamente";
-    header("Location: ../usuarios/12.readusuarios.php");
+    header("Location: ../usuario/12.readusuarios.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

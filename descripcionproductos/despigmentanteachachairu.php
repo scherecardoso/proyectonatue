@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -161,7 +164,15 @@ body{
         </div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
-        <a href="../pedidos/1.formpedidos.php" class="boton">Agregar a carrito</a>
+        <form action="../carrito/agregarcarrito.php" method="POST">
+
+    <input type="hidden" name="codigo" value="2">
+    <input type="hidden" name="cantidad" value="1">
+    <input type="hidden" name="precio" value="55">
+
+    <input type="submit" value="Agregar al Carrito"class="boton">
+
+</form>
     </div>
 
 </div>

@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if ($_SESSION['rol'] != 'vendedor') {
+    header("Location: ../pagina/login.php");
+    exit();
+}
+?>
+<?php
 $servidor ="localhost";
 $usuario ="root";
 $contra ="";
@@ -8,10 +16,6 @@ $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
 if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
-}
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') {
-    echo "Acceso denegado";
-    exit();
 }
 
 $codigo = $_GET['codigo'];

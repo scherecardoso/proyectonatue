@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if ($_SESSION['rol'] != 'vendedor') {
+    header("Location: ../pagina/login.php");
+    exit();
+}
+?>
+<?php
     
 $servidor ="localhost";
 $usuario ="root";
@@ -36,6 +44,7 @@ if ($conn->connect_error) {
 
 </head>
 <body>
+    <?php include("../includes/header.php"); ?>
     <form action="../productos/19.actualizarproductos.php" method="post">
         <label for="codigo">Nombre:</label>
         <input type="hidden" name="codigo" value='<?=$codigo?>'>

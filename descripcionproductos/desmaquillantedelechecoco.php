@@ -106,7 +106,7 @@ body{
 </head>
 <body>
 
-<?php include("../header.php"); ?>
+<?php include("../includes/header.php"); ?>
 
 <div class="contenedor">
 

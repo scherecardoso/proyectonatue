@@ -1,14 +1,10 @@
 <?php
 session_start();
 
-if ($conn->connect_error) {
-    die("Conexion fallida: " . $conn->connect_error);
-}
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') { //se puso esto en todos los productos para hacer validacion con el rol
-    echo "Acceso denegado";
+if ($_SESSION['rol'] != 'vendedor') {
+    header("Location: ../pagina/login.php");
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -119,7 +115,7 @@ input.error{
 </head>
 
 <body>
-
+<?php include("../includes/header.php"); ?>
 <div class="contenedor">
 
     <h2>Registro</h2>

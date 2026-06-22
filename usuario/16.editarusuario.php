@@ -118,8 +118,8 @@ select {
 <body>
 
     
-
-    <form action="../usuario/14.actualizarusuario.php" method="post">
+<?php include("../includes/header.php"); ?>
+<form action="../usuario/14.actualizarusuario.php" method="post">
 <h2>Editar Usuario</h2>
         <input type="hidden" name="CI" value="<?=$CI?>">
         <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre Completo" required>

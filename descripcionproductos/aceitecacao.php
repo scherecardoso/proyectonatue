@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -105,7 +108,6 @@ body{
 </style>
 </head>
 <body>
-
 <?php include("../includes/header.php"); ?>
 
 <div class="contenedor">

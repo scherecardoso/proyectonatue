@@ -434,7 +434,7 @@ body {
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href=""><i class="fa-solid fa-house"></i> Registrar Ventas</a>
   <a href=""><i class="fa-solid fa-box"></i> Stock de Productos</a>
-  <a href="../carrito/28.micarrito.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
+  <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
   <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
@@ -465,7 +465,7 @@ body {
     <section class="contenedor-acciones">
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-cart-shopping"></i></div>
-    <a href="" style="color: #000000;">Registrar Venta</a>
+    <a href="../pedidos/1.formpedidos.php" style="color: #000000;">Registrar Venta</a>
     <p><center>Registra nuevas ventas de productos</center></p>
   </section>
   <section class="accion">
@@ -559,7 +559,7 @@ $conn->close();
       <h2>Acceso Rápido</h2>
     </section>
     <section class="boton-acceso">
-      <a href="">Nuevo Pedido</a>
+      <a href="../pedidos/1.formpedidos.php">Nuevo Pedido</a>
     </section>
     <section class="boton-acceso">
       <a href="">Ver Catálogo</a>

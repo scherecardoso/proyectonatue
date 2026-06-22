@@ -1,8 +1,6 @@
 <?php
 session_start();
 if ($_SESSION['rol'] != "administrador") {
-    echo "Acceso denegado";
-    exit();
 }
 
 $servidor = "localhost";
@@ -24,7 +22,7 @@ $totalProductos = $conn->query(
     "SELECT COUNT(*) AS total FROM productos"
 )->fetch_assoc()['total'];
 ?>
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -449,10 +447,11 @@ div{
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
     <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <a href="../productos/22.readproductos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
+    <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
-    <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
+    <div><i class="fa-solid fa-right-from-bracket"><a href="../auth/26.cerrarsesion.php"></i> Cerrar sesión</div>
+    
 </aside>
 
 <main class="info">

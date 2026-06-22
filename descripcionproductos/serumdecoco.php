@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -156,11 +159,17 @@ body{
                 Masajear suavemente hasta su completa absorción.
                 Utilizar por la mañana y por la noche.
             </p>
-
+e
         </div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
-        <a href="../pedidos/1.formpedidos.php" class="boton">Agregar a carrito</a>//despues de el ../ hay que poner a dodne se ira para que funcione
+
+        <form action="../carrito/agregarcarrito.php" method="POST">
+            <input type="hidden" name="codigo" value="1">
+            <input type="hidden" name="cantidad" value="1">
+            <input type="hidden" name="precio" value="45">
+            <input type="submit" value="Agregar al Carrito"class="boton">
+        </form>
 
     </div>
 

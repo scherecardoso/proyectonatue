@@ -1,10 +1,15 @@
 <?php
 session_start();
+?>
+<?php
 
-if ($_SESSION['rol'] != "usuario") {
-    echo "Acceso denegado";
-    exit();
-}
+$conexion = new mysqli("localhost","root","","shena");
+$nombre_usuario = $_SESSION['nombre'];
+$sqlPedidos = "SELECT COUNT(*) AS total FROM pedidos  WHERE nombre='$nombre_usuario'";
+$resultadoPedidos = $conexion->query($sqlPedidos);
+$filaPedidos = $resultadoPedidos->fetch_assoc();
+$totalpedido = $filaPedidos['total'];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -187,7 +192,77 @@ th{
 td{
     color:#777;
 }
+@media (max-width: 768px){
 
+    body{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "barra"
+        "contenido"
+        "pie";
+        height: auto;
+    }
+
+
+    .menu{
+        display: none;
+    }
+    .contenido{
+        width: 100%;
+        padding: 15px;
+    }
+
+    .bienvenida{
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+        padding: 25px;
+        gap: 20px;
+    }
+
+    .foto{
+        width: 120px;
+        height: 120px;
+    }
+
+    .texto h2{
+        font-size: 28px;
+    }
+
+    .texto p{
+        font-size: 16px;
+    }
+
+    .cards{
+        flex-direction: column;
+    }
+
+    .card{
+        width: 100%;
+        height: auto;
+        padding: 25px;
+    }
+
+    .card h3{
+        font-size: 24px;
+    }
+
+    .pedidos{
+        padding: 20px;
+        overflow-x: auto;
+    }
+
+    table{
+        min-width: 500px;
+    }
+
+    th,
+    td{
+        padding: 10px;
+        font-size: 14px;
+    }
+
+}
 </style> 
 </head>
 
@@ -197,7 +272,8 @@ td{
     <h3>MENU USUARIO</h3>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
     <div><i class="fa-solid fa-user"></i> Mi Perfil</div>
-    <div><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
+    <div><a href="../carrito/micarrito.php"><i class="fas fa-shopping-cart"></i> Mi Carrito</a></div>
+    <div><a href="../pedidos/mispedidos.php"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
     <div><i class="fa-solid fa-heart"></i> Favoritos</div>
     <div><i class="fa-solid fa-location-dot"></i> Direcciones</div>
     <div><i class="fa-solid fa-credit-card"></i> Pagos</div>
@@ -216,54 +292,63 @@ td{
 
 
 <section class="cards">
-    <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3>12</h3><p>Pedidos</p></article>
+    <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalpedido; ?></h3><p>Pedidos</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-heart"></i></div><h3>8</h3><p>Favoritos</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-star"></i></div><h3>5</h3><p>Reseñas</p></article>
 </section>
+<section class="pedidos">
 
-section class="pedidos">
-    <h2 class="titulo">MIS PEDIDOS</h2>
+<h2 class="titulo">MIS PEDIDOS</h2>
+
 <table>
-   <tr>
-        <th>Pedido</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-    </tr>
+
+<tr>
+    <th>Pedido</th>
+    <th>Fecha</th>
+    <th>Estado</th>
+</tr>
 
 <?php
 
-$servidor = "localhost";
-$usuario = "root";
-$contrasena = "";
-$bd = "shena";
+$conexion = new mysqli("localhost","root","","shena");
 
-$conn = new mysqli($servidor, $usuario, $contrasena, $bd);
-
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+if($conexion->connect_error){
+    die("Error de conexión");
 }
 
-// Buscar pedidos donde nombre = nombre del usuario en sesión (o mejorar con CI si se agrega ese campo)
 $nombre_usuario = $_SESSION['nombre'];
-$sql = "SELECT id, fecha, estado FROM pedidos WHERE nombre='$nombre_usuario' ORDER BY id DESC";
-$resultado = $conn->query($sql);
 
-if ($resultado && $resultado->num_rows > 0) {
-    while ($pedido = $resultado->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>#NT-" . str_pad($pedido['id'], 3, '0', STR_PAD_LEFT) . "</td>";
-        echo "<td>" . $pedido['fecha'] . "</td>";
-        echo "<td>" . $pedido['estado'] . "</td>";
-        echo "</tr>";
+$pedidos = $conexion->query(" SELECT * FROM pedidos WHERE nombre='$nombre_usuario' ORDER BY id DESC");
+
+if($pedidos->num_rows > 0){
+
+    while($pedido = $pedidos->fetch_assoc()){
+?>
+
+<tr>
+    <td>#PRD-<?php echo str_pad($pedido['id'],3,'0',STR_PAD_LEFT); ?></td>
+    <td><?php echo $pedido['fecha']; ?></td>
+    <td><?php echo $pedido['estado']; ?></td>
+</tr>
+
+<?php
     }
-} else {
-    echo "<tr><td colspan='3'>No tienes pedidos</td></tr>";
+
+}else{
+?>
+
+<tr>
+    <td colspan="3">No tienes pedidos registrados</td>
+</tr>
+
+<?php
 }
 
-$conn->close();
-
+$conexion->close();
 ?>
+
 </table>
+
 </section>
 </main>
 <?php include("../includes/footer.php"); ?>

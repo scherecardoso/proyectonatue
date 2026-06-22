@@ -151,7 +151,7 @@ select {
 </head>
 
 <body>
-
+<?php include("../includes/header.php"); ?>
 <div class="contenedor">
     <div class="menu-registro">
     <a href="../usuario/09.register.php">Iniciar sesión</a>

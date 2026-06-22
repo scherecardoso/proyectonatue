@@ -11,13 +11,13 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-// Si no se pasó CI por GET, redirigimos al listado (manteniendo el estilo simple del proyecto)
+
 if (!isset($_GET['CI']) || $_GET['CI'] === '') {
     header("Location: ../usuario/12.readusuarios.php");
     exit();
 }
 
-$CI = intval($_GET['CI']); // forzamos entero para evitar sintaxis SQL vacía
+$CI = intval($_GET['CI']); 
 
 $sql ="SELECT * FROM usuario WHERE CI=$CI"; 
 
@@ -162,7 +162,7 @@ input.error{
 </head>
 
 <body>
-
+<?php include("../includes/header.php"); ?>
 <div class="contenedor">
 
     <div class="logo">

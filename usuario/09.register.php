@@ -24,9 +24,6 @@
 
 body{
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     background:#f5f3f2;
 }
 
@@ -133,7 +130,12 @@ select {
     margin-bottom:18px;
     background:#fafafa;
 }
-
+.contenedor-login{
+    min-height:calc(100vh - 100px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 @media(max-width:768px){
 
     .caja-login{
@@ -154,9 +156,8 @@ select {
 
 </style>
 </head>
-
 <body>
-
+<?php include("../includes/header.php"); ?> <div class="contenedor-login">
 <form action="../auth/23.autenticar.php" method="post" id="iniciarsesion">
  <div class="caja-login">
 <div class="menu-login">

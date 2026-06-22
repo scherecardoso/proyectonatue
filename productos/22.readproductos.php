@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION['rol'] != 'vendedor') {
+    header("Location: ../pagina/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

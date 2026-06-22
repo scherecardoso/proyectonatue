@@ -1,3 +1,4 @@
+
 <style>
 header {
   grid-area: barra;
@@ -62,7 +63,18 @@ nav a.activo::after {
   font-size: 18px;
   position: relative;
 }
+.usuario-info{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:#2b2b2b;
+}
 
+.nombre-usuario{
+    font-size:14px;
+    white-space:nowrap;
+}
 @media(max-width: 768px){
     header {
     padding: 20px;
@@ -95,21 +107,56 @@ nav a.activo::after {
 
   <nav>
     <ul>
-      <li><a href="02.inicio.php" class="activo">Inicio</a></li>
-      <li><a href="03.productos.php">Cuidado</a></li>
-      <li><a href="04.productos2.php">Cosmeticos</a></li>
-      <li><a href="05.acercade.php">Nosotros</a></li>
-       <li><a href="005.contactanos.php">Contactanos</a></li>
+      <li><a href="../pagina/02.inicio.php">Inicio</a></li>
+      <li><a href="../pagina/03.productos.php">Cuidado</a></li>
+      <li><a href="../pagina/04.productos2.php">Cosmeticos</a></li>
+      <li><a href="../pagina/05.acercade.php">Nosotros</a></li>
+       <li><a href="../pagina/005.contactanos.php">Contactanos</a></li>
     </ul>
   </nav>
 
-  <div class="iconos-barra">
-    <a href="../usuario/09.register.php">
-      <i class="fa-solid fa-user"></i>
+<div class="iconos-barra">
+
+<a href="<?php
+
+if(isset($_SESSION['rol'])){
+
+    if($_SESSION['rol'] == 'administrador'){
+        echo '../admin/06.admin.php';
+    }
+
+    elseif($_SESSION['rol'] == 'vendedor'){
+        echo '../vendedor/07.vendedor.php';
+    }
+
+    else{
+        echo '../usuario/08.usuario.php';
+    }
+
+}else{
+    echo '../usuario/09.register.php';
+}
+
+?>" class="usuario-info">
+
+    <i class="fa-solid fa-user"></i>
+
+    <span class="nombre-usuario">
+        <?php
+        if(isset($_SESSION['nombre'])){
+            echo $_SESSION['nombre'];
+        }else{
+            echo 'Invitado';
+        }
+        ?>
+    </span>
+
+</a>
+
+</a>
+    <a href="../pedidos/1.formpedido.php">
+        <i class="fa-solid fa-bag-shopping"></i>
     </a>
 
-    <a href="../productos/16.formproductos.php">
-      <i class="fa-solid fa-bag-shopping"></i>
-    </a>
-  </div>
+</div>
 </header>

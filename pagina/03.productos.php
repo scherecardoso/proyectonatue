@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,12 +118,12 @@ h3{
 </head>
 <body>
 
-<<<<<<< HEAD:pagina/03.productos.php
+
 <?php include("../includes/header.php");?>
 <h2 id="titulo1"></h2>
-=======
-<?php include("header.php");?>
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+
+
 <div class="caja" id="caja1">
     <a href="../descripcionproductos/serumdecoco.php"><div class="producto"><img src="../img/zpr2.jpeg" alt="" class=""  >
       <h3>Serum de Coco</h3>
@@ -167,103 +170,88 @@ h3{
 </div>
 
 <div class="caja" id="caja2">
-<<<<<<< HEAD:pagina/03.productos.php
-     <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr11.jpeg" alt="" class="">
-=======
-     <a href="descripcionproductos/geldequinua.php"><div class="producto"><img src="./img/zpr11.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+     <a href="../descripcionproductos/geldequinua.php"><div class="producto"><img src="../img/zpr11.jpeg" alt="" class="">
     <h3>Gel de Quinua</h3>
     <h3>Codigo: PRD-008</h3>
     <h3>Precio: 33 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-     <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr5.jpeg" alt="" class="">
-=======
-     <a href="descripcionproductos/geldepepino.php"><div class="producto"><img src="./img/zpr5.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+    
+
+     <a href="../descripcionproductos/geldepepino.php"><div class="producto"><img src="../img/zpr5.jpeg" alt="" class="">
+
     <h3>Gel de Pepino</h3>
     <h3>Codigo: PRD-009</h3>
     <h3>Precio: 30 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr7.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/geldesabila.php"><div class="producto"><img src="./img/zpr7.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+   
+
+    <a href="../descripcionproductos/geldesabila.php"><div class="producto"><img src="../img/zpr7.jpeg" alt="" class="">
+
     <h3>Gel de Sabila</h3>
     <h3>Codigo: PRD-010</h3>
     <h3>Precio: 28 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr14.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/aceitedecoco.php"><div class="producto"><img src="./img/zpr14.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+   
+    <a href="../descripcionproductos/aceitedecoco.php"><div class="producto"><img src="../img/zpr14.jpeg" alt="" class="">
+
     <h3>Aceite de Coco</h3>
     <h3>Codigo: PRD-011</h3>
     <h3>Precio: 38 Bs</h3></div>
     </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr24.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/brumaeucalipto.php"><div class="producto"><img src="./img/zpr24.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+   
+
+    <a href="../descripcionproductos/brumaeucalipto.php"><div class="producto"><img src="../img/zpr24.jpeg" alt="" class="">
+
     <h3>Bruma de Eucalipto</h3>
     <h3>Codigo: PRD-012</h3>
     <h3>Precio: 32 Bs</h3></div>
 </div>
 
 <div class="caja" id="caja3">
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr3.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/suavizantepapaya.php"><div class="producto"><img src="./img/zpr3.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+    
+    <a href="../descripcionproductos/suavizantepapaya.php"><div class="producto"><img src="../img/zpr3.jpeg" alt="" class="">
+
     <h3>Suavizante de Papaya</h3>
     <h3>Codigo: PRD-013</h3>
     <h3>Precio: 30 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr4.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/balsamomatico.php"><div class="producto"><img src="./img/zpr4.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+   
+
+    <a href="../descripcionproductos/balsamomatico.php"><div class="producto"><img src="../img/zpr4.jpeg" alt="" class="">
+
     <h3>Balsamo de Matico</h3>
     <h3>Codigo: PRD-014</h3>
     <h3>Precio: 42 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr8.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/cremamaracuyasabila.php"><div class="producto"><img src="./img/zpr8.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+   
+    <a href="../descripcionproductos/cremamaracuyasabila.php"><div class="producto"><img src="../img/zpr8.jpeg" alt="" class="">
+
     <h3>Crema de Maracuya y Sabila</h3>
     <h3>Codigo: PRD-015</h3>
     <h3>Precio: 37 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr23.jpeg" alt="" class="">
-    <h3>Exfoliente de Cafe</h3>
-=======
-    <a href="descripcionproductos/exfoliantecafe.php"><div class="producto"><img src="./img/zpr23.jpeg" alt="" class="">
+
+    <a href="../descripcionproductos/exfoliantecafe.php"><div class="producto"><img src="../img/zpr23.jpeg" alt="" class="">
     <h3>Exfoliante de Cafe</h3>
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
     <h3>Codigo: PRD-016</h3>
     <h3>Precio: 34 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr25.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/cremamatificante.php"><div class="producto"><img src="./img/zpr25.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+    <a href="../descripcionproductos/cremamatificante.php"><div class="producto"><img src="../img/zpr25.jpeg" alt="" class="">
     <h3>Crema Matificante</h3>
     <h3>Codigo: PRD-017</h3>
     <h3>Precio: 39 Bs</h3></div>
@@ -271,51 +259,45 @@ h3{
 </div>
 
 <div class="caja" id="caja4">
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr9.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/jabontarwi.php"><div class="producto"><img src="./img/zpr9.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+    
+    <a href="../descripcionproductos/jabontarwi.php"><div class="producto"><img src="../img/zpr9.jpeg" alt="" class="">
     <h3>Jabon de Semilla de Tarwi</h3>
     <h3>Codigo: PRD-018</h3>
     <h3>Precio: 18 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr44.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/jabonavenaymiel.php"><div class="producto"><img src="./img/zpr44.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+   
+    <a href="../descripcionproductos/jabonavenaymiel.php"><div class="producto"><img src="../img/zpr44.jpeg" alt="" class="">
+
     <h3>Jabon de Avena y Miel</h3>
     <h3>Codigo: PRD-019</h3>
     <h3>Precio: 20 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr45.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/jabonrosamosqueta.php"><div class="producto"><img src="./img/zpr45.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+    
+
+    <a href="../descripcionproductos/jabonrosamosqueta.php"><div class="producto"><img src="../img/zpr45.jpeg" alt="" class="">
+
     <h3>Jabon de Rosa Mosqueta</h3>
     <h3>Codigo: PRD-020</h3>
     <h3>Precio: 22 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr46.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/jaboncurcumaymanzanilla.php"><div class="producto"><img src="./img/zpr46.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+
+    <a href="../descripcionproductos/jaboncurcumaymanzanilla.php"><div class="producto"><img src="../img/zpr46.jpeg" alt="" class="">
+
     <h3>Jabon de Curcuma y Manzanilla</h3>
     <h3>Codigo: PRD-021</h3>
     <h3>Precio: 20 Bs</h3></div>
 </a>
 
-<<<<<<< HEAD:pagina/03.productos.php
-    <a href="../productos/16.formproductos.php"><div class="producto"><img src="../img/zpr47.jpeg" alt="" class="">
-=======
-    <a href="descripcionproductos/jabondecarbon.php"><div class="producto"><img src="./img/zpr47.jpeg" alt="" class="">
->>>>>>> 1ab20f9125341948f8257db8e2e7d75f97ae3471:03.productos.php
+
+
+    <a href="../descripcionproductos/jabondecarbon.php"><div class="producto"><img src="../img/zpr47.jpeg" alt="" class="">
+
     <h3>Jabon de Carbon Activado</h3>
     <h3>Codigo: PRD-022</h3>
     <h3>Precio: 22 Bs</h3></div>

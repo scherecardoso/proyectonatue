@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,30 +187,75 @@ body {
   color:#888;
   font-size:14px;
 }
-
 @media (max-width: 768px) {
+
+  .contenido{
+    padding: 40px 15px;
+    gap: 40px;
+  }
+
+  .contenido h1{
+    font-size: 38px;
+    text-align: center;
+  }
+
+  .contenido p{
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
   .bloque{
     flex-direction: column;
     width: 90%;
-    padding: 20px;
     gap: 20px;
     align-items: center;
-}
+  }
 
-.bloque img{
+  .mision,
+  .vision{
     width: 100%;
-    max-width: 300px;
-    height: auto;
-    left: 0;
-}
+    padding: 25px;
+  }
 
-.bloque-texto{
+  .bloque-texto{
     width: 100%;
     left: 0;
     font-size: 16px;
     text-align: center;
-}}
+  }
 
+  .equipo{
+    width: 95%;
+  }
+
+  .equipo-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .miembro{
+    max-width: 300px;
+    margin: auto;
+  }
+
+  .miembro img{
+    height: auto;
+  }
+
+  
+  .valores{
+    width: 90%;
+    padding: 30px 15px;
+  }
+
+  .valores-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .valor{
+    width: 100%;
+  }
+
+}
   </style>
 </head>
 <body>

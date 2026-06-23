@@ -157,7 +157,7 @@ select {
 </style>
 </head>
 <body>
-<?php include("../includes/header.php"); ?> <div class="contenedor-login">
+  <div class="contenedor-login">
 <form action="../auth/23.autenticar.php" method="post" id="iniciarsesion">
  <div class="caja-login">
 <div class="menu-login">

@@ -203,7 +203,7 @@ tr:hover td{
 
 <h1>Lista de Usuarios</h1>
 
-<a class="volver" href="../admin/06.admin.php">
+<a class="volver" href="../usuario/09.register.php">
     ← Volver 
 </a>
 

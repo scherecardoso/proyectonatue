@@ -127,7 +127,24 @@ input{
 .btn-finalizar:hover{
     background: #c06d8c;
 }
+.extra{
+    text-align: center;
+    margin-top: 20px;
+}
 
+.btn-volver{
+    display: inline-block;
+    background: #e9e9e9;
+    color: black;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-volver:hover{
+    background: #ccccccbd;
+}
 @media screen and (max-width: 768px) {
     body {
         padding: 15px;
@@ -207,9 +224,12 @@ input{
 </tr>
 
 <?php
-
-$sqlCarrito = " SELECT p.codigo,p.nombre,p.precio,c.cantidad,c.costototal
-FROM carrito c INNER JOIN productos p ON c.productos_codigo = p.codigo WHERE c.pedidos_id = '$id_pedido'";
+$sqlCarrito = " SELECT productos.codigo,productos.nombre,productos.precio,carrito.cantidad,carrito.costototal
+FROM carrito
+INNER JOIN productos
+ON carrito.productos_codigo = productos.codigo
+WHERE carrito.pedidos_id = '$id_pedido'
+";
 
 $resCarrito = $conn->query($sqlCarrito);
 echo "Pedido actual: " . $id_pedido . "<br>";
@@ -218,25 +238,25 @@ while($fila = $resCarrito->fetch_assoc()){
 ?>
 
 <tr>
-<td><?php echo htmlspecialchars($fila['codigo']); ?></td>
-<td><?php echo htmlspecialchars($fila['nombre']); ?></td>
-<td><?php echo htmlspecialchars($fila['precio']); ?> Bs</td>
+<td><?php echo $fila['codigo']; ?></td>
+<td><?php echo $fila['nombre']; ?></td>
+<td><?php echo $fila['precio']; ?> Bs</td>
 <td>
 
 <form action="editarcarrito.php" method="POST">
 
 <input type="hidden"name="idPedido"value="<?php echo $id_pedido; ?>">
-<input type="hidden"name="codigo"value="<?php echo htmlspecialchars($fila['codigo']); ?>">
-<input type="hidden"name="precio"value="<?php echo htmlspecialchars($fila['precio']); ?>">
-<input type="number"name="cantidad"value="<?php echo htmlspecialchars($fila['cantidad']); ?>"min="1">
+<input type="hidden"name="codigo"value="<?php echo $fila['codigo']; ?>">
+<input type="hidden"name="precio"value="<?php echo $fila['precio']; ?>">
+<input type="number"name="cantidad"value="<?php echo $fila['cantidad']; ?>"min="1">
 <input class="btn-actualizar"type="submit"value="Actualizar">
 </form>
 </td>
 
-<td><?php echo htmlspecialchars($fila['costototal']); ?> Bs</td>
+<td><?php echo $fila['costototal']; ?> Bs</td>
 
 <td>
-<a class="btn-eliminar"href="eliminarcarrito.php?idPedido=<?php echo $id_pedido; ?>&codigo=<?php echo htmlspecialchars($fila['codigo']); ?>">Eliminar</a>
+<a class="btn-eliminar"href="eliminarcarrito.php?idPedido=<?php echo $id_pedido; ?>&codigo=<?php echo $fila['codigo']; ?>">Eliminar</a>
 </td>
 </tr>
 
@@ -246,6 +266,14 @@ while($fila = $resCarrito->fetch_assoc()){
 
 </table>
 <a class="btn-finalizar" href="../pedidos/8.finalizarpedido.php?idPedido=<?php echo $id_pedido; ?>"> Finalizar Pedido </a>
+
+<div class="extra">
+    <a href="../pagina/03.productos.php" class="btn-volver">
+        Seguir viendo productos
+    </a>
+</div>
+
+
 </div>
 </body>
 </html>

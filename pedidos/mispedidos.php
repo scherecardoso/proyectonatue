@@ -1,21 +1,28 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) == "") {
-    header("Location: ../usuario/09.register.php");
-    exit();
-}
-
 $conn = new mysqli("localhost", "root", "", "shena");
 
 if ($conn->connect_error) {
     die("Error de conexión");
 }
 
-$nombre = $conn->real_escape_string($_SESSION['nombre']);
+$nombre = $_SESSION['nombre'];
 
-$sql = "SELECT pe.id,pe.fecha,pe.estado,pr.nombre AS producto,pr.precio,c.cantidad,c.costototal FROM pedidos pe
-INNER JOIN carrito c ON pe.id = c.pedidos_id INNER JOIN productos pr ON c.productos_codigo = pr.codigo WHERE pe.nombre = '$nombre' ORDER BY pe.id DESC ";
+$sql = "SELECT pedidos.id,
+               pedidos.fecha,
+               pedidos.estado,
+               productos.nombre AS producto,
+               productos.precio,
+               carrito.cantidad,
+               carrito.costototal
+        FROM pedidos
+        INNER JOIN carrito
+        ON pedidos.id = carrito.pedidos_id
+        INNER JOIN productos
+        ON carrito.productos_codigo = productos.codigo
+        WHERE pedidos.nombre = '$nombre'
+        ORDER BY pedidos.id DESC";
 
 $resultado = $conn->query($sql);
 ?>
@@ -156,13 +163,13 @@ if($resultado && $resultado->num_rows > 0){
 ?>
 
 <tr>
-    <td><?php echo htmlspecialchars($fila['id']); ?></td>
-    <td><?php echo htmlspecialchars($fila['fecha']); ?></td>
-    <td class="estado"><?php echo htmlspecialchars($fila['estado']); ?></td>
-    <td><?php echo htmlspecialchars($fila['producto']); ?></td>
-    <td><?php echo htmlspecialchars($fila['precio']); ?> Bs</td>
-    <td><?php echo htmlspecialchars($fila['cantidad']); ?></td>
-    <td><?php echo htmlspecialchars($fila['costototal']); ?> Bs</td>
+    <td><?php echo $fila['id']; ?></td>
+    <td><?php echo $fila['fecha']; ?></td>
+    <td class="estado"><?php echo $fila['estado']; ?></td>
+    <td><?php echo $fila['producto']; ?></td>
+    <td><?php echo $fila['precio']; ?> Bs</td>
+    <td><?php echo $fila['cantidad']; ?></td>
+    <td><?php echo $fila['costototal']; ?> Bs</td>
 </tr>
 
 <?php

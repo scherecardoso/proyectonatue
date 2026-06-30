@@ -12,24 +12,17 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-$CI = isset($_POST["CI"]) ? intval($_POST["CI"]) : 0;
-$direccion = isset($_POST["direccion"]) ? trim($_POST["direccion"]) : "";
+$CI = $_POST["CI"] ;
+$direccion = $_POST['direccion'];
 
-if ($CI === 0 || $direccion === "") {
-    echo "Faltan credenciales.";
-    exit();
-}
+$sql = "SELECT CI, nombre, rol, estado
+        FROM usuario
+        WHERE CI='$CI'
+        AND direccion='$direccion'";
 
-$stmt = $conn->prepare("SELECT CI, nombre, rol, estado FROM usuario WHERE CI = ? AND direccion = ?");
-if (!$stmt) {
-    echo "Error en la preparación: " . $conn->error;
-    exit();
-}
-$stmt->bind_param("is", $CI, $direccion);
-$stmt->execute();
-$result = $stmt->get_result();
+$resultado = $conn->query($sql);
 
-if ($result && $result->num_rows > 0) {
+if ($resultado->num_rows > 0) {
     $fila = $result->fetch_assoc();
 
     $_SESSION['CI'] = $fila['CI'];

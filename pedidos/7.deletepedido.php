@@ -6,7 +6,7 @@ session_start();
 $conexion = new mysqli("localhost","root","","shena");
 $id = $_GET['id'];
 $conexion->query(
-    "DELETE FROM carritobWHERE pedidos_id = $id"
+    "DELETE FROM carrito WHERE pedidos_id = $id"
 );
 
 $conexion->query(

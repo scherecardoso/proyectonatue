@@ -37,8 +37,7 @@ if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) === "") {
 
 $nombre = $conn->real_escape_string($_SESSION['nombre']);
 
-$buscarPedido = "
-SELECT id
+$buscarPedido = " SELECT id
 FROM pedidos
 WHERE nombre='$nombre'
 AND estado='En Proceso'
@@ -56,8 +55,7 @@ if ($resPedido && $resPedido->num_rows > 0) {
 
     $fecha = date("Y-m-d");
 
-    $crearPedido = "
-    INSERT INTO pedidos(nombre, fecha, estado, vendedor)
+    $crearPedido = " INSERT INTO pedidos(nombre, fecha, estado, vendedor)
     VALUES('$nombre', '$fecha', 'En Proceso', 'Administrador')
     ";
 
@@ -71,8 +69,7 @@ if ($resPedido && $resPedido->num_rows > 0) {
 $total = $cantidad * $precio;
 
 
-$verificar = "
-SELECT cantidad
+$verificar = " SELECT cantidad
 FROM carrito
 WHERE productos_codigo = $codigo
 AND pedidos_id = $idpedido
@@ -87,8 +84,7 @@ if ($resultado && $resultado->num_rows > 0) {
     $nuevaCantidad = intval($fila["cantidad"]) + $cantidad;
     $nuevoTotal = $nuevaCantidad * $precio;
 
-    $sql = "
-    UPDATE carrito
+    $sql = "UPDATE carrito
     SET cantidad = '$nuevaCantidad',
         costototal = '$nuevoTotal'
     WHERE productos_codigo = '$codigo'
@@ -97,8 +93,7 @@ if ($resultado && $resultado->num_rows > 0) {
 
 } else {
 
-    $sql = "
-    INSERT INTO carrito
+    $sql = "INSERT INTO carrito
     (productos_codigo, pedidos_id, cantidad, costototal)
     VALUES
     ('$codigo', '$idpedido', '$cantidad', '$total')

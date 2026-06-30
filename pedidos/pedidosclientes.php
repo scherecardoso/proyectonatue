@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "vendedor") {
+if ($_SESSION['rol'] != "vendedor") {
     die("Acceso denegado");
 }
 $conn = new mysqli("localhost", "root", "", "shena");
@@ -78,13 +78,40 @@ button:hover{
     background:#c06d8c;
 }
 
+.barra-superior{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.btn-volver{
+    text-decoration: none;
+    background: #ffffff;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.btn-volver:hover{
+    background: #c06d8c;
+}
+
+.barra-superior h2{
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
 </style>
 </head>
 
 <body>
 <?php include("../includes/header.php"); ?>
 <div class="contenedor">
-<h2>Pedidos de Clientes</h2>
+<div class="barra-superior">
+    <a href="../vendedor/07.vendedor.php" class="btn-volver">← Volver</a>
+    <h2>Pedidos de Clientes</h2>
+</div>
 
 <table>
 
@@ -102,31 +129,37 @@ button:hover{
 $sqlPedidos = "SELECT * FROM pedidos ORDER BY id DESC";
 $resultadoPedidos = $conn->query($sqlPedidos);
 
-if($resultadoPedidos && $resultadoPedidos->num_rows > 0){
+while ($pedido = $resultadoPedidos->fetch_assoc()) {
 
-    while($pedido = $resultadoPedidos->fetch_assoc()){
+    $idPedido = $pedido['id'];
 
-        $idPedido = $pedido['id'];
-        $sqlProductos = " SELECT p.nombre, c.cantidad FROM carrito c INNER JOIN productos p ON c.productos_codigo = p.codigo WHERE c.pedidos_id = '$idPedido'";
-        $resultadoProductos = $conn->query($sqlProductos);
-        $productos = "";
-        if($resultadoProductos){
+    $sqlProductos = "SELECT productos.nombre, carrito.cantidad
+                     FROM carrito
+                     INNER JOIN productos
+                     ON carrito.productos_codigo = productos.codigo
+                     WHERE carrito.pedidos_id = '$idPedido'";
 
-            while($prod = $resultadoProductos->fetch_assoc()){
-                $productos .= $prod['nombre'] .
-                              " (".$prod['cantidad'].")<br>";
-            }
-        }
+    $resultadoProductos = $conn->query($sqlProductos);
+
+    $productos = "";
+
+    while ($prod = $resultadoProductos->fetch_assoc()) {
+        $productos .= $prod['nombre'] . " (" . $prod['cantidad'] . ")<br>";
+    }
+
 ?>
 
 <tr>
+    <td><?php echo $pedido['id']; ?></td>
+    <td><?php echo $pedido['nombre']; ?></td>
+    <td><?php echo $pedido['fecha']; ?></td>
+    <td><?php echo $pedido['estado']; ?></td>
+    <td><?php echo $productos; ?></td>
+</tr>
 
-<td><?php echo $pedido['id']; ?></td>
-<td><?php echo htmlspecialchars($pedido['nombre']); ?></td>
-<td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
-<td><?php echo htmlspecialchars($pedido['estado']); ?></td>
-<td><?php echo $productos; ?></td>
-<td>
+<?php
+}
+?>
 
 <form action="actualizar_estado_pedido.php" method="POST">
 <input type="hidden" name="pedido_id" value="<?php echo $pedido['id']; ?>">
@@ -142,15 +175,7 @@ if($resultadoPedidos && $resultadoPedidos->num_rows > 0){
 </form>
 </td>
 </tr>
-<?php
-    }
-}else{
-?>
-
-<tr><td>No existen pedidos registrados.</td></tr>
-<?php
-}
-?>
+    <td colspan="6">No existen pedidos registrados.</td>
 </table>
 </div>
 </body>

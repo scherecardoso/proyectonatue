@@ -478,7 +478,7 @@ div{
   <table class="tabla-pedidos">
 <?php
 $pedidos = $conn->query("
-    SELECT *
+SELECT *
     FROM pedidos
     ORDER BY id DESC
     LIMIT 5

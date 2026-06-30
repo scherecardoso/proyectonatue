@@ -18,7 +18,7 @@ if ($_SESSION['rol'] != "vendedor") {
 <title>Maquetado Vendedor</title>
 <style>
 body {
-  display: grid;
+  display: grid; 
   font-family: Arial, sans-serif;
   margin: 0;
   grid-template-areas:

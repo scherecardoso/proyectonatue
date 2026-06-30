@@ -221,7 +221,7 @@ $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 if ($conn->connect_error) {
     die("Error de conexión");
 }
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') {
+if ($_SESSION['rol']) || $_SESSION['rol'] != 'administrador' {
     echo "Acceso denegado";
     exit();
 }

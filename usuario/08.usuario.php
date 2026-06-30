@@ -326,7 +326,7 @@ if($pedidos->num_rows > 0){
 ?>
 
 <tr>
-    <td>#PRD-<?php echo str_pad($pedido['id'],3,'0',STR_PAD_LEFT); ?></td>
+    <td><?php echo $pedido['id']; ?></td>
     <td><?php echo $pedido['fecha']; ?></td>
     <td><?php echo $pedido['estado']; ?></td>
 </tr>

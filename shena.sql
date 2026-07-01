@@ -52,7 +52,7 @@ INSERT INTO `carrito` (`pedidos_id`, `productos_codigo`, `cantidad`, `costototal
 --
 
 CREATE TABLE `pedidos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,

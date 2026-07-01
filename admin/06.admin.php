@@ -2,7 +2,7 @@
 session_start();
 if ($_SESSION['rol'] != "administrador") {
 }
-
+ 
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
@@ -48,7 +48,7 @@ body {
         "pie pie pie";
     gap: 10px;
     height: 100vh;
-    background: #ffffff
+    background: #ffffff;
 }
 
 
@@ -376,7 +376,16 @@ p{
 }
 
 div{
-  color: #000;
+  color: black;
+}
+
+i{
+    color:black;
+}
+
+.menu a{
+    text-decoration: none;
+    color: black;
 }
 
 @media (max-width: 768px) {

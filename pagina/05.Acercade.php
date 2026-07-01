@@ -15,8 +15,8 @@ session_start();
 body {  
   display: grid;
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  color: black;
+  font-family: Arial, sans-serif;
+  grid-template-columns: 1fr;
   grid-template-areas:
     "barra"
     "mision"
@@ -24,7 +24,16 @@ body {
     "equipo"
     "valores"
     "pie";
+    gap: 10px;
   }
+
+  h2 {
+    font-size: 28px;
+}
+
+h3{
+    color: #000000;
+}
 .contenido{
   display:flex; 
   flex-direction:column; 
@@ -260,7 +269,7 @@ body {
 </head>
 <body>
 <?php include("../includes/header.php");?>
-<section class="contenido" style="display:flex; flex-direction:column; align-items:center; gap:60px; padding:60px 0;">
+<section class="contenido" >
 
 <h1>Nosotros</h1>
 
@@ -271,7 +280,6 @@ body {
     promover el talento local y construir una Bolivia más
      consciente y sostenible.</p>
 
-</h1>
 <div class="bloque">
 
   <div class="mision">

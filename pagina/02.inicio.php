@@ -318,7 +318,8 @@ h3{
 <body>
 
 <?php include("../includes/header.php"); ?>
-  <section><img src="../img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
+  <section>
+    <img src="../img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
   </section>
 
 

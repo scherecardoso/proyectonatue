@@ -8,17 +8,9 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-if (
-    !isset($_POST["codigo"]) ||
-    !isset($_POST["cantidad"]) ||
-    !isset($_POST["precio"])
-) {
-    die("Faltan datos.");
-}
-
-$codigo = intval($_POST["codigo"]);
-$cantidad = intval($_POST["cantidad"]);
-$precio = floatval($_POST["precio"]);
+$codigo = $_POST["codigo"]; 
+$cantidad = $_POST["cantidad"];
+$precio = $_POST["precio"];
 
 if ($cantidad <= 0) {
     die("La cantidad debe ser mayor a cero.");
@@ -29,13 +21,13 @@ if ($precio < 0) {
 }
 
 
-if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) === "") {
+if ($_SESSION['nombre']  == "") {
 
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
-$nombre = $conn->real_escape_string($_SESSION['nombre']);
+$nombre = $_SESSION['nombre'];
 
 $buscarPedido = " SELECT id
 FROM pedidos
@@ -46,10 +38,10 @@ LIMIT 1
 
 $resPedido = $conn->query($buscarPedido);
 
-if ($resPedido && $resPedido->num_rows > 0) {
+if ($resPedido->num_rows > 0) {
 
     $pedido = $resPedido->fetch_assoc();
-    $idpedido = intval($pedido['id']);
+    $idpedido = $pedido['id'];
 
 } else {
 
@@ -59,7 +51,7 @@ if ($resPedido && $resPedido->num_rows > 0) {
     VALUES('$nombre', '$fecha', 'En Proceso', 'Administrador')
     ";
 
-    if (!$conn->query($crearPedido)) {
+    if ($conn->query($crearPedido)) {
         die("Error al crear pedido: " . $conn->error);
     }
 
@@ -77,11 +69,11 @@ AND pedidos_id = $idpedido
 
 $resultado = $conn->query($verificar);
 
-if ($resultado && $resultado->num_rows > 0) {
+if ($resultado->num_rows > 0) {
 
     $fila = $resultado->fetch_assoc();
 
-    $nuevaCantidad = intval($fila["cantidad"]) + $cantidad;
+    $nuevaCantidad = $fila["cantidad"] + $cantidad;
     $nuevoTotal = $nuevaCantidad * $precio;
 
     $sql = "UPDATE carrito

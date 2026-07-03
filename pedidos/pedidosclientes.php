@@ -15,32 +15,83 @@ if ($conn->connect_error) {
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Pedidos de Clientes</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<title>Maquetado Vendedor</title>
 <style>
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f5f5f5;
-    margin:0;
-    padding:30px;
+    
+body {
+  display: grid; 
+  font-family: Arial, sans-serif;
+  margin: 0;
+  grid-template-areas:
+    "barra barra"
+    "menu-lateral contenedor"
+    "pie pie";
+  grid-template-columns: 320px 1fr;
+  grid-template-rows: 70px 1fr 70px;
+  min-height: 100vh;
+  gap: 5px;
 }
 
+.menu-lateral {
+   grid-area: menu-lateral;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 15px;
+  margin-top: 27px;
+  width: 280px;
+  border-right: 1px solid #ececec;
+ 
+}
+.menu-titulo {
+  font-size: 15px;
+  color: #ff5ca8;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.menu-lateral a{
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 20px;
+  transition: .3s;
+  cursor: pointer;
+  display: block;
+}
+.menu-lateral a:hover{
+  background: #ffdcec;
+  color: #ff5ca8;
+  padding-left: 22px;
+}
+
+
+
+
+
 .contenedor{
-    max-width:1200px;
+    max-width:none;
     margin:auto;
     background:white;
     padding:30px;
     border-radius:15px;
+    width: 95%;
+    height:105%;
     box-shadow:0 0 20px rgba(0,0,0,.1);
 }
 
-h2{
-    text-align:center;
-    color:#d88aa7;
-    margin-bottom:25px;
-}
 
+.encabezado-pedidos h2{
+    color:#ff4f94;
+    font-size:28px;
+    margin:0;
+}
 table{
     width:100%;
     border-collapse:collapse;
@@ -84,18 +135,6 @@ button:hover{
     margin-bottom: 25px;
 }
 
-.btn-volver{
-    text-decoration: none;
-    background: #ffffff;
-    color: black;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-right: 20px;
-}
-
-.btn-volver:hover{
-    background: #c06d8c;
-}
 
 .barra-superior h2{
     margin: 0;
@@ -107,9 +146,21 @@ button:hover{
 
 <body>
 <?php include("../includes/header.php"); ?>
+<aside class="menu-lateral">
+  <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
+  <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Registrar Ventas</a>
+  <a href=""><i class="fa-solid fa-box"></i> Stock de Productos</a>
+  <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
+  <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
+  <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
+  <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
+  <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>
+</aside>
+
+
 <div class="contenedor">
 <div class="barra-superior">
-    <a href="../vendedor/07.vendedor.php" class="btn-volver">← Volver</a>
+
     <h2>Pedidos de Clientes</h2>
 </div>
 
@@ -155,24 +206,27 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
     <td><?php echo $pedido['fecha']; ?></td>
     <td><?php echo $pedido['estado']; ?></td>
     <td><?php echo $productos; ?></td>
+
+    <td>
+        <form action="actualizar_estado_pedido.php" method="POST">
+            <input type="hidden" name="pedido_id"
+                   value="<?php echo $pedido['id']; ?>">
+
+            <select name="estado">
+                <option value="En Proceso">En Proceso</option>
+                <option value="Aceptado">Aceptado</option>
+                <option value="Rechazado">Rechazado</option>
+            </select>
+
+            <button type="submit">Actualizar</button>
+
+    </form>
+</td>
 </tr>
 
 <?php
 }
 ?>
-
-<form action="actualizar_estado_pedido.php" method="POST">
-<input type="hidden" name="pedido_id" value="<?php echo $pedido['id']; ?>">
-
-<select name="estado">
-<option value="En Proceso">En Proceso</option>
-<option value="Aceptado">Aceptado</option>
-<option value="Rechazado">Rechazado</option>
-</select>
-
-<button type="submit">Actualizar</button>
-
-</form>
 </td>
 </tr>
     <td colspan="6">No existen pedidos registrados.</td>

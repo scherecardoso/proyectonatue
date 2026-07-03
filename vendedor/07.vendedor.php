@@ -17,6 +17,7 @@ if ($_SESSION['rol'] != "vendedor") {
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <title>Maquetado Vendedor</title>
 <style>
+
 body {
   display: grid; 
   font-family: Arial, sans-serif;
@@ -64,6 +65,8 @@ body {
   color: #ff5ca8;
   padding-left: 22px;
 }
+
+
 .principal {
   grid-area: principal;
   padding: 15px;

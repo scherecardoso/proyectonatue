@@ -11,25 +11,32 @@ session_start();
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-*{
+body{
     margin:0;
     padding:0;
-    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+    background-color:#f8f8f8;
+    gap: 10px;
 }
 
 body{
-    font-family:'Open Sans', sans-serif;
     background-color:#f8f8f8;
 }
+h2 {
+    font-size: 28px;
+}
 
+h3{
+    color: #000000;
+}
 .contacto{
-    min-height:100vh;
+    min-height:auto;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:50px 20px;
+    padding:80px 20px;
 }
 
 .contacto h1{

@@ -169,7 +169,7 @@ select {
 
     <input type="number" name="CI" placeholder="CI" required>
     <input type="email" name="direccion" placeholder="Correo electronico" required>
-
+    
    <select name="rol">
          <option value="">Seleccione un rol</option>
         <option value="usuario">Usuario</option>
@@ -210,6 +210,7 @@ $(document).ready(function(){
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 6 números"
             },
+        
             direccion:{
                 required:"Por favor, ingresa tu correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"

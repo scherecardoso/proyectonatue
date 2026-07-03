@@ -18,12 +18,12 @@ USE `shena` ;
 -- Table `shena`.`productos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shena`.`productos` (
-  `codigo` INT NOT NULL,
-  `nombre` VARCHAR(45) NULL,
-  `descripcion` VARCHAR(45) NULL,
-  `precio` INT NULL,
-  `costo` INT NULL,
-  `stock` INT NULL,
+  `codigo` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `descripcion` VARCHAR(45) NULL DEFAULT NULL,
+  `precio` INT NULL DEFAULT NULL,
+  `costo` INT NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 
@@ -33,10 +33,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shena`.`pedidos` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `fecha` DATE NULL,
-  `estado` VARCHAR(45) NULL,
-  `vendedor` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `fecha` DATE NULL DEFAULT NULL,
+  `estado` VARCHAR(45) NULL DEFAULT NULL,
+  `vendedor` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -46,11 +46,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shena`.`carrito` (
   `pedidos_id` INT NOT NULL,
-  `productos_codigo` INT NOT NULL,
-  `cantidad` INT NULL,
-  `costototal` INT NULL,
+  `productos_codigo` VARCHAR(45) NOT NULL,
+  `cantidad` INT NULL DEFAULT NULL,
+  `costototal` INT NULL DEFAULT NULL,
   PRIMARY KEY (`pedidos_id`, `productos_codigo`),
-  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC),
+  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC) ,
   INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC) ,
   CONSTRAINT `fk_pedidos_has_productos_pedidos`
     FOREIGN KEY (`pedidos_id`)
@@ -70,12 +70,31 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shena`.`usuario` (
   `CI` INT NOT NULL,
-  `nombre` VARCHAR(45) NULL,
-  `direccion` VARCHAR(45) NULL,
-  `celular` INT NULL,
-  `rol` VARCHAR(45) NULL,
-  `estado` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `direccion` VARCHAR(45) NULL DEFAULT NULL,
+  `celular` INT NULL DEFAULT NULL,
+  `rol` VARCHAR(45) NULL DEFAULT NULL,
+  `estado` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`CI`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shena`.`ventas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shena`.`ventas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `pedidos_id` INT NOT NULL,
+  `costo` INT NULL,
+  `fecha` DATE NULL,
+  `estado` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`, `pedidos_id`),
+  INDEX `fk_ventas_pedidos1_idx` (`pedidos_id` ASC) ,
+  CONSTRAINT `fk_ventas_pedidos1`
+    FOREIGN KEY (`pedidos_id`)
+    REFERENCES `shena`.`pedidos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

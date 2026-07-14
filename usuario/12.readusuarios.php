@@ -91,6 +91,11 @@ td{
     color:#dc3545;
 }
 
+.cambiar{
+    background:#ffe1e1;
+    color:#E9967A;
+}
+
 .btn:hover{
     transform:translateY(-2px);
 }
@@ -114,7 +119,7 @@ td{
 
 <h1>Lista de Usuarios</h1>
 
-<a class="volver" href="../usuario/09.register.php">
+<a class="volver" href="../admin/06.admin.php">
     ← Volver
 </a>
 
@@ -175,15 +180,13 @@ $result = $conn->query($sql);
 
             <?php if($fila["rol"]=="Usuario"){ ?>
 
-                <a class="btn eliminar"
-                   href="../admin/cambiarrol.php?CI=<?= $fila['CI'] ?>">
+                <a class="btn cambiar" href="../admin/cambiarrolVendedor.php?CI=<?= $fila['CI'] ?>">
                    Hacer Vendedor
                 </a>
 
             <?php }elseif($fila["rol"]=="Vendedor"){ ?>
 
-                <a class="btn eliminar"
-                   href="../admin/cambiarrolUsuario.php?CI=<?= $fila['CI'] ?>">
+                <a class="btn cambiar" href="../admin/cambiarrolUsuario.php?CI=<?= $fila['CI'] ?>">
                    Hacer Usuario
                 </a>
 

@@ -178,13 +178,13 @@ $result = $conn->query($sql);
                Eliminar
             </a>
 
-            <?php if($fila["rol"]=="Usuario"){ ?>
+            <?php if($fila["rol"]=="usuario"){ ?>
 
                 <a class="btn cambiar" href="../admin/cambiarrolVendedor.php?CI=<?= $fila['CI'] ?>">
                    Hacer Vendedor
                 </a>
 
-            <?php }elseif($fila["rol"]=="Vendedor"){ ?>
+            <?php }elseif($fila["rol"]=="vendedor"){ ?>
 
                 <a class="btn cambiar" href="../admin/cambiarrolUsuario.php?CI=<?= $fila['CI'] ?>">
                    Hacer Usuario

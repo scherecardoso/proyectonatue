@@ -112,9 +112,7 @@ td{
 </head>
 
 <body>
-
 <?php include("../includes/header.php"); ?>
-
 <div class="contenedor">
 
 <h1>Lista de Usuarios</h1>

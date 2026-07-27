@@ -153,7 +153,7 @@ body{
 
 </div>
 
-<a href="../03.productos.php" class="boton">Volver</a>
+<a href="../pagina/03.productos.php" class="boton">Volver</a>
 <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
 
 </body>

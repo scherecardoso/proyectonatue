@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 $CI = $_GET['CI'];
 
-$sql = "UPDATE usuario SET rol='Usuario' WHERE CI=$CI";
+$sql = "UPDATE usuario SET rol='usuario' WHERE CI=$CI";
 
 if ($conn->query($sql) === TRUE) {
     echo "Rol actualizado exitosamente";

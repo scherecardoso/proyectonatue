@@ -448,6 +448,16 @@ i{
 <div class="texto"><h2>BIENVENIDA <?php echo $_SESSION['nombre']; ?></h2>
 <p>Aquí puedes revisar tus pedidos, favoritos y administrar tu cuenta.</p></div></section>
 
+<<<<<<< Updated upstream
+=======
+<main class="contenido">
+<section class="bienvenida">
+<div class="foto"><img src="../img/sheshe.png"></div>
+<div class="texto">
+    <h2>BIENVENIDA <?php echo $_SESSION['nombre']; . $_SESSION['estado']; ?></h2>
+    <p>Aquí puedes revisar tus pedidos, favoritos y administrar tu cuenta.</p>
+</section>
+>>>>>>> Stashed changes
 
 
 <section class="cards">

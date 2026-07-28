@@ -125,9 +125,9 @@ h3{
 
 
 <div class="caja" id="caja1">
-    <a href="../descripcionproductos/serumdecoco.php"><div class="producto"><img src="../img/zpr2.jpeg" alt="" class=""  >
+    <a href="../descripcionproductos/SDC.php"><div class="producto"><img src="../img/zpr2.jpeg" alt="" class=""  >
       <h3>Serum de Coco</h3>
-      <h3>Codigo:PRD-001</h3>   
+      <h3>Codigo:SDC-001</h3>   
       <h3>Precio:45Bs</h3>
       </div>
       </a>

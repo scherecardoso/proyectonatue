@@ -158,8 +158,20 @@ body{
         </div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
+<<<<<<< Updated upstream
          <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
+=======
+
+        <form action="../carrito/agregarcarrito.php" method="POST">
+            <input type="hidden" name="codigo" value="10">
+            <input type="hidden" name="cantidad" value="1">
+            <input type="hidden" name="precio" value="28">
+            <input type="submit" value="Agregar al Carrito"class="boton">
+        </form>
+
+>>>>>>> Stashed changes
     </div>
+
 
 </div>
 

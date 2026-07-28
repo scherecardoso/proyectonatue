@@ -1,6 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['rol'] != "administrador") {
+  header("Location: ../usuario/09.register.php");
 }
  
 $servidor = "localhost";

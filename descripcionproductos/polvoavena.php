@@ -153,7 +153,18 @@ body{
     <h2>Modo de uso</h2>
 
     <p>Mezclar con agua o añadir al baño para un efecto suavizante.</p>
+ </div>
 
+        <a href="../pagina/03.productos.php" class="boton">Volver</a>
+
+        <form action="../carrito/agregarcarrito.php" method="POST">
+            <input type="hidden" name="codigo" value="1">
+            <input type="hidden" name="cantidad" value="1">
+            <input type="hidden" name="precio" value="45">
+            <input type="submit" value="Agregar al Carrito"class="boton">
+        </form>
+
+    </div>
 </div>
 
 </body>

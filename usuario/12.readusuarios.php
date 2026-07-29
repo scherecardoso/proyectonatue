@@ -1,21 +1,29 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Lista de Usuarios</title>
 
+<title>Lista de Usuarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
 *{
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
 }
 
 body{
-    background:linear-gradient(to bottom,#f8f8f8,#ececec);
-    padding:30px;
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f8f8f8;
+    gap: 10px;
 }
 
 .contenedor{
@@ -28,11 +36,15 @@ body{
     box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
-h1{
-    margin-bottom:25px;
-    font-size:42px;
-    color:#444;
-    font-weight:700;
+
+
+
+h2 {
+    font-size: 28px;
+}
+
+h3{
+    color: #000000;
 }
 
 .volver{

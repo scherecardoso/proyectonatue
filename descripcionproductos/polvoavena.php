@@ -156,15 +156,16 @@ body{
  </div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
-
         <form action="../carrito/agregarcarrito.php" method="POST">
-            <input type="hidden" name="codigo" value="1">
-            <input type="hidden" name="cantidad" value="1">
-            <input type="hidden" name="precio" value="45">
-            <input type="submit" value="Agregar al Carrito"class="boton">
-        </form>
+
+    <input type="hidden" name="codigo" value="42">
+    <input type="hidden" name="cantidad" value="1">
+    <input type="hidden" name="precio" value="17">
+
+    <input type="submit" value="Agregar al Carrito"class="boton">
 
     </div>
+
 </div>
 
 </body>

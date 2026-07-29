@@ -151,11 +151,19 @@ body{
         Aplicar con algodón sobre el rostro hasta eliminar el maquillaje.
         No requiere enjuague.
     </p>
-
 </div>
 
-<a href="../pagina/03.productos.php" class="boton">Volver</a>
-<a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
+        <a href="../pagina/03.productos.php" class="boton">Volver</a>
+        <form action="../carrito/agregarcarrito.php" method="POST">
 
+    <input type="hidden" name="codigo" value="27">
+    <input type="hidden" name="cantidad" value="1">
+    <input type="hidden" name="precio" value="29">
+
+    <input type="submit" value="Agregar al Carrito"class="boton">
+
+    </div>
+
+</div>
 </body>
 </html>

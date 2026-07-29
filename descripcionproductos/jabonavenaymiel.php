@@ -150,10 +150,17 @@ body{
        Enjuagar con agua tibia. Puede usarse a diario en manos y cuerpo.
     </p>
 
-        </div>
+</div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
-         <a href="../28.micarrito.php" class="boton">Agregar a carrito</a>
+        <form action="../carrito/agregarcarrito.php" method="POST">
+
+    <input type="hidden" name="codigo" value="19">
+    <input type="hidden" name="cantidad" value="1">
+    <input type="hidden" name="precio" value="20">
+
+    <input type="submit" value="Agregar al Carrito"class="boton">
+
     </div>
 
 </div>

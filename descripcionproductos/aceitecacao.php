@@ -10,7 +10,7 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
-
+ 
 <style>
 
 body{
@@ -155,10 +155,16 @@ body{
                  una sensación de relajación.
             </p>
 
-        </div>
+</div>
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
-        <a href="../pedidos/1.formpedidos.php" class="boton">Agregar a carrito</a>
+        <form action="../carrito/agregarcarrito.php" method="POST">
+
+    <input type="hidden" name="codigo" value="4">
+    <input type="hidden" name="cantidad" value="1">
+    <input type="hidden" name="precio" value="40">
+
+    <input type="submit" value="Agregar al Carrito"class="boton">
 
     </div>
 

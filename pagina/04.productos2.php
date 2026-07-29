@@ -216,7 +216,7 @@ h3 {
     <h3>Precio: 35 Bs</h3></div>
     </a>
 
-    <a href="../descripcionproductos/perfumebermagota.php"><div class="producto"><img src="../img/zpr35.jpeg" alt="" class="">
+    <a href="../descripcionproductos/perfumebergamota.php"><div class="producto"><img src="../img/zpr35.jpeg" alt="" class="">
 
     <h3>Perfume Solido de Bergamota</h3>
     <h3>Codigo: PRD-035</h3>
@@ -263,9 +263,8 @@ h3 {
     </a>
 
 
-    <a href="../escripcionproductos/polvoteverde.php"><div class="producto"><img src="../img/zpr42.jpeg" alt="" class="">
+    <a href="../descripcionproductos/polvoteverde.php"><div class="producto"><img src="../img/zpr42.jpeg" alt="" class="">
     <h3>Polvo Te Verde </h3>
-
     <h3>Codigo: PRD-041</h3>
     <h3>Precio: 18 Bs</h3></div>
     </a>

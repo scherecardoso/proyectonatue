@@ -294,7 +294,7 @@ h3{
   }
 
 
-  .texto-contenido {
+  .texto-contenido {.
     width: 100%;
     padding: 0;
     margin: 0;

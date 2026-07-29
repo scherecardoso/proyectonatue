@@ -25,7 +25,7 @@ if ($resultado->num_rows > 0) {
             <p class='texto-suave'><b>Estado:</b> {$fila['estado']}</p>
             <div class='zona-botones'>
             <a href='editarventa.php?id=$id'> <button class='botoncito editar-plata'>Editar</button></a>
-            <a href='deleteventa.php?id=$id'><button class='botoncito eliminar-rojo-suave'>Eliminar</button></a>
+            <a href=' deleteventa.php?id=$id'><button class='botoncito eliminar-rojo-suave'>Eliminar</button></a>
         </div>
         </div>";
     }

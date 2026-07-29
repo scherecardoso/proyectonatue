@@ -111,6 +111,8 @@ body{
     <input type="date"name="fecha"value="<?php echo date('Y-m-d'); ?>">
     <input type="hidden"name="estado"value="En Proceso">
     <input type="text"name="nombrevendedor"value="<?php echo $_SESSION['nombre']; ?>"readonly>
+    <input type="text" name="telefono" required>
+    <input type="text" name="direccion" required>
     <button type="submit">Crear Pedido</button>
 </div>
 

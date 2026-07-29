@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `shena`.`pedidos` (
   `fecha` DATE NULL DEFAULT NULL,
   `estado` VARCHAR(45) NULL DEFAULT NULL,
   `vendedor` VARCHAR(45) NULL DEFAULT NULL,
+  `telefono` VARCHAR(45) NULL,
+  `direccion` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -50,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `shena`.`carrito` (
   `cantidad` INT NULL DEFAULT NULL,
   `costototal` INT NULL DEFAULT NULL,
   PRIMARY KEY (`pedidos_id`, `productos_codigo`),
-  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC) ,
-  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC) ,
+  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC),
+  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC),
   CONSTRAINT `fk_pedidos_has_productos_pedidos`
     FOREIGN KEY (`pedidos_id`)
     REFERENCES `shena`.`pedidos` (`id`)
@@ -86,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `shena`.`ventas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pedidos_id` INT NOT NULL,
   `costo` INT NULL,
-  `fecha` DATE NULL,
+  `metodo` VARCHAR(45) NULL,
   `estado` VARCHAR(45) NULL,
   PRIMARY KEY (`id`, `pedidos_id`),
   INDEX `fk_ventas_pedidos1_idx` (`pedidos_id` ASC) ,

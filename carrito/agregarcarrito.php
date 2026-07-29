@@ -51,7 +51,7 @@ if ($resPedido->num_rows > 0) {
     VALUES('$nombre', '$fecha', 'En Proceso', 'Administrador')
     ";
 
-    if ($conn->query($crearPedido)) {
+    if ($conn->query($crearPedido)==false) {
         die("Error al crear pedido: " . $conn->error);
     }
 

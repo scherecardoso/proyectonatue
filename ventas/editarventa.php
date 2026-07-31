@@ -16,24 +16,23 @@ if ($conexion->connect_error) {
 $id = $_GET['id'] ?? null;
 
 if ($id == null) {
-    die("No se recibió el ID del pedido");
+    die("No se recibió el ID de la Venta");
 }
 
-$sql = "SELECT * FROM pedidos WHERE id='$id'";
+$sql = "SELECT * FROM ventas WHERE id='$id'";
 $resultado = $conexion->query($sql);
 
 if ($resultado->num_rows > 0) {
 
     $fila = $resultado->fetch_assoc();
 
-    $nombre = $fila['nombre'];
-    $fecha = $fila['fecha'];
+    $costo = $fila['costo'];
+    $metodo = $fila['metodo'];
     $estado = $fila['estado'];
-    $vendedor = $fila['vendedor'];
 
 } else {
 
-    die("Pedido no encontrado");
+    die("Venta no encontrada");
 
 }
 
@@ -41,27 +40,24 @@ if ($resultado->num_rows > 0) {
 
 <div class="contenedor">
 
-    <form action="updatepedido.php" method="POST">
+    <form action="updateventa.php" method="POST">
 
-        <h1>Pedido Nro <?php echo $id; ?></h1>
+        <h1>Venta Nro <?php echo $id; ?></h1>
 
-        <label>Nombre:</label>
-        <input type="text"name="nombre"value="<?php echo $nombre; ?>"required>
+        <label>Costo:</label>
+        <input type="number"name="costo"value="<?php echo $costo; ?>"required>
 
-        <label>Fecha:</label>
-        <input type="date"name="fecha"value="<?php echo $fecha; ?>"required>
+        <label>Método de Pago:</label>
+        <input type="text"name="metodo"value="<?php echo $metodo; ?>"required>
 
         <label>Estado:</label>
         <input type="text"name="estado"value="<?php echo $estado; ?>"required>
 
-        <label>Vendedor:</label>
-        <input type="text"name="vendedor"value="<?php echo $vendedor; ?>"required>
-
         <input type="hidden"name="id"value="<?php echo $id; ?>">
 
-        <button type="submit">Actualizar Pedido</button>
+        <button type="submit">Actualizar Venta</button>
 
     </form>
-    <a href="4.readpedidos.php" class="volver">Volver a Pedido</a>
+    <a href="4.readventas.php" class="volver">Volver a Ventas</a>
 
 </div>

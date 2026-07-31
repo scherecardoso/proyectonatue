@@ -108,11 +108,11 @@ body{
     <h2>Nuevo Pedido</h2>
     <label for="nombre">Nombre</label>
     <input type="text"id="nombre"name="nombre"required>
-    <input type="date"name="fecha"value="<?php echo date('Y-m-d'); ?>">
-    <input type="hidden"name="estado"value="En Proceso">
-    <input type="text"name="nombrevendedor"value="<?php echo $_SESSION['nombre']; ?>"readonly>
-    <input type="text" name="telefono" required>
-    <input type="text" name="direccion" required>
+    <input type="date"name="fecha" value="<?php echo date('Y-m-d'); ?>">
+    <input type="hidden"name="estado" placeholder="Estado" value="En Proceso">
+    <input type="text"name="nombrevendedor" placeholder="Vendedor" value="<?php echo $_SESSION['nombre']; ?>"readonly>
+    <input type="text" name="telefono" placeholder="Teléfono" required>
+    <input type="text" name="direccion" placeholder="Dirección" required>
     <button type="submit">Crear Pedido</button>
 </div>
 

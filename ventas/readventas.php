@@ -6,7 +6,7 @@ $conexion = new mysqli("localhost", "root", "", "shena");
 if ($conexion->connect_error) {
     die("Error de conexión");
 }
-$sql = "SELECT * FROM pedidos";
+$sql = "SELECT * FROM ventas";
 $resultado = $conexion->query($sql);
 
 ?>

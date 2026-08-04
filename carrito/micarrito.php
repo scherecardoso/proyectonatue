@@ -13,20 +13,58 @@ if ($conn->connect_error) {
 }
 
 
-$id_pedido = (int)($_GET['idPedido'] ?? 0);
+$id_pedido = (int)($_GET['Pedido_id'] ?? 0);
 
-$sqlTotal = "SELECT SUM(costototal) AS total 
-             FROM carrito 
-             WHERE pedidos_id = $id_pedido";
+$sql = "SELECT * FROM producto";
 
-$res = $conn->query($sqlTotal);
+$resultado = $conn->query($sql);
+$sqlTotal="SELECT sum(costototal) FROM carrito where Pedido_id='$id_pedido'";
+$resultadoTotal=$conn->query($sqlTotal);
+$res = $resultadoTotal->fetch_assoc();
+$total=$res['sum(costototal)'];
 
-if ($res) {
-    $row = $res->fetch_assoc();
-    $total = $row['total'] ?? 0;
-} else {
-    $total = 0;
+if($res['sum(costototal)']==null){
+    $total=0;
 }
+echo "<h3>Total: ".$total."</h3>";
+echo "<table border='1'>";
+
+echo "<tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+        <th colspan=2>Agregar al Carrito</th>
+      </tr>";
+
+while($fila = $resultado->fetch_assoc()){
+    echo "<tr>";
+        echo "<td>".$fila["codigo"]."</td>";
+        echo "<td>".$fila["nombre"]."</td>";
+        echo "<td>".$fila["descripcion"]."</td>";
+        echo "<td>".$fila["precio"]."</td>";
+        echo "<td>
+                <a href='../pagina/03.productos.php?codigo=".$fila["codigo"]."'>
+                    <button>Mostrar</button>
+                </a>
+            </td>";
+        echo "<input type='hidden' value=".$fila["codigo"]." name='codigo'>";
+        echo "<input type='hidden' value=".$id_pedido." name='Pedido_id'>";
+        echo "<input type='hidden' value=".$fila["precio"]." name='precio'>";
+
+        echo "<td><input type='number' name='cantidad' value=0></td>";
+        echo "<td><input type='submit' value='Agregar'></td>";
+        echo "</tr>";
+        echo "</form>";
+
+}
+
+echo "</table>";
+echo "<a href='../pedidos/1.formpedido.php'>
+        <button>Generar Nuevo Pedido</button>
+      </a><br><br>";
+
 ?>
 
 <!DOCTYPE html>
@@ -319,42 +357,7 @@ i{
 <th>Acciones</th>
 </tr>
 
-<?php
-$sqlCarrito = " SELECT productos.codigo,productos.nombre,productos.precio,carrito.cantidad,carrito.costototal FROM carrito INNER JOIN productos ON carrito.productos_codigo = productos.codigo WHERE carrito.pedidos_id = '$id_pedido'
-";
 
-$resCarrito = $conn->query($sqlCarrito);
-echo "Pedido actual: " . $id_pedido . "<br>";
-while($fila = $resCarrito->fetch_assoc()){
-
-?>
-
-<tr>
-<td><?php echo $fila['codigo']; ?></td>
-<td><?php echo $fila['nombre']; ?></td>
-<td><?php echo $fila['precio']; ?> Bs</td>
-<td>
-
-<form action="editarcarrito.php" method="POST">
-
-<input type="hidden"name="idPedido"value="<?php echo $id_pedido; ?>">
-<input type="hidden"name="codigo"value="<?php echo $fila['codigo']; ?>">
-<input type="hidden"name="precio"value="<?php echo $fila['precio']; ?>">
-<input type="number"name="cantidad"value="<?php echo $fila['cantidad']; ?>"min="1">
-<input class="btn-actualizar"type="submit"value="Actualizar">
-</form>
-</td>
-
-<td><?php echo $fila['costototal']; ?> Bs</td>
-
-<td>
-<a class="btn-eliminar"href="eliminarcarrito.php?idPedido=<?php echo $id_pedido; ?>&codigo=<?php echo $fila['codigo']; ?>">Eliminar</a>
-</td>
-</tr>
-
-<?php
-}
-?>
 
 </table>
 <a class="btn-finalizar" href="../pedidos/8.finalizarpedido.php?idPedido=<?php echo $id_pedido; ?>"> Finalizar Pedido </a>

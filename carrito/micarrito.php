@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) === "") {
+if (empty($_SESSION['nombre'])) {
     header("Location: ../usuario/09.register.php");
     exit();
 }
@@ -9,21 +9,16 @@ if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) === "") {
 $conn = new mysqli("localhost","root","","shena");
 
 if ($conn->connect_error) {
-    die("Error de conexión");
+    die("Error de conexión: " . $conn->connect_error);
 }
 
-$nombre = $conn->real_escape_string($_SESSION['nombre']);
-$sqlPedido = " SELECT id FROM pedidos WHERE nombre='$nombre' AND estado='En Proceso' ORDER BY id DESC LIMIT 1";
-$resPedido = $conn->query($sqlPedido);
 
-if($resPedido->num_rows == 0){
-    die("No existe un pedido activo");
-}
+$id_pedido = (int)($_GET['idPedido'] ?? 0);
 
-$pedido = $resPedido->fetch_assoc();
-$id_pedido = $pedido['id'];
+$sqlTotal = "SELECT SUM(costototal) AS total 
+             FROM carrito 
+             WHERE pedidos_id = $id_pedido";
 
-$sqlTotal = "SELECT SUM(costototal) AS total FROM carrito WHERE pedidos_id='$id_pedido'";
 $res = $conn->query($sqlTotal);
 
 if ($res) {
@@ -32,7 +27,6 @@ if ($res) {
 } else {
     $total = 0;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -326,11 +320,7 @@ i{
 </tr>
 
 <?php
-$sqlCarrito = " SELECT productos.codigo,productos.nombre,productos.precio,carrito.cantidad,carrito.costototal
-FROM carrito
-INNER JOIN productos
-ON carrito.productos_codigo = productos.codigo
-WHERE carrito.pedidos_id = '$id_pedido'
+$sqlCarrito = " SELECT productos.codigo,productos.nombre,productos.precio,carrito.cantidad,carrito.costototal FROM carrito INNER JOIN productos ON carrito.productos_codigo = productos.codigo WHERE carrito.pedidos_id = '$id_pedido'
 ";
 
 $resCarrito = $conn->query($sqlCarrito);

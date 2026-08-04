@@ -12,7 +12,7 @@ $vendedor = "Administrador";
 <h2>Crear Pedido</h2>
 <form action="nuevopedido.php" method="POST">
     Nombre:
-    <input type="text"name="nombre"value="<?php echo $_SESSION['nombre']; ?>"readonly><br><br>
+    <input type="text"name="nombre"value="<?php echo $vendedor; ?>"readonly><br><br>
 
     Fecha:
     <input type="date"name="fecha"value="<?php echo date('Y-m-d'); ?>" readonly><br><br>

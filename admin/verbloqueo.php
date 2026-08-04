@@ -1,0 +1,1 @@
+<h2> Lo sentimos. En etse momento tu cuenta esta bloqueada. </h2>

@@ -14,6 +14,10 @@ $precio = $_POST["precio"];
 
 
 $total = $cantidad * $precio;
+
+if($cantidad <= 0){
+    die("Cantidad inválida");
+}
 $sql = "UPDATE carrito SET cantidad = '$cantidad',costototal = '$total'WHERE pedidos_id = '$idpedido'AND productos_codigo = '$codigo'";
 if ($conn->query($sql)) {
     header("Location: micarrito.php?idPedido=" . $idpedido);

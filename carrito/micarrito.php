@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre']) || trim($_SESSION['nombre']) === "") {
+if ($_SESSION['nombre'] === "") {
     header("Location: ../usuario/09.register.php");
     exit();
 }
@@ -12,18 +12,12 @@ if ($conn->connect_error) {
     die("Error de conexión");
 }
 
-$nombre = $conn->real_escape_string($_SESSION['nombre']);
-$sqlPedido = " SELECT id FROM pedidos WHERE nombre='$nombre' AND estado='En Proceso' ORDER BY id DESC LIMIT 1";
-$resPedido = $conn->query($sqlPedido);
+$pedidos_id = $_GET['idPedido'];
 
-if($resPedido->num_rows == 0){
-    die("No existe un pedido activo");
-}
+$sqlTotal = "SELECT SUM(costototal) AS total 
+             FROM carrito 
+             WHERE pedidos_id='$pedidos_id'";
 
-$pedido = $resPedido->fetch_assoc();
-$id_pedido = $pedido['id'];
-
-$sqlTotal = "SELECT SUM(costototal) AS total FROM carrito WHERE pedidos_id='$id_pedido'";
 $res = $conn->query($sqlTotal);
 
 if ($res) {
@@ -34,7 +28,6 @@ if ($res) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

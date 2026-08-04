@@ -19,7 +19,9 @@ $vendedor = $_POST["vendedor"];
 $sql = "INSERT INTO pedidos (nombre, fecha, estado, vendedor) VALUES ('$nombre', '$fecha', '$estado', '$vendedor')";
 
 if($conn->query($sql)){
-    header("Location: ../28.micarrito.php?idPedido=" . $conn->insert_id);
+    $idpedido = $conn->insert_id;
+    $_SESSION['id_pedido'] = $idpedido;
+    header("Location: ../carrito/micarrito.php?idPedido=" . $idpedido);
     exit();
 }else{
     echo "Error: " . $conn->error;

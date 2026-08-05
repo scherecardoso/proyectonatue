@@ -44,8 +44,10 @@ if ($resultado->num_rows > 0) {
 
         <h1>Venta Nro <?php echo $id; ?></h1>
 
+        <input type="hidden"name="id"value="<?php echo $id; ?>" readonly>
+           
         <label>Costo:</label>
-        <input type="number"name="costo"value="<?php echo $costo; ?>"required>
+        <input type="number"name="costo"value="<?php echo $costo; ?>" readonly>
 
         <label>Método de Pago:</label>
         <input type="text"name="metodo"value="<?php echo $metodo; ?>"required>
@@ -53,7 +55,6 @@ if ($resultado->num_rows > 0) {
         <label>Estado:</label>
         <input type="text"name="estado"value="<?php echo $estado; ?>"required>
 
-        <input type="hidden"name="id"value="<?php echo $id; ?>">
 
         <button type="submit">Actualizar Venta</button>
 

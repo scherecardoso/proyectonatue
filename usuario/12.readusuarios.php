@@ -202,6 +202,20 @@ $result = $conn->query($sql);
 
             <?php } ?>
 
+             <?php if($fila["bloqueado"]==1){ ?>
+
+                <a class="btn cambiar" href="../admin/desbloqueado.php?CI=<?= $fila['CI'] ?>">
+                   Desbloquear
+                </a>
+
+            <?php }else{ ?>
+
+                <a class="btn cambiar" href="../admin/bloquear.php?CI=<?= $fila['CI'] ?>">
+                   Bloquear
+                </a>
+
+            <?php } ?>
+
         </td>
 
     </tr>

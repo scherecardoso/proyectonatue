@@ -221,10 +221,8 @@ $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 if ($conn->connect_error) {
     die("Error de conexión");
 }
-if ($_SESSION['rol']) || $_SESSION['rol'] != 'administrador' {
-    echo "Acceso denegado";
-    exit();
-}
+if ($_SESSION['rol'] == 'vendedor' || $_SESSION['rol'] == 'administrador') {
+ 
 
 $sql = "SELECT * FROM productos";
 $result = $conn->query($sql);
@@ -280,6 +278,8 @@ if ($result && $result->num_rows > 0) {
     No hay productos registrados
     </p>";
 
+}  }else{ echo "Acceso denegado";
+    exit();
 }
 
 $conn->close();

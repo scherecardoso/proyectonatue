@@ -202,7 +202,7 @@ $result = $conn->query($sql);
 
             <?php } ?>
 
-             <?php if($fila["bloqueado"]==1){ ?>
+             <?php if($fila["estado"]==1){ ?>
 
                 <a class="btn cambiar" href="../admin/desbloqueado.php?CI=<?= $fila['CI'] ?>">
                    Desbloquear

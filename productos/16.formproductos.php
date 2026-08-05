@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SESSION['rol'] != 'vendedor') {
-    header("Location: ../pagina/login.php");
+    header("Location: ../usuario/09.register.php");
     exit();
 }
 ?>
@@ -121,7 +121,7 @@ input.error{
     <h2>Registro</h2>
     <p>Datos del producto</p>
 
-    <form action="../productos/23.registroproductos.php" method="post" id="valipro">
+    <form action="../productos/23.registroproductos.php" method="post" id="valipro"  enctype="multipart/form-data">
 
         <label class="campo">
             <i class="fa-solid fa-barcode"></i>
@@ -152,6 +152,11 @@ input.error{
             <i class="fa-solid fa-warehouse"></i>
             <input type="text" name="stock" placeholder="Stock">
         </label>
+        <label class="campo">
+            <i class="fa-solid fa-warehouse"></i>
+            <input type="file" name="imagen" placeholder="Stock">
+        </label>
+        
 
         <button type="submit">Guardar</button>
 

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION["nombre"])) {
+    header("Location: ../usuario/09.register.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +114,7 @@ body{
    <input type="text" id="nombre" name="nombre" value="<?php echo $_SESSION['nombre']; ?>" readonly>
     <input type="date"name="fecha" value="<?php echo date('Y-m-d'); ?>">
     <input type="hidden"name="estado" placeholder="Estado" value="En Proceso">
-    <input type="text" name="vendedor" placeholder="Vendedor" value="null" readonly>
+    <input type="text" name="vendedor" placeholder="Vendedor" value="vendedor" readonly>
 
     <button type="submit">Crear Pedido</button>
 </div>

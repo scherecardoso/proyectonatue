@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $servidor = "localhost";
 $usuario = "root";
 $contrasena = "";
@@ -11,17 +12,13 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-$nombre = $_POST["nombre"];  
-$fecha = $_POST["fecha"];
-$estado = $_POST["estado"];
-$vendedor = $_POST["vendedor"];
 
-$sql = "INSERT INTO pedidos (nombre, fecha, estado, vendedor) VALUES ('$nombre', '$fecha', '$estado', '$vendedor')";
+$sql = "INSERT INTO pedidos (fecha) VALUES ('$fecha')";
 
 if($conn->query($sql)){
     $idpedido = $conn->insert_id;
-    $_SESSION['id_pedido'] = $idpedido;
-    header("Location: ../carrito/micarrito.php?idPedido=" . $idpedido);
+    $_SESSION['pedido'] = $idpedido;
+    header("Location: ../carrito/micarrito.php");
     exit();
 }else{
     echo "Error: " . $conn->error;

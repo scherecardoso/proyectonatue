@@ -11,23 +11,43 @@ $nombre = $_POST['nombre'];
 $fecha = $_POST['fecha'];
 $estado = $_POST['estado'];
 $vendedor = $_POST['vendedor'];
+$telefono = $_POST["telefono"];
+$direccion = $_POST["direccion"];
 
 $sql = "INSERT INTO pedidos(nombre, fecha, estado, vendedor)VALUES('$nombre','$fecha','$estado','$vendedor')";
 
-if($conexion->query($sql)){
+if ($conexion->query($sql)) {
+
     $idPedido = $conexion->insert_id;
+    $_SESSION["pedidos_id"] = $idPedido;
+if (isset($_SESSION["producto_temp"])) {
 
-    if($conexion->query($sql)){
+        $datos = $_SESSION["producto_temp"];
 
-        header("Location: ../carrito/micarrito.php?idPedido=".$idPedido);
-        exit();
+        $codigo = $datos["codigo"];
+        $cantidad = (int)$datos["cantidad"];
+        $precio = (float)$datos["precio"];
 
-    }else{
-        echo "Error al guardar carrito: ".$conexion->error;
+        $total = $cantidad * $precio;
+
+        $sqlCarrito = "INSERT INTO carrito
+        (pedidos_id, productos_codigo, cantidad, costototal)
+        VALUES
+        ('$idPedido','$codigo','$cantidad','$total')
+        ON DUPLICATE KEY UPDATE
+        cantidad = cantidad + VALUES(cantidad),
+        costototal = costototal + VALUES(costototal)";
+
+        $conexion->query($sqlCarrito);
+
+        unset($_SESSION["producto_temp"]);
     }
 
+    header("Location: ../carrito/micarrito.php");
+    exit();
 
-}else{
+} else {
+
     echo "Error al crear pedido: " . $conexion->error;
 }
 ?>

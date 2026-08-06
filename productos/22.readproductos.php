@@ -238,6 +238,7 @@ if ($result && $result->num_rows > 0) {
         <th>Precio</th>
         <th>Costo</th>
         <th>Stock</th>
+        <th>Imagen</th>
         <th>Acciones</th>
     </tr>
     ";
@@ -253,8 +254,29 @@ if ($result && $result->num_rows > 0) {
             <td>{$fila['descripcion']}</td>
             <td>$ {$fila['precio']}</td>
             <td>$ {$fila['costo']}</td>
-            <td>{$fila['stock']}</td>
+            <td>{$fila['stock']}</td>";
+        $nombreImagen="P-".$fila['codigo'];
+        $directorio= "../img/";
+        $extensiones = ["jpg", "jpeg", "png", "gif"];
 
+        $archivoEncontrado = null;
+        //verificar si el archivo se creo en alguna extension conocida
+        foreach ($extensiones as $ext) {
+            //nombre del archivo con cada extension
+            $ruta = $directorio . $nombreImagen . "." . $ext;
+            //verifica
+            if (file_exists($ruta)) {
+                $archivoEncontrado = $ruta;
+                //detenemos la búsqueda en cuanto lo encuentra
+                break;
+            }
+        }
+        if ($archivoEncontrado) {
+            echo "<td><img src='".$archivoEncontrado."' width=150></td>";
+        }else{
+            echo "<td>No imagen</td>";
+        }
+        echo "
             <td>
                 <a class='btn editar'
                 href='../productos/18.formeditarproductos.php?codigo=$codigo'>

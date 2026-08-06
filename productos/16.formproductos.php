@@ -154,7 +154,7 @@ input.error{
         </label>
         <label class="campo">
             <i class="fa-solid fa-warehouse"></i>
-            <input type="file" name="imagen" placeholder="Stock">
+            <input type="file" name="imagen" placeholder="Imagen">
         </label>
         
 

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -202,16 +199,16 @@ $result = $conn->query($sql);
 
             <?php } ?>
 
-             <?php if($fila["estado"]==1){ ?>
-
-                <a class="btn cambiar" href="../admin/desbloqueado.php?CI=<?= $fila['CI'] ?>">
-                   Desbloquear
-                </a>
-
-            <?php }else{ ?>
+              <?php if($fila["estado"]=="activo"){ ?>
 
                 <a class="btn cambiar" href="../admin/bloquear.php?CI=<?= $fila['CI'] ?>">
                    Bloquear
+                </a>
+
+            <?php }elseif($fila["estado"]=="bloqueado"){ ?>
+
+                <a class="btn cambiar" href="../admin/desbloqueado.php?CI=<?= $fila['CI'] ?>">
+                   Activar
                 </a>
 
             <?php } ?>

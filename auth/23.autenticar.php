@@ -30,6 +30,14 @@ if ($resultado->num_rows > 0) {
     $_SESSION['direccion'] = $fila['direccion'];
     $_SESSION['rol'] = $fila['rol'];
     $_SESSION['nombre'] = $fila['nombre'];
+    $_SESSION['estado'] = $fila['estado'];
+
+session_start();
+
+if ($_SESSION['estado'] == "bloqueado") {
+    header("Location: ../admin/verbloqueo.php");
+    exit();
+}
 
     if ($_SESSION['rol'] == "vendedor") {
 

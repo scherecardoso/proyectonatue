@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS `shena`.`productos` (
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   `precio` INT NULL DEFAULT NULL,
   `costo` INT NULL DEFAULT NULL,
-  `stock` INT NULL DEFAULT NULL,
+ `stock` INT NULL DEFAULT NULL,
+  `imagen` VARCHAR(200) DEFAULT NULL,
+  `estado` ENUM('Activo','Inactivo') DEFAULT 'Activo',
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 

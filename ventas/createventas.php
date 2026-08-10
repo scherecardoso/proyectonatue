@@ -10,18 +10,25 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$costo= $_POST['costo'];
-$metodo = $_POST['metodo'];
+$costo = $_POST['total'];
+$fecha = $_POST['fecha'];
 $estado = $_POST['estado'];
-$sql = "INSERT INTO ventas (costo, metodo, estado) VALUES ('$costo', '$metodo', '$estado')";
-header("Location: readventas.php");
-exit();
-if($conexion->query($sql)){
-    $idVentas = $conexion->insert_id;
-    header("Location: ../ventas/guardarventa.php?id=".$idVentas);
+$id_pedidos = $_POST['id_pedidos'];
+
+$sql = "INSERT INTO ventas (costo, fecha, estado, pedidos_id) 
+        VALUES ('$costo', '$fecha', '$estado', '$id_pedidos')";
+
+if($conn->query($sql)){
+
+    $idVentas = $conn->insert_id;
+
+    header("Location: readventas.php");
     exit();
 
 }else{
-    echo $conexion->error;
+
+    echo $conn->error;
+
 }
+
 ?>

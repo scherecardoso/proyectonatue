@@ -18,7 +18,7 @@ $rol = $_POST['rol'];
 $estado = $_POST['estado'];
 $sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado) VALUES ('$CI','$nombre', '$direccion', '$celular', '$rol','$estado')";
 if ($conn->query($sql) === TRUE) {
-    header("Location: ../usuario/12.readusuarios.php");
+    header("Location: ../usuario/09.register.php");
 
 
 

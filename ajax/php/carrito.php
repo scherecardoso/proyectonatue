@@ -1,220 +1,140 @@
 <?php
 
 session_start();
-
 require("conexion.php");
 
 header("Content-Type: application/json");
 
-
 if(!isset($_SESSION["pedido"])){
+    echo json_encode([
+        "ok"=>false,
+        "mensaje"=>"No existe pedido activo"
+    ]);
+    exit;
+}
+
+$idPedido = $_SESSION["pedido"];
+
+$accion = $_POST["accion"] ?? "";
+
+switch($accion){
+
+    case "agregar":
+
+        $codigo = $_POST["codigo"];
+
+        // Buscar producto
+        $sqlProducto = "SELECT * FROM productos WHERE codigo='$codigo'";
+        $resultadoProducto = $conn->query($sqlProducto);
+        if($resultadoProducto->num_rows == 0){
 
     echo json_encode([
-
         "ok"=>false,
-        "mensaje"=>"No hay un pedido activo"
-
+        "mensaje"=>"Producto no encontrado"
     ]);
 
     exit;
 
 }
+        $producto = $resultadoProducto->fetch_assoc();
 
+        // Verificar si ya existe
+        $sqlExiste = "SELECT * FROM carrito
+                       WHERE pedidos_id='$idPedido'
+                       AND productos_codigo='$codigo'";
 
-if(!isset($_POST["accion"])){
+        $resultadoExiste = $conn->query($sqlExiste);
+
+        if($resultadoExiste->num_rows > 0){
+
+            $fila = $resultadoExiste->fetch_assoc();
+
+            $cantidad = $fila["cantidad"] + 1;
+
+            $subtotal = $cantidad * $producto["precio"];
+
+            $sql = "UPDATE Carrito
+                    SET cantidad='$cantidad',
+                        costototal='$subtotal'
+                    WHERE pedidos_id='$idPedido'
+                    AND productos_codigo='$codigo'";
+
+        }else{
+
+            $subtotal = $producto["precio"];
+
+            $sql = "INSERT INTO carrito
+                    (pedidos_id,productos_codigo,cantidad,costototal)
+                    VALUES
+                    ('$idPedido','$codigo',1,'$subtotal')";
+
+        }
+
+        if($conn->query($sql)){
 
     echo json_encode([
-
-        "ok"=>false,
-        "mensaje"=>"Falta la acción"
-
+        "ok"=>true,
+        "mensaje"=>"Producto agregado correctamente"
     ]);
-
-    exit;
-
-}
-
-
-$idPedido=$_SESSION["pedido"];
-
-$accion=$_POST["accion"];
-
-
-if($accion=="agregar"){
-
-
-    if(!isset($_POST["codigo"])){
-
-        echo json_encode([
-
-            "ok"=>false,
-            "mensaje"=>"Falta el código del producto"
-
-        ]);
-
-        exit;
-
-    }
-
-
-    $codigo=$_POST["codigo"];
-
-
-    if(isset($_POST["cantidad"])){
-
-        $cantidad=(int)$_POST["cantidad"];
-
-    }else{
-
-        $cantidad=1;
-
-    }
-
-
-    $sqlProducto="
-
-    SELECT precio
-    FROM producto
-    WHERE codigo='$codigo'
-
-    ";
-
-
-    $resultadoProducto=$conn->query($sqlProducto);
-
-
-    if(!$resultadoProducto or $resultadoProducto->num_rows==0){
-
-        echo json_encode([
-
-            "ok"=>false,
-            "mensaje"=>"Producto no encontrado"
-
-        ]);
-
-        exit;
-
-    }
-
-
-    $producto=$resultadoProducto->fetch_assoc();
-
-    $precio=$producto["precio"];
-
-    $total=$cantidad*$precio;
-
-
-    $sql="
-
-    INSERT INTO carrito
-    (Pedido_id, Producto_codigo, cantidad, costototal)
-
-    VALUES
-    ('$idPedido','$codigo','$cantidad','$total')
-
-    ON DUPLICATE KEY UPDATE
-    cantidad = cantidad + VALUES(cantidad),
-    costototal = costototal + VALUES(costototal)
-
-    ";
-
-
-    if($conn->query($sql)){
-
-        echo json_encode([
-
-            "ok"=>true
-
-        ]);
-
-    }else{
-
-        echo json_encode([
-
-            "ok"=>false,
-            "mensaje"=>$conn->error
-
-        ]);
-
-    }
-
-
-}elseif($accion=="mostrar"){
-
-
-    $sql="
-
-    SELECT p.codigo, p.nombre, p.precio, p.imagen, c.cantidad, c.costototal
-
-    FROM carrito c
-
-    INNER JOIN producto p
-    ON c.Producto_codigo=p.codigo
-
-    WHERE c.Pedido_id='$idPedido'
-
-    ";
-
-
-    $resultado=$conn->query($sql);
-
-
-    $productos=[];
-
-
-    while($fila=$resultado->fetch_assoc()){
-
-        $productos[]=$fila;
-
-    }
-
-
-    echo json_encode($productos);
-
-
-}elseif($accion=="vaciar"){
-
-
-    $sql="
-
-    DELETE FROM carrito
-    WHERE Pedido_id='$idPedido'
-
-    ";
-
-
-    if($conn->query($sql)){
-
-        echo json_encode([
-
-            "ok"=>true
-
-        ]);
-
-    }else{
-
-        echo json_encode([
-
-            "ok"=>false,
-            "mensaje"=>$conn->error
-
-        ]);
-
-    }
-
 
 }else{
 
     echo json_encode([
-
         "ok"=>false,
-        "mensaje"=>"Acción no reconocida"
-
+        "mensaje"=>$conn->error
     ]);
 
 }
 
+    break;
+    case "mostrar":
 
-$conn->close();
+    $sql = "SELECT
+                c.productos_codigo,
+                c.cantidad,
+                c.costototal,
+                p.nombre,
+                p.precio,
+                p.imagen
+            FROM carrito c
+            INNER JOIN productos p
+            ON c.productos_codigo = p.codigo
+            WHERE c.pedidos_id='$idPedido'";
 
-?>
+    $resultado = $conn->query($sql);
+
+    $carrito = [];
+
+    while($fila = $resultado->fetch_assoc()){
+
+        $carrito[] = $fila;
+
+    }
+
+    echo json_encode($carrito);
+
+break;
+case "vaciar":
+
+    $sql = "DELETE FROM carrito
+            WHERE pedidos_id='$idPedido'";
+
+    if($conn->query($sql)){
+
+        echo json_encode([
+            "ok"=>true,
+            "mensaje"=>"Carrito vaciado correctamente"
+        ]);
+
+    }else{
+
+        echo json_encode([
+            "ok"=>false,
+            "mensaje"=>$conn->error
+        ]);
+
+    }
+
+break;
+
+}

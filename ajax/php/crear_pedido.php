@@ -1,3 +1,4 @@
+
 <?php
 
 /*ini_set('display_errors',1);
@@ -29,35 +30,21 @@ if(!$datos){
 }
 
 
-if(!isset($datos["nombre"]) or !isset($datos["telefono"]) or !isset($datos["direccion"]) or !isset($datos["metodo"])){
-
-    echo json_encode([
-        "ok"=>false,
-        "mensaje"=>"Faltan datos del formulario"
-    ]);
-
-    exit;
-
-}
-
-
 $nombre=$datos["nombre"];
 $telefono=$datos["telefono"];
 $direccion=$datos["direccion"];
-$metodo=$datos["metodo"];
 
 
 
 $stmt=$conn->prepare("
 
-INSERT INTO pedido
+INSERT INTO pedidos
 (
-Nombre,
-Fecha,
-Estado,
+nombre,
+fecha,
+estado,
 telefono,
-direccion,
-metodoPago
+direccion
 )
 
 VALUES
@@ -77,8 +64,7 @@ $stmt->bind_param(
 "ssss",
 $nombre,
 $telefono,
-$direccion,
-$metodo
+$direccion
 );
 
 if($stmt->execute()){
@@ -89,7 +75,8 @@ if($stmt->execute()){
 
     echo json_encode([
         "ok"=>true,
-        "pedido"=>$idPedido
+        "pedido"=>$idPedido,
+        "sesion"=>$_SESSION["pedido"]
     ]);
 
 }else{

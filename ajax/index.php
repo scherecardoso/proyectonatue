@@ -59,16 +59,8 @@
 Generar Pedido
 </button>
 
-<div id="resumenPedido" style="display:none;">
-
-    <h3>Pedido en curso</h3>
-
-    <div id="datosPedido">
-
-    </div>
 
 </div>
-
 <!--================== FONDO OSCURO ==================-->
 
     <div id="fondo"></div>
@@ -136,13 +128,6 @@ Generar Pedido
                id="direccion"
                placeholder="Dirección">
 
-        <select id="metodoPago">
-
-            <option value="QR">Pago mediante QR</option>
-
-            <option value="Efectivo">Pago en efectivo</option>
-
-        </select>
 
         <div class="botonesModal">
 
@@ -160,6 +145,8 @@ Generar Pedido
 
 </div>
 
+</div>
+    
 
 
 <script src="js/productos.js"></script>
@@ -167,4 +154,5 @@ Generar Pedido
 <script src="js/carrito.js"></script>
 
 </body>
+
 </html>

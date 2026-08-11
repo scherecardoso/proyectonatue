@@ -435,11 +435,12 @@ body {
 <?php include("../includes/header.php"); ?>
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
-  <a href=""><i class="fa-solid fa-house"></i> Registrar Ventas</a>
-  <a href=""><i class="fa-solid fa-box"></i> Stock de Productos</a>
+  <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
+  <a href="../pedidos/1.formpedidos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Ventas</a>
+  <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
-  <a href=""><i class="fa-solid fa-history"></i> Historial de Ventas</a>
-  <a href=""><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
+  <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
+  <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
   <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>
 </aside>

@@ -23,7 +23,7 @@ $idPedido=$_SESSION["pedido"];
 
 
 $sql="
-UPDATE pedido
+UPDATE pedidos
 SET Estado='Pendiente'
 WHERE id='$idPedido'
 ";
@@ -53,7 +53,5 @@ if($conn->query($sql)){
 
 }
 
-
-$conn->close();
 
 ?>

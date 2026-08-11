@@ -39,7 +39,6 @@ document.getElementById("confirmarPedido").addEventListener("click",()=>{
         nombre: document.getElementById("nombre").value,
         telefono: document.getElementById("telefono").value,
         direccion: document.getElementById("direccion").value,
-        metodo: document.getElementById("metodoPago").value,
     
 
     };
@@ -119,7 +118,7 @@ let pedido=data.pedido;
 
 
 
-if(pedido.Estado=="Pendiente"){
+if(pedidos.estado=="Pendiente"){
 
 
 
@@ -141,7 +140,7 @@ ${pedido.id}
 
 <p>
 Cliente:
-${pedido.Nombre}
+${pedido.nombre}
 </p>
 
 
@@ -154,12 +153,6 @@ ${pedido.telefono}
 <p>
 Dirección:
 ${pedido.direccion}
-</p>
-
-
-<p>
-Método pago:
-${pedido.metodoPago}
 </p>
 
 

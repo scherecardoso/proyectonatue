@@ -18,54 +18,52 @@ if ($_SESSION['rol'] != 'vendedor') {
 
 <style>
 
-body{
-    display:grid;
-    margin:0;
-    font-family:Arial, sans-serif;
-    grid-template-columns:300px 1fr;
-    grid-template-rows:70px 1fr;
-    grid-template-areas:
+
+body {
+  display: grid; 
+  font-family: Arial, sans-serif;
+  margin: 0;
+  grid-template-areas:
     "barra barra"
-    "menu contenido";
-    background:#ffffff;
+    "menu-lateral contenido";
+  grid-template-columns: 320px 1fr;
+  grid-template-rows: 70px 1fr 70px;
+  min-height: 100vh;
+  gap: 5px;
 }
-
-.menu{
-    grid-area:menu;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    background-color:#ffffff;
-    padding:15px;
-    width:300px;
-    border-right:1px solid #ececec;
+.menu-lateral {
+   grid-area: menu-lateral;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 15px;
+  margin-top: 27px;
+  width: 280px;
+  border-right: 1px solid #ececec;
+ 
 }
-
-.titulo-menu{
-    font-size:15px;
-    color:#ff5ca8;
-    margin-bottom:10px;
+.menu-titulo {
+  font-size: 15px;
+  color: #ff5ca8;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
-
-.menu div{
-    padding:15px;
-    border-radius:12px;
-    font-size:18px;
-    transition:.3s;
-    cursor:pointer;
+.menu-lateral a{
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 20px;
+  transition: .3s;
+  cursor: pointer;
+  display: block;
 }
-
-.menu div:hover{
-    background:#ffdcec;
-    color:#ff5ca8;
-    padding-left:22px;
+.menu-lateral a:hover{
+  background: #ffdcec;
+  color: #ff5ca8;
+  padding-left: 22px;
 }
-
-.menu a{
-    text-decoration:none;
-    color:black;
-}
-
 
 
 .contenedor{
@@ -185,25 +183,17 @@ h1{
 
 <body>
 <?php include("../includes/header.php"); ?>
-<aside class="menu">
-
-<div class="titulo-menu">MENU ADMINISTRADOR</div>
-
-<a href="../admin/06.admin.php"><div><i class="fa-solid fa-house"></i> Inicio</div></a>
-<a href="../usuario/12.readusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
-
- <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
- <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
- <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-
-<a href="../productos/22.readproductos.php">
- <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
- <div><i class="fa-solid fa-gear"></i> Configuración</div>
- <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
- <div><a href="../auth/26.cerrarsesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></div>
-
+<aside class="menu-lateral">
+  <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
+  <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
+  <a href="../pedidos/1.formpedidos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Ventas</a>
+  <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
+  <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
+  <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
+  <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
+  <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
+  <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>
 </aside>
-
 
 
 <div class="contenedor">

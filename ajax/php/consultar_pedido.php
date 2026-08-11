@@ -1,24 +1,6 @@
 <?php
 
-session_start();
-
 require("conexion.php");
-
-header("Content-Type: application/json");
-
-
-if(!isset($_POST["id"])){
-
-    echo json_encode([
-
-        "ok"=>false,
-        "mensaje"=>"Falta el número de pedido"
-
-    ]);
-
-    exit;
-
-}
 
 
 $id=$_POST["id"];
@@ -26,7 +8,7 @@ $id=$_POST["id"];
 
 $sql="
 SELECT *
-FROM pedido
+FROM pedidos
 WHERE id='$id'
 ";
 
@@ -34,7 +16,8 @@ WHERE id='$id'
 $resultado=$conn->query($sql);
 
 
-if($resultado and $resultado->num_rows>0){
+
+if($resultado->num_rows>0){
 
 
 $pedido=$resultado->fetch_assoc();
@@ -62,7 +45,5 @@ echo json_encode([
 
 }
 
-
-$conn->close();
 
 ?>

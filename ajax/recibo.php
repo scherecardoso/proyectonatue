@@ -23,8 +23,8 @@ $id=$_SESSION["pedido"];
 
 $sql="
 SELECT *
-FROM pedido
-WHERE id='$id'
+FROM pedidos
+WHERE id='$id_pedidos                                                                                                                                                                                                                                                                                                              '
 ";
 
 
@@ -69,7 +69,7 @@ Número:
 
 <p>
 Cliente:
-<?php echo $pedido["Nombre"]; ?>
+<?php echo $pedido["nombre"]; ?>
 </p>
 
 
@@ -85,15 +85,10 @@ Dirección:
 </p>
 
 
-<p>
-Método de pago:
-<?php echo $pedido["metodoPago"]; ?>
-</p>
-
 
 <p>
 Estado:
-<?php echo $pedido["Estado"]; ?>
+<?php echo $pedido["estado"]; ?>
 </p>
 
 
@@ -117,11 +112,11 @@ c.costototal
 
 FROM carrito c
 
-INNER JOIN producto p
+INNER JOIN productos p
 
-ON c.Producto_codigo=p.codigo
+ON c.productos_codigo=p.codigo
 
-WHERE c.Pedido_id='$id'
+WHERE c.pedidos_id='$id'
 
 ";
 

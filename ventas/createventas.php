@@ -1,49 +1,42 @@
 <?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
-if ($conn->connect_error) {
-    die("Conexion fallida: " . $conn->connect_error);
+$servidor "localhost";
+Snombre "root";
+Scontraseña
+$BDnombre "shena";
+$conn new mysqli($servidor, $nombre, $contraseña, $BDnombre);
+if($conn->connect_error) {
+die ("conexion fallida", $conn->connect_error);
 }
+$metodo $_POST['metodo'];
+$pedidos_id = $_POST['pedidos_id'];
 
-$costo = $_POST['pedidos_id'];
-$fecha = $_POST['fecha'];
-$estado = $_POST['estado'];
-$id_pedidos = $_POST['total'];
+$estado "Pendiente";
 
-$sql = "INSERT INTO ventas (pedidos_id, fecha, estado, total) VALUES ('$pedidos_id', '$fecha', '$estado', '$total')";
+$sqlTotal "SELECT SUM(costototal) AS total FROM carrito WHERE pedidos_id = '$pedidos_id";
+$resultado Sconn->query($sqlTotal);
+$fila Sresultado->fetch_assoc();
+$costototal $fila['total'];
 
-if($conn->query($sql))
-  {
-      
-     //buscar nevamente los productos para desconectar stock
-$sql="SELECT * FROM micarrito WHERE pedidos_id='$pedidos_id'";
-$resultao=$conn->query($sql);
-while($fila=$resultao->fetch_assoc())
-    {
-          $codigo=$fila['productos_codigo'];
-         $cantidad=$fila['cantidad'];
-         //obtener stock actual 
+//Aqui debemos buscar los productos del pedido paar ver si se puede validar la venta
+$sqlCarrito ="SELECT productos_id, cantidad FROM carrito WHERE pedidos_id= '$pedidos_id'";
+$resultadoCarrito $conn->query($sqlCarrito);
 
-         $sql="SELECT * FROM producos WHERE codigo='$codigo'";
-         $r2=$conn->query($sql2);
-         $productos=$r2->fetch_assoc();
-         $stock=$productos['stock'];
-         $nuevosSTOCK=$stock-$cantidad;
-         //actualizar stock
-         $sql3="UPDATE producos SET stock=´$nuevoStock´ WHERE codigo=´$codigo´";
-         $cconn->query($sql3);
+//Luego Validamos el stock antes de registrar la venta
+$hayStock= true;
+$productoSinStock = "";
 
-    }
-        echo "<h2>venta registrada correctmente</h2>";
-  }   
-   else
-    {
-        echo"error".$conn->error;
-    }
-    
-?>
+while ($productos= $resultadoCarrito->fetch_assoc()) {
+     $productos_id= $productos['productos_id'];
+$cantidad =$productos['cantidad'];
+
+//Buscamos el stock actual
+
+$sqlProductos= "SELECT nombre, stock FROM productos WHERE id ='$pedidos_id'";
+
+$resultadoProductos =Sconn->query($sqlProductos);
+$datosProductos $resultadoProductos->fetch_assoc();
+$stock $datosProductos['stock'];
+$nombreProductoS =$datosProductos ['nombre'];
+// 
+}
+ 

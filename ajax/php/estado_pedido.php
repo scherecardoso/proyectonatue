@@ -7,12 +7,12 @@ require("conexion.php");
 header("Content-Type: application/json");
 
 
-if(!isset($_POST["id"])){
+if(!isset($_SESSION["pedido"])){
 
     echo json_encode([
 
         "ok"=>false,
-        "mensaje"=>"Falta el número de pedido"
+        "mensaje"=>"No hay pedido activo"
 
     ]);
 
@@ -21,13 +21,15 @@ if(!isset($_POST["id"])){
 }
 
 
-$id=$_POST["id"];
+$id=$_SESSION["pedido"];
 
 
 $sql="
+
 SELECT *
 FROM pedido
 WHERE id='$id'
+
 ";
 
 
@@ -37,27 +39,26 @@ $resultado=$conn->query($sql);
 if($resultado and $resultado->num_rows>0){
 
 
-$pedido=$resultado->fetch_assoc();
+    $pedido=$resultado->fetch_assoc();
 
 
+    echo json_encode([
 
-echo json_encode([
+        "ok"=>true,
+        "pedido"=>$pedido
 
-"ok"=>true,
-
-"pedido"=>$pedido
-
-]);
+    ]);
 
 
 }else{
 
 
-echo json_encode([
+    echo json_encode([
 
-"ok"=>false
+        "ok"=>false,
+        "mensaje"=>"Pedido no encontrado"
 
-]);
+    ]);
 
 
 }

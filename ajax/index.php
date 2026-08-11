@@ -59,8 +59,16 @@
 Generar Pedido
 </button>
 
+<div id="resumenPedido" style="display:none;">
+
+    <h3>Pedido en curso</h3>
+
+    <div id="datosPedido">
+
+    </div>
 
 </div>
+
 <!--================== FONDO OSCURO ==================-->
 
     <div id="fondo"></div>
@@ -152,8 +160,6 @@ Generar Pedido
 
 </div>
 
-</div>
-    
 
 
 <script src="js/productos.js"></script>

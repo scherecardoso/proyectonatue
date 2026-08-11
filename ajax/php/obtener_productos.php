@@ -1,7 +1,6 @@
-
 <?php
 
-include("conexion.php");
+require("conexion.php");
 
 $sql = "SELECT * FROM producto WHERE estado='Activo'";
 

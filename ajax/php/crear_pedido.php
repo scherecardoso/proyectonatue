@@ -29,6 +29,18 @@ if(!$datos){
 }
 
 
+if(!isset($datos["nombre"]) or !isset($datos["telefono"]) or !isset($datos["direccion"]) or !isset($datos["metodo"])){
+
+    echo json_encode([
+        "ok"=>false,
+        "mensaje"=>"Faltan datos del formulario"
+    ]);
+
+    exit;
+
+}
+
+
 $nombre=$datos["nombre"];
 $telefono=$datos["telefono"];
 $direccion=$datos["direccion"];
@@ -77,8 +89,7 @@ if($stmt->execute()){
 
     echo json_encode([
         "ok"=>true,
-        "pedido"=>$idPedido,
-        "sesion"=>$_SESSION["pedido"]
+        "pedido"=>$idPedido
     ]);
 
 }else{

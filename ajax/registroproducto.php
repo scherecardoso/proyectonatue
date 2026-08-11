@@ -1,14 +1,16 @@
 <?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
 
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+$servidor = "localhost";
+$usuario = "root";
+$contrasena = "";
+$bd = "shena";
+
+$conn = new mysqli($servidor, $usuario, $contrasena, $bd);
 
 if ($conn->connect_error) {
-    die("Conexion fallida: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
+
 $codigo = $_POST["codigo"];
 $nombre = $_POST["nombre"];
 $descripcion = $_POST["descripcion"];

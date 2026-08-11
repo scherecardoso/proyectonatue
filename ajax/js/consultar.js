@@ -58,25 +58,25 @@ Pedido Nº ${p.id}
 
 <p>
 Cliente:
-${p.Nombre}
+${p.nombre}
 </p>
 
 
 <p>
 Fecha:
-${p.Fecha}
+${p.fecha}
 </p>
 
 
 <p>
 Estado:
-<b>${p.Estado}</b>
+<b>${p.estado}</b>
 </p>
 
 
 <p>
 Vendedor:
-${p.NombreVendedor ?? "Pendiente"}
+${p.vendedor ?? "Pendiente"}
 </p>
 
 `;

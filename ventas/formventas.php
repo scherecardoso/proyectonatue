@@ -1,54 +1,96 @@
 <?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-$id_pedidos=$_GET ['íd_pedidos'];
-$sql="SELECT *FROM pedidos WHERE id='$íd_pedidos'";
-$resultado=$conn->query($sql);
-while($fila=$resultado->fetch_assoc())
-    {
-        $nombre=$fila["nombre"];
-    }
-//para hallar el total del pedido 
-$sqltotal="SELECT sum(costototal)FROM carrito where pedidos_id='$íd_pedidos'";
-$resultadoTotal=$conn->query($sqltotal);
-$res= $resultadoTotal->fetch_assoc();
-$total=$res['sum(costototal)'];
-if($res['sum(costototal)']==null){
-    $total=0;
+if (isset($_GET['pedido'])) {
+    $pedidos_id = $_GET['pedido'];
+} else {
+    die("No se recibió el pedido.");
 }
 
+$servidor = "localhost";
+$nombre = "root";
+$contraseña = "";
+$BDnombre = "shena";
+
+$conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
+
+if($conn->connect_error) {
+    die ("conexion fallida" . $conn->connect_error);
+}
+
+// Buscamos los productos del pedido para luego mostrar el stock
+$sqlCarrito = "SELECT productos_id, cantidad FROM carrito WHERE pedidos_id = '$pedidos_id'";
+$resultadoCarrito = $conn->query($sqlCarrito);
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de venta</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registrar Venta </title>
 </head>
 <body>
-    <form action="../guardarventas/createventas.php" method="post" id="valiventas">
-        pedido:
-        <input type="text" name="nombrePedidos" value="<?php echo $nombre?>"readonly>
-        <br><br>
-        fecha:
-        <input type="date" name="fecha">
-        <br><br>
-        estado :
-        <select name="estado">
-            <option value="pagado">pagado</option>
-            <option value="pendiente">pendiente</option>
 
-</select>
-<br><br>
-<input type="hidden" value="<?=$total?>"name="total">
-<input type="hidden" value="<?=$id_pedidos?>"name="pedidos_id">
-<input type="submit" value="guardar">
+<article class="caja-formulario">
 
-        <button type="submit">Crear Venta</button>
+    <header class="caja-titulos">
+        <h3 class="texto-saludo">Productos del pedido</h3>
+        <h1 class="texto-rol">Registrar Venta</h1>
+    </header>
+
+    <div class="caja-tabla">
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Stock disponible</th>
+                <th>Cantidad solicitada</th>
+            </tr>
+
+            <?php
+            while ($producto = $resultadoCarrito->fetch_assoc()) {
+                $productos_id = $productos['productos_id'];
+                $cantidad = $productos['cantidad'];
+
+                // Buscar el producto
+                $sqlProductos = "SELECT nombre, stock FROM productos WHERE id = '$productos_id'";
+                $resultadoProductos = $conn->query($sqlProducto);
+                $datosProductos = $resultadoProductos->fetch_assoc();
+            ?>
+
+            <tr>
+                <td><?php echo $datosProductos['nombre']; ?></td>
+                <td><?php echo $datosProductos['stock']; ?></td>
+                <td><?php echo $cantidad; ?></td>
+            </tr>
+
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+
+    <form action="createventas.php" method="POST" class="caja-pago">
+
+        <input type="hidden" name="pedidos_id" value="<?php echo $pedidos_id; ?>">
+
+        <div class="grupo-campo">
+            <label>Método de Pago:</label>
+            <select name="metodo" required>
+                <option value="">Seleccione</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="QR">QR</option>
+                <option value="Transferencia">Transferencia</option>
+            </select>
+        </div>
+
+        <button type="submit" class="boton-registrar">Registrar Venta</button>
+
     </form>
+
+</article>
+
 </body>
 </html>
+
+<?php
+    $conn->close();
+?>

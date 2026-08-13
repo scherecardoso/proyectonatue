@@ -1,90 +1,221 @@
 let listaProductos = [];
 let pedidoActivo = false;
-document.addEventListener("DOMContentLoaded", () => {
-//esto crea una lista vacia donde despues sera cargada con los productos de la base de datos 
 
-   
-verificarPedido();
-   //cargarProductos();
-  
+
+//==================================================
+// INICIAR
+//==================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    verificarPedido();
+
+    // BUSCADOR
+    const buscador = document.getElementById("buscar");
+
+    if (buscador) {
+
+        buscador.addEventListener("keyup", function () {
+
+            buscarProductos(this.value);
+
+        });
+
+    }
 
 });
 
+
+
+//==================================================
+// CARGAR PRODUCTOS
+//==================================================
+
 function cargarProductos(){
-/*fetch() es una función de JavaScript que permite realizar peticiones HTTP al servidor.
 
-En este caso envía una petición al archivo:*/
     fetch("php/obtener_productos.php")
-/*Cuando el servidor responde, esa respuesta aún no es un objeto de JavaScript.
 
-Es simplemente una respuesta HTTP. Es decir, transforma el JSON recibido en datos que JavaScript puede utilizar.*/ 
     .then(respuesta => respuesta.json())
 
     .then(productos => {
 
+        console.log("Productos cargados:", productos);
+
         listaProductos = productos;
 
-        mostrarProductos(productos);
+        mostrarProductos(listaProductos);
 
     })
 
-    .catch(error => console.log(error));
+    .catch(error => {
+
+        console.log("Error cargando productos:", error);
+
+    });
 
 }
+
+
+
+//==================================================
+// BUSCAR PRODUCTOS
+//==================================================
+
+function buscarProductos(texto){
+
+    texto = texto.toLowerCase().trim();
+
+    console.log("Buscando:", texto);
+
+    if(texto === ""){
+
+        mostrarProductos(listaProductos);
+
+        return;
+
+    }
+
+
+    const resultados = listaProductos.filter(function(producto){
+
+        const nombre = String(producto.nombre || "").toLowerCase();
+
+        const descripcion = String(producto.descripcion || "").toLowerCase();
+
+        return (
+            nombre.includes(texto) ||
+            descripcion.includes(texto)
+        );
+
+    });
+
+
+    console.log("Resultados:", resultados);
+
+    mostrarProductos(resultados);
+
+}
+
+
+
+//==================================================
+// MOSTRAR PRODUCTOS
+//==================================================
+
 function mostrarProductos(productos){
 
-    let contenedor = document.getElementById("productos");
+    const contenedor = document.getElementById("productos");
+
+    if(!contenedor){
+        return;
+    }
+
 
     let html = "";
 
-    productos.forEach(producto=>{
+
+    // SI NO HAY RESULTADOS
+    if(productos.length === 0){
+
+        contenedor.innerHTML = `
+
+            <div class="sinResultados">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <h3>No encontramos ese producto</h3>
+
+                <p>Prueba con otro nombre o descripción.</p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    // MOSTRAR PRODUCTOS
+    productos.forEach(function(producto){
 
         html += `
-        <div class="tarjeta">
 
-            <img src="img/productos/${producto.imagen}" alt="${producto.nombre}">
+            <div class="tarjeta">
 
-            <h3>${producto.nombre}</h3>
+                <img
+                    src="../img/${producto.imagen}"
+                    alt="${producto.nombre}"
+                >
 
-            <p>${producto.descripcion}</p>
+                <h3>
+                    ${producto.nombre}
+                </h3>
 
-            <h2>Bs ${producto.precio}</h2>
+                <p>
+                    ${producto.descripcion}
+                </p>
 
-            <button
-class="btnAgregar"
-data-codigo="${producto.codigo}"
-${pedidoActivo ? "" : "disabled"}>
-Agregar al carrito
-</button>
+                <h2>
+                    Bs ${producto.precio}
+                </h2>
 
+                <button
+                    class="btnAgregar"
+                    data-codigo="${producto.codigo}"
+                    ${pedidoActivo ? "" : "disabled"}
+                >
 
-        </div>
+                    <i class="fa-solid fa-cart-plus"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+            </div>
+
         `;
 
     });
 
+
     contenedor.innerHTML = html;
-// el boton agregar carrito ,Este fragmento es muy importante porque crea dinámicamente el botón "Agregar al carrito" y además decide si estará habilitado o deshabilitado según exista un pedido activo.
-    // IMPORTANTE
+
+
+    // VOLVER A ACTIVAR LOS BOTONES
     agregarEventos();
 
 }
+
+
+
+//==================================================
+// EVENTOS BOTONES
+//==================================================
+
 function agregarEventos(){
 
-    document.querySelectorAll(".btnAgregar").forEach(boton=>{
+    document.querySelectorAll(".btnAgregar").forEach(function(boton){
 
-        boton.addEventListener("click",()=>{
+        boton.addEventListener("click", function(){
 
-            agregarProducto(boton.dataset.codigo);
+            agregarProducto(this.dataset.codigo);
 
         });
 
     });
 
 }
+
+
+
+//==================================================
+// AGREGAR PRODUCTO
+//==================================================
+
 function agregarProducto(codigo){
 
-    fetch("php/carrito.php",{
+    fetch("php/carrito.php", {
 
         method:"POST",
 
@@ -92,40 +223,61 @@ function agregarProducto(codigo){
             "Content-Type":"application/x-www-form-urlencoded"
         },
 
-        body:"accion=agregar&codigo="+codigo
+        body:"accion=agregar&codigo=" + codigo
 
     })
 
     .then(respuesta => respuesta.json())
 
-.then(datos=>{
+    .then(datos => {
 
-    console.log(datos);
+        console.log(datos);
 
-    if(datos.ok){
 
-        actualizarCarrito();
+        if(datos.ok){
 
-    }else{
+            actualizarCarrito();
 
-        alert(datos.mensaje);
+        }else{
 
-    }
+            alert(datos.mensaje);
 
-})
+        }
+
+    })
+
+    .catch(error => {
+
+        console.log("Error al agregar:", error);
+
+    });
+
 }
+
+
+
+//==================================================
+// HABILITAR COMPRA
+//==================================================
+
 function habilitarCompra(){
 
     pedidoActivo = true;
 
-    document.querySelectorAll(".btnAgregar")
-    .forEach(boton=>{
+
+    document.querySelectorAll(".btnAgregar").forEach(function(boton){
 
         boton.disabled = false;
 
     });
 
 }
+
+
+
+//==================================================
+// VERIFICAR PEDIDO
+//==================================================
 
 function verificarPedido(){
 
@@ -135,7 +287,8 @@ function verificarPedido(){
 
     .then(datos => {
 
-        console.log("Pedido:",datos);
+        console.log("Pedido:", datos);
+
 
         if(datos.pedidoActivo){
 
@@ -143,6 +296,17 @@ function verificarPedido(){
 
         }
 
+
+        cargarProductos();
+
+    })
+
+    .catch(error => {
+
+        console.log("Error verificando pedido:", error);
+
+        // Aunque falle verificarPedido,
+        // igual cargamos los productos
         cargarProductos();
 
     });

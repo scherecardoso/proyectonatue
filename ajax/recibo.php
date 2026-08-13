@@ -24,7 +24,7 @@ $id=$_SESSION["pedido"];
 $sql="
 SELECT *
 FROM pedidos
-WHERE id='$id_pedidos                                                                                                                                                                                                                                                                                                              '
+WHERE id='$id                                                                                                                                                                                                                                                                                                         '
 ";
 
 

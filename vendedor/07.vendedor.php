@@ -280,6 +280,69 @@ body {
   font-weight: bold;
 }
 
+.accionesPedido{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:nowrap;
+
+}
+
+.btnVerPedido{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:9px 13px;
+    background:#555;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    transition:.3s ease;
+}
+.btnVerPedido:hover{
+    background:#3f3f3f;
+    transform:translateY(-1px);
+}
+
+.formEstado{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin:0;
+}
+
+
+.formEstado select{
+    padding:8px 10px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    background:white;
+    font-size:12px;
+    color:#555;
+    outline:none;
+}
+
+
+.btnActualizar{
+    padding:8px 11px;
+    border:none;
+    border-radius:8px;
+    background:#888;
+    color:white;
+    cursor:pointer;
+    font-size:12px;
+    white-space:nowrap;
+    transition:.3s ease;
+}
+
+.btnActualizar:hover{
+    background:#666;
+}
 @keyframes cambiarImagen{
     0%{
         opacity: 0;
@@ -535,18 +598,40 @@ if ($resultado && $resultado->num_rows > 0) {
         echo "<td>" . $pedido['nombre'] . "</td>";
         echo "<td>" . $pedido['fecha'] . "</td>";
         echo "<td>" . $pedido['estado'] . "</td>";
-        echo "<td>";
-        echo "<form action='../pedidos/actualizar_estado_pedido.php' method='post' style='display:inline;'>";
-        echo "<input type='hidden' name='pedido_id' value='" . $pedido['id'] . "'>";
-        echo "<select name='estado'>";
-        echo "<option value='En Proceso'>En Proceso</option>";
-        echo "<option value='Aceptado'>Aceptado</option>";
-        echo "<option value='Rechazado'>Rechazado</option>";
-        echo "</select>";
-        echo "<button type='submit'>Actualizar</button>";
-        echo "</form>";
-        echo "</td>";
-        echo "</tr>";
+   echo "<td class='accionesPedido'>";
+
+echo "<a 
+        href='../pedidos/detallepedido.php?id=" . $pedido['id'] . "' 
+        class='btnVerPedido'>
+        Ver pedido
+        
+      </a>";
+
+echo "<form 
+        action='../pedidos/actualizar_estado_pedido.php' 
+        method='post' 
+        class='formEstado'>";
+
+echo "<input 
+        type='hidden' 
+        name='pedido_id' 
+        value='" . $pedido['id'] . "'>";
+
+echo "<select name='estado'>";
+
+echo "<option value='En Proceso'>En Proceso</option>";
+echo "<option value='Aceptado'>Aceptado</option>";
+echo "<option value='Rechazado'>Rechazado</option>";
+
+echo "</select>";
+
+echo "<button type='submit' class='btnActualizar'>
+        Actualizar
+      </button>";
+
+echo "</form>";
+
+echo "</td>";
     }
 } else {
     echo "<tr><td colspan='5'>No hay pedidos</td></tr>";

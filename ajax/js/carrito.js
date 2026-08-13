@@ -86,7 +86,7 @@ html += `
 
 <div class="productoCarrito">
 
-<img src="img/productos/${producto.imagen}" width="80">
+<img src="../imagen/${producto.imagen}" width="80">
 
 
 <h3>

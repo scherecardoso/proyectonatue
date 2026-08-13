@@ -36,37 +36,33 @@ $direccion=$datos["direccion"];
 
 
 
-$stmt=$conn->prepare("
-
+$stmt = $conn->prepare("
 INSERT INTO pedidos
 (
-nombre,
-fecha,
-estado,
-telefono,
-direccion
+    nombre,
+    fecha,
+    estado,
+    vendedor,
+    telefono,
+    direccion
 )
-
 VALUES
 (
-?,
-NOW(),
-'Abierto',
-?,
-?,
-?
+    ?,
+    NOW(),
+    'Abierto',
+    'Sin asignar',
+    ?,
+    ?
 )
-
 ");
 
-
 $stmt->bind_param(
-"ssss",
-$nombre,
-$telefono,
-$direccion
+    "sss",
+    $nombre,
+    $telefono,
+    $direccion
 );
-
 if($stmt->execute()){
 
     $idPedido=$conn->insert_id;

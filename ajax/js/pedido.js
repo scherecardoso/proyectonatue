@@ -118,7 +118,7 @@ let pedido=data.pedido;
 
 
 
-if(pedidos.estado=="Pendiente"){
+if(pedido.estado=="Pendiente"){
 
 
 

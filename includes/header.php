@@ -154,7 +154,7 @@ if(isset($_SESSION['rol'])){
 </a>
 
 </a>
-    <a href="../pedidos/1.formpedido.php">
+    <a href="../ajax/index.php">
         <i class="fa-solid fa-bag-shopping"></i>
     </a>
 

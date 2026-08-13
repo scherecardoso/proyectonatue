@@ -1,45 +1,67 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Mi Tienda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/estilos.css">
 
 </head>
 
 <body>
+<?php include("../includes/header.php");?>
+  
+  
+<!--================== ZONA DE TIENDA ==================-->
 
-    <!--================== CABECERA ==================-->
+<div class="zonaTienda">
 
-    <header>
+    <!-- BUSCADOR CENTRADO -->
+    <div class="busqueda">
 
-        <div class="logo">
+        <i class="fa-solid fa-magnifying-glass"></i>
 
-            🛍 <span>MI TIENDA</span>
+        <input
+            type="text"
+            id="buscar"
+            placeholder="Buscar producto..."
+            autocomplete="off">
 
-        </div>
+    </div>
 
-        <div class="busqueda">
 
-            <input
-                type="text"
-                id="buscar"
-                placeholder="Buscar producto...">
+    <!-- GENERAR PEDIDO -->
+    <button id="generarPedido">
 
-        </div>
+        <i class="fa-solid fa-file-circle-plus"></i>
 
-        <div id="carritoIcono">
+        <span>Generar Pedido</span>
 
-            🛒 <span id="cantidadCarrito">0</span>
+    </button>
 
-        </div>
+</div>
 
-    </header>
+
+<!--================== CARRITO FLOTANTE ==================-->
+
+<button id="carritoIcono" title="Abrir carrito">
+
+    <i class="fa-solid fa-bag-shopping"></i>
+
+    <span id="cantidadCarrito">0</span>
+
+</button>
+  
 
     <!--================== PRODUCTOS ==================-->
 
@@ -55,9 +77,7 @@
 
     </main>
     
-   <button id="generarPedido">
-Generar Pedido
-</button>
+
 
 
 </div>
@@ -116,17 +136,11 @@ Generar Pedido
 
         <h2>🛍 Finalizar Compra</h2>
 
-        <input type="text"
-               id="nombre"
-               placeholder="Nombre completo">
+        <input type="text"id="nombre"placeholder="Nombre completo">
 
-        <input type="text"
-               id="telefono"
-               placeholder="Teléfono">
+        <input type="text"id="telefono"placeholder="Teléfono">
 
-        <input type="text"
-               id="direccion"
-               placeholder="Dirección">
+        <input type="text"id="direccion" placeholder="Dirección">
 
 
         <div class="botonesModal">

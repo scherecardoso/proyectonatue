@@ -19,6 +19,7 @@ if ($_SESSION['rol'] != 'vendedor') {
 <style>
 
 
+
 body {
   display: grid; 
   font-family: Arial, sans-serif;
@@ -43,12 +44,14 @@ body {
   border-right: 1px solid #ececec;
  
 }
+
 .menu-titulo {
   font-size: 15px;
   color: #ff5ca8;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
+
 .menu-lateral a{
   text-decoration: none;
   color: black;
@@ -59,11 +62,14 @@ body {
   cursor: pointer;
   display: block;
 }
+
+
 .menu-lateral a:hover{
   background: #ffdcec;
   color: #ff5ca8;
   padding-left: 22px;
 }
+
 
 
 .contenedor{
@@ -194,6 +200,7 @@ h1{
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
   <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>
 </aside>
+
 
 
 <div class="contenedor">

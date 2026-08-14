@@ -115,7 +115,7 @@ input.error{
 </head>
 
 <body>
-<?php include("../includes/header.php"); ?>
+
 <div class="contenedor">
 
     <h2>Registro</h2>

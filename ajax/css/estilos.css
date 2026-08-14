@@ -958,6 +958,28 @@ body{
 }
 
 
+.modalContenido select{
+
+    width:100%;
+
+    height:45px;
+
+    padding:0 14px;
+
+    border:1px solid #dedede;
+
+    border-radius:10px;
+
+    background:#fafafa;
+
+    color:#444;
+
+    font-size:14px;
+
+    outline:none;
+}
+
+
 .modalContenido input:focus{
 
     background:#fff;

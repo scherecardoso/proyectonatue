@@ -1,4 +1,3 @@
-
 <?php
 
 /*ini_set('display_errors',1);
@@ -30,13 +29,24 @@ if(!$datos){
 }
 
 
-$nombre=$datos["nombre"];
-$telefono=$datos["telefono"];
-$direccion=$datos["direccion"];
+$nombre=$datos["nombre"] ?? "";
+$telefono=$datos["telefono"] ?? "";
+$direccion=$datos["direccion"] ?? "";
+$metodoPago=$datos["metodoPago"] ?? "";
+
+if($nombre=="" || $telefono=="" || $direccion=="" || $metodoPago==""){
+
+    echo json_encode([
+        "ok"=>false,
+        "mensaje"=>"Complete todos los datos del pedido"
+    ]);
+
+    exit;
+
+}
 
 
-
-$stmt = $conn->prepare("
+$sql="
 INSERT INTO pedidos
 (
     nombre,
@@ -44,26 +54,22 @@ INSERT INTO pedidos
     estado,
     vendedor,
     telefono,
-    direccion
+    direccion,
+    metodoPago
 )
 VALUES
 (
-    ?,
+    '$nombre',
     NOW(),
-    'Abierto',
+    'Pendiente',
     'Sin asignar',
-    ?,
-    ?
+    '$telefono',
+    '$direccion',
+    '$metodoPago'
 )
-");
+";
 
-$stmt->bind_param(
-    "sss",
-    $nombre,
-    $telefono,
-    $direccion
-);
-if($stmt->execute()){
+if($conn->query($sql)){
 
     $idPedido=$conn->insert_id;
 
@@ -79,14 +85,11 @@ if($stmt->execute()){
 
     echo json_encode([
         "ok"=>false,
-        "mensaje"=>$stmt->error,
-        "mysql"=>$conn->error
+        "mensaje"=>$conn->error
     ]);
 
 }
 
-
-$stmt->close();
 $conn->close();
 
 ?>

@@ -434,7 +434,6 @@ i{
     <div class="titulo-menu">MENU USUARIO</div>
     <div><i class="fa-solid fa-house"></i> Inicio</div>
     <div><i class="fa-solid fa-user"></i> Mi Perfil</div>
-    <div><a href="../carrito/micarrito.php"><i class="fas fa-shopping-cart"></i> Mi Carrito</a></div>
     <div><a href="../pedidos/mispedidos.php"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
     <div><i class="fa-solid fa-heart"></i> Favoritos</div>
     <div><i class="fa-solid fa-location-dot"></i> Direcciones</div>

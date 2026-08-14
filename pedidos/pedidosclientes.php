@@ -141,6 +141,64 @@ button:hover{
     flex: 1;
     text-align: center;
 }
+
+.accionesPedido{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.accionesPedido a,
+.accionesPedido button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:9px 14px;
+    border:none;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.2s;
+}
+.btnVerPedido{
+    background:#eeeeee;
+    color:#222;
+}
+.btnVerPedido:hover{
+    background:#dddddd;
+    transform:translateY(-2px);
+}
+
+.btnAceptar{
+    background:#dff5e7;
+    color:#217346;
+
+}
+.btnAceptar:hover{
+    background:#c7ecd4;
+    transform:translateY(-2px);
+}
+
+.btnRechazar{
+    background:#ffe1e1;
+    color:#b42323;
+
+}
+.btnRechazar:hover{
+    background:#ffcaca;
+    transform:translateY(-2px);
+
+}
+
+.accionesPedido form{
+    margin:0;
+}
+
 </style>
 </head>
 
@@ -149,7 +207,7 @@ button:hover{
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
-  <a href="../pedidos/1.formpedidos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Ventas</a>
+  <a href="../productos/16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Productos</a>
   <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
@@ -208,21 +266,86 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
     <td><?php echo $pedido['estado']; ?></td>
     <td><?php echo $productos; ?></td>
 
-    <td>
-        <form action="actualizar_estado_pedido.php" method="POST">
-            <input type="hidden" name="pedido_id"
-                   value="<?php echo $pedido['id']; ?>">
+<td class="accionesPedido">
 
-            <select name="estado">
-                <option value="En Proceso">En Proceso</option>
-                <option value="Aceptado">Aceptado</option>
-                <option value="Rechazado">Rechazado</option>
-            </select>
+    <!-- VER PEDIDO -->
 
-            <button type="submit">Actualizar</button>
+    <a
+        href="detallepedido.php?id=<?php echo $pedido['id']; ?>"
+        class="btnVerPedido"
+    >
+        <i class="fa-solid fa-eye"></i>
+        Ver pedido
+    </a>
 
-    </form>
+
+    <?php if($pedido['estado'] == 'Pendiente'){ ?>
+
+
+        <!-- ACEPTAR -->
+
+        <form
+            action="actualizar_estado_pedido.php"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="pedido_id"
+                value="<?php echo $pedido['id']; ?>"
+            >
+
+            <input
+                type="hidden"
+                name="estado"
+                value="Aceptado"
+            >
+
+            <button
+                type="submit"
+                class="btnAceptar"
+            >
+                <i class="fa-solid fa-check"></i>
+                Aceptar
+            </button>
+
+        </form>
+
+
+        <!-- RECHAZAR -->
+
+        <form
+            action="actualizar_estado_pedido.php"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="pedido_id"
+                value="<?php echo $pedido['id']; ?>"
+            >
+
+            <input
+                type="hidden"
+                name="estado"
+                value="Rechazado"
+            >
+
+            <button
+                type="submit"
+                class="btnRechazar"
+            >
+                <i class="fa-solid fa-xmark"></i>
+                Rechazar
+            </button>
+
+        </form>
+
+
+    <?php } ?>
+
 </td>
+
 </tr>
 
 <?php

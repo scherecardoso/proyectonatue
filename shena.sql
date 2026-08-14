@@ -56,7 +56,10 @@ CREATE TABLE `pedidos` (
   `nombre` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `vendedor` varchar(45) DEFAULT NULL
+  `vendedor` varchar(45) DEFAULT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `direccion` varchar(45) DEFAULT NULL,
+  `metodoPago` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --

@@ -192,7 +192,7 @@ h1{
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
-  <a href="../pedidos/1.formpedidos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Ventas</a>
+  <a href="../productos/16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Productos</a>
   <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
@@ -252,27 +252,14 @@ if ($result && $result->num_rows > 0) {
             <td>$ {$fila['precio']}</td>
             <td>$ {$fila['costo']}</td>
             <td>{$fila['stock']}</td>";
-        $nombreImagen="P-".$fila['codigo'];
-        $directorio= "../img/";
-        $extensiones = ["jpg", "jpeg", "png", "gif"];
+$directorio = "../img/";
+$archivoImagen = $directorio . $fila['imagen'];
 
-        $archivoEncontrado = null;
-        //verificar si el archivo se creo en alguna extension conocida
-        foreach ($extensiones as $ext) {
-            //nombre del archivo con cada extension
-            $ruta = $directorio . $nombreImagen . "." . $ext;
-            //verifica
-            if (file_exists($ruta)) {
-                $archivoEncontrado = $ruta;
-                //detenemos la búsqueda en cuanto lo encuentra
-                break;
-            }
-        }
-        if ($archivoEncontrado) {
-            echo "<td><img src='".$archivoEncontrado."' width=150></td>";
-        }else{
-            echo "<td>No imagen</td>";
-        }
+if (file_exists($archivoImagen)) {
+    echo "<td><img src='".$archivoImagen."' width='150'></td>";
+} else {
+    echo "<td>No imagen</td>";
+}
         echo "
             <td>
                 <a class='btn editar'

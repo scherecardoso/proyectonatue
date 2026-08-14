@@ -1,6 +1,16 @@
 <?php
 session_start();
+if (
+    !isset($_SESSION['rol']) ||
+    !in_array($_SESSION['rol'], ['usuario', 'vendedor'])
+) {
+    echo "Acceso denegado";
+    exit();
+
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -140,7 +150,14 @@ session_start();
 
         <input type="text"id="telefono"placeholder="Teléfono">
 
-        <input type="text"id="direccion" placeholder="Dirección">
+        <input type="text" id="direccion" placeholder="Dirección">
+
+        <select id="metodoPago">
+            <option value="">Método de Pago</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+            <option value="QR">QR</option>
+        </select>
 
 
         <div class="botonesModal">

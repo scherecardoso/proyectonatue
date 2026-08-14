@@ -79,6 +79,11 @@ Vendedor:
 ${p.vendedor ?? "Pendiente"}
 </p>
 
+<p>
+Método de Pago:
+${p.metodoPago ?? "Pendiente"}
+</p>
+
 `;
 
 

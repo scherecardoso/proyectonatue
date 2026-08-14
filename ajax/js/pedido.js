@@ -39,10 +39,13 @@ document.getElementById("confirmarPedido").addEventListener("click",()=>{
         nombre: document.getElementById("nombre").value,
         telefono: document.getElementById("telefono").value,
         direccion: document.getElementById("direccion").value,
-    
-
+        metodoPago: document.getElementById("metodoPago").value
     };
 
+    if(datos.nombre=="" || datos.telefono=="" || datos.direccion=="" || datos.metodoPago==""){
+        alert("Complete todos los datos del pedido.");
+        return;
+    }
 
 
 fetch("php/crear_pedido.php",{
@@ -71,8 +74,9 @@ fetch("php/crear_pedido.php",{
 
 
         alert(
-        "Pedido confirmado Nº "
+        "Pedido creado Nº "
         + data.pedido
+        + ". Ahora agregue los productos al carrito."
         );
 
 
@@ -101,79 +105,14 @@ fetch("php/crear_pedido.php",{
 });
 function verificarEstadoPedido(){
 
-
-fetch("php/estado_pedido.php")
-
-
+fetch("php/verificar_pedido.php")
 .then(res=>res.json())
-
-
 .then(data=>{
 
-
-if(data.ok){
-
-
-let pedido=data.pedido;
-
-
-
-if(pedido.estado=="Pendiente"){
-
-
-
-document.getElementById("formularioPedido").style.display="none";
-
-
-
-document.getElementById("resumenPedido").style.display="block";
-
-
-
-document.getElementById("datosPedido").innerHTML=`
-
-<p>
-Número pedido:
-${pedido.id}
-</p>
-
-
-<p>
-Cliente:
-${pedido.nombre}
-</p>
-
-
-<p>
-Teléfono:
-${pedido.telefono}
-</p>
-
-
-<p>
-Dirección:
-${pedido.direccion}
-</p>
-
-
-<p>
-Estado:
-Pendiente de aprobación
-</p>
-
-
-`;
-
-
-
+if(data.pedidoActivo){
+    pedidoActivo=true;
 }
 
-
-}
-
-
-
-});
-
-
+})
+.catch(error=>console.log(error));
 }

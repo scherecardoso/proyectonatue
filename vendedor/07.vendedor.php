@@ -295,7 +295,7 @@ body {
     justify-content:center;
     gap:6px;
     padding:9px 13px;
-    background:#555;
+    background:pink;
     color:white;
     text-decoration:none;
     border-radius:8px;
@@ -305,7 +305,7 @@ body {
     transition:.3s ease;
 }
 .btnVerPedido:hover{
-    background:#3f3f3f;
+    background:pink;
     transform:translateY(-1px);
 }
 
@@ -499,7 +499,7 @@ body {
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
-  <a href="../pedidos/1.formpedidos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Ventas</a>
+  <a href="../productos/16.formproductos.php"><i class="fa-solid fa-cart-shopping"></i> Registrar Productos</a>
   <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
@@ -532,8 +532,8 @@ body {
     <section class="contenedor-acciones">
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-cart-shopping"></i></div>
-    <a href="../pedidos/1.formpedidos.php" style="color: #000000;">Registrar Venta</a>
-    <p><center>Registra nuevas ventas de productos</center></p>
+    <a href="../productos/16.formproductos.php" style="color: #000000;">Registrar Productos</a>
+    <p><center>Registra nuevos productos</center></p>
   </section>
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-box"></i></div>
@@ -607,29 +607,21 @@ echo "<a
         
       </a>";
 
-echo "<form 
-        action='../pedidos/actualizar_estado_pedido.php' 
-        method='post' 
-        class='formEstado'>";
+if($pedido['estado'] == 'Pendiente'){
 
-echo "<input 
-        type='hidden' 
-        name='pedido_id' 
-        value='" . $pedido['id'] . "'>";
+    echo "<form action='../pedidos/Actualizar_estado_pedido.php' method='post' class='formEstado'>";
+    echo "<input type='hidden' name='pedido_id' value='" . $pedido['id'] . "'>";
+    echo "<input type='hidden' name='estado' value='Aceptado'>";
+    echo "<button type='submit' class='btnActualizar'>Aceptar</button>";
+    echo "</form>";
 
-echo "<select name='estado'>";
+    echo "<form action='../pedidos/Actualizar_estado_pedido.php' method='post' class='formEstado'>";
+    echo "<input type='hidden' name='pedido_id' value='" . $pedido['id'] . "'>";
+    echo "<input type='hidden' name='estado' value='Rechazado'>";
+    echo "<button type='submit' class='btnActualizar'>Rechazar</button>";
+    echo "</form>";
 
-echo "<option value='En Proceso'>En Proceso</option>";
-echo "<option value='Aceptado'>Aceptado</option>";
-echo "<option value='Rechazado'>Rechazado</option>";
-
-echo "</select>";
-
-echo "<button type='submit' class='btnActualizar'>
-        Actualizar
-      </button>";
-
-echo "</form>";
+}
 
 echo "</td>";
     }
@@ -647,9 +639,7 @@ $conn->close();
     <section class="encabezado-acceso">
       <h2>Acceso Rápido</h2>
     </section>
-    <section class="boton-acceso">
-      <a href="../pedidos/1.formpedidos.php">Nuevo Pedido</a>
-    </section>
+
     <section class="boton-acceso">
       <a href="">Ver Catálogo</a>
     </section>

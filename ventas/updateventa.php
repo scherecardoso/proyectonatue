@@ -1,5 +1,6 @@
 <?php
 session_start();
+if(!isset($_SESSION["rol"]) || $_SESSION["rol"] != "administrador"){ die("Acceso denegado"); }
 ?>
 <?php 
 $direccion = "localhost";
@@ -20,6 +21,16 @@ $estado = $_POST['estado'];
 $sql = "UPDATE ventas SET costo='$costo',metodo='$metodo',estado='$estado' WHERE id='$id'";
 
 if ($conexion->query($sql)) {
+
+    $pedido = $conexion->query("SELECT pedidos_id FROM ventas WHERE id='$id'")->fetch_assoc();
+
+    if($pedido){
+        if($estado == "Entregado"){
+            $conexion->query("UPDATE pedidos SET estado='Entregado' WHERE id='".$pedido['pedidos_id']."'");
+        }else{
+            $conexion->query("UPDATE pedidos SET estado='En proceso' WHERE id='".$pedido['pedidos_id']."'");
+        }
+    }
 
     header("Location: readventas.php");
     exit();

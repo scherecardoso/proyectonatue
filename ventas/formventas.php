@@ -1,4 +1,6 @@
 <?php
+session_start();
+if(!isset($_SESSION["rol"]) || $_SESSION["rol"] != "administrador"){ die("Acceso denegado"); }
 if (isset($_GET['pedido'])) {
     $pedidos_id = $_GET['pedido'];
 } else {
@@ -17,7 +19,7 @@ if($conn->connect_error) {
 }
 
 // Buscamos los productos del pedido para luego mostrar el stock
-$sqlCarrito = "SELECT productos_id, cantidad FROM carrito WHERE pedidos_id = '$pedidos_id'";
+$sqlCarrito = "SELECT productos_codigo, cantidad FROM carrito WHERE pedidos_id = '$pedidos_id'";
 $resultadoCarrito = $conn->query($sqlCarrito);
 ?>
 
@@ -47,12 +49,12 @@ $resultadoCarrito = $conn->query($sqlCarrito);
 
             <?php
             while ($producto = $resultadoCarrito->fetch_assoc()) {
-                $productos_id = $productos['productos_id'];
-                $cantidad = $productos['cantidad'];
+                $productos_id = $producto['productos_codigo'];
+                $cantidad = $producto['cantidad'];
 
                 // Buscar el producto
-                $sqlProductos = "SELECT nombre, stock FROM productos WHERE id = '$productos_id'";
-                $resultadoProductos = $conn->query($sqlProducto);
+                $sqlProductos = "SELECT nombre, stock FROM productos WHERE codigo = '$productos_id'";
+                $resultadoProductos = $conn->query($sqlProductos);
                 $datosProductos = $resultadoProductos->fetch_assoc();
             ?>
 
@@ -78,7 +80,7 @@ $resultadoCarrito = $conn->query($sqlCarrito);
                 <option value="">Seleccione</option>
                 <option value="Efectivo">Efectivo</option>
                 <option value="QR">QR</option>
-                <option value="Transferencia">Transferencia</option>
+                <option value="Tarjeta">Tarjeta</option>
             </select>
         </div>
 

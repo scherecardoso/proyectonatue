@@ -12,39 +12,62 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-$CI = $_POST["CI"] ;
-$direccion = $_POST['direccion'];
+$CI = $_POST["CI"] ?? "";
+$direccion = $_POST["direccion"] ?? "";
+
+if ($CI == "" || $direccion == "") {
+    echo "Usuario o datos incorrectos";
+    $conn->close();
+    exit();
+}
 
 $sql = "SELECT CI, nombre, rol, estado
         FROM usuario
-        WHERE CI='$CI'
-        AND direccion='$direccion'";
+        WHERE CI = ?
+        AND direccion = ?";
 
-$resultado = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    die("Error en la consulta: " . $conn->error);
+}
+
+$stmt->bind_param("ss", $CI, $direccion);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows > 0) {
-    $fila = $result->fetch_assoc();
+
+    $fila = $resultado->fetch_assoc();
 
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol'] = $fila['rol'];
     $_SESSION['estado'] = $fila['estado'];
 
-    if ($_SESSION['rol'] == "vendedor") {
+    if ($fila['rol'] == "vendedor") {
+
         header("Location: ../vendedor/07.vendedor.php");
         exit();
-    } elseif ($_SESSION['rol'] == "administrador") {
+
+    } elseif ($fila['rol'] == "administrador") {
+
         header("Location: ../admin/06.admin.php");
         exit();
-    } elseif ($_SESSION['rol'] == "usuario") {
+
+    } elseif ($fila['rol'] == "usuario") {
+
         header("Location: ../usuario/08.usuario.php");
         exit();
+
     } else {
-        header("Location: ../pagina/02.inicio.php");
-        exit();
+
+        echo "Rol no reconocido";
     }
 
 } else {
+
     echo "Usuario o datos incorrectos";
 }
 

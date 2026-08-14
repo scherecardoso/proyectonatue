@@ -160,10 +160,14 @@ function mostrarProductos(productos){
                     Bs ${producto.precio}
                 </h2>
 
+                <p>
+                    Stock: ${producto.stock}
+                </p>
+
                 <button
                     class="btnAgregar"
                     data-codigo="${producto.codigo}"
-                    ${pedidoActivo ? "" : "disabled"}
+                    ${pedidoActivo && Number(producto.stock)>0 ? "" : "disabled"}
                 >
 
                     <i class="fa-solid fa-cart-plus"></i>

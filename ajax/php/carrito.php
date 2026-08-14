@@ -51,6 +51,14 @@ switch($accion){
 
             $cantidad = $fila["cantidad"] + 1;
 
+            if($cantidad > (int)$producto["stock"]){
+                echo json_encode([
+                    "ok"=>false,
+                    "mensaje"=>"No hay más stock disponible de este producto"
+                ]);
+                exit;
+            }
+
             $subtotal = $cantidad * $producto["precio"];
 
             $sql = "UPDATE Carrito
@@ -60,6 +68,14 @@ switch($accion){
                     AND productos_codigo='$codigo'";
 
         }else{
+
+            if((int)$producto["stock"] <= 0){
+                echo json_encode([
+                    "ok"=>false,
+                    "mensaje"=>"Este producto no tiene stock disponible"
+                ]);
+                exit;
+            }
 
             $subtotal = $producto["precio"];
 
@@ -87,6 +103,56 @@ switch($accion){
 }
 
     break;
+    case "aumentar":
+
+        $codigo = $_POST["codigo"];
+        $sql = "SELECT p.stock,c.cantidad,p.precio FROM carrito c INNER JOIN productos p ON c.productos_codigo=p.codigo WHERE c.pedidos_id='$idPedido' AND c.productos_codigo='$codigo'";
+        $resultado = $conn->query($sql);
+
+        if($resultado->num_rows == 0){
+            echo json_encode(["ok"=>false,"mensaje"=>"Producto no encontrado en el carrito"]);
+            exit;
+        }
+
+        $fila = $resultado->fetch_assoc();
+        $cantidad = (int)$fila["cantidad"] + 1;
+
+        if($cantidad > (int)$fila["stock"]){
+            echo json_encode(["ok"=>false,"mensaje"=>"No hay más stock disponible"]);
+            exit;
+        }
+
+        $subtotal = $cantidad * (float)$fila["precio"];
+        $sql = "UPDATE carrito SET cantidad='$cantidad',costototal='$subtotal' WHERE pedidos_id='$idPedido' AND productos_codigo='$codigo'";
+        echo json_encode(["ok"=>$conn->query($sql)]);
+
+    break;
+
+    case "disminuir":
+
+        $codigo = $_POST["codigo"];
+        $sql = "SELECT cantidad,precio FROM carrito c INNER JOIN productos p ON c.productos_codigo=p.codigo WHERE c.pedidos_id='$idPedido' AND c.productos_codigo='$codigo'";
+        $resultado = $conn->query($sql);
+
+        if($resultado->num_rows == 0){
+            echo json_encode(["ok"=>false,"mensaje"=>"Producto no encontrado"]);
+            exit;
+        }
+
+        $fila = $resultado->fetch_assoc();
+        $cantidad = (int)$fila["cantidad"] - 1;
+
+        if($cantidad <= 0){
+            $sql = "DELETE FROM carrito WHERE pedidos_id='$idPedido' AND productos_codigo='$codigo'";
+        }else{
+            $subtotal = $cantidad * (float)$fila["precio"];
+            $sql = "UPDATE carrito SET cantidad='$cantidad',costototal='$subtotal' WHERE pedidos_id='$idPedido' AND productos_codigo='$codigo'";
+        }
+
+        echo json_encode(["ok"=>$conn->query($sql)]);
+
+    break;
+
     case "mostrar":
 
     $sql = "SELECT

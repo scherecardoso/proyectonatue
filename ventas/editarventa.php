@@ -1,7 +1,7 @@
 <?php
 session_start();
-?>
-<?php
+if(!isset($_SESSION["rol"]) || $_SESSION["rol"] != "administrador"){ die("Acceso denegado"); }
+
 $direccion = "localhost";
 $usuario = "root";
 $contraseña = "";

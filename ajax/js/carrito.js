@@ -86,7 +86,7 @@ html += `
 
 <div class="productoCarrito">
 
-<img src="../imagen/${producto.imagen}" width="80">
+<img src="../img/${producto.imagen}" width="80">
 
 
 <h3>
@@ -102,6 +102,11 @@ Precio: Bs ${producto.precio}
 <p>
 Cantidad: ${cantidad}
 </p>
+
+<div>
+<button onclick="cambiarCantidad('${producto.productos_codigo}','disminuir')">-</button>
+<button onclick="cambiarCantidad('${producto.productos_codigo}','aumentar')">+</button>
+</div>
 
 
 <p>
@@ -226,3 +231,16 @@ document.addEventListener("click",function(e){
 
 
 });
+
+function cambiarCantidad(codigo,accion){
+fetch("php/carrito.php",{
+method:"POST",
+headers:{"Content-Type":"application/x-www-form-urlencoded"},
+body:"accion="+accion+"&codigo="+codigo
+})
+.then(res=>res.json())
+.then(data=>{
+if(!data.ok && data.mensaje) alert(data.mensaje);
+actualizarCarrito();
+});
+}

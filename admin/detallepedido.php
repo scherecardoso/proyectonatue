@@ -375,7 +375,7 @@ $total = 0;
     <div class="acciones">
 
         <a
-            href="../vendedor/07.vendedor.php"
+            href="../admin/ventasypedidos.php"
             class="volver"
         >
 

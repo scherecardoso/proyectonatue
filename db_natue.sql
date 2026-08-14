@@ -1,107 +1,227 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 14, 2026 at 09:17 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema shena
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema shena
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `shena` DEFAULT CHARACTER SET utf8 ;
-USE `shena` ;
-
--- -----------------------------------------------------
--- Table `shena`.`productos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shena`.`productos` (
-  `codigo` VARCHAR(45) NOT NULL,
-  `nombre` VARCHAR(45) NULL DEFAULT NULL,
-  `descripcion` VARCHAR(45) NULL DEFAULT NULL,
-  `precio` INT NULL DEFAULT NULL,
-  `costo` INT NULL DEFAULT NULL,
- `stock` INT NULL DEFAULT NULL,
-  `imagen` VARCHAR(200) DEFAULT NULL,
-  `estado` ENUM('Activo','Inactivo') DEFAULT 'Activo',
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `shena`.`pedidos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shena`.`pedidos` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL DEFAULT NULL,
-  `fecha` DATE NULL DEFAULT NULL,
-  `estado` VARCHAR(45) NULL DEFAULT NULL,
-  `vendedor` VARCHAR(45) NULL DEFAULT NULL,
-  `telefono` VARCHAR(45) NULL,
-  `direccion` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `shena`
+--
 
--- -----------------------------------------------------
--- Table `shena`.`carrito`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shena`.`carrito` (
-  `pedidos_id` INT NOT NULL,
-  `productos_codigo` VARCHAR(45) NOT NULL,
-  `cantidad` INT NULL DEFAULT NULL,
-  `costototal` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`pedidos_id`, `productos_codigo`),
-  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_codigo` ASC),
-  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC),
-  CONSTRAINT `fk_pedidos_has_productos_pedidos`
-    FOREIGN KEY (`pedidos_id`)
-    REFERENCES `shena`.`pedidos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pedidos_has_productos_productos1`
-    FOREIGN KEY (`productos_codigo`)
-    REFERENCES `shena`.`productos` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `carrito`
+--
 
--- -----------------------------------------------------
--- Table `shena`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shena`.`usuario` (
-  `CI` INT NOT NULL,
-  `nombre` VARCHAR(45) NULL DEFAULT NULL,
-  `direccion` VARCHAR(45) NULL DEFAULT NULL,
-  `celular` INT NULL DEFAULT NULL,
-  `rol` VARCHAR(45) NULL DEFAULT NULL,
-  `estado` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`CI`))
-ENGINE = InnoDB;
+CREATE TABLE `carrito` (
+  `pedidos_id` int(11) NOT NULL,
+  `productos_codigo` int(11) NOT NULL,
+  `cantidad` int(11) DEFAULT 1,
+  `costototal` decimal(10,2) DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `shena`.`ventas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shena`.`ventas` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `pedidos_id` INT NOT NULL,
-  `costo` INT NULL,
-  `metodo` VARCHAR(45) NULL,
-  `estado` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`, `pedidos_id`),
-  INDEX `fk_ventas_pedidos1_idx` (`pedidos_id` ASC) ,
-  CONSTRAINT `fk_ventas_pedidos1`
-    FOREIGN KEY (`pedidos_id`)
-    REFERENCES `shena`.`pedidos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `pedidos`
+--
 
+CREATE TABLE `pedidos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `estado` varchar(45) DEFAULT 'Abierto',
+  `vendedor` varchar(45) DEFAULT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `metodoPago` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productos`
+--
+
+CREATE TABLE `productos` (
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `costo` decimal(10,2) DEFAULT 0.00,
+  `stock` int(11) DEFAULT 0,
+  `imagen` varchar(200) DEFAULT NULL,
+  `estado` enum('Activo','Inactivo') DEFAULT 'Activo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`codigo`, `nombre`, `descripcion`, `precio`, `costo`, `stock`, `imagen`, `estado`) VALUES
+(1, 'Serum de Coco', 'Serum hidratante de coco', 45.00, 30.00, 30, 'zpr2.jpeg', 'Activo'),
+(2, 'Despigmentante de Achachairu', 'Despigmentante natural de Achachairu', 55.00, 40.00, 30, 'zpr6.jpeg', 'Activo'),
+(3, 'Serum de Tamarindo', 'Serum natural de tamarindo', 48.00, 35.00, 30, 'zpr19.jpeg', 'Activo'),
+(4, 'Aceite Antiestres de Cacao', 'Aceite relajante de cacao', 40.00, 28.00, 30, 'zpr16.jpeg', 'Activo'),
+(5, 'Serum de Chirimoya', 'Serum de chirimoya para la piel', 47.00, 34.00, 30, 'zpr18.jpeg', 'Activo'),
+(6, 'Flores de Kantuta', 'Producto natural de flores de kantuta', 35.00, 22.00, 30, 'zpr21.jpeg', 'Activo'),
+(7, 'Aceite de Copaiba', 'Aceite natural de copaiba', 50.00, 36.00, 30, 'zpr22.jpeg', 'Activo'),
+(8, 'Gel de Quinua', 'Gel natural de quinua', 33.00, 20.00, 30, 'zpr11.jpeg', 'Activo'),
+(9, 'Gel de Pepino', 'Gel refrescante de pepino', 30.00, 18.00, 30, 'zpr5.jpeg', 'Activo'),
+(10, 'Gel de Sabila', 'Gel de sábila hidratante', 28.00, 16.00, 30, 'zpr7.jpeg', 'Activo'),
+(11, 'Aceite de Coco', 'Aceite natural de coco', 38.00, 25.00, 30, 'zpr14.jpeg', 'Activo'),
+(12, 'Bruma de Eucalipto', 'Bruma refrescante de eucalipto', 32.00, 20.00, 30, 'zpr24.jpeg', 'Activo'),
+(13, 'Suavizante de Papaya', 'Suavizante natural de papaya', 30.00, 18.00, 30, 'zpr3.jpeg', 'Activo'),
+(14, 'Balsamo de Matico', 'Bálsamo de matico', 42.00, 28.00, 30, 'zpr4.jpeg', 'Activo'),
+(15, 'Crema de Maracuya y Sabila', 'Crema natural de maracuyá y sábila', 37.00, 24.00, 30, 'zpr8.jpeg', 'Activo'),
+(16, 'Exfoliante de Cafe', 'Exfoliante natural de café', 34.00, 22.00, 30, 'zpr23.jpeg', 'Activo'),
+(17, 'Crema Matificante', 'Crema matificante facial', 39.00, 26.00, 30, 'zpr25.jpeg', 'Activo'),
+(18, 'Jabon de Semilla de Tarwi', 'Jabón de tarwi', 18.00, 10.00, 30, 'zpr9.jpeg', 'Activo'),
+(19, 'Jabon de Avena y Miel', 'Jabón de avena y miel', 20.00, 12.00, 30, 'zpr44.jpeg', 'Activo'),
+(20, 'Jabon de Rosa Mosqueta', 'Jabón de rosa mosqueta', 22.00, 14.00, 30, 'zpr45.jpeg', 'Activo'),
+(21, 'Jabon de Curcuma y Manzanilla', 'Jabón de cúrcuma y manzanilla', 20.00, 12.00, 30, 'zpr46.jpeg', 'Activo'),
+(22, 'Jabon de Carbon Activado', 'Jabón de carbón activado', 22.00, 14.00, 30, 'zpr47.jpeg', 'Activo'),
+(23, 'Desmaquillante de Chia', 'Desmaquillante natural de chia', 28.00, 18.00, 30, 'zpr1.jpeg', 'Activo'),
+(24, 'Desmaquillante de Manzanilla y Avena', 'Desmaquillante natural de manzanilla y avena', 30.00, 19.00, 30, 'zpr34.jpeg', 'Activo'),
+(25, 'Desmaquillante de Uva Morada', 'Desmaquillante natural de uva morada', 32.00, 20.00, 30, 'zpr33.jpeg', 'Activo'),
+(26, 'Desmaquillante de Pepino', 'Desmaquillante refrescante de pepino', 27.00, 17.00, 30, 'zpr31.jpeg', 'Activo'),
+(27, 'Desmaquillante Leche de Coco', 'Desmaquillante nutritivo de leche de coco', 29.00, 18.00, 30, 'zpr32.jpeg', 'Activo'),
+(28, 'Desmaquillante de Agua de Rosas', 'Desmaquillante de agua de rosas', 28.00, 18.00, 30, 'zpr30.jpeg', 'Activo'),
+(29, 'Balsamo de Castaña', 'Bálsamo nutritivo de castaña', 20.00, 12.00, 30, 'zpr12.jpeg', 'Activo'),
+(30, 'Balsamo de Frambuesa', 'Bálsamo de frambuesa', 20.00, 12.00, 30, 'zpr27.jpeg', 'Activo'),
+(31, 'Balsamo de Maracuya', 'Bálsamo de maracuyá', 20.00, 12.00, 30, 'zpr28.jpeg', 'Activo'),
+(32, 'Balsamo de Vainilla y Coco', 'Bálsamo de vainilla y coco', 22.00, 13.00, 30, 'zpr29.jpeg', 'Activo'),
+(33, 'Balsamo de Frutilla', 'Bálsamo de frutilla', 20.00, 12.00, 30, 'zpr26.jpeg', 'Activo'),
+(34, 'Perfume Solido de Orquidea', 'Perfume sólido de orquídea', 35.00, 22.00, 30, 'zpr13.jpeg', 'Activo'),
+(35, 'Perfume Solido de Bergamota', 'Perfume sólido de bergamota', 35.00, 22.00, 30, 'zpr35.jpeg', 'Activo'),
+(36, 'Perfume Solido de Frutilla y Petalos de Rosa', 'Perfume sólido floral de frutilla y rosa', 38.00, 24.00, 30, 'zpr36.jpeg', 'Activo'),
+(37, 'Perfume Solido de Vainilla y Flores Blancas', 'Perfume sólido de vainilla y flores', 38.00, 24.00, 30, 'zpr37.jpeg', 'Activo'),
+(38, 'Perfume Solido de Jazmin', 'Perfume sólido de jazmín', 35.00, 22.00, 30, 'zpr39.jpeg', 'Activo'),
+(39, 'Polvo Maiz Morado', 'Polvo facial de maíz morado', 18.00, 11.00, 30, 'zpr17.jpeg', 'Activo'),
+(40, 'Polvo Arcilla Rosada', 'Polvo facial de arcilla rosada', 20.00, 12.00, 30, 'zpr40.jpeg', 'Activo'),
+(41, 'Polvo Te Verde', 'Polvo facial de té verde', 18.00, 11.00, 30, 'zpr42.jpeg', 'Activo'),
+(42, 'Polvo Avena Coloidal', 'Polvo facial de avena coloidal', 17.00, 10.00, 30, 'zpr41.jpeg', 'Activo'),
+(43, 'Polvo de Remolacha', 'Polvo natural de remolacha', 18.00, 11.00, 30, 'zpr43.jpeg', 'Activo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `CI` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `celular` int(11) DEFAULT NULL,
+  `rol` varchar(45) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` int(11) NOT NULL,
+  `pedidos_id` int(11) NOT NULL,
+  `costo` decimal(10,2) DEFAULT 0.00,
+  `metodo` varchar(45) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`pedidos_id`,`productos_codigo`),
+  ADD KEY `fk_carrito_producto` (`productos_codigo`);
+
+--
+-- Indexes for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`CI`);
+
+--
+-- Indexes for table `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_ventas_pedido` (`pedidos_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
+
+--
+-- AUTO_INCREMENT for table `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `fk_carrito_pedido` FOREIGN KEY (`pedidos_id`) REFERENCES `pedidos` (`id`),
+  ADD CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`productos_codigo`) REFERENCES `productos` (`codigo`);
+
+--
+-- Constraints for table `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `fk_ventas_pedido` FOREIGN KEY (`pedidos_id`) REFERENCES `pedidos` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

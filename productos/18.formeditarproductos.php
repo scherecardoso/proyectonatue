@@ -1,11 +1,12 @@
 <?php
 session_start();
 
-if ($_SESSION['rol'] != 'vendedor') {
+if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ['vendedor', 'administrador'])) {
     header("Location: ../pagina/login.php");
     exit();
 }
 ?>
+
 <?php
     
 $servidor ="localhost";
@@ -160,7 +161,6 @@ input.error{
 </head>
 
 <body>
-<?php include("../includes/header.php"); ?>
 <div class="contenedor">
 
     <div class="logo">

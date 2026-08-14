@@ -455,9 +455,9 @@ i{
     <div><i class="fa-solid fa-house"></i> Inicio</div>
     <a href="../usuario/13.formeditarusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
-    <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
+     <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
+    <a href="../admin/ventasypedidos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
     <div><i class="fa-solid fa-right-from-bracket"><a href="../auth/26.cerrarsesion.php"></i> Cerrar sesión</div>

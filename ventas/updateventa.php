@@ -32,7 +32,7 @@ if ($conexion->query($sql)) {
         }
     }
 
-    header("Location: readventas.php");
+    header("Location: ../admin/ventasypedidos.php");
     exit();
 
 } else {

@@ -215,6 +215,39 @@ body {
     }
 }
 
+.btn-editar,
+.btn-eliminar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: .2s;
+    margin-left: 8px;
+}
+
+.btn-editar {
+    background: #fff0f6;
+    color: #d63f7b;
+}
+
+.btn-editar:hover {
+    background: #ffdcec;
+    transform: translateY(-2px);
+}
+
+.btn-eliminar {
+    background: #ffe8e8;
+    color: #c0392b;
+}
+
+.btn-eliminar:hover {
+    background: #ffd0d0;
+    transform: translateY(-2px);
+}
+
 </style>
 </head>
 
@@ -282,18 +315,34 @@ body {
                         </div>
 
                     </div>
+<div class="acciones">
 
-                    <div class="acciones">
+    <a
+        href="../admin/detallepedido.php?id=<?php echo $fila['pedidos_id']; ?>"
+        class="btn-ver"
+    >
+        <i class="fa-solid fa-eye"></i>
+        Ver pedido
+    </a>
 
-                        <a
-                            href="../admin/detallepedido.php?id=<?php echo $fila['pedidos_id']; ?>"
-                            class="btn-ver"
-                        >
-                            <i class="fa-solid fa-eye"></i>
-                            Ver pedido
-                        </a>
+    <a
+        href="../ventas/editarventa.php?id=<?php echo $fila['id']; ?>"
+        class="btn-editar"
+    >
+        <i class="fa-solid fa-pen"></i>
+        Editar
+    </a>
 
-                    </div>
+    <a
+        href="../ventas/deleteventas.php?id=<?php echo $fila['id']; ?>"
+        class="btn-eliminar"
+        onclick="return confirm('¿Estás seguro de eliminar esta venta?');"
+    >
+        <i class="fa-solid fa-trash"></i>
+        Eliminar
+    </a>
+
+</div>
 
                 </div>
 

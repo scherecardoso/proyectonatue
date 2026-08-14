@@ -1,27 +1,21 @@
-<?php
-
-/*ini_set('display_errors',1);
-error_reporting(E_ALL);*/
+<?php 
 
 session_start();
-
 
 require("conexion.php");
 
 header("Content-Type: application/json");
 
-
-$datos=json_decode(
-file_get_contents("php://input"),
-true
+$datos = json_decode(
+    file_get_contents("php://input"),
+    true
 );
-
 
 if(!$datos){
 
     echo json_encode([
-        "ok"=>false,
-        "mensaje"=>"No se recibieron datos"
+        "ok" => false,
+        "mensaje" => "No se recibieron datos"
     ]);
 
     exit;
@@ -29,16 +23,25 @@ if(!$datos){
 }
 
 
-$nombre=$datos["nombre"] ?? "";
-$telefono=$datos["telefono"] ?? "";
-$direccion=$datos["direccion"] ?? "";
-$metodoPago=$datos["metodoPago"] ?? "";
+/* =========================
+   DATOS DEL CLIENTE
+========================= */
 
-if($nombre=="" || $telefono=="" || $direccion=="" || $metodoPago==""){
+$nombre = $_SESSION['nombre'] ?? "";
+$telefono = $datos["telefono"] ?? "";
+$direccion = $datos["direccion"] ?? "";
+$metodoPago = $datos["metodoPago"] ?? "";
+
+
+/* =========================
+   VALIDAR SESIÓN
+========================= */
+
+if($nombre == ""){
 
     echo json_encode([
-        "ok"=>false,
-        "mensaje"=>"Complete todos los datos del pedido"
+        "ok" => false,
+        "mensaje" => "No se encontró el usuario en la sesión"
     ]);
 
     exit;
@@ -46,7 +49,27 @@ if($nombre=="" || $telefono=="" || $direccion=="" || $metodoPago==""){
 }
 
 
-$sql="
+/* =========================
+   VALIDAR DATOS
+========================= */
+
+if($telefono == "" || $direccion == "" || $metodoPago == ""){
+
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Complete todos los datos del pedido"
+    ]);
+
+    exit;
+
+}
+
+
+/* =========================
+   CREAR PEDIDO
+========================= */
+
+$sql = "
 INSERT INTO pedidos
 (
     nombre,
@@ -69,23 +92,25 @@ VALUES
 )
 ";
 
+
 if($conn->query($sql)){
 
-    $idPedido=$conn->insert_id;
+    $idPedido = $conn->insert_id;
 
-    $_SESSION["pedido"]=$idPedido;
+    /* Guardar el pedido actual */
+    $_SESSION["pedido"] = $idPedido;
 
     echo json_encode([
-        "ok"=>true,
-        "pedido"=>$idPedido,
-        "sesion"=>$_SESSION["pedido"]
+        "ok" => true,
+        "pedido" => $idPedido,
+        "sesion" => $_SESSION["pedido"]
     ]);
 
 }else{
 
     echo json_encode([
-        "ok"=>false,
-        "mensaje"=>$conn->error
+        "ok" => false,
+        "mensaje" => $conn->error
     ]);
 
 }

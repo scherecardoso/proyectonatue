@@ -285,7 +285,7 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
         <!-- ACEPTAR -->
 
         <form
-            action="actualizar_estado_pedido.php"
+            action="Actualizar_estado_pedido.php"
             method="POST"
         >
 

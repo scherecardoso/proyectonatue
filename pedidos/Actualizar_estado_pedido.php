@@ -65,7 +65,7 @@ if($estado == "Aceptado"){
         $conn->query("UPDATE productos SET stock=stock-$cantidad WHERE codigo='$codigo'");
     }
 
-    $sql="UPDATE pedidos SET estado='En proceso',vendedor='$vendedor' WHERE id='$id'";
+    $sql="UPDATE pedidos SET estado='Aceptado',vendedor='$vendedor' WHERE id='$id'";
     if($conn->query($sql)){
         header("Location: ../vendedor/07.vendedor.php");
         exit();

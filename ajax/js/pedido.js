@@ -34,19 +34,17 @@ document.getElementById("cancelarCompra").addEventListener("click",()=>{
 document.getElementById("confirmarPedido").addEventListener("click",()=>{
       
 
-    let datos = {
+let datos = {
 
-        nombre: document.getElementById("nombre").value,
-        telefono: document.getElementById("telefono").value,
-        direccion: document.getElementById("direccion").value,
-        metodoPago: document.getElementById("metodoPago").value
-    };
+    telefono: document.getElementById("telefono").value,
+    direccion: document.getElementById("direccion").value,
+    metodoPago: document.getElementById("metodoPago").value
+};
 
-    if(datos.nombre=="" || datos.telefono=="" || datos.direccion=="" || datos.metodoPago==""){
-        alert("Complete todos los datos del pedido.");
-        return;
-    }
-
+if(datos.telefono=="" || datos.direccion=="" || datos.metodoPago==""){
+    alert("Complete todos los datos del pedido.");
+    return;
+}
 
 fetch("php/crear_pedido.php",{
 

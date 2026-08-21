@@ -106,7 +106,7 @@ body{
 </head>
 <body>
 <?php include("../includes/header.php"); ?>
-<form action="3.guardarpedido.php" method="POST">
+<form action="3.guardarpedido.php" method="POST" id=""validacionpedido>
 
 <div class="formulario-pedido">
     <h2>Nuevo Pedido</h2>

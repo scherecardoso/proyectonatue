@@ -156,12 +156,7 @@ body{
 
         <a href="../pagina/03.productos.php" class="boton">Volver</a>
 
-    <input type="hidden" name="codigo" value="9">
-    <input type="hidden" name="cantidad" value="1">
-    <input type="hidden" name="precio" value="30">
-
-
-    </div>
+   
 
 </div>
 

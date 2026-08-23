@@ -106,7 +106,7 @@ body{
 </head>
 <body>
 <?php include("../includes/header.php"); ?>
-<form action="3.guardarpedido.php" method="POST">
+<form  id="formnuevopedido" action="3.guardarpedido.php" method="POST">
 
 <div class="formulario-pedido">
     <h2>Nuevo Pedido</h2>
@@ -120,5 +120,39 @@ body{
 </div>
 
 </form>
+<script>
+$(document).ready(function(){
+    $("#formnuevopedido").validate({
+        rules:{
+            nombre:{
+                required:true,
+                minlength:3 
+            },
+            fecha:{
+                required:true,
+                date:true
+            },
+            vendedor:{
+                required:true,
+                minlength:3
+            }
+        },
+        messages:{
+            nombre:{
+                required:"Por favor ingrese su nombre",
+                minlength:"El nombre debe tener al menos 3 caracteres"
+            },
+            fecha:{
+                required:"Por favor ingrese la fecha",
+                date:"Ingrese una fecha válida"
+            },
+            vendedor:{
+                required:"Por favor ingrese el nombre del vendedor",
+                minlength:"El nombre del vendedor debe tener al menos 3 caracteres"
+            }
+        },
+
+    });
+});
 </body>
 </html>

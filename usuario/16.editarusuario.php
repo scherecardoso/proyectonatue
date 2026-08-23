@@ -119,7 +119,7 @@ select {
 
     
 <?php include("../includes/header.php"); ?>
-<form action="../usuario/14.actualizarusuario.php" method="post">
+<form id="formeditarusuario" action="../usuario/14.actualizarusuario.php" method="post">
 <h2>Editar Usuario</h2>
         <input type="hidden" name="CI" value="<?=$CI?>">
         <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre Completo" required>
@@ -137,6 +137,65 @@ select {
         <button type="submit">Actualizar Usuario</button>
 
     </form>
+    <script>
+$(document).ready(function(){
+
+    $("#formeditarusuario").validate({
+
+        rules:{
+            CI:{
+                required:true,
+                minlength:3
+            },
+            nombre:{
+                required:true,
+                minlength:3
+            },
+            direccion:{
+                required:true,
+                minlength:5
+            },
+            celular:{
+                required:true,
+                digits:true
+            },
+            rol:{
+                required:true
+            },
+            estado:{
+                required:true
+            }
+        },
+
+        messages:{
+            CI:{
+                required:"Debes ingresar un CI",
+                minlength:"El CI debe tener al menos 3 caracteres"
+            },
+            nombre:{
+                required:"Debes ingresar un nombre",
+                minlength:"El nombre debe tener al menos 3 caracteres"
+            },
+            direccion:{
+                required:"Debes ingresar una dirección",
+                minlength:"La dirección debe tener al menos 5 caracteres"
+            },
+            celular:{
+                required:"Debes ingresar un número de celular",
+                digits:"Debes ingresar un número válido"
+            },
+            rol:{
+                required:"Debes seleccionar un rol"
+            },
+            estado:{
+                required:"Debes seleccionar un estado"
+            }
+        }
+
+    });
+
+});
+</script>
 
 </body>
 </html>

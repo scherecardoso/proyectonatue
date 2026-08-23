@@ -45,7 +45,7 @@ if ($conn->connect_error) {
 </head>
 <body>
     <?php include("../includes/header.php"); ?>
-    <form action="../productos/19.actualizarproductos.php" method="post">
+    <form id="formeditarproducto" action="../productos/19.actualizarproductos.php" method="post">
         <label for="codigo">Nombre:</label>
         <input type="hidden" name="codigo" value='<?=$codigo?>'>
         <input type="text" name="nombreproducto" value='<?=$nombreproducto?>'><br>
@@ -58,5 +58,56 @@ if ($conn->connect_error) {
         <input type="submit">
         
     </form>
+<script>
+$(document).ready(function(){
+
+    $("#formeditarproducto").validate({
+
+        rules:{
+            nombreproducto:{
+                required:true,
+                minlength:3
+            },
+            descripcion:{
+                required:true,
+                minlength:5
+            },
+            precio:{
+                required:true,
+                number:true,
+                min:0.01
+            },
+            stock:{
+                required:true,
+                digits:true,
+                min:0
+            }
+        },
+
+        messages:{
+            nombreproducto:{
+                required:"El nombre del producto es obligatorio",
+                minlength:"El nombre debe tener al menos 3 caracteres"
+            },
+            descripcion:{
+                required:"La descripción es obligatoria",
+                minlength:"La descripción debe tener al menos 5 caracteres"
+            },
+            precio:{
+                required:"El precio es obligatorio",
+                number:"El precio debe ser un número válido",
+                min:"El precio debe ser mayor a 0"
+            },
+            stock:{
+                required:"El stock es obligatorio",
+                digits:"El stock debe ser un número entero",
+                min:"El stock no puede ser negativo"
+            }
+        }
+
+    });
+
+});
+</script>
 </body>
 </html>

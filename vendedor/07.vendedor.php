@@ -46,7 +46,7 @@ body {
 }
 .menu-titulo {
   font-size: 15px;
-  color: #ff5ca8;
+  color: #f7b5d4;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
@@ -62,7 +62,7 @@ body {
 }
 .menu-lateral a:hover{
   background: #ffdcec;
-  color: #ff5ca8;
+  color: #f7a1c9;
   padding-left: 22px;
 }
 
@@ -131,7 +131,7 @@ body {
 .acciones {
   padding: 20px;
   border-radius: 20%;
-  color: #ff5ca8;
+  color: #fa97c5;
 }
 .contenedor-acciones {
   display: flex;
@@ -171,7 +171,7 @@ body {
     justify-content: center;
 }
 .icono i {
-    color: #ff5ca8;
+    color: #ffa7d0;
     font-size: 20px;
 }
 .contenido {
@@ -254,7 +254,7 @@ body {
 }
 .encabezado-acceso {
   height: 60px;
-  background-color: #ff5c93;
+  background-color: #f5b0c7;
   color: white;
   border-radius: 15px;
   display: flex;
@@ -276,7 +276,7 @@ body {
 }
 .boton-acceso a {
   text-decoration: none;
-  color: #d87093;
+  color: #f7a0bd;
   font-weight: bold;
 }
 

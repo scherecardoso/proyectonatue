@@ -139,8 +139,8 @@ if (
 
 
 <!--================== MODAL COMPRA ==================-->
-<form>
-<div id="modalCompra" class="modal">
+<form id="valiindex">
+<div  id="modalCompra" class="modal">
 
     <div class="modalContenido">
 

@@ -139,7 +139,7 @@ if (
 
 
 <!--================== MODAL COMPRA ==================-->
-
+<form>
 <div id="modalCompra" class="modal">
 
     <div class="modalContenido">
@@ -177,7 +177,48 @@ if (
 </div>
 
 </div>
+</form>
     
+$(document).ready(function() {
+    $(#valiindex).validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 3
+            },
+            telefono: {
+                required: true,
+                digits: true,
+                minlength: 8
+            },
+            direccion: {
+                required: true,
+                minlength: 5
+            },
+            metodoPago: {
+                required: true
+            }
+        },
+        messages: {
+            nombre: {
+                required: "Por favor, ingresa tu nombre.",
+                minlength: "El nombre debe tener al menos 3 caracteres."
+            },
+            telefono: {
+                required: "Por favor, ingresa tu número de teléfono.",
+                digits: "El teléfono debe contener solo números.",
+                minlength: "El teléfono debe tener al menos 8 dígitos."
+            },
+            direccion: {
+                required: "Por favor, ingresa tu dirección.",
+                minlength: "La dirección debe tener al menos 5 caracteres."
+            },
+            metodoPago: {
+                required: "Por favor, selecciona un método de pago."
+            }
+        }
+    }
+    })
 
 
 <script src="js/productos.js"></script>

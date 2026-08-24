@@ -178,7 +178,7 @@ if (
 
 </div>
 </form>
-    
+    <script>
 $(document).ready(function() {
     $(#valiindex).validate({
         rules: {
@@ -217,9 +217,9 @@ $(document).ready(function() {
                 required: "Por favor, selecciona un método de pago."
             }
         }
-    }
-    })
-
+    });
+    });
+</script>
 
 <script src="js/productos.js"></script>
 <script src="js/pedido.js"></script>

@@ -70,7 +70,7 @@ $resultadoCarrito = $conn->query($sqlCarrito);
         </table>
     </div>
 
-    <form action="createventas.php" method="POST" class="caja-pago">
+    <form id="formCrearVenta" action="createventas.php" method="POST" class="caja-pago">
 
         <input type="hidden" name="pedidos_id" value="<?php echo $pedidos_id; ?>">
 
@@ -87,6 +87,27 @@ $resultadoCarrito = $conn->query($sqlCarrito);
         <button type="submit" class="boton-registrar">Registrar Venta</button>
 
     </form>
+    <script>
+$(document).ready(function(){
+
+    $("#formCrearVenta").validate({
+
+        rules:{
+            metodo:{
+                required:true
+            }
+        },
+
+        messages:{
+            metodo:{
+                required:"Debes seleccionar un método de pago"
+            }
+        }
+
+    });
+
+});
+</script>
 
 </article>
 

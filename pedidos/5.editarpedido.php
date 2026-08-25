@@ -154,7 +154,7 @@ button:hover{
 <?php include("../includes/header.php"); ?>
 <div class="contenedor">
 
-    <form action="6.updatepedido.php" method="POST">
+    <form id="formeditarpedido" action="6.updatepedido.php" method="POST">
 
         <h1>Pedido Nro <?php echo $id; ?></h1>
 
@@ -175,6 +175,48 @@ button:hover{
         <button type="submit">Actualizar Pedido</button>
 
     </form>
+    <script>
+    $(document).ready(function(){
+        $("#formeditarpedido").validate({
+            rules:{
+                nombre:{
+                    required:true,
+                    minlength:3
+                },
+                fecha:{
+                    required:true,
+                    date:true
+                },
+                estado:{
+                    required:true,
+                    minlength:3
+                },
+                vendedor:{
+                    required:true,
+                    minlength:3
+                }
+            },
+            messages:{
+                nombre:{
+                    required:"Por favor ingrese un nombre",
+                    minlength:"El nombre debe tener al menos 3 caracteres"
+                },
+                fecha:{
+                    required:"Por favor ingrese una fecha",
+                    date:"Ingrese una fecha válida"
+                },
+                estado:{
+                    required:"Por favor ingrese un estado",
+                    minlength:"El estado debe tener al menos 3 caracteres"
+                },
+                vendedor:{
+                    required:"Por favor ingrese un vendedor",
+                    minlength:"El vendedor debe tener al menos 3 caracteres"
+                }
+            }
+        });
+    });
+    </script>
     <a href="4.readpedidos.php" class="volver">Volver a Pedido</a>
 
 </div>

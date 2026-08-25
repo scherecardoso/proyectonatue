@@ -167,7 +167,7 @@ button:hover {
 
     <p>Venta Nro. <?php echo htmlspecialchars($id); ?></p>
 
-    <form action="updateventa.php" method="POST">
+    <form  id="formEditarVenta" action="updateventa.php" method="POST">
 
         <input
             type="hidden"
@@ -242,6 +242,36 @@ button:hover {
     </a>
 
 </div>
+
+<script>
+$(document).ready(function(){
+
+    $("#formEditarVenta").validate({
+
+        rules:{
+            metodo:{
+                required:true,
+                minlength:3
+            },
+            estado:{
+                required:true
+            }
+        },
+
+        messages:{
+            metodo:{
+                required:"Debes indicar el método de pago",
+                minlength:"El método de pago debe tener al menos 3 caracteres"
+            },
+            estado:{
+                required:"Debes seleccionar un estado"
+            }
+        }
+
+    });
+
+});
+</script>
 
 </body>
 

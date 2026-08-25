@@ -179,8 +179,8 @@ if (
 </div>
 </form>
     <script>
-$(document).ready(function() {
-    $(#valiindex).validate({
+$(document).ready(function(){
+    $("#valiindex").validate({
         rules: {
             nombre: {
                 required: true,

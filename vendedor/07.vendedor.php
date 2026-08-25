@@ -61,7 +61,7 @@ body {
   display: block;
 }
 .menu-lateral a:hover{
-  background: #ffdcec;
+  background: #ffe4ec;
   color: #f7a1c9;
   padding-left: 22px;
 }
@@ -131,7 +131,7 @@ body {
 .acciones {
   padding: 20px;
   border-radius: 20%;
-  color: #fa97c5;
+  color: #8c8c8c;
 }
 .contenedor-acciones {
   display: flex;
@@ -164,14 +164,14 @@ body {
 .icono {
     width: 50px;
     height: 50px;
-    background: #ffdcec;
+    background: #f1b7c8;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .icono i {
-    color: #ffa7d0;
+    color: #fa7ebc;
     font-size: 20px;
 }
 .contenido {
@@ -198,7 +198,7 @@ body {
 }
 
 .encabezado-pedidos h2{
-    color:#ff4f94;
+    color: #8c8c8c ;
     font-size:28px;
     margin:0;
 }
@@ -215,8 +215,8 @@ body {
 }
 
 .tabla-pedidos th{
-    background:#f8e8ee;
-    color:#ff4f94;
+    background:#f1b7c8;
+    color:#8c8c8c;
     text-align:left;
     padding:20px;
     font-size:18px;
@@ -225,7 +225,7 @@ body {
 .tabla-pedidos td{
     padding:25px 20px;
     font-size:18px;
-    color:#222;
+    color:##ffe4ec;
     border-bottom:1px solid #eeeeee;
 }
 

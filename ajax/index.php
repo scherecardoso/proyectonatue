@@ -26,6 +26,10 @@ if (
 
     <link rel="stylesheet" href="css/estilos.css">
 
+    <!-- jQuery y jQuery Validate (necesarios para la validación del formulario) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
 </head>
 
 <body>
@@ -146,13 +150,13 @@ if (
 
         <h2>🛍 Finalizar Compra</h2>
 
-        <input type="text"id="nombre"placeholder="Nombre completo">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo">
 
-        <input type="text"id="telefono"placeholder="Teléfono">
+        <input type="text" id="telefono" name="telefono" placeholder="Teléfono">
 
-        <input type="text" id="direccion" placeholder="Dirección">
+        <input type="text" id="direccion" name="direccion" placeholder="Dirección">
 
-        <select id="metodoPago">
+        <select id="metodoPago" name="metodoPago">
             <option value="">Método de Pago</option>
             <option value="Efectivo">Efectivo</option>
             <option value="Tarjeta">Tarjeta</option>
@@ -162,11 +166,11 @@ if (
 
         <div class="botonesModal">
 
-            <button id="confirmarPedido">
+            <button id="confirmarPedido" type="submit">
                 Confirmar Compra
             </button>
 
-            <button id="cancelarCompra">
+            <button id="cancelarCompra" type="button">
                 Cancelar
             </button>
 
@@ -178,9 +182,9 @@ if (
 
 </div>
 </form>
-    
-$(document).ready(function() {
-    $(#valiindex).validate({
+    <script>
+$(document).ready(function(){
+    $("#valiindex").validate({
         rules: {
             nombre: {
                 required: true,
@@ -217,9 +221,9 @@ $(document).ready(function() {
                 required: "Por favor, selecciona un método de pago."
             }
         }
-    }
-    })
-
+    });
+    });
+</script>
 
 <script src="js/productos.js"></script>
 <script src="js/pedido.js"></script>

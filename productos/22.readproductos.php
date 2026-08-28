@@ -106,7 +106,8 @@ td{
     font-size:14px;
     text-align:center;
     border-top:1px solid #f3f3f3;
-    border-bottom:1px solid #f3f3f3;
+    border-bottom:10px solid #f3f3f3;
+
 }
 
 tr td:first-child{
@@ -125,12 +126,19 @@ tr:hover td{
 
 
 
-.btn{
-    padding:8px 15px;
-    border-radius:12px;
-    font-size:13px;
-    font-weight:500;
-    text-decoration:none;
+.btn {
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
 }
 
 .editar{

@@ -199,9 +199,9 @@ if (!$hayStock) {
 
 $sql = "
     INSERT INTO ventas
-    (estado, metodo, costo, pedidos_id)
+    (estado, metodo, costo, pedidos_id, fecha)
     VALUES
-    ('$estado', '$metodo', '$costototal', '$pedidos_id')
+    ('$estado', '$metodo', '$costototal', '$pedidos_id', '$fecha')
 ";
 
 

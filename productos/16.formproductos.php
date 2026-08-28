@@ -156,7 +156,7 @@ input.error{
             <i class="fa-solid fa-warehouse"></i>
             <input type="file" name="imagen" placeholder="Imagen">
         </label>
-        
+        </label>
 
         <button type="submit">Guardar</button>
 

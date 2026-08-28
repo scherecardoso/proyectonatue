@@ -126,16 +126,18 @@ tr:hover td{
 
 
 .btn{
-    padding:8px 15px;
-    border-radius:12px;
+    padding:8px 20px;
+    border-radius:20px;
     font-size:13px;
     font-weight:500;
     text-decoration:none;
+
 }
 
 .editar{
     background:#ffe4ef;
     color:#ff4f8b;
+    
 }
 
 .eliminar{
@@ -145,7 +147,7 @@ tr:hover td{
 
 .sin-datos{
     text-align:center;
-    margin-top:20px;
+    margin-top:40px;
     color:#777;
 }
 

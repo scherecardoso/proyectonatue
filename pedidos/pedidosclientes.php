@@ -353,7 +353,7 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
 ?>
 </td>
 </tr>
-    <td colspan="6">No existen pedidos registrados.</td>
+    
 </table>
 </div>
 </body>

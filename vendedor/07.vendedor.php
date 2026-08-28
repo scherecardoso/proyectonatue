@@ -164,7 +164,7 @@ body {
 .icono {
     width: 50px;
     height: 50px;
-    background: #f1b7c8;
+    background:  #ffe4ec;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -215,7 +215,7 @@ body {
 }
 
 .tabla-pedidos th{
-    background:#f1b7c8;
+    background: #ffe4ec ;
     color:#8c8c8c;
     text-align:left;
     padding:20px;
@@ -225,8 +225,8 @@ body {
 .tabla-pedidos td{
     padding:25px 20px;
     font-size:18px;
-    color:##ffe4ec;
-    border-bottom:1px solid #eeeeee;
+    color: #8c8c8c;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .tabla-pedidos tr:last-child td{

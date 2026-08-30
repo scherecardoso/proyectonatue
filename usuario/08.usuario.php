@@ -432,7 +432,7 @@ i{
 <?php include("../includes/header.php"); ?>
 <aside class="menu">
     <div class="titulo-menu">MENU USUARIO</div>
-    <div><i class="fa-solid fa-house"></i> Inicio</div>
+    <div><a href="../usuario/08.usuario.php"><i class="fa-solid fa-house"></i> Inicio</div></a>
     <div><i class="fa-solid fa-user"></i> Mi Perfil</div>
     <div><a href="../pedidos/mispedidos.php"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
     <div><i class="fa-solid fa-heart"></i> Favoritos</div>
@@ -443,7 +443,7 @@ i{
 </aside>
 
 <main class="info">
-<section class="bienvenida"><div class="circulo"><img src="../img/sheshe.png"></div>
+<section class="bienvenida"><div class="circulo"> <i class="fa-solid fa-user"></i></div>
 <div class="texto"><h2>BIENVENIDA <?php echo $_SESSION['nombre']; ?></h2>
 <p>Aquí puedes revisar tus pedidos, favoritos y administrar tu cuenta.</p></div></section>
 

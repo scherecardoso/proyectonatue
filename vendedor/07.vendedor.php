@@ -46,7 +46,7 @@ body {
 }
 .menu-titulo {
   font-size: 15px;
-  color: #ff5ca8;
+  color: #f7b5d4;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
@@ -61,8 +61,8 @@ body {
   display: block;
 }
 .menu-lateral a:hover{
-  background: #ffdcec;
-  color: #ff5ca8;
+  background: #ffe4ec;
+  color: #f7a1c9;
   padding-left: 22px;
 }
 
@@ -131,7 +131,7 @@ body {
 .acciones {
   padding: 20px;
   border-radius: 20%;
-  color: #ff5ca8;
+  color: #8c8c8c;
 }
 .contenedor-acciones {
   display: flex;
@@ -164,14 +164,14 @@ body {
 .icono {
     width: 50px;
     height: 50px;
-    background: #ffdcec;
+    background:  #ffe4ec;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .icono i {
-    color: #ff5ca8;
+    color: #fa7ebc;
     font-size: 20px;
 }
 .contenido {
@@ -198,7 +198,7 @@ body {
 }
 
 .encabezado-pedidos h2{
-    color:#ff4f94;
+    color: #8c8c8c ;
     font-size:28px;
     margin:0;
 }
@@ -215,8 +215,8 @@ body {
 }
 
 .tabla-pedidos th{
-    background:#f8e8ee;
-    color:#ff4f94;
+    background: #ffe4ec ;
+    color:#8c8c8c;
     text-align:left;
     padding:20px;
     font-size:18px;
@@ -225,8 +225,8 @@ body {
 .tabla-pedidos td{
     padding:25px 20px;
     font-size:18px;
-    color:#222;
-    border-bottom:1px solid #eeeeee;
+    color: #8c8c8c;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .tabla-pedidos tr:last-child td{
@@ -254,7 +254,7 @@ body {
 }
 .encabezado-acceso {
   height: 60px;
-  background-color: #ff5c93;
+  background-color: #f5b0c7;
   color: white;
   border-radius: 15px;
   display: flex;
@@ -276,7 +276,7 @@ body {
 }
 .boton-acceso a {
   text-decoration: none;
-  color: #d87093;
+  color: #f7a0bd;
   font-weight: bold;
 }
 

@@ -142,6 +142,9 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 12px;
+    text-decoration: none;
+    color: inherit;
+
 }
 
 th {
@@ -201,8 +204,12 @@ tr:hover td {
     font-weight: 500;
     text-decoration: none;
     transition: .2s;
+    
 }
-
+.menu a {
+    text-decoration: none;
+    color: inherit;
+}
 .editar {
     background: #ffe4ef;
     color: #ff4f8b;
@@ -260,16 +267,35 @@ tr:hover td {
 <?php include("../includes/header.php"); ?>
 <aside class="menu">
     <div class="titulo-menu">MENU ADMINISTRADOR</div>
-    <a href="../admin/06.admin.php"><div><i class="fa-solid fa-house"></i> Inicio</div>
-    <a href="../usuario/13.formeditarusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
+
+    <a href="../admin/06.admin.php">
+        <div><i class="fa-solid fa-house"></i> Inicio</div>
+    </a>
+
+    <a href="../usuario/13.formeditarusuario.php">
+        <div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div>
+    </a>
+
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
-     <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
+
+    <a href="../admin/gestionproductos.php">
+        <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
+    </a>
+
     <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <a href="../admin/ventasypedidos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
+
+    <a href="../admin/ventasypedidos.php">
+        <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div>
+    </a>
+
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
+
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
-    <div><i class="fa-solid fa-right-from-bracket"><a href="../auth/26.cerrarsesion.php"></i> Cerrar sesión</div>
-    
+
+    <a href="../auth/26.cerrarsesion.php">
+        <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
+    </a>
+
 </aside>
 
 <main class="contenido">

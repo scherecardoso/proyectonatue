@@ -88,7 +88,10 @@ h3{
     border-radius: 15px;
 }
 
-
+.caja a {
+    text-decoration: none;
+    color: inherit;
+}
 
 @media (max-width: 768px) {
 

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if ($_SESSION['rol'] != "usuario") {
+  header("Location: ../usuario/09.register.php");
+}
 ?>
 <?php
 
@@ -37,39 +40,6 @@ body {
     height: 100vh;
     background: #ffffff;
 }
-
-
-.menu {
-    grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 15px;
-    margin-top: 27px;
-    width: 330px;
-    border-right: 1px solid #ececec;
-}
-
-.titulo-menu {
-    font-size: 15px;
-    color: #ff5ca8; 
-    margin-bottom: 10px;
-}
-
-.menu div{
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 20px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.menu div:hover{
-    background: #ffdcec;
-    color: #ff5ca8;
-    padding-left: 22px;
-} 
 
 
 .info {
@@ -378,10 +348,7 @@ i{
       "info";
   }
 
-  .menu,
-  .act {
-    display: none;
-  }
+
 
 
   .bienvenida {
@@ -430,17 +397,8 @@ i{
 
 <body>
 <?php include("../includes/header.php"); ?>
-<aside class="menu">
-    <div class="titulo-menu">MENU USUARIO</div>
-    <div><a href="../usuario/08.usuario.php"><i class="fa-solid fa-house"></i> Inicio</div></a>
-    <div><i class="fa-solid fa-user"></i> Mi Perfil</div>
-    <div><a href="../pedidos/mispedidos.php"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
-    <div><i class="fa-solid fa-heart"></i> Favoritos</div>
-    <div><i class="fa-solid fa-location-dot"></i> Direcciones</div>
-    <div><i class="fa-solid fa-credit-card"></i> Pagos</div>
-    <div><i class="fa-solid fa-gear"></i> Configuración</div>
-    <div><a href="../auth/26.cerrarsesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></div>
-</aside>
+<?php include("../includes/includeUser.php"); ?>
+
 
 <main class="info">
 <section class="bienvenida"><div class="circulo"> <i class="fa-solid fa-user"></i></div>

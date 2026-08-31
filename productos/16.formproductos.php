@@ -157,6 +157,8 @@ input.error{
             <input type="file" name="imagen" placeholder="Imagen">
         </label>
         </label>
+        <input type="hidden" name="codigo" value="<?php echo $producto['codigo']; ?>">
+    <button type="submit">♡</button>
 
         <button type="submit">Guardar</button>
 

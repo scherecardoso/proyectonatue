@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        p{
+            color:red;
+        }
+    </style>
 </head>
 <body>
      <?php
@@ -11,7 +16,7 @@
      while(!feof($archivo)){
         $leer=fgets($archivo);
         $ver=nl2br($leer);
-        echo $ver;
+        echo "<p>".$ver ."</p>";
      }
     ?>
 </body> 

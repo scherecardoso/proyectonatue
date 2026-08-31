@@ -41,38 +41,6 @@ body {
     background: #fff;
 }
 
-.menu {
-    grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 15px;
-    margin-top: 27px;
-    width: 330px;
-    border-right: 1px solid #ececec;
-}
-
-.titulo-menu {
-    font-size: 15px;
-    color: #ff5ca8; 
-    margin-bottom: 10px;
-}
-
-.menu div{
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 20px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.menu div:hover{
-    background: #ffdcec;
-    color: #ff5ca8;
-    padding-left: 22px;
-} 
-
 
 .contenido {
     grid-area: contenido;
@@ -265,38 +233,7 @@ tr:hover td {
 <body>
 
 <?php include("../includes/header.php"); ?>
-<aside class="menu">
-    <div class="titulo-menu">MENU ADMINISTRADOR</div>
-
-    <a href="../admin/06.admin.php">
-        <div><i class="fa-solid fa-house"></i> Inicio</div>
-    </a>
-
-    <a href="../usuario/13.formeditarusuario.php">
-        <div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div>
-    </a>
-
-    <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
-
-    <a href="../admin/gestionproductos.php">
-        <div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
-    </a>
-
-    <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-
-    <a href="../admin/ventasypedidos.php">
-        <div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div>
-    </a>
-
-    <div><i class="fa-solid fa-gear"></i> Configuración</div>
-
-    <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
-
-    <a href="../auth/26.cerrarsesion.php">
-        <div><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</div>
-    </a>
-
-</aside>
+<?php include("../includes/includeadmin.php"); ?>
 
 <main class="contenido">
 

@@ -197,7 +197,7 @@ i {
 
 
 <?php include("../includes/header.php"); ?>
-<?php include("../includes/includeUser.php"); ?>
+<?php include("../includes/includeuser.php"); ?>
 
 
 <div class="perfil-contenedor">

@@ -535,7 +535,23 @@ body {
                             </span>
 
                         </div>
+                        <div class="dato">
 
+                            <strong>
+                                fecha
+                            </strong>
+
+                            <span class="fecha">
+
+                                <?php
+                                echo htmlspecialchars(
+                                    $fila['fecha']
+                                );
+                                ?>
+
+                            </span>
+
+                        </div>
 
                     </div>
 

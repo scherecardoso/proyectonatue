@@ -41,10 +41,7 @@ let datos = {
     metodoPago: document.getElementById("metodoPago").value
 };
 
-if(datos.telefono=="" || datos.direccion=="" || datos.metodoPago==""){
-    alert("Complete todos los datos del pedido.");
-    return;
-}
+
 
 fetch("php/crear_pedido.php",{
 

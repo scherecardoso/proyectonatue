@@ -27,11 +27,19 @@ $stock = $_POST['stock'];
 $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo', '$nombre', '$descripcion', '$precio',  '$costo','$stock')";
 if ($conn->query($sql) === TRUE) {
     //Define a que carpeta irá el archivo
-    $carpetaImagenes = "../img/";
-    $extension = strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
+     $carpetaImagenes = "../img/";
+    if ($_FILES["IMAGEN"]["NAME"]==""){
+        $nuevoNombre=".angie.png";
+        
+    } else{
+         $extension = strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
     //Define el nombre del archivo P-[codigo del producto]
     $nuevoNombre = "P-".$codigo.".".$extension;
     //Ejemplo: P-233.jpg
+    }
+
+   
+   
 
     //ruta comppleta de carpeta+nombre donde se guardara el archivo
     $ruta = $carpetaImagenes . $nuevoNombre;

@@ -150,6 +150,15 @@ tr:hover td{
     margin-top:40px;
     color:#777;
 }
+.stock-bajo {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.stock-normal {
+    color: #008000;
+    font-weight: bold;
+}
 
 
 
@@ -245,6 +254,17 @@ if ($result && $result->num_rows > 0) {
     while($fila = $result->fetch_assoc()) {
 
         $codigo = $fila['codigo'];
+         $stock = $fila['stock'];
+
+    // ==========================================
+    // DEFINIR COLOR SEGÚN CANTIDAD DE STOCK
+    // ==========================================
+    if ($stock <= 5) {
+        $colorStock = "red";
+    } else {
+        $colorStock = "green";
+    }
+
 
         echo "
         <tr>
@@ -253,7 +273,7 @@ if ($result && $result->num_rows > 0) {
             <td>{$fila['descripcion']}</td>
             <td>$ {$fila['precio']}</td>
             <td>$ {$fila['costo']}</td>
-            <td>{$fila['stock']}</td>";
+            <td><span style='color:{$colorStock}; font-weight:bold;'>{$stock}</span></td>";
 $directorio = "../img/";
 $archivoImagen = $directorio . $fila['imagen'];
 

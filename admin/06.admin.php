@@ -420,7 +420,7 @@ i{
 <?php include("../includes/includeadmin.php"); ?>
 
 <main class="info">
-    <seccion class="bienvenida"><div class="circulo"><img src="./img/sheshe.png" alt=""></div>
+    <seccion class="bienvenida"><div class="circulo">"></div>
     <div class="texto"><h2>BIENVENID@ <?php echo $_SESSION['nombre'];?></h2>
     <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p></div></seccion>
 

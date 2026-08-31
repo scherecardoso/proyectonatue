@@ -36,7 +36,6 @@ $totalProductos = $conn->query(
   
 <style>
 
-  
 body {
     display: grid;
     margin: 0;
@@ -52,38 +51,6 @@ body {
     background: #ffffff;
 }
 
-
-.menu {
-    grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 15px;
-    margin-top: 27px;
-    width: 330px;
-    border-right: 1px solid #ececec;
-}
-
-.titulo-menu {
-    font-size: 15px;
-    color: #ff5ca8; 
-    margin-bottom: 10px;
-}
-
-.menu div{
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 20px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.menu div:hover{
-    background: #ffdcec;
-    color: #ff5ca8;
-    padding-left: 22px;
-} 
 
 
 .info {
@@ -450,22 +417,10 @@ i{
 </head>
 <body>
 <?php include("../includes/header.php"); ?>
-<aside class="menu">
-    <div class="titulo-menu">MENU ADMINISTRADOR</div>
-    <div><i class="fa-solid fa-house"></i> Inicio</div>
-    <a href="../usuario/13.formeditarusuario.php"><div><i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
-    <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
-     <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
-    <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
-    <a href="../admin/ventasypedidos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
-    <div><i class="fa-solid fa-gear"></i> Configuración</div>
-    <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>
-    <div><i class="fa-solid fa-right-from-bracket"><a href="../auth/26.cerrarsesion.php"></i> Cerrar sesión</div>
-    
-</aside>
+<?php include("../includes/includeadmin.php"); ?>
 
 <main class="info">
-    <seccion class="bienvenida"><div class="circulo"><img src="./img/sheshe.png" alt=""></div>
+    <seccion class="bienvenida"><div class="circulo">"></div>
     <div class="texto"><h2>BIENVENID@ <?php echo $_SESSION['nombre'];?></h2>
     <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p></div></seccion>
 

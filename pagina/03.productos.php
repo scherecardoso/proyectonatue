@@ -102,6 +102,7 @@ h3 {
 }
 
 
+
 /* ENLACE DEL PRODUCTO */
 
 .producto a {
@@ -130,6 +131,11 @@ h3 {
     color: #ff2f8a;
 }
 
+
+.caja a {
+    text-decoration: none;
+    color: inherit;
+}
 
 @media (max-width: 768px) {
 

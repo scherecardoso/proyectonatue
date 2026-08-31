@@ -23,6 +23,7 @@ body {
     "nompro"
     "productos"
     "contenido"
+    "coment"
     "pie";
  gap: 10px;
 
@@ -190,6 +191,49 @@ h3{
 .img-contenido:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.comentario{
+  grid-area: coment;
+  background: rgb(255, 255, 255);
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  text-align: center;
+}
+
+.contenido-comentario {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #000000;
+}
+
+.icono-comentario {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.icono-comentario a {
+  color: #000000;
+  font-size: 32px;
+}
+
+.icono-comentario:hover {
+  transform: scale(1.1);
+  background-color: #f2f2f2;
 }
 
 @media (max-width: 768px) {
@@ -361,6 +405,20 @@ h3{
       Trabajamos para crear conciencia sobre el impacto de nuestras decisiones diarias
       y fomentar prácticas que contribuyan al bienestar de las personas y del planeta.</p></div>
     <img src="../img/nos.png" alt="Orgánico y natural" class="img-contenido">
+</section>
+
+<section class="comentario">
+  
+  <div class="contenido-comentario">
+    <p>Déjanos tus comentarios</p>
+  </div>
+
+  <div class="icono-comentario">
+    <a href="comentario.php">
+      <i class="fa-regular fa-comment-dots"></i>
+    </a>
+  </div>
+
 </section>
 <?php include("../includes/footer.php"); ?>
 </body>

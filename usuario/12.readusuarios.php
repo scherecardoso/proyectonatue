@@ -12,15 +12,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
-*{
-    margin:0;
-}
-
-body{
-    margin:0;
+body {
+    display: grid;
+    margin: 0;
     font-family: Arial, sans-serif;
-    background:#f8f8f8;
+    grid-template-columns: 198px 1fr 260px;
+    grid-template-rows: 70px 1fr;   
+    grid-template-areas:
+        "barra barra barra"
+        "menu info info"
+        "pie pie pie";
     gap: 10px;
+    height: 100vh;
+    background: #ffffff;
 }
 
 .contenedor{
@@ -122,13 +126,12 @@ td{
 
 <body>
 <?php include("../includes/header.php"); ?>
+<?php include("../includes/includeadmin.php"); ?>
 <div class="contenedor">
 
 <h1>Lista de Usuarios</h1>
 
-<a class="volver" href="../admin/06.admin.php">
-    ← Volver
-</a>
+
 
 <?php
 

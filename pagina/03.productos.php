@@ -77,7 +77,6 @@ h3 {
 }
 
 
-/* TARJETA DEL PRODUCTO */
 
 .producto {
     min-width: 350px;
@@ -103,15 +102,12 @@ h3 {
 
 
 
-/* ENLACE DEL PRODUCTO */
-
 .producto a {
     text-decoration: none;
     color: black;
 }
 
 
-/* CORAZÓN */
 
 .form-favorito {
     margin-top: 10px;
@@ -131,11 +127,6 @@ h3 {
     color: #ff2f8a;
 }
 
-
-.caja a {
-    text-decoration: none;
-    color: inherit;
-}
 
 @media (max-width: 768px) {
 
@@ -173,16 +164,12 @@ h3 {
 <?php include("../includes/header.php"); ?>
 
 
-<!-- ================================================= -->
-<!-- PRODUCTOS 1 -->
-<!-- ================================================= -->
 
 <h2 id="titulo1"></h2>
 
 <div class="caja" id="caja1">
 
 
-    <!-- PRODUCTO 1 -->
     <div class="producto">
 
         <a href="../descripcionproductos/SDC.php">
@@ -197,7 +184,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="SDC-001">
+            <input type="hidden" name="codigo" value="1">
 
             <button class="corazon" type="submit">
                 ♡
@@ -208,7 +195,6 @@ h3 {
     </div>
 
 
-    <!-- PRODUCTO 2 -->
     <div class="producto">
 
         <a href="../descripcionproductos/despigmentanteachachairu.php">
@@ -223,7 +209,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-002">
+            <input type="hidden" name="codigo" value="2">
 
             <button class="corazon" type="submit">
                 ♡
@@ -233,8 +219,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 3 -->
     <div class="producto">
 
         <a href="../descripcionproductos/serumtamarindo.php">
@@ -249,7 +233,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-003">
+            <input type="hidden" name="codigo" value="3">
 
             <button class="corazon" type="submit">
                 ♡
@@ -259,8 +243,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 4 -->
     <div class="producto">
 
         <a href="../descripcionproductos/aceitecacao.php">
@@ -275,7 +257,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-004">
+            <input type="hidden" name="codigo" value="4">
 
             <button class="corazon" type="submit">
                 ♡
@@ -285,8 +267,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 5 -->
     <div class="producto">
 
         <a href="../descripcionproductos/serumchirimoya.php">
@@ -301,7 +281,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-005">
+            <input type="hidden" name="codigo" value="5">
 
             <button class="corazon" type="submit">
                 ♡
@@ -312,7 +292,6 @@ h3 {
     </div>
 
 
-    <!-- PRODUCTO 6 -->
     <div class="producto">
 
         <a href="../descripcionproductos/floreskantuta.php">
@@ -327,7 +306,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-006">
+            <input type="hidden" name="codigo" value="6">
 
             <button class="corazon" type="submit">
                 ♡
@@ -337,8 +316,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 7 -->
     <div class="producto">
 
         <a href="../descripcionproductos/aceitecopaiba.php">
@@ -353,7 +330,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-007">
+            <input type="hidden" name="codigo" value="7">
 
             <button class="corazon" type="submit">
                 ♡
@@ -366,14 +343,8 @@ h3 {
 </div>
 
 
-<!-- ================================================= -->
-<!-- PRODUCTOS 2 -->
-<!-- ================================================= -->
-
 <div class="caja" id="caja2">
 
-
-    <!-- PRODUCTO 8 -->
     <div class="producto">
 
         <a href="../descripcionproductos/geldequinua.php">
@@ -388,7 +359,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-008">
+            <input type="hidden" name="codigo" value="8">
 
             <button class="corazon" type="submit">
                 ♡
@@ -398,8 +369,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 9 -->
     <div class="producto">
 
         <a href="../descripcionproductos/geldepepino.php">
@@ -414,7 +383,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-009">
+            <input type="hidden" name="codigo" value="9">
 
             <button class="corazon" type="submit">
                 ♡
@@ -425,7 +394,6 @@ h3 {
     </div>
 
 
-    <!-- PRODUCTO 10 -->
     <div class="producto">
 
         <a href="../descripcionproductos/geldesabila.php">
@@ -440,7 +408,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-010">
+            <input type="hidden" name="codigo" value="10">
 
             <button class="corazon" type="submit">
                 ♡
@@ -450,8 +418,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 11 -->
     <div class="producto">
 
         <a href="../descripcionproductos/aceitedecoco.php">
@@ -466,7 +432,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-011">
+            <input type="hidden" name="codigo" value="11">
 
             <button class="corazon" type="submit">
                 ♡
@@ -476,8 +442,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 12 -->
     <div class="producto">
 
         <a href="../descripcionproductos/brumaeucalipto.php">
@@ -492,7 +456,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-012">
+            <input type="hidden" name="codigo" value="12">
 
             <button class="corazon" type="submit">
                 ♡
@@ -505,9 +469,6 @@ h3 {
 </div>
 
 
-<!-- ================================================= -->
-<!-- PRODUCTOS 3 -->
-<!-- ================================================= -->
 
 <div class="caja" id="caja3">
 
@@ -527,7 +488,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-013">
+            <input type="hidden" name="codigo" value="13">
 
             <button class="corazon" type="submit">
                 ♡
@@ -537,8 +498,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 14 -->
     <div class="producto">
 
         <a href="../descripcionproductos/balsamomatico.php">
@@ -553,7 +512,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-014">
+            <input type="hidden" name="codigo" value="14">
 
             <button class="corazon" type="submit">
                 ♡
@@ -563,8 +522,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 15 -->
     <div class="producto">
 
         <a href="../descripcionproductos/cremamaracuyasabila.php">
@@ -579,7 +536,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-015">
+            <input type="hidden" name="codigo" value="15">
 
             <button class="corazon" type="submit">
                 ♡
@@ -589,8 +546,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 16 -->
     <div class="producto">
 
         <a href="../descripcionproductos/exfoliantecafe.php">
@@ -605,7 +560,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-016">
+            <input type="hidden" name="codigo" value="16">
 
             <button class="corazon" type="submit">
                 ♡
@@ -615,8 +570,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 17 -->
     <div class="producto">
 
         <a href="../descripcionproductos/cremamatificante.php">
@@ -631,7 +584,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-017">
+            <input type="hidden" name="codigo" value="17">
 
             <button class="corazon" type="submit">
                 ♡
@@ -644,14 +597,10 @@ h3 {
 </div>
 
 
-<!-- ================================================= -->
-<!-- PRODUCTOS 4 -->
-<!-- ================================================= -->
 
 <div class="caja" id="caja4">
 
 
-    <!-- PRODUCTO 18 -->
     <div class="producto">
 
         <a href="../descripcionproductos/jabontarwi.php">
@@ -666,7 +615,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-018">
+            <input type="hidden" name="codigo" value="18">
 
             <button class="corazon" type="submit">
                 ♡
@@ -676,8 +625,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 19 -->
     <div class="producto">
 
         <a href="../descripcionproductos/jabonavenaymiel.php">
@@ -692,7 +639,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-019">
+            <input type="hidden" name="codigo" value="19">
 
             <button class="corazon" type="submit">
                 ♡
@@ -702,8 +649,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 20 -->
     <div class="producto">
 
         <a href="../descripcionproductos/jabonrosamosqueta.php">
@@ -718,7 +663,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-020">
+            <input type="hidden" name="codigo" value="20">
 
             <button class="corazon" type="submit">
                 ♡
@@ -728,8 +673,6 @@ h3 {
 
     </div>
 
-
-    <!-- PRODUCTO 21 -->
     <div class="producto">
 
         <a href="../descripcionproductos/jaboncurcumaymanzanilla.php">
@@ -744,7 +687,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-021">
+            <input type="hidden" name="codigo" value="21">
 
             <button class="corazon" type="submit">
                 ♡
@@ -753,9 +696,6 @@ h3 {
         </form>
 
     </div>
-
-
-    <!-- PRODUCTO 22 -->
     <div class="producto">
 
         <a href="../descripcionproductos/jabondecarbon.php">
@@ -770,7 +710,7 @@ h3 {
 
         <form class="form-favorito" action="../favoritos/agregar_favorito.php" method="POST">
 
-            <input type="hidden" name="codigo" value="PRD-022">
+            <input type="hidden" name="codigo" value="22">
 
             <button class="corazon" type="submit">
                 ♡

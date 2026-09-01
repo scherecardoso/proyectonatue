@@ -296,8 +296,21 @@ while ($fila = $result->fetch_assoc()) {
                         Bs <?php echo htmlspecialchars($fila['costo']); ?>
                     </td>
 
+
+                    
                     <td>
-                        <?php echo htmlspecialchars($fila['stock']); ?>
+<?php
+    $stock = (int)$fila['stock'];
+
+    if ($stock <= 5) {
+        $colorStock = "#ff0000";
+    } else {
+        $colorStock = "#008000";
+    }
+?>
+                        <span style="color:<?php echo $colorStock; ?>; font-weight:bold;">
+                            <?php echo htmlspecialchars($stock); ?>
+                        </span>
                     </td>
 
                     <td>

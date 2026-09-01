@@ -8,10 +8,24 @@ if ($_SESSION['rol'] != "usuario") {
 
 $conexion = new mysqli("localhost","root","","shena");
 $nombre_usuario = $_SESSION['nombre'];
+
+// ===== CARGAR IMAGEN DEL USUARIO =====
+$sql = "SELECT imagen_perfil FROM usuario WHERE nombre=?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("s", $nombre_usuario);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$datosUsuario = $resultado->fetch_assoc();
+$stmt->close();
+
+// Determinar qué imagen mostrar
+$imagenPerfil = (!empty($datosUsuario['imagen_perfil'])) ? $datosUsuario['imagen_perfil'] : 'imgperfil.avif';
+
 $sqlPedidos = "SELECT COUNT(*) AS total FROM pedidos  WHERE nombre='$nombre_usuario'";
 $resultadoPedidos = $conexion->query($sqlPedidos);
 $filaPedidos = $resultadoPedidos->fetch_assoc();
 $totalpedido = $filaPedidos['total'];
+
 
 ?>
 <!DOCTYPE html>
@@ -401,7 +415,10 @@ i{
 
 
 <main class="info">
-<section class="bienvenida"><div class="circulo"> <i class="fa-solid fa-user"></i></div>
+<section class="bienvenida">
+<div class="circulo">
+  <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
+</div>
 <div class="texto"><h2>BIENVENIDA <?php echo $_SESSION['nombre']; ?></h2>
 <p>Aquí puedes revisar tus pedidos, favoritos y administrar tu cuenta.</p></div></section>
 

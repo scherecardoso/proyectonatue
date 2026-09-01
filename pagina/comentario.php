@@ -114,23 +114,39 @@
             background-color: #dddddd;
         }
 
-        .perrito {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+        .titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.titulo img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.titulo h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    color: #4F4F4F;
+}
 
         @media (max-width: 768px) {
 
-            .perrito {
-                width: 70px;
-                height: 70px;
-                left: 10px;
-            }
+           .titulo img {
+     width: 65px;
+    height: 65px;
+}
+
+.titulo h1 {
+    font-size: 25px;
+}
 
             form {
                 padding: 35px 25px;
@@ -145,10 +161,10 @@
 
     <form action="mensaje.php" method="POST">
 
-        <img src="../img/perrito-comentario.jpg" alt="Perrito usando una computadora" class="perrito">
-
-        <h1>Déjanos tu comentario</h1>
-
+        <div class="titulo">
+    <img src="../img/perrito-comentario.jpg" alt="Perrito usando una computadora">
+    <h1>Déjanos tu comentario</h1>
+</div>
         <p class="descripcion">
             Tu opinión es muy importante para nosotros.
         </p>

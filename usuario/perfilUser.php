@@ -154,7 +154,7 @@ i {
 .nombre-perfil {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
-    color: #fffefe;
+    color: #000000;
     margin: 0 0 15px 0;
     text-align: center;
 }
@@ -204,7 +204,7 @@ i {
 .info-dato i {
     width: 50px;
     text-align: center;
-    color: #ffffff;
+    color: #000000;
     font-size: 26px;
 }
 
@@ -275,7 +275,7 @@ i {
 .modal-content button {
     width: 100%;
     padding: 12px;
-    background: #fffdfd;
+    background: #000000;
     color: white;
     border: none;
     border-radius: 8px;
@@ -284,6 +284,7 @@ i {
     margin-top: 10px;
     transition: 0.3s;
 }
+
 
 
 </style>
@@ -297,9 +298,15 @@ i {
 
 <div class="perfil-contenedor">
     <div class="perfil-card">
-        <div class="foto-perfil">
-            <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
-        </div>
+
+
+
+
+<div class="foto-perfil">
+    <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
+
+</div>
+
         <div class="nombre-perfil">
             <?php echo htmlspecialchars($datosUsuario['nombre']); ?>
         </div>

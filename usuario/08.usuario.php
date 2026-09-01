@@ -84,7 +84,7 @@ body {
     justify-content: center;
     font-size: 30px;
     font-family: 'Playfair Display', serif;
-    color: #2b2b2b;
+    color: #272020;
     gap: 15px;
     justify-content: flex-start;
     padding: 20px 40px;
@@ -425,8 +425,8 @@ i{
 
 <section class="cards">
     <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalpedido; ?></h3><p>Pedidos</p></article>
-    <article class="card"><a href="../favoritos/favoritos.php"><div class="icono"><i class="fa-solid fa-heart"></i></div><h3>8</h3><p>Favoritos</p></a></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-star"></i></div><h3>5</h3><p>Reseñas</p></article>
+    <article class="card"><a href="../favoritos/favoritos.php"><div class="icono"><i class="fa-solid fa-heart"></i></div><p>Favoritos</p></a></article>
+    <article class="card"><a href="../pagina/revisar.php"><div class="icono"><i class="fa-solid fa-star"></i></div><p>Comentarios</p></a></article>
 </section>
 
 <section class="contenido">

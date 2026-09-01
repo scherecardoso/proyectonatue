@@ -138,7 +138,7 @@ switch($accion){
         "mensaje"=>$conn->error
     ]);
 
-}
+}  
 
     break;
         // ======================================

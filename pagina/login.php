@@ -43,8 +43,11 @@ if ($resultado->num_rows > 0) {
 
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['nombre'] = $fila['nombre'];
+    $_SESSION['direccion'] = $fila['direccion'];
+    $_SESSION['celular'] = $fila['celular'];
     $_SESSION['rol'] = $fila['rol'];
     $_SESSION['estado'] = $fila['estado'];
+    $_SESSION['fecha'] = $fila['fecha'];
 
     if ($fila['rol'] == "vendedor") {
 

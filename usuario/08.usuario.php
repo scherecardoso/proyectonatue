@@ -70,7 +70,7 @@ body {
     justify-content: center;
     font-size: 30px;
     font-family: 'Playfair Display', serif;
-    color: #2b2b2b;
+    color: #272020;
     gap: 15px;
     justify-content: flex-start;
     padding: 20px 40px;

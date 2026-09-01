@@ -195,14 +195,18 @@ h3{
 
 .comentario{
   grid-area: coment;
-  background: rgb(255, 255, 255);
-  min-height: 350px;
+  border-radius: 30px;
+  background: #F1F1F1;
+  height: 350px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 25px;
   text-align: center;
+  margin: auto;
+  border: 1px solid #DADADA;
 }
 
 .contenido-comentario {
@@ -212,28 +216,29 @@ h3{
   font-size: 30px;
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  color: #000000;
+  color: #4F4F4F;
 }
 
 .icono-comentario {
-  width: 75px;
-  height: 75px;
-  border: 1px solid #000000;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #C7C7C7;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  background: #FFFFFF;
+  transition: 0.3s ease;
 }
 
 .icono-comentario a {
-  color: #000000;
-  font-size: 32px;
+  color: #666666;
+  font-size: 28px;
 }
 
 .icono-comentario:hover {
-  transform: scale(1.1);
-  background-color: #f2f2f2;
+  background-color: #E2E2E2;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {

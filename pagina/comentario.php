@@ -30,6 +30,7 @@
             padding: 45px;
             border-radius: 25px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            position: relative;
         }
 
         h1 {
@@ -38,6 +39,7 @@
             font-size: 32px;
             margin-top: 0;
             margin-bottom: 10px;
+            color: #4F4F4F;
         }
 
         .descripcion {
@@ -51,6 +53,7 @@
             margin-bottom: 8px;
             font-size: 16px;
             font-weight: 500;
+            color: #555555;
         }
 
         input[type="text"],
@@ -93,12 +96,13 @@
         }
 
         input[type="submit"] {
-            background-color: #222;
+            background-color: #666666;
             color: white;
         }
 
         input[type="submit"]:hover {
             transform: scale(1.03);
+            background-color: #555555;
         }
 
         input[type="reset"] {
@@ -110,12 +114,38 @@
             background-color: #dddddd;
         }
 
+        .perrito {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @media (max-width: 768px) {
+
+            .perrito {
+                width: 70px;
+                height: 70px;
+                left: 10px;
+            }
+
+            form {
+                padding: 35px 25px;
+            }
+
+        }
+
     </style>
 </head>
 
 <body>
 
     <form action="mensaje.php" method="POST">
+
+        <img src="../img/perrito-comentario.jpg" alt="Perrito usando una computadora" class="perrito">
 
         <h1>Déjanos tu comentario</h1>
 

@@ -15,7 +15,6 @@ if ($conexion->connect_error) {
 
 $nombre_usuario = $_SESSION['nombre'] ?? '';
 
-// ===== CARGAR DATOS DEL USUARIO DESDE BD =====
 $sql = "SELECT CI, nombre, direccion, celular, rol, imagen_perfil FROM usuario WHERE nombre=?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $nombre_usuario);
@@ -24,8 +23,6 @@ $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 
 $stmt->close();
-
-// Si el usuario no se encuentra, usar valores por defecto
 if (!$datosUsuario) {
     $datosUsuario = [
         'CI' => 'N/A',
@@ -37,7 +34,6 @@ if (!$datosUsuario) {
     ];
 }
 
-// Determinar qué imagen mostrar
 $imagenPerfil = (!empty($datosUsuario['imagen_perfil'])) ? $datosUsuario['imagen_perfil'] : 'imgperfil.avif';
 
 $conexion->close();

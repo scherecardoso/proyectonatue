@@ -61,7 +61,7 @@ body {
 }
 
 .icono i {
-    color: #ff5ca8;
+    color: #E4E4E5;
     font-size: 20px;
 }
 

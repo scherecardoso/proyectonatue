@@ -69,7 +69,7 @@ body {
 
 .bienvenida {
     grid-area: bienvenida;
-    background: #fdeff6;
+    background:#E4E4E5;
     height: 220px;
     width: 900px;
     left: 20%;
@@ -139,7 +139,7 @@ body {
 }
 
 .icono i {
-    color: #ff5ca8;
+    color: rgb(17, 16, 16);
     font-size: 20px;
 }
 
@@ -341,9 +341,7 @@ div{
   color: black;
 }
 
-i{
-    color:black;
-}
+
 
 .menu a{
     text-decoration: none;

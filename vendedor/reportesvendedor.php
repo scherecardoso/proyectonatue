@@ -266,7 +266,14 @@ if ($resultadoTotal) {
 </style>
 
 </div>
+<body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<?php include("../includes/header.php"); ?>
+<?php include("../includes/includeVendedor.php"); ?>
+
+
+
+</body>
 <script>
 const etiquetasIngresos = <?php echo json_encode($labels); ?>;
 const datosIngresos = <?php echo json_encode($ingresos); ?>;

@@ -66,6 +66,14 @@ body {
 </style>
 
 <body>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+
 <aside class="menu-lateral">
   <a class="menu-titulo"><h2>Menu Vendedor</h2></a>
   <a href="../vendedor/07.vendedor.php"><i class="fa-solid fa-house"></i> Inicio</a>
@@ -73,6 +81,7 @@ body {
   <a href="../productos/22.readproductos.php"><i class="fa-solid fa-box"></i> Stock de Productos</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-truck"></i> Pedidos de Clientes</a>
   <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
+  <a href="../vendedor/reportesvendedor.php"><i class="fa-solid fa-chart-line"></i> Reportes</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
   <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
   <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>

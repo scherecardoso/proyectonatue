@@ -35,9 +35,6 @@ if ($pedidos_id == "" && isset($_SESSION["pedido"])) {
 $pedidos_id = (int)$pedidos_id;
 
 
-// ==========================================
-// VALIDAR DATOS
-// ==========================================
 
 if ($metodo == "" || $pedidos_id <= 0) {
 
@@ -47,10 +44,6 @@ if ($metodo == "" || $pedidos_id <= 0) {
 
 $estado = "Pendiente";
 
-
-// ==========================================
-// COMPROBAR QUE EXISTE EL PEDIDO
-// ==========================================
 
 $sqlPedido = "
     SELECT id
@@ -72,10 +65,6 @@ if ($resultadoPedido->num_rows == 0) {
 
 }
 
-
-// ==========================================
-// CALCULAR TOTAL DEL PEDIDO
-// ==========================================
 
 $sqlTotal = "
     SELECT SUM(costototal) AS total
@@ -104,10 +93,6 @@ if ($costototal <= 0) {
 
 }
 
-
-// ==========================================
-// COMPROBAR STOCK
-// ==========================================
 
 $sqlCarrito = "
     SELECT productos_codigo, cantidad
@@ -178,10 +163,6 @@ while ($productos = $resultadoCarrito->fetch_assoc()) {
 }
 
 
-// ==========================================
-// SI NO HAY STOCK SUFICIENTE
-// ==========================================
-
 if (!$hayStock) {
 
     echo "No hay suficiente stock del producto: "
@@ -193,9 +174,6 @@ if (!$hayStock) {
 }
 
 
-// ==========================================
-// CREAR VENTA
-// ==========================================
 
 $sql = "
     INSERT INTO ventas
@@ -211,10 +189,6 @@ if (!$conn->query($sql)) {
 
 }
 
-
-// ==========================================
-// DESCONTAR STOCK
-// ==========================================
 
 $sqlCarrito = "
     SELECT productos_codigo, cantidad
@@ -258,9 +232,6 @@ while ($productos = $resultadoCarrito->fetch_assoc()) {
 }
 
 
-// ==========================================
-// ACTUALIZAR ESTADO DEL PEDIDO
-// ==========================================
 
 $sqlPedido = "
     UPDATE pedidos
@@ -278,17 +249,8 @@ if (!$conn->query($sqlPedido)) {
 
 }
 
-
-// ==========================================
-// GUARDAR ID DE LA VENTA
-// ==========================================
-
 $_SESSION["venta"] = $conn->insert_id;
 
-
-// ==========================================
-// IR A VENTAS
-// ==========================================
 
 $conn->close();
 

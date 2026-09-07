@@ -18,7 +18,6 @@ if($conn->connect_error) {
     die ("conexion fallida" . $conn->connect_error);
 }
 
-// Buscamos los productos del pedido para luego mostrar el stock
 $sqlCarrito = "SELECT productos_codigo, cantidad FROM carrito WHERE pedidos_id = '$pedidos_id'";
 $resultadoCarrito = $conn->query($sqlCarrito);
 ?>

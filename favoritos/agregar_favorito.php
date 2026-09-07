@@ -22,7 +22,6 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-/* Verificar que el usuario exista */
 $sql = "SELECT * FROM usuario
         WHERE CI='$CI'";
 
@@ -36,7 +35,6 @@ if ($resultado->num_rows == 0) {
     die("El usuario no existe en la base de datos.");
 }
 
-/* Verificar que el producto exista */
 $sql = "SELECT * FROM productos
         WHERE codigo='$codigo'";
 
@@ -50,7 +48,6 @@ if ($resultado->num_rows == 0) {
     die("El producto no existe en la base de datos.");
 }
 
-/* Verificar si ya es favorito */
 $sql = "SELECT * FROM favoritos
         WHERE ci='$CI'
         AND codigo='$codigo'";
@@ -61,7 +58,6 @@ if (!$resultado) {
     die("Error en la consulta: " . $conn->error);
 }
 
-/* Si todavía no es favorito, guardarlo */
 if ($resultado->num_rows == 0) {
 
     $sql = "INSERT INTO favoritos (ci, codigo)

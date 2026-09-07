@@ -8,8 +8,6 @@ if ($_SESSION['rol'] != "usuario") {
 
 $conexion = new mysqli("localhost","root","","shena");
 $nombre_usuario = $_SESSION['nombre'];
-
-// ===== CARGAR IMAGEN DEL USUARIO =====
 $sql = "SELECT imagen_perfil FROM usuario WHERE nombre=?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $nombre_usuario);
@@ -18,7 +16,6 @@ $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 $stmt->close();
 
-// Determinar qué imagen mostrar
 $imagenPerfil = (!empty($datosUsuario['imagen_perfil'])) ? $datosUsuario['imagen_perfil'] : 'imgperfil.avif';
 
 $sqlPedidos = "SELECT COUNT(*) AS total FROM pedidos  WHERE nombre='$nombre_usuario'";

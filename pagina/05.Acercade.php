@@ -12,48 +12,48 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
   
 <style>
-body {  
-  display: grid;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   font-family: Arial, sans-serif;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "barra"
-    "mision"
-    "vision"
-    "equipo"
-    "valores"
-    "pie";
-    gap: 10px;
-  }
-
-  h2 {
-    font-size: 28px;
+  overflow-x: hidden;
 }
 
-h3{
-    color: #000000;
+h2 {
+  font-size: 28px;
 }
-.contenido{
-  display:flex; 
-  flex-direction:column; 
-  align-items:center; 
-  gap:60px; 
-  padding:80px 0;
+
+h3 {
+  color: #000000;
 }
-.contenido h1{
-    font-family:'Playfair Display', serif;
-    font-size:52px;
-    margin-bottom:20px;
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 0;
 }
-.contenido p {
+
+.contenido h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.contenido > p {
   text-align: center;
   max-width: 700px;
+  width: 90%;
   line-height: 1.6;
   font-size: 18px;
 }
 
-.bloque-nosotros{
+.bloque-nosotros {
   width: 100%;
   text-align: center;
   background-color: white;
@@ -64,15 +64,11 @@ h3{
   padding: 60px 20px;
 }
 
-
-
-.bloque-nosotros p{
+.bloque-nosotros p {
   max-width: 800px;
   line-height: 1.6;
   font-size: 18px;
 }
-
-
 
 .bloque {
   display: flex;
@@ -82,7 +78,8 @@ h3{
   margin: auto;
 }
 
-.mision, .vision {
+.mision,
+.vision {
   width: 50%;
   background: white;
   padding: 40px;
@@ -90,182 +87,236 @@ h3{
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+.mision p,
+.vision p {
+  line-height: 1.6;
+  font-size: 17px;
+}
 
+.bloque-texto {
+  width: 50%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  position: relative;
+  left: 30px;
+}
 
-    .bloque-texto {
-      width: 50%;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 20px;
-      position: relative;
-      left: 30px;
-    }
-
-.bloque-texto h2{
+.bloque-texto h2 {
   font-family: 'Playfair Display', serif;
   color: #caa3a9;
 }
 
-.bloque-texto h2::after{
-  content:"";
-  display:block;
-  width:35px;
-  height:2px;
-  background:#d8bfc4;
-  margin-top:8px;
+.bloque-texto h2::after {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 2px;
+  background: #d8bfc4;
+  margin-top: 8px;
 }
 
-
-.valores{
-  grid-area: valores;
-  width:85%;
+.valores {
+  width: 85%;
   margin: 0 auto;
-  padding:50px;
-  border-radius:25px;
-  background:white;
-  text-align:center;
+  padding: 50px;
+  border-radius: 25px;
+  background: white;
+  text-align: center;
 }
 
-.valores h2{
-  font-family:'Playfair Display', serif;
+.valores h2 {
+  font-family: 'Playfair Display', serif;
 }
 
-.valores-grid{
-  display:grid;
+.valores-grid {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:25px;
-  margin-top:30px;
+  gap: 25px;
+  margin-top: 30px;
 }
 
-.valor{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  transition:0.3s;
+.valor {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
 }
 
-.valor:hover{
-  transform:translateY(-5px);
+.valor:hover {
+  transform: translateY(-5px);
 }
 
-.valor i{
-  font-size:22px;
-  color:pink;
-  margin-bottom:10px;
+.valor i {
+  font-size: 22px;
+  color: pink;
+  margin-bottom: 10px;
 }
-.equipo{
-  grid-area: equipo;
-  width:85%;
-  text-align:center;
+
+.equipo {
+  width: 85%;
+  text-align: center;
   margin: 40px auto;
 }
 
-.equipo h2{
-  font-family:'Playfair Display', serif;
+.equipo h2 {
+  font-family: 'Playfair Display', serif;
 }
 
-.equipo-grid{
-  display:grid;
+.equipo-grid {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:25px;
-  margin-top:30px;
+  gap: 25px;
+  margin-top: 30px;
 }
 
-.miembro{
-  background:white;
-  padding:20px;
-  border-radius:20px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  transition:0.3s;
+.miembro {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.miembro img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.miembro h4 {
+  margin: 5px 0;
+}
+
+.miembro p {
+  color: #888;
+  font-size: 14px;
 }
 
 
-
-.miembro img{
-  width:100%;
-  height: 76%;
-  border-radius:100%;
-  margin-bottom:10px;
-}
-
-.miembro h4{
-  margin:5px 0;
-}
-
-.miembro p{
-  color:#888;
-  font-size:14px;
-}
 @media (max-width: 768px) {
 
-  .contenido{
-    padding: 40px 15px;
-    gap: 40px;
+  body {
+    overflow-x: hidden;
   }
 
-  .contenido h1{
+  .contenido {
+    width: 100%;
+    padding: 40px 15px;
+    gap: 30px;
+  }
+
+  .contenido h1 {
     font-size: 38px;
     text-align: center;
+    margin: 0;
   }
 
-  .contenido p{
+  .contenido > p {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 5px;
     font-size: 16px;
-    padding: 0 10px;
+    line-height: 1.6;
   }
 
-  .bloque{
+
+  .bloque {
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    width: 90%;
     gap: 20px;
     align-items: center;
   }
 
   .mision,
-  .vision{
+  .vision {
     width: 100%;
-    padding: 25px;
+    padding: 25px 20px;
+    border-radius: 20px;
   }
 
-  .bloque-texto{
-    width: 100%;
-    left: 0;
-    font-size: 16px;
+  .mision h2,
+  .vision h2 {
+    font-size: 25px;
+    margin-top: 0;
+  }
+
+  .mision p,
+  .vision p {
+    font-size: 15px;
+    line-height: 1.6;
     text-align: center;
   }
 
-  .equipo{
-    width: 95%;
-  }
 
-  .equipo-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .miembro{
-    max-width: 300px;
-    margin: auto;
-  }
-
-  .miembro img{
-    height: auto;
-  }
-
-  
-  .valores{
-    width: 90%;
-    padding: 30px 15px;
-  }
-
-  .valores-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .valor{
+  .equipo {
     width: 100%;
+    padding: 0 15px;
+    margin: 30px auto;
+  }
+
+  .equipo h2 {
+    font-size: 28px;
+  }
+
+  .equipo-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .miembro {
+    width: 100%;
+    max-width: 320px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .miembro img {
+    width: 150px;
+    height: 150px;
+  }
+
+
+
+  .valores {
+    width: calc(100% - 30px);
+    padding: 30px 15px;
+    border-radius: 20px;
+  }
+
+  .valores h2 {
+    font-size: 28px;
+  }
+
+  .valores-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .valor {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .valor h4 {
+    font-size: 17px;
+  }
+
+  .valor p {
+    font-size: 14px;
   }
 
 }
-  </style>
+
+
+
+
+</style>
 </head>
 <body>
 <?php include("../includes/header.php");?>

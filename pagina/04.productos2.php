@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ?>
@@ -119,33 +118,60 @@ h3 {
 
 @media (max-width: 768px) {
 
-.caja {
-    gap: 15px;
-    padding: 10px;
-    margin-top: 0px;
-}
+    body {
+        display: block;
+        margin: 0;
+        overflow-x: hidden;
+    }
 
-.producto {
-    min-width: 220px;
-    padding: 10px;
-    border-radius: 15px;
-}
+    .caja {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+        padding: 20px 10px;
+        margin: 0;
+        box-sizing: border-box;
+        overflow-x: visible;
+    }
 
-.producto img {
-    height: 250px;
-    border-radius: 12px;
-}
+    .producto {
+        width: 90%;
+        max-width: 320px;
+        min-width: 0;
+        padding: 10px;
+        border-radius: 15px;
+        box-sizing: border-box;
+    }
 
-.producto h3 {
-    font-size: 14px;
-}
+    .producto img {
+        width: 100%;
+        height: 300px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
 
-.corazon {
-    font-size: 26px;
-}
+    .producto h3 {
+        font-size: 15px;
+        margin: 8px 0;
+        line-height: 1.4;
+    }
+
+    .form-favorito {
+        margin-top: 8px;
+    }
+
+    .corazon {
+        font-size: 28px;
+    }
+
+    .producto:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
 
 }
-
 </style>
 </head>
 

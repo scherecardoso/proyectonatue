@@ -114,7 +114,7 @@ i{
     <div><a href="../usuario/08.usuario.php"><i class="fa-solid fa-house"></i> Inicio</div></a>
     <div><a href="../usuario/perfilUser.php"><i class="fa-solid fa-user"></i> Mi Perfil</div>
     <div><a href="../pedidos/mispedidos.php"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</div>
-    <div><a href="../favoritos/favoritos.php"><i class="fa-solid fa-heart"></i> Favoritos</a></div>
+    <div><a href="../favoritos/favoritos.php"><i class="fa fa-heart-o"></i>Favoritos</div></a>
     <div><a href="../auth/26.cerrarsesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></div>
 </aside>
 

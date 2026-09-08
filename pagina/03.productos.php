@@ -131,31 +131,50 @@ h3 {
 @media (max-width: 768px) {
 
     .caja {
-        gap: 15px;
-        padding: 10px;
-        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 20px 10px;
+        margin: 0;
+        overflow-x: visible;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .producto {
-        min-width: 220px;
+        width: 90%;
+        max-width: 320px;
+        min-width: 0;
         padding: 10px;
         border-radius: 15px;
+        box-sizing: border-box;
     }
 
     .producto img {
-        height: 250px;
+        width: 100%;
+        height: 300px;
         border-radius: 12px;
+        object-fit: cover;
+    }
+    .producto h3 {
+        font-size: 15px;
+        margin: 8px 0;
     }
 
-    .producto h3 {
-        font-size: 14px;
+    .form-favorito {
+        margin-top: 8px;
     }
 
     .corazon {
-        font-size: 26px;
+        font-size: 28px;
+    }
+
+    .producto:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 }
-
 </style>
 </head>
 

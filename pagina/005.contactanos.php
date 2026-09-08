@@ -87,7 +87,51 @@ h3{
     text-decoration:none;
     color:#444;
 }
+@media (max-width: 768px) {
 
+    .contacto {
+        padding: 40px 15px;
+    }
+
+    .contacto h1 {
+        font-size: 38px;
+        text-align: center;
+    }
+
+    .contacto > p {
+        font-size: 16px;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 35px;
+        line-height: 1.6;
+    }
+
+    .iconos {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .tarjeta {
+        width: 90%;
+        max-width: 330px;
+        padding: 30px 20px;
+    }
+
+    .tarjeta i {
+        font-size: 50px;
+    }
+
+    .tarjeta h3 {
+        font-size: 21px;
+    }
+
+    .tarjeta p {
+        font-size: 15px;
+    }
+
+}
 </style>
 </head>
 <body>

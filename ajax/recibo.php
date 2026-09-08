@@ -37,6 +37,7 @@ $total = 0;
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recibo<?php echo $pedido["id"]; ?></title>
 <link rel="stylesheet" href="css/ticket.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -242,7 +243,11 @@ fetch("php/nueva_compra.php")
 if(data.ok){
 window.location.href = "index.php";
 }else{
-alert(data.mensaje || "No se pudo iniciar una nueva compra.");
+Swal.fire({
+  title: "Hay un problrema",
+  text: "No se pudo iniciar una nueva compra.",
+  icon: "error"
+});
 }
 
 })
@@ -251,8 +256,11 @@ alert(data.mensaje || "No se pudo iniciar una nueva compra.");
 
 console.log(error);
 
-alert("Ocurrió un error al iniciar una nueva compra.");
-
+Swal.fire({
+  title: "ERROR",
+  text: "Ocurrio un error al iniciar una nueva compra.",
+  icon: "error"
+});
 });
 
 });

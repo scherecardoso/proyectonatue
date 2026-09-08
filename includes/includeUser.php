@@ -53,7 +53,7 @@ body {
 .icono {
     width: 50px;
     height: 50px;
-    background: #ffdcec;
+    background: #f3f3f3;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -61,7 +61,7 @@ body {
 }
 
 .icono i {
-    color: #ff5ca8;
+    color: #070707;
     font-size: 20px;
 }
 

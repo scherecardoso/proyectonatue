@@ -294,10 +294,7 @@ while ($fila = $result->fetch_assoc()) {
 
                     <td>
                         Bs <?php echo htmlspecialchars($fila['costo']); ?>
-                    </td>
-
-
-                    
+                    </td>  
                     <td>
 <?php
     $stock = (int)$fila['stock'];

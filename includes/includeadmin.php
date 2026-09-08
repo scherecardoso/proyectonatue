@@ -16,10 +16,6 @@ body {
     font-family: Arial, sans-serif;
     grid-template-columns: 198px 1fr 260px;
     grid-template-rows: 70px 1fr;   
-    grid-template-areas:
-        "barra barra barra"
-        "menu info act"
-        "pie pie pie";
     gap: 10px;
     height: 100vh;
     background: #ffffff;
@@ -103,7 +99,7 @@ i{
     <a href="../usuario/13.formeditarusuario.php"><div> <i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
      <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
-    <div><i class="fa-solid fa-chart-line"></i> Reportes</div>
+    <a href="../admin/grafico.php"></a><div><i class="fa-solid fa-chart-line"></i> Reportes</div>
     <a href="../admin/ventasypedidos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>

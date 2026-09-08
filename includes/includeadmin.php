@@ -99,6 +99,7 @@ i{
 <aside class="menu">
     </a><div class="titulo-menu">MENU ADMINISTRADOR</div>
     <a href="../admin/06.admin.php"><div> <i class="fa-solid fa-house"></i> Inicio</div></a>
+    <div><a href="../admin/perfiladmin.php"><i class="fa-solid fa-user"></i> Mi Perfil</div>
     <a href="../usuario/13.formeditarusuario.php"><div> <i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
      <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>

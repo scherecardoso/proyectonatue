@@ -243,21 +243,21 @@ h3{
 
 @media (max-width: 768px) {
 
-  .carrusel {
-    height: auto;
+  body {
+    display: block;
+    margin: 0;
+    overflow-x: hidden;
   }
-
-.banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
+  .banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
   .img-logo {
     width: 180px;
     height: auto;
-    top: 80px;
-    margin: auto;
+    top: 0;
+    margin: 20px auto;
     background: transparent;
   }
 
@@ -265,11 +265,16 @@ h3{
     width: 100%;
     height: auto;
   }
+
   .caja-correo {
+    position: absolute;
     width: 100%;
     left: 0;
     top: 65%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 8px;
     padding: 0 15px;
     box-sizing: border-box;
   }
@@ -277,34 +282,40 @@ h3{
   .input-correo {
     width: 70%;
     height: 50px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .boton-enviar {
-    width: 80px;
+    width: 70px;
     height: 50px;
   }
   .titulo-productos {
+    position: relative;
     width: 100%;
+    height: auto;
     left: 0;
-    top: 50px;
+    top: 0;
+    margin: 40px 0 20px;
     text-align: center;
     font-size: 25px;
-    height: auto;
+    background-color: white;
   }
 
-
-  .titulo-productos h2{
+  .titulo-productos h2 {
     font-size: 28px;
+    margin: 0;
   }
+
   .productos {
+    position: relative;
+    top: 0;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 50px;
-    top: 50px;
-    padding: 50px 20px;
+    padding: 20px 20px 60px;
+    background-color: white;
   }
-
 
   .producto {
     width: 100%;
@@ -313,49 +324,111 @@ h3{
     align-items: center;
   }
 
-
   .rectangulo-titulo {
     width: 90%;
+    max-width: 300px;
+    height: auto;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     font-size: 22px;
+    background-color: white;
   }
 
+  .rectangulo-titulo p {
+    margin: 10px 0;
+  }
 
   .cuadro-grande {
     width: 90%;
     max-width: 320px;
     height: 400px;
+    border-radius: 50px;
   }
 
+  .cuadro-grande img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
+  }
 
   .rectangulo-info {
     width: 90%;
+    max-width: 300px;
     height: auto;
+    min-height: 95px;
     padding: 10px;
+    box-sizing: border-box;
     text-align: center;
+    font-size: 18px;
   }
+
+  .rectangulo-info p {
+    margin: 10px;
+  }
+
   .contenido {
-    flex-direction: column;
+    width: 100%;
     height: auto;
-    padding: 40px 20px;
-    text-align: center;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
+    padding: 50px 20px;
+    box-sizing: border-box;
+    text-align: center;
   }
 
-
-  .texto-contenido {.
+  .texto-contenido {
     width: 100%;
     padding: 0;
     margin: 0;
     font-size: 16px;
+    line-height: 1.7;
     text-align: justify;
+    box-sizing: border-box;
   }
-
 
   .img-contenido {
     width: 90%;
     max-width: 320px;
+    height: 320px;
+    border-radius: 40px;
+    object-fit: cover;
+  }
+
+  .comentario {
+    width: 90%;
+    max-width: 500px;
     height: auto;
+    min-height: 280px;
+    margin: 40px auto;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+
+  .contenido-comentario {
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .contenido-comentario p {
+    margin: 0;
+  }
+
+  .icono-comentario {
+    width: 65px;
+    height: 65px;
+  }
+
+  .icono-comentario a {
+    font-size: 25px;
   }
 }
 

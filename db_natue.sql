@@ -119,7 +119,35 @@ INSERT INTO `productos` (`codigo`, `nombre`, `descripcion`, `precio`, `costo`, `
 
 -- --------------------------------------------------------
 
---
+--(9463748, 'Angie', 'Av. Camacho 421', 62731919, 'admin', 'activo', NOW(), 'imgperfil.avif'),
+(13969703, 'Scherezade', 'Calle Jaén 118', 69957473, 'admin', 'activo', NOW(), 'imgperfil.avif'),
+(12372096, 'Jessenia', 'Av. Hernando Siles 735', 62731772, 'admin', 'activo', NOW(), 'imgperfil.avif'),
+(13875379, 'Nahia', 'Calle Federico Zuazo 286', 68487759, 'admin', 'activo', NOW(), 'imgperfil.avif');
+(10000008, 'lorena', 'Av. Mariscal Santa Cruz', 78889900, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000009, 'maria', 'Calle Linares #44', 79990011, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000010, 'denis', 'Av. Buenos Aires 990', 60001122, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000011, 'carmelita', 'Zona Miraflores #12', 61112233, 'usuario', 'inactivo', NOW(), 'imgperfil.avif'),
+(10000012, 'valentina', 'Calle Illampu 777', 62223344, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000004, 'veliz', 'Av. Arce 555', 74445566, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000001, 'isabella', 'Av. Villazón 1024', 71223344, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000002, 'paola', 'Calle Jordan 456', 72334455, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000003, 'pepi', 'Calle Murillo 102', 73334455, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000003, 'claudia', 'Zona Calacoto, Calle 15', 73445566, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000002, 'pablo', 'Av. 6 de Agosto 789', 72223344, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000004, 'alejandra', 'Av. Blanco Galindo Km 4', 74556677, 'usuario', 'inactivo', NOW(), 'imgperfil.avif'),
+(30000005, 'carolina', 'Calle Ayacucho 712', 75667788, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000006, 'tatiana', 'Av. Banzer, Condominio El Bosque', 76778899, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000007, 'veronica', 'Zona Achumani, Calle 22', 77889900, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000007, 'josue', 'Calle Sagárnaga #88', 77778899, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000008, 'raquel', 'Calle San Martín 380', 78990011, 'usuario', 'inactivo', NOW(), 'imgperfil.avif'),
+(10000005, 'pampeño', 'Zona Sur, Calle 21', 75556677, 'usuario', 'inactivo', NOW(), 'imgperfil.avif'),
+(30000009, 'vanessa', 'Av. Las Américas #89', 79001122, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(10000001, 'machaca', 'Calle Potosí 456', 71112233, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(30000010, 'elizabeth', 'Zona Equipetrol, Calle 5', 60112233, 'usuario', 'activo', NOW(), 'imgperfil.avif');
+(10000006, 'sebastian', 'Av. Bush 321', 76667788, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(40000001, 'fabricia', 'Av. Mutualista 450', 71334455, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(40000002, 'leonarda', 'Calle Bolívar 890', 72445566, 'usuario', 'activo', NOW(), 'imgperfil.avif'),
+(40000003, 'matea', 'Zona Sopocachi, Calle Aspiazu', 73556677, 'usuario', 'inactivo', NOW(), 'imgperfil.avif');
 -- Table structure for table `usuario`
 --
 

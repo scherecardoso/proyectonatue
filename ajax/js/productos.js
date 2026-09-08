@@ -231,6 +231,7 @@ function agregarProducto(codigo){
 
     })
 
+
     .then(respuesta => respuesta.json())
 
     .then(datos => {

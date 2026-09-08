@@ -1,3 +1,5 @@
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 document.addEventListener("DOMContentLoaded",()=>{
 
 verificarEstadoPedido();
@@ -68,11 +70,15 @@ fetch("php/crear_pedido.php",{
     if(data.ok){
 
 
-        alert(
-        "Pedido creado Nº "
-        + data.pedido
-        + ". Ahora agregue los productos al carrito."
-        );
+       Swal.fire({
+    title: "¡Pedido creado!",
+    text: "Pedido Nº " + data.pedido + ". Ahora agregue los productos al carrito.",
+    icon: "success",
+    background: "#faf9f6",
+    color: "#4a4a4a",
+    confirmButtonColor: "#555555",
+    confirmButtonText: "Aceptar"
+});
 
 
          window.location.href="index.php?id="+data.pedido;

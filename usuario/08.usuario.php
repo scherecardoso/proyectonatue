@@ -69,7 +69,10 @@ body {
 
 .bienvenida {
     grid-area: bienvenida;
-    background:#E4E4E5;
+    background-image: url('../img/niuserç.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 220px;
     width: 900px;
     left: 20%;
@@ -420,7 +423,7 @@ div{
 
 <section class="cards">
     <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalpedido; ?></h3><p>Pedidos</p></article>
-    <article class="card"><a href="../favoritos/favoritos.php"><div class="icono"><i class="fa-solid fa-heart"></i></div><p>Favoritos</p></a></article>
+    <article class="card"><a href="../favoritos/favoritos.php"><div class="icono"><i class="fa fa-heart-o"></i></div><p>Favoritos</p></a></article>
     <article class="card"><a href="../pagina/revisar.php"><div class="icono"><i class="fa-solid fa-star"></i></div><p>Comentarios</p></a></article>
 </section>
 

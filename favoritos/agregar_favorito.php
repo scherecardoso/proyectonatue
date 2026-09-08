@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -21,9 +22,34 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-/* Verificar si el producto ya es favorito */
+$sql = "SELECT * FROM usuario
+        WHERE CI='$CI'";
+
+$resultado = $conn->query($sql);
+
+if (!$resultado) {
+    die("Error en la consulta: " . $conn->error);
+}
+
+if ($resultado->num_rows == 0) {
+    die("El usuario no existe en la base de datos.");
+}
+
+$sql = "SELECT * FROM productos
+        WHERE codigo='$codigo'";
+
+$resultado = $conn->query($sql);
+
+if (!$resultado) {
+    die("Error en la consulta: " . $conn->error);
+}
+
+if ($resultado->num_rows == 0) {
+    die("El producto no existe en la base de datos.");
+}
+
 $sql = "SELECT * FROM favoritos
-        WHERE CI='$CI'
+        WHERE ci='$CI'
         AND codigo='$codigo'";
 
 $resultado = $conn->query($sql);
@@ -32,10 +58,9 @@ if (!$resultado) {
     die("Error en la consulta: " . $conn->error);
 }
 
-/* Si todavía no es favorito, guardarlo */
 if ($resultado->num_rows == 0) {
 
-    $sql = "INSERT INTO favoritos (CI, codigo)
+    $sql = "INSERT INTO favoritos (ci, codigo)
             VALUES ('$CI', '$codigo')";
 
     if (!$conn->query($sql)) {

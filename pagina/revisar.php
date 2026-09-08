@@ -129,7 +129,7 @@
 
             echo '<div class="asunto-titulo">Asunto</div>';
             echo '<div class="asunto">'.nl2br($asunto).'</div>';
-
+        
             echo '<div class="comentario-titulo">Comentario o sugerencia</div>';
             echo '<div class="texto-comentario">'.nl2br($comentario).'</div>';
 

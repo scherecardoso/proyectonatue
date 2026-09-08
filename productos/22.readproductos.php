@@ -256,9 +256,7 @@ if ($result && $result->num_rows > 0) {
         $codigo = $fila['codigo'];
          $stock = $fila['stock'];
 
-    // ==========================================
-    // DEFINIR COLOR SEGÚN CANTIDAD DE STOCK
-    // ==========================================
+
     if ($stock <= 5) {
         $colorStock = "red";
     } else {

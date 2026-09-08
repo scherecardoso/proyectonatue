@@ -1,4 +1,4 @@
-```php
+
 <?php
 session_start();
 ?>
@@ -98,7 +98,6 @@ h3 {
     color: inherit;
 }
 
-/* FAVORITOS */
 
 .form-favorito {
     margin-top: 10px;
@@ -156,7 +155,6 @@ h3 {
 
 <h2 id="titulo1"></h2>
 
-<!-- PRODUCTOS 23 AL 28 -->
 
 <div class="caja" id="caja1">
 
@@ -252,7 +250,6 @@ h3 {
 </div>
 
 
-<!-- PRODUCTOS 29 AL 33 -->
 
 <div class="caja" id="caja2">
 
@@ -333,8 +330,6 @@ h3 {
 </div>
 
 
-<!-- PRODUCTOS 34 AL 38 -->
-
 <div class="caja" id="caja3">
 
     <div class="producto">
@@ -413,8 +408,6 @@ h3 {
 
 </div>
 
-
-<!-- PRODUCTOS 39 AL 43 -->
 
 <div class="caja" id="caja4">
 
@@ -498,4 +491,4 @@ h3 {
 
 </body>
 </html>
-```
+

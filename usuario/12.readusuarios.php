@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if ($_SESSION['rol'] != "administrador") {
+  header("Location: ../usuario/09.register.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -2,6 +2,11 @@
 session_start();
 require("../ajax/php/conexion.php");
 
+include("../includes/header.php");
+include("../includes/includeadmin.php");
+
+
+
 $periodo = $_GET['periodo'] ?? 'dia';
 
 $labels = [];
@@ -60,8 +65,6 @@ if ($periodo == "dia") {
         }
     }
 
-
-
 } elseif ($periodo == "mes") {
 
     $titulo = "Ingresos por mes";
@@ -104,8 +107,6 @@ if ($periodo == "dia") {
         }
     }
 
-
-
 } elseif ($periodo == "anio") {
 
     $titulo = "Ingresos por año";
@@ -132,16 +133,12 @@ if ($periodo == "dia") {
         }
     }
 
-
-
 } else {
 
     $periodo = "dia";
     $titulo = "Ingresos por día";
 
 }
-
-
 
 $sqlTotal = " SELECT 
         SUM(v.costo) AS total
@@ -162,56 +159,65 @@ if ($resultadoTotal) {
 
 ?>
 
-<div class="reporte-ingresos">
-<h3><?php echo $titulo; ?></h3>
+<main class="contenido-principal">
+    <div class="reporte-ingresos">
+        <h3><?php echo $titulo; ?></h3>
 
-<div class="botones-periodo">
+        <div class="botones-periodo">
 
-    <a href="?periodo=dia"
-       class="<?php echo ($periodo == 'dia') ? 'activo' : ''; ?>">
-        Día
-    </a>
+            <a href="?periodo=dia"
+               class="<?php echo ($periodo == 'dia') ? 'activo' : ''; ?>">
+                Día
+            </a>
 
-    <a href="?periodo=semana"
-       class="<?php echo ($periodo == 'semana') ? 'activo' : ''; ?>">
-        Semana
-    </a>
+            <a href="?periodo=semana"
+               class="<?php echo ($periodo == 'semana') ? 'activo' : ''; ?>">
+                Semana
+            </a>
 
-    <a href="?periodo=mes"
-       class="<?php echo ($periodo == 'mes') ? 'activo' : ''; ?>">
-        Mes
-    </a>
+            <a href="?periodo=mes"
+               class="<?php echo ($periodo == 'mes') ? 'activo' : ''; ?>">
+                Mes
+            </a>
 
-    <a href="?periodo=anio"
-       class="<?php echo ($periodo == 'anio') ? 'activo' : ''; ?>">
-        Año
-    </a>
+            <a href="?periodo=anio"
+               class="<?php echo ($periodo == 'anio') ? 'activo' : ''; ?>">
+                Año
+            </a>
 
-</div>
+        </div>
 
-<div class="total-ingresos">
-    <span>Ingresos totales:</span>
-    <strong>
-        Bs <?php echo number_format($totalIngresos, 2); ?>
-    </strong>
-</div>|
-<div class="contenedor-grafico">
+        <div class="total-ingresos">
+            <span>Ingresos totales:</span>
+            <strong>
+                Bs <?php echo number_format($totalIngresos, 2); ?>
+            </strong>
+        </div>
 
-    <canvas id="graficoIngresos"></canvas>
-
-</div>
+        <div class="contenedor-grafico">
+            <canvas id="graficoIngresos"></canvas>
+        </div>
+    </div>
+</main>
 
 <style>
 
+main.contenido-principal {
+    grid-area: info;
+    padding: 30px;
+    overflow-y: auto;
+}
+
 .reporte-ingresos {
     width: 100%;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 
 .reporte-ingresos h3 {
     margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
 }
-
 
 .botones-periodo {
     display: flex;
@@ -227,6 +233,7 @@ if ($resultadoTotal) {
     color: #333;
     background: #fff;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .botones-periodo a:hover {
@@ -234,32 +241,48 @@ if ($resultadoTotal) {
 }
 
 .botones-periodo a.activo {
-    background: #333;
+    background: #ff5ca8;
     color: #fff;
+    border-color: #ff5ca8;
 }
-
 
 .total-ingresos {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 15px;
     margin-bottom: 20px;
-
     border: 1px solid #ddd;
     border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
 .total-ingresos strong {
     font-size: 22px;
+    color: #ff5ca8;
 }
-
-
 
 .contenedor-grafico {
     width: 100%;
     height: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+    main.contenido-principal {
+        padding: 15px;
+    }
+
+    .contenedor-grafico {
+        height: 300px;
+    }
+
+    .botones-periodo {
+        flex-wrap: wrap;
+    }
 }
 
 </style>

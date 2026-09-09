@@ -99,7 +99,7 @@ i{
     <a href="../usuario/13.formeditarusuario.php"><div> <i class="fa-solid fa-users"></i> Gestión de Usuarios</div></a>
     <div><i class="fa-solid fa-shield-halved"></i> Roles y Permisos</div>
      <a href="../admin/gestionproductos.php"><div><i class="fa-solid fa-box"></i> Gestión de Productos</div>
-    <a href="../admin/grafico.php"><div><i class="fa-solid fa-chart-line"></i> Reportes</div></a>
+    <a href="../admin/reporteingresos.php"><div><i class="fa-solid fa-chart-line"></i> Reportes</div></a>
     <a href="../admin/ventasypedidos.php"><div><i class="fa-solid fa-cart-shopping"></i> Ventas y Pedidos</div></a>
     <div><i class="fa-solid fa-gear"></i> Configuración</div>
     <div><i class="fa-solid fa-clock-rotate-left"></i> Actividad</div>

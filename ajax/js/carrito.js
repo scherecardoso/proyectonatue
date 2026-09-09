@@ -1,7 +1,6 @@
 //==============================
 // ABRIR CARRITO
 //==============================
-
 document.getElementById("carritoIcono")
 .addEventListener("click",()=>{
 
@@ -39,7 +38,6 @@ function cerrarSidebar(){
 // ACTUALIZAR CARRITO
 //==============================
 
-
 function actualizarCarrito(){
 
 fetch("php/carrito.php",{
@@ -58,9 +56,7 @@ body:"accion=mostrar"
 
 .then(datos=>{
 
-
 console.log(datos);
-
 
 let html="";
 
@@ -68,19 +64,15 @@ let total = 0;
 
 let cantidadTotal = 0;
 
-
 datos.forEach(producto=>{
-
 
 let subtotal = Number(producto.costototal);
 
 let cantidad = Number(producto.cantidad);
 
-
 total += subtotal;
 
 cantidadTotal += cantidad;
-
 
 html += `
 
@@ -88,16 +80,13 @@ html += `
 
 <img src="../img/${producto.imagen}" width="80">
 
-
 <h3>
 ${producto.nombre}
 </h3>
 
-
 <p>
 Precio: Bs ${producto.precio}
 </p>
-
 
 <p>
 Cantidad: ${cantidad}
@@ -108,12 +97,10 @@ Cantidad: ${cantidad}
 <button onclick="cambiarCantidad('${producto.productos_codigo}','aumentar')">+</button>
 </div>
 
-
 <p>
 Subtotal:
 Bs ${subtotal}
 </p>
-
 
 </div>
 
@@ -121,22 +108,14 @@ Bs ${subtotal}
 
 });
 
-
-
 document.getElementById("contenidoCarrito")
 .innerHTML = html;
-
-
 
 document.getElementById("cantidadCarrito")
 .innerHTML = cantidadTotal;
 
-
-
 document.getElementById("totalCarrito")
 .innerHTML = "Total: Bs " + total;
-
-
 
 })
 
@@ -146,8 +125,8 @@ console.log("Error carrito:",error);
 
 });
 
-
 }
+
 //==============================
 // VACIAR CARRITO
 //==============================
@@ -157,90 +136,147 @@ document.getElementById("vaciarCarrito")
 
 function vaciarCarrito(){
 
-    if(!confirm("¿Desea vaciar todo el carrito?")){
-        return;
-    }
+    Swal.fire({
+        title: "¿Vaciar carrito?",
+        text: "Se eliminarán todos los productos del carrito.",
+        icon: "warning",
+        background: "#faf9f6",
+        color: "#4a4a4a",
+        showCancelButton: true,
+        confirmButtonColor: "#555555",
+        cancelButtonColor: "#b8b5ae",
+        confirmButtonText: "Sí, vaciar",
+        cancelButtonText: "Cancelar"
+    }).then((resultado)=>{
 
-    fetch("php/carrito.php",{
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/x-www-form-urlencoded"
-        },
-
-        body:"accion=vaciar"
-
-    })
-
-    .then(res=>res.json())
-
-    .then(datos=>{
-
-        if(datos.ok){
-
-            actualizarCarrito();
-
-        }else{
-
-            alert(datos.mensaje);
-
+        if(!resultado.isConfirmed){
+            return;
         }
 
-    })
+        fetch("php/carrito.php",{
 
-    .catch(error=>{
+            method:"POST",
 
-        console.log(error);
+            headers:{
+                "Content-Type":"application/x-www-form-urlencoded"
+            },
+
+            body:"accion=vaciar"
+
+        })
+
+        .then(res=>res.json())
+
+        .then(datos=>{
+
+            if(datos.ok){
+
+                actualizarCarrito();
+
+                Swal.fire({
+                    title: "Carrito vacío",
+                    text: "Se eliminaron todos los productos.",
+                    icon: "success",
+                    background: "#faf9f6",
+                    color: "#4a4a4a",
+                    confirmButtonColor: "#555555",
+                    confirmButtonText: "Aceptar"
+                });
+
+            }else{
+
+                Swal.fire({
+                    title: "No se pudo vaciar",
+                    text: datos.mensaje,
+                    icon: "error",
+                    background: "#faf9f6",
+                    color: "#4a4a4a",
+                    confirmButtonColor: "#555555",
+                    confirmButtonText: "Aceptar"
+                });
+
+            }
+
+        })
+
+        .catch(error=>{
+
+            console.log(error);
+
+        });
 
     });
 
 }
 
-
 document.addEventListener("click",function(e){
-
 
     if(e.target.id=="comprar"){
 
-
         fetch("php/finalizar_pedido.php")
 
-.then(res=>res.json())
+        .then(res=>res.json())
 
-.then(data=>{
+        .then(data=>{
 
+            if(data.ok){
 
-    if(data.ok){
+                window.location.href="recibo.php";
 
+            }else{
 
-        window.location.href="recibo.php";
+                Swal.fire({
+                    title: "No se pudo finalizar",
+                    text: data.mensaje,
+                    icon: "error",
+                    background: "#faf9f6",
+                    color: "#4a4a4a",
+                    confirmButtonColor: "#555555",
+                    confirmButtonText: "Aceptar"
+                });
 
+            }
 
-    }else{
-
-
-        alert(data.mensaje);
+        });
 
     }
-
-
-});
-
-    }
-
 
 });
 
 function cambiarCantidad(codigo,accion){
+
 fetch("php/carrito.php",{
+
 method:"POST",
-headers:{"Content-Type":"application/x-www-form-urlencoded"},
+
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+
 body:"accion="+accion+"&codigo="+codigo
+
 })
+
 .then(res=>res.json())
+
 .then(data=>{
-if(!data.ok && data.mensaje) alert(data.mensaje);
+
+if(!data.ok && data.mensaje){
+
+    Swal.fire({
+        title: "No se puede realizar",
+        text: data.mensaje,
+        icon: "warning",
+        background: "#faf9f6",
+        color: "#4a4a4a",
+        confirmButtonColor: "#555555",
+        confirmButtonText: "Aceptar"
+    });
+
+}
+
 actualizarCarrito();
+
 });
+
 }

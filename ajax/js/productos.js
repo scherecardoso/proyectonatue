@@ -245,7 +245,15 @@ function agregarProducto(codigo){
 
         }else{
 
-            alert(datos.mensaje);
+            Swal.fire({
+                title: "No se pudo agregar",
+                text: datos.mensaje,
+                icon: "error",
+                background: "#faf9f6",
+                color: "#4a4a4a",
+                confirmButtonColor: "#555555",
+                confirmButtonText: "Aceptar"
+            });
 
         }
 

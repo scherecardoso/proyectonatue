@@ -225,6 +225,7 @@ $(document).ready(function(){
     });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/productos.js"></script>
 <script src="js/pedido.js"></script>
 <script src="js/carrito.js"></script>

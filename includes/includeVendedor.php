@@ -83,7 +83,6 @@ body {
   <a href="../ventas/readventas.php"><i class="fa-solid fa-history"></i> Historial de Ventas</a>
   <a href="../vendedor/reportesvendedor.php"><i class="fa-solid fa-chart-line"></i> Reportes</a>
   <a href="../pedidos/pedidosclientes.php"><i class="fa-solid fa-info-circle"></i> Estado de Pedidos</a>
-  <a href=""><i class="fa-solid fa-user"></i> Mi perfil</a>
   <a href="../auth/26.cerrarsesion.php">Cerrar Sesión</a>
 </aside>
 </body>

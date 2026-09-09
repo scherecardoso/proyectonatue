@@ -110,7 +110,24 @@ label.error{
 input.error{
     border:1px solid #a01045;
 }
+.volver{
+    width:100%;
+    padding:10px;
+    border:1px solid #f34bb3;
+    border-radius:12px;
+    background:#f06ac3;
+    color:#fff;
+    margin-top:10px;
+    cursor:pointer;
+    text-align:center;
+    text-decoration:none;
+    font-size: 11px;
+}
 
+.volver:hover{
+    transform: scale(1.03);
+    background:#f765c6;
+}
 </style>
 </head>
 
@@ -157,8 +174,9 @@ input.error{
             <input type="file" name="imagen" placeholder="Imagen">
         </label>
         </label>
-        <input type="hidden" name="codigo" value="<?php echo $producto['codigo']; ?>">
-    <button type="submit">♡</button>
+        <div class="volver">
+       <a href="../vendedor/07.vendedor.php" style="text-decoration:none; color:#fff;">VOLVER</a>
+        </div>
 
         <button type="submit">Guardar</button>
 

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 // ABRIR FORMULARIO 
 //============================== 
  
- 
+
 document.getElementById("generarPedido").addEventListener("click",()=>{ 
  
     document 
@@ -77,11 +77,18 @@ fetch("php/crear_pedido.php",{
             background: "#faf9f6", 
             color: "#4a4a4a", 
             confirmButtonColor: "#555555", 
-            confirmButtonText: "Aceptar" 
-        }); 
+            confirmButtonText: "Aceptar",
+            customClass: {
+                popup: "alertaPedido",
+                title: "tituloAlerta",
+                htmlContainer: "textoAlerta",
+                confirmButton: "botonAlerta"
+            }
+        }).then(() => {
  
+            window.location.href="index.php?id="+data.pedido; 
  
-         window.location.href="index.php?id="+data.pedido; 
+        });
  
  
     }else{ 
@@ -94,7 +101,13 @@ fetch("php/crear_pedido.php",{
             background: "#faf9f6",
             color: "#4a4a4a",
             confirmButtonColor: "#555555",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            customClass: {
+                popup: "alertaPedido",
+                title: "tituloAlerta",
+                htmlContainer: "textoAlerta",
+                confirmButton: "botonAlerta"
+            }
         });
  
  
@@ -106,7 +119,23 @@ fetch("php/crear_pedido.php",{
  
 .catch(error=>{ 
  
-    console.log("Error:",error); 
+    console.log("Error:", error); 
+ 
+    Swal.fire({
+        title: "Ocurrió un error",
+        text: "No se pudo conectar con el servidor.",
+        icon: "error",
+        background: "#faf9f6",
+        color: "#4a4a4a",
+        confirmButtonColor: "#555555",
+        confirmButtonText: "Aceptar",
+        customClass: {
+            popup: "alertaPedido",
+            title: "tituloAlerta",
+            htmlContainer: "textoAlerta",
+            confirmButton: "botonAlerta"
+        }
+    });
  
 }); 
  

@@ -31,6 +31,7 @@ if (
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
     <style>
+        /* Estilos para el buscador de pedidos */
         .zonaBuscadores {
             display: flex;
             flex-direction: column;
@@ -39,6 +40,7 @@ if (
         }
 
         .seccionBuscador {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -55,11 +57,7 @@ if (
         }
 
         .buscadorPedido {
-            margin-right:30%;
-            display: flex;
-            gap: 10px;
-            margin-right: 100%;
-        
+            display: flex; gap: 10px; align-items: center; margin-right: 30%;
         }
 
         .buscadorPedido input {
@@ -73,12 +71,13 @@ if (
 
         .buscadorPedido input:focus {
             outline: none;
+            border-color: #667eea;
             box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
         }
 
         .btnConsultarPedido {
             padding: 12px 25px;
-
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 5px;
@@ -89,6 +88,11 @@ if (
             align-items: center;
             gap: 8px;
             white-space: nowrap;
+        }
+
+        .btnConsultarPedido:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .btnConsultarPedido:disabled {
@@ -135,12 +139,14 @@ if (
 
         .tarjetaPedido {
             background: white;
+            border-left: 5px solid #667eea;
             padding: 15px;
             border-radius: 5px;
             margin-top: 10px;
         }
 
         .tarjetaPedido h4 {
+            color: #667eea;
             margin-bottom: 10px;
             font-size: 16px;
         }
@@ -194,6 +200,7 @@ if (
             width: 16px;
             height: 16px;
             border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -426,6 +433,9 @@ $(document).ready(function(){
         }
     });
 
+    // ============================================
+    // CONSULTAR PEDIDO
+    // ============================================
     const inputPedido = document.getElementById("numeroPedidoConsulta");
     const btnConsultar = document.getElementById("btnConsultarPedido");
     const divResultado = document.getElementById("resultadoPedido");
@@ -444,6 +454,7 @@ $(document).ready(function(){
             return;
         }
 
+        // Mostrar carga
         btnConsultar.disabled = true;
         divResultado.innerHTML = `
             <div class="alerta alerta-exito">
@@ -466,6 +477,7 @@ $(document).ready(function(){
             if (data.ok && data.pedido) {
                 let p = data.pedido;
 
+                // Determinar clase de estado
                 let estadoClase = "pendiente";
                 if (p.estado.toLowerCase().includes("completado")) {
                     estadoClase = "completado";
@@ -475,7 +487,7 @@ $(document).ready(function(){
 
                 divResultado.innerHTML = `
                     <div class="tarjetaPedido">
-                        <h4>Pedido Encontrado</h4>
+                        <h4>✅ Pedido Encontrado</h4>
                         
                         <div class="filaPedido">
                             <span class="etiqueta">Número:</span>

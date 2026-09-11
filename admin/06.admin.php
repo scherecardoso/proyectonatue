@@ -22,6 +22,28 @@ $totalUsuarios = $conn->query(
 $totalProductos = $conn->query(
     "SELECT COUNT(*) AS total FROM productos"
 )->fetch_assoc()['total'];
+
+
+$sqlVentasSemana = "SELECT  DATE(p.fecha) AS dia,
+        SUM(v.costo) AS total
+    FROM ventas v
+    INNER JOIN pedidos p ON v.pedidos_id = p.id
+    WHERE p.fecha >= CURDATE() - INTERVAL 6 DAY
+    GROUP BY DATE(p.fecha)
+    ORDER BY dia ASC
+";
+
+$resultadoVentasSemana = $conn->query($sqlVentasSemana);
+
+$diasVentas = [];
+$totalesVentas = [];
+
+if ($resultadoVentasSemana) {
+    while ($fila = $resultadoVentasSemana->fetch_assoc()) {
+        $diasVentas[] = date("d/m", strtotime($fila['dia']));
+        $totalesVentas[] = (float)$fila['total'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +55,7 @@ $totalProductos = $conn->query(
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
 body {
@@ -185,7 +207,11 @@ body {
     color: #ff78b8;
     font-size: 28px;
 }
-
+.grafico-resumen {
+    width: 90%;
+    height: 350px;
+    padding: 10px;
+}
 .pedidos {
     grid-area: pedidos;
     background: #ffffff;
@@ -435,8 +461,12 @@ i{
 
 
 <section class="contenido">
-  <section class="resumen">
+ <section class="resumen">
   <h3 class="titulo-caja">RESUMEN DE VENTAS</h3>
+  <div class="grafico-resumen">
+    <canvas id="graficoResumenVentas"></canvas>
+  </div>
+</section>
 </section>
 
 <section class="pedidos"><h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
@@ -496,5 +526,38 @@ while($pedido = $pedidos->fetch_assoc()){
   </section>
 </aside>
 </main>
+<script>
+
+const diasVentas = <?php echo json_encode($diasVentas); ?>;
+const totalesVentas = <?php echo json_encode($totalesVentas); ?>;
+
+const ctxResumen = document.getElementById('graficoResumenVentas');
+
+new Chart(ctxResumen, {
+    type: 'line',
+    data: {
+        labels: diasVentas,
+        datasets: [{
+            label: 'Ventas (Bs)',
+            data: totalesVentas,
+            borderColor: '#ff5ca8',
+            backgroundColor: 'rgba(255,92,168,0.15)',
+            tension: 0.3,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+</script>
 </body>
 </html>

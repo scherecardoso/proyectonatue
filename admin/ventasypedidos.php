@@ -23,70 +23,31 @@ if (!$resultado) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
 body {
+
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 330px 1fr;
+    grid-template-columns: 198px 1fr 260px;
     grid-template-rows: 70px 1fr;
     grid-template-areas:
-        "barra barra"
-        "menu contenido";
-    min-height: 100vh;
-    background: #fff;
-}
+        "barra barra barra"
+        "menu contenido contenido";
 
-.menu {
-    grid-area: menu;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
-    background: #fff;
-    padding: 15px;
-    margin-top: 27px;
-    width: 330px;
-    border-right: 1px solid #ececec;
-}
+    min-height: 100vh;
+    background: #ffffff;
 
-.menu a {
-    text-decoration: none;
-    color: #000;
 }
-
-.titulo-menu {
-    font-size: 15px;
-    color: #ff5ca8;
-    margin-bottom: 10px;
-}
-
-.menu div {
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 20px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.menu div:hover {
-    background: #ffdcec;
-    color: #ff5ca8;
-    padding-left: 22px;
-}
-
-.contenido {
-    grid-area: contenido;
-    padding: 40px;
-}
-
 .titulo {
     text-align: center;
     margin: 10px 0 35px;
@@ -95,20 +56,28 @@ body {
     font-size: 32px;
 }
 
+.contenido {
+    grid-area: contenido;
+    padding: 35px 40px;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+}
+
 .contenedorVentas {
     width: 100%;
-    max-width: 850px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-.contenedor {
-    background: #fff;
-    padding: 25px 30px;
-    margin: 0 auto 25px;
-    border-radius: 18px;
-    border: 1px solid #f0f0f0;
-    box-shadow: 0 4px 18px rgba(0,0,0,.08);
-    transition: .2s;
+.contenedor { 
+    background: #fff; 
+    padding: 25px 30px; 
+    margin: 0 0 25px; 
+    border-radius: 18px; 
+    border: 1px solid #f0f0f0; 
+    box-shadow: 0 4px 18px rgba(0,0,0,.08); 
+    transition: .2s; 
 }
 
 .contenedor:hover {
@@ -188,7 +157,12 @@ body {
     text-align: center;
     color: #777;
 }
-
+.btn i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 14px;
+    display: inline-block;
+}
 @media (max-width: 800px) {
 
     body {

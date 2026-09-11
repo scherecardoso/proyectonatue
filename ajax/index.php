@@ -40,7 +40,7 @@ if (
         }
 
         .seccionBuscador {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -71,13 +71,11 @@ if (
 
         .buscadorPedido input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+            border-color: #b5b5b6;
         }
 
         .btnConsultarPedido {
             padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 5px;
@@ -90,10 +88,6 @@ if (
             white-space: nowrap;
         }
 
-        .btnConsultarPedido:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
 
         .btnConsultarPedido:disabled {
             opacity: 0.6;
@@ -137,19 +131,7 @@ if (
             border-left: 4px solid #2e7d32;
         }
 
-        .tarjetaPedido {
-            background: white;
-            border-left: 5px solid #667eea;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
 
-        .tarjetaPedido h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
 
         .filaPedido {
             display: flex;
@@ -190,25 +172,6 @@ if (
             color: #155724;
         }
 
-        .estadoBadge.proceso {
-            background: #cce5ff;
-            color: #004085;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 
 </head>

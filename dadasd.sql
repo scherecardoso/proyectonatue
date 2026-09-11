@@ -35,7 +35,83 @@ CREATE TABLE `carrito` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+INSERT INTO carrito 
+(pedidos_id, productos_codigo, cantidad, costototal) VALUES
 
+(2001, 1, 2, 90),
+(2001, 3, 1, 48),
+
+(2002, 7, 1, 50),
+(2002, 19, 2, 40),
+
+(2003, 3, 2, 96),
+(2003, 23, 1, 28),
+
+(2004, 15, 2, 74),
+(2004, 18, 2, 36),
+
+(2005, 1, 3, 135),
+(2005, 17, 1, 39),
+
+(2006, 7, 2, 100),
+(2006, 19, 1, 20),
+
+(2007, 3, 3, 144),
+(2007, 23, 2, 56),
+
+(2008, 1, 1, 45),
+(2008, 15, 2, 74),
+
+(2009, 18, 3, 54),
+(2009, 19, 2, 40),
+
+(2010, 1, 2, 90),
+(2010, 3, 2, 96),
+
+(2011, 7, 1, 50),
+(2011, 23, 2, 56),
+
+(2012, 15, 3, 111),
+(2012, 17, 1, 39),
+
+(2013, 1, 2, 90),
+(2013, 18, 1, 18),
+
+(2014, 3, 2, 96),
+(2014, 19, 3, 60),
+
+(2015, 7, 2, 100),
+(2015, 23, 1, 28),
+
+(2016, 1, 4, 180),
+(2016, 17, 2, 78),
+
+(2017, 15, 1, 37),
+(2017, 18, 2, 36),
+
+(2018, 3, 1, 48),
+(2018, 7, 2, 100),
+
+(2019, 1, 2, 90),
+(2019, 23, 3, 84),
+
+(2020, 19, 2, 40),
+(2020, 18, 2, 36),
+
+(2021, 1, 3, 135),
+(2021, 3, 2, 96),
+
+(2022, 7, 1, 50),
+(2022, 15, 2, 74),
+
+(2023, 23, 2, 56),
+(2023, 17, 2, 78),
+
+(2024, 1, 2, 90),
+(2024, 19, 2, 40),
+
+(2025, 3, 3, 144),
+(2025, 18, 1, 18);
 --
 -- Estructura de tabla para la tabla `favoritos`
 --
@@ -63,7 +139,34 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+INSERT INTO pedidos 
+(id, nombre, fecha, estado, vendedor, telefono, direccion, metodoPago) VALUES
 
+(2001, 'lorena', '2026-09-01', 'Aceptado', 'Angie', '70000001', 'Cochabamba', 'QR'),
+(2002, 'maria', '2026-09-02', 'Aceptado', 'Scherezade', '70000002', 'Cochabamba', 'Efectivo'),
+(2003, 'denis', '2026-09-03', 'Aceptado', 'Jessenia', '70000003', 'Cochabamba', 'QR'),
+(2004, 'carmelita', '2026-09-04', 'Aceptado', 'Nahia', '70000004', 'Cochabamba', 'Tarjeta'),
+(2005, 'valentina', '2026-09-05', 'Aceptado', 'Angie', '70000005', 'Cochabamba', 'QR'),
+(2006, 'veliz', '2026-09-06', 'Aceptado', 'Scherezade', '70000006', 'Cochabamba', 'Efectivo'),
+(2007, 'isabella', '2026-09-07', 'Aceptado', 'Jessenia', '70000007', 'Cochabamba', 'QR'),
+(2008, 'paola', '2026-09-08', 'Aceptado', 'Nahia', '70000008', 'Cochabamba', 'Tarjeta'),
+(2009, 'pepi', '2026-09-09', 'Aceptado', 'Angie', '70000009', 'Cochabamba', 'Efectivo'),
+(2010, 'claudia', '2026-09-10', 'Aceptado', 'Scherezade', '70000010', 'Cochabamba', 'QR'),
+(2011, 'pablo', '2026-09-01', 'Aceptado', 'Jessenia', '70000011', 'Cochabamba', 'QR'),
+(2012, 'alejandra', '2026-09-02', 'Aceptado', 'Nahia', '70000012', 'Cochabamba', 'Efectivo'),
+(2013, 'carolina', '2026-09-03', 'Aceptado', 'Angie', '70000013', 'Cochabamba', 'Tarjeta'),
+(2014, 'tatiana', '2026-09-04', 'Aceptado', 'Scherezade', '70000014', 'Cochabamba', 'QR'),
+(2015, 'veronica', '2026-09-05', 'Aceptado', 'Jessenia', '70000015', 'Cochabamba', 'Efectivo'),
+(2016, 'josue', '2026-09-06', 'Aceptado', 'Nahia', '70000016', 'Cochabamba', 'QR'),
+(2017, 'raquel', '2026-09-07', 'Aceptado', 'Angie', '70000017', 'Cochabamba', 'Tarjeta'),
+(2018, 'pampeño', '2026-09-08', 'Aceptado', 'Scherezade', '70000018', 'Cochabamba', 'QR'),
+(2019, 'vanessa', '2026-09-09', 'Aceptado', 'Jessenia', '70000019', 'Cochabamba', 'Efectivo'),
+(2020, 'machaca', '2026-09-10', 'Aceptado', 'Nahia', '70000020', 'Cochabamba', 'QR'),
+(2021, 'elizabeth', '2026-09-01', 'Aceptado', 'Angie', '70000021', 'Cochabamba', 'Tarjeta'),
+(2022, 'sebastian', '2026-09-02', 'Aceptado', 'Scherezade', '70000022', 'Cochabamba', 'QR'),
+(2023, 'fabricia', '2026-09-03', 'Aceptado', 'Jessenia', '70000023', 'Cochabamba', 'Efectivo'),
+(2024, 'leonarda', '2026-09-04', 'Aceptado', 'Nahia', '70000024', 'Cochabamba', 'QR'),
+(2025, 'matea', '2026-09-05', 'Aceptado', 'Angie', '70000025', 'Cochabamba', 'Tarjeta');
 --
 -- Estructura de tabla para la tabla `productos`
 --
@@ -148,60 +251,61 @@ CREATE TABLE `usuario` (
 --
 -- Volcado de datos para la tabla `usuario`
 --
+INSERT INTO `usuario` (`CI`, `nombre`, `direccion`, `celular`, `rol`, `estado`, `fecha`, `imagen_perfil`) VALUES 
 
-INSERT INTO `usuario` (`CI`, `nombre`, `direccion`, `celular`, `rol`, `estado`, `fecha`, `imagen_perfil`) VALUES
-(9463748, 'Angie', 'angie@gmail.com', 62731919, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
-(13969703, 'Scherezade', 'scherezade@gmail.com', 69957473, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
-(12372096, 'Jessenia', 'jessenia@gmail.com', 62731772, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
-(13875379, 'Nahia', 'nahia@gmail.com', 68487759, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
-(10000008, 'lorena', 'Av. Mariscal Santa Cruz', 78889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000009, 'maria', 'Calle Linares #44', 79990011, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000010, 'denis', 'Av. Buenos Aires 990', 60001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000011, 'carmelita', 'Zona Miraflores #12', 61112233, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000012, 'valentina', 'Calle Illampu 777', 62223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000004, 'veliz', 'Av. Arce 555', 74445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000001, 'isabella', 'Av. Villazón 1024', 71223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000002, 'paola', 'Calle Jordan 456', 72334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000003, 'pepi', 'Calle Murillo 102', 73334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000003, 'claudia', 'Zona Calacoto, Calle 15', 73445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000002, 'pablo', 'Av. 6 de Agosto 789', 72223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000004, 'alejandra', 'Av. Blanco Galindo Km 4', 74556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000005, 'carolina', 'Calle Ayacucho 712', 75667788, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000006, 'tatiana', 'Av. Banzer, Condominio El Bosque', 76778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000007, 'veronica', 'Zona Achumani, Calle 22', 77889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000007, 'josue', 'Calle Sagárnaga #88', 77778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000008, 'raquel', 'Calle San Martín 380', 78990011, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000005, 'pampeño', 'Zona Sur, Calle 21', 75556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000009, 'vanessa', 'Av. Las Américas #89', 79001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000001, 'machaca', 'Calle Potosí 456', 71112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(30000010, 'elizabeth', 'Zona Equipetrol, Calle 5', 60112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
-(10000008, 'lorena', 'Av. Mariscal Santa Cruz', 78889900, 'usuario', 'activo', '2025-01-15 09:24:00', 'imgperfil.avif'),
-(10000009, 'maria', 'Calle Linares #44', 79990011, 'usuario', 'activo', '2025-02-03 14:17:00', 'imgperfil.avif'),
-(10000010, 'denis', 'Av. Buenos Aires 990', 60001122, 'usuario', 'activo', '2025-02-21 10:42:00', 'imgperfil.avif'),
-(10000011, 'carmelita', 'Zona Miraflores #12', 61112233, 'usuario', 'inactivo', '2025-03-08 16:35:00', 'imgperfil.avif'),
-(10000012, 'valentina', 'Calle Illampu 777', 62223344, 'usuario', 'activo', '2025-03-27 11:08:00', 'imgperfil.avif'),
-(10000004, 'veliz', 'Av. Arce 555', 74445566, 'usuario', 'activo', '2025-04-12 08:51:00', 'imgperfil.avif'),
-(30000001, 'isabella', 'Av. Villazón 1024', 71223344, 'usuario', 'activo', '2025-04-29 13:26:00', 'imgperfil.avif'),
-(30000002, 'paola', 'Calle Jordan 456', 72334455, 'usuario', 'activo', '2025-05-16 15:44:00', 'imgperfil.avif'),
-(10000003, 'pepi', 'Calle Murillo 102', 73334455, 'usuario', 'activo', '2025-06-02 09:13:00', 'imgperfil.avif'),
-(30000003, 'claudia', 'Zona Calacoto, Calle 15', 73445566, 'usuario', 'activo', '2025-06-19 17:22:00', 'imgperfil.avif'),
-(10000002, 'pablo', 'Av. 6 de Agosto 789', 72223344, 'usuario', 'activo', '2025-07-05 10:37:00', 'imgperfil.avif'),
-(30000004, 'alejandra', 'Av. Blanco Galindo Km 4', 74556677, 'usuario', 'inactivo', '2025-07-23 12:49:00', 'imgperfil.avif'),
-(30000005, 'carolina', 'Calle Ayacucho 712', 75667788, 'usuario', 'activo', '2025-08-11 14:05:00', 'imgperfil.avif'),
-(30000006, 'tatiana', 'Av. Banzer, Condominio El Bosque', 76778899, 'usuario', 'activo', '2025-08-28 09:56:00', 'imgperfil.avif'),
-(30000007, 'veronica', 'Zona Achumani, Calle 22', 77889900, 'usuario', 'activo', '2025-09-14 16:18:00', 'imgperfil.avif'),
-(10000007, 'josue', 'Calle Sagárnaga #88', 77778899, 'usuario', 'activo', '2025-10-01 11:31:00', 'imgperfil.avif'),
-(30000008, 'raquel', 'Calle San Martín 380', 78990011, 'usuario', 'inactivo', '2025-10-19 13:47:00', 'imgperfil.avif'),
-(10000005, 'pampeño', 'Zona Sur, Calle 21', 75556677, 'usuario', 'inactivo', '2025-11-06 08:29:00', 'imgperfil.avif'),
-(30000009, 'vanessa', 'Av. Las Américas #89', 79001122, 'usuario', 'activo', '2025-11-24 15:12:00', 'imgperfil.avif'),
-(10000001, 'machaca', 'Calle Potosí 456', 71112233, 'usuario', 'activo', '2025-12-09 10:06:00', 'imgperfil.avif'),
-(30000010, 'elizabeth', 'Zona Equipetrol, Calle 5', 60112233, 'usuario', 'activo', '2026-01-18 14:38:00', 'imgperfil.avif'),
-(10000006, 'sebastian', 'Av. Bush 321', 76667788, 'usuario', 'activo', '2026-02-07 09:45:00', 'imgperfil.avif'),
-(40000001, 'fabricia', 'Av. Mutualista 450', 71334455, 'usuario', 'activo', '2026-02-25 16:21:00', 'imgperfil.avif'),
-(40000002, 'leonarda', 'Calle Bolívar 890', 72445566, 'usuario', 'activo', '2026-03-13 11:54:00', 'imgperfil.avif'),
-(40000003, 'matea', 'Zona Sopocachi, Calle Aspiazu', 73556677, 'usuario', 'inactivo', '2026-04-02 13:16:00', 'imgperfil.avif'),
+(9463748, 'Angie', 'angie@gmail.com', 62731919, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'), 
+(13969703, 'Scherezade', 'scherezade@gmail.com', 69957473, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'), 
+(12372096, 'Jessenia', 'jessenia@gmail.com', 62731772, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'), 
+(13875379, 'Nahia', 'nahia@gmail.com', 68487759, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'), 
+
+(10000008, 'lorena', 'lorena@gmail.com', 78889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000009, 'maria', 'maria@gmail.com', 79990011, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000010, 'denis', 'denis@gmail.com', 60001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000011, 'carmelita', 'carmelita@gmail.com', 61112233, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000012, 'valentina', 'valentina@gmail.com', 62223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000004, 'veliz', 'veliz@gmail.com', 74445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000001, 'isabella', 'isabella@gmail.com', 71223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000002, 'paola', 'paola@gmail.com', 72334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000003, 'pepi', 'pepi@gmail.com', 73334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000003, 'claudia', 'claudia@gmail.com', 73445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000002, 'pablo', 'pablo@gmail.com', 72223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000004, 'alejandra', 'alejandra@gmail.com', 74556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000005, 'carolina', 'carolina@gmail.com', 75667788, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000006, 'tatiana', 'tatiana@gmail.com', 76778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000007, 'veronica', 'veronica@gmail.com', 77889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000007, 'josue', 'josue@gmail.com', 77778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000008, 'raquel', 'raquel@gmail.com', 78990011, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000005, 'pampeño', 'pampeño@gmail.com', 75556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000009, 'vanessa', 'vanessa@gmail.com', 79001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(10000001, 'machaca', 'machaca@gmail.com', 71112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+(30000010, 'elizabeth', 'elizabeth@gmail.com', 60112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'), 
+
+(10000008, 'lorena', 'lorena@gmail.com', 78889900, 'usuario', 'activo', '2025-01-15 09:24:00', 'imgperfil.avif'), 
+(10000009, 'maria', 'maria@gmail.com', 79990011, 'usuario', 'activo', '2025-02-03 14:17:00', 'imgperfil.avif'), 
+(10000010, 'denis', 'denis@gmail.com', 60001122, 'usuario', 'activo', '2025-02-21 10:42:00', 'imgperfil.avif'), 
+(10000011, 'carmelita', 'carmelita@gmail.com', 61112233, 'usuario', 'inactivo', '2025-03-08 16:35:00', 'imgperfil.avif'), 
+(10000012, 'valentina', 'valentina@gmail.com', 62223344, 'usuario', 'activo', '2025-03-27 11:08:00', 'imgperfil.avif'), 
+(10000004, 'veliz', 'veliz@gmail.com', 74445566, 'usuario', 'activo', '2025-04-12 08:51:00', 'imgperfil.avif'), 
+(30000001, 'isabella', 'isabella@gmail.com', 71223344, 'usuario', 'activo', '2025-04-29 13:26:00', 'imgperfil.avif'), 
+(30000002, 'paola', 'paola@gmail.com', 72334455, 'usuario', 'activo', '2025-05-16 15:44:00', 'imgperfil.avif'), 
+(10000003, 'pepi', 'pepi@gmail.com', 73334455, 'usuario', 'activo', '2025-06-02 09:13:00', 'imgperfil.avif'), 
+(30000003, 'claudia', 'claudia@gmail.com', 73445566, 'usuario', 'activo', '2025-06-19 17:22:00', 'imgperfil.avif'), 
+(10000002, 'pablo', 'pablo@gmail.com', 72223344, 'usuario', 'activo', '2025-07-05 10:37:00', 'imgperfil.avif'), 
+(30000004, 'alejandra', 'alejandra@gmail.com', 74556677, 'usuario', 'inactivo', '2025-07-23 12:49:00', 'imgperfil.avif'), 
+(30000005, 'carolina', 'carolina@gmail.com', 75667788, 'usuario', 'activo', '2025-08-11 14:05:00', 'imgperfil.avif'), 
+(30000006, 'tatiana', 'tatiana@gmail.com', 76778899, 'usuario', 'activo', '2025-08-28 09:56:00', 'imgperfil.avif'), 
+(30000007, 'veronica', 'veronica@gmail.com', 77889900, 'usuario', 'activo', '2025-09-14 16:18:00', 'imgperfil.avif'), 
+(10000007, 'josue', 'josue@gmail.com', 77778899, 'usuario', 'activo', '2025-10-01 11:31:00', 'imgperfil.avif'), 
+(30000008, 'raquel', 'raquel@gmail.com', 78990011, 'usuario', 'inactivo', '2025-10-19 13:47:00', 'imgperfil.avif'), 
+(10000005, 'pampeño', 'pampeño@gmail.com', 75556677, 'usuario', 'inactivo', '2025-11-06 08:29:00', 'imgperfil.avif'), 
+(30000009, 'vanessa', 'vanessa@gmail.com', 79001122, 'usuario', 'activo', '2025-11-24 15:12:00', 'imgperfil.avif'), 
+(10000001, 'machaca', 'machaca@gmail.com', 71112233, 'usuario', 'activo', '2025-12-09 10:06:00', 'imgperfil.avif'), 
+(30000010, 'elizabeth', 'elizabeth@gmail.com', 60112233, 'usuario', 'activo', '2026-01-18 14:38:00', 'imgperfil.avif'), 
+(10000006, 'sebastian', 'sebastian@gmail.com', 76667788, 'usuario', 'activo', '2026-02-07 09:45:00', 'imgperfil.avif'), 
+(40000001, 'fabricia', 'fabricia@gmail.com', 71334455, 'usuario', 'activo', '2026-02-25 16:21:00', 'imgperfil.avif'), 
+(40000002, 'leonarda', 'leonarda@gmail.com', 72445566, 'usuario', 'activo', '2026-03-13 11:54:00', 'imgperfil.avif'), 
+(40000003, 'matea', 'matea@gmail.com', 73556677, 'usuario', 'inactivo', '2026-04-02 13:16:00', 'imgperfil.avif'), 
 (2147483647, 'machaca', 'rojas@gmail.com', 2147483647, 'usuario', 'activo', '2026-09-08 10:13:57', 'imgperfil.avif');
-
 -- --------------------------------------------------------
 
 --
@@ -219,7 +323,34 @@ CREATE TABLE `ventas` (
 --
 -- Índices para tablas volcadas
 --
+INSERT INTO ventas 
+(pedidos_id, costo, metodo, estado) VALUES
 
+(2001, 138, 'QR', 'En proceso'),
+(2002, 90, 'Efectivo', 'En proceso'),
+(2003, 124, 'QR', 'En proceso'),
+(2004, 110, 'Tarjeta', 'En proceso'),
+(2005, 174, 'QR', 'En proceso'),
+(2006, 120, 'Efectivo', 'En proceso'),
+(2007, 200, 'QR', 'En proceso'),
+(2008, 119, 'Tarjeta', 'En proceso'),
+(2009, 94, 'Efectivo', 'En proceso'),
+(2010, 186, 'QR', 'En proceso'),
+(2011, 106, 'QR', 'En proceso'),
+(2012, 150, 'Efectivo', 'En proceso'),
+(2013, 108, 'Tarjeta', 'En proceso'),
+(2014, 156, 'QR', 'En proceso'),
+(2015, 128, 'Efectivo', 'En proceso'),
+(2016, 258, 'QR', 'En proceso'),
+(2017, 73, 'Tarjeta', 'En proceso'),
+(2018, 148, 'QR', 'En proceso'),
+(2019, 174, 'Efectivo', 'En proceso'),
+(2020, 76, 'QR', 'En proceso'),
+(2021, 231, 'Tarjeta', 'En proceso'),
+(2022, 124, 'QR', 'En proceso'),
+(2023, 134, 'Efectivo', 'En proceso'),
+(2024, 130, 'QR', 'En proceso'),
+(2025, 162, 'Tarjeta', 'En proceso');
 --
 -- Indices de la tabla `ventas`
 --

@@ -158,5 +158,10 @@ if(isset($_SESSION['rol'])){
         <i class="fa-solid fa-bag-shopping"></i>
     </a>
 
+    </a>
+    <a href="../fichaaaaaaaaaaaaaaaaaa(1).pdf">
+        <i class="fa-solid fa-seedling"></i>
+    </a>
+
 </div>
 </header>

@@ -193,6 +193,7 @@ tr:hover{
 <body>
 
 <?php include("../includes/header.php"); ?>
+<?php include("../includes/includeVendedor.php"); ?>
 
 <?php
 if ($rol == "administrador") {

@@ -24,7 +24,7 @@ body {
   margin: 0;
   grid-template-areas:
     "barra barra"
-    "menu-lateral principal"
+    "menu-lateral contenido"
     "pie pie";
   grid-template-columns: 320px 1fr;
   grid-template-rows: 70px 1fr 70px;
@@ -34,8 +34,8 @@ body {
 
 
 
-.principal {
-  grid-area: principal;
+.contenido {
+  grid-area: contenido;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -338,7 +338,7 @@ body {
     grid-template-rows: auto;
   }
   
-  .menu-lateral {
+  .contenido {
    display: none;
   }
   .principal {

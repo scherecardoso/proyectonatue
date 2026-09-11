@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2026 a las 17:22:03
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Sep 11, 2026 at 08:48 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `shena`
+-- Database: `shena`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `carrito`
+-- Table structure for table `carrito`
 --
 
 CREATE TABLE `carrito` (
@@ -34,10 +34,66 @@ CREATE TABLE `carrito` (
   `costototal` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `carrito`
+--
+
+INSERT INTO `carrito` (`pedidos_id`, `productos_codigo`, `cantidad`, `costototal`) VALUES
+(2001, 1, 2, 90.00),
+(2001, 3, 1, 48.00),
+(2002, 7, 1, 50.00),
+(2002, 19, 2, 40.00),
+(2003, 3, 2, 96.00),
+(2003, 23, 1, 28.00),
+(2004, 15, 2, 74.00),
+(2004, 18, 2, 36.00),
+(2005, 1, 3, 135.00),
+(2005, 17, 1, 39.00),
+(2006, 7, 2, 100.00),
+(2006, 19, 1, 20.00),
+(2007, 3, 3, 144.00),
+(2007, 23, 2, 56.00),
+(2008, 1, 1, 45.00),
+(2008, 15, 2, 74.00),
+(2009, 18, 3, 54.00),
+(2009, 19, 2, 40.00),
+(2010, 1, 2, 90.00),
+(2010, 3, 2, 96.00),
+(2011, 7, 1, 50.00),
+(2011, 23, 2, 56.00),
+(2012, 15, 3, 111.00),
+(2012, 17, 1, 39.00),
+(2013, 1, 2, 90.00),
+(2013, 18, 1, 18.00),
+(2014, 3, 2, 96.00),
+(2014, 19, 3, 60.00),
+(2015, 7, 2, 100.00),
+(2015, 23, 1, 28.00),
+(2016, 1, 4, 180.00),
+(2016, 17, 2, 78.00),
+(2017, 15, 1, 37.00),
+(2017, 18, 2, 36.00),
+(2018, 3, 1, 48.00),
+(2018, 7, 2, 100.00),
+(2019, 1, 2, 90.00),
+(2019, 23, 3, 84.00),
+(2020, 19, 2, 40.00),
+(2020, 18, 2, 36.00),
+(2021, 1, 3, 135.00),
+(2021, 3, 2, 96.00),
+(2022, 7, 1, 50.00),
+(2022, 15, 2, 74.00),
+(2023, 23, 2, 56.00),
+(2023, 17, 2, 78.00),
+(2024, 1, 2, 90.00),
+(2024, 19, 2, 40.00),
+(2025, 3, 3, 144.00),
+(2025, 18, 1, 18.00);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `favoritos`
+-- Table structure for table `favoritos`
 --
 
 CREATE TABLE `favoritos` (
@@ -48,7 +104,7 @@ CREATE TABLE `favoritos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedidos`
+-- Table structure for table `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -62,10 +118,41 @@ CREATE TABLE `pedidos` (
   `metodoPago` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `nombre`, `fecha`, `estado`, `vendedor`, `telefono`, `direccion`, `metodoPago`) VALUES
+(2001, 'lorena', '2026-09-01', 'Aceptado', 'Angie', '70000001', 'Cochabamba', 'QR'),
+(2002, 'maria', '2026-09-02', 'Aceptado', 'Scherezade', '70000002', 'Cochabamba', 'Efectivo'),
+(2003, 'denis', '2026-09-03', 'Aceptado', 'Jessenia', '70000003', 'Cochabamba', 'QR'),
+(2004, 'carmelita', '2026-09-04', 'Aceptado', 'Nahia', '70000004', 'Cochabamba', 'Tarjeta'),
+(2005, 'valentina', '2026-09-05', 'Aceptado', 'Angie', '70000005', 'Cochabamba', 'QR'),
+(2006, 'veliz', '2026-09-06', 'Aceptado', 'Scherezade', '70000006', 'Cochabamba', 'Efectivo'),
+(2007, 'isabella', '2026-09-07', 'Aceptado', 'Jessenia', '70000007', 'Cochabamba', 'QR'),
+(2008, 'paola', '2026-09-08', 'Aceptado', 'Nahia', '70000008', 'Cochabamba', 'Tarjeta'),
+(2009, 'pepi', '2026-09-09', 'Aceptado', 'Angie', '70000009', 'Cochabamba', 'Efectivo'),
+(2010, 'claudia', '2026-09-10', 'Aceptado', 'Scherezade', '70000010', 'Cochabamba', 'QR'),
+(2011, 'pablo', '2026-09-01', 'Aceptado', 'Jessenia', '70000011', 'Cochabamba', 'QR'),
+(2012, 'alejandra', '2026-09-02', 'Aceptado', 'Nahia', '70000012', 'Cochabamba', 'Efectivo'),
+(2013, 'carolina', '2026-09-03', 'Aceptado', 'Angie', '70000013', 'Cochabamba', 'Tarjeta'),
+(2014, 'tatiana', '2026-09-04', 'Aceptado', 'Scherezade', '70000014', 'Cochabamba', 'QR'),
+(2015, 'veronica', '2026-09-05', 'Aceptado', 'Jessenia', '70000015', 'Cochabamba', 'Efectivo'),
+(2016, 'josue', '2026-09-06', 'Aceptado', 'Nahia', '70000016', 'Cochabamba', 'QR'),
+(2017, 'raquel', '2026-09-07', 'Aceptado', 'Angie', '70000017', 'Cochabamba', 'Tarjeta'),
+(2018, 'pampeño', '2026-09-08', 'Aceptado', 'Scherezade', '70000018', 'Cochabamba', 'QR'),
+(2019, 'vanessa', '2026-09-09', 'Aceptado', 'Jessenia', '70000019', 'Cochabamba', 'Efectivo'),
+(2020, 'machaca', '2026-09-10', 'Aceptado', 'Nahia', '70000020', 'Cochabamba', 'QR'),
+(2021, 'elizabeth', '2026-09-01', 'Aceptado', 'Angie', '70000021', 'Cochabamba', 'Tarjeta'),
+(2022, 'sebastian', '2026-09-02', 'Aceptado', 'Scherezade', '70000022', 'Cochabamba', 'QR'),
+(2023, 'fabricia', '2026-09-03', 'Aceptado', 'Jessenia', '70000023', 'Cochabamba', 'Efectivo'),
+(2024, 'leonarda', '2026-09-04', 'Aceptado', 'Nahia', '70000024', 'Cochabamba', 'QR'),
+(2025, 'matea', '2026-09-05', 'Aceptado', 'Angie', '70000025', 'Cochabamba', 'Tarjeta');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -80,7 +167,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`codigo`, `nombre`, `descripcion`, `precio`, `costo`, `stock`, `imagen`, `estado`) VALUES
@@ -131,7 +218,7 @@ INSERT INTO `productos` (`codigo`, `nombre`, `descripcion`, `precio`, `costo`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -146,16 +233,67 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`CI`, `nombre`, `direccion`, `celular`, `rol`, `estado`, `fecha`, `imagen_perfil`) VALUES
-(12345678, 'pepa', 'aguilarcortezisabel@pedropoveda.edu.bo', 12345678, 'usuario', 'bfxgchdgjh', '2026-08-28 11:15:45', 'imgperfil.avif');
+(9463748, 'Angie', 'angie@gmail.com', 62731919, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
+(13969703, 'Scherezade', 'scherezade@gmail.com', 69957473, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
+(12372096, 'Jessenia', 'jessenia@gmail.com', 62731772, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
+(13875379, 'Nahia', 'nahia@gmail.com', 68487759, 'administrador', 'activo', '2026-09-08 14:08:43', 'imgperfil.avif'),
+(10000008, 'lorena', 'lorena@gmail.com', 78889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000009, 'maria', 'maria@gmail.com', 79990011, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000010, 'denis', 'denis@gmail.com', 60001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000011, 'carmelita', 'carmelita@gmail.com', 61112233, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000012, 'valentina', 'valentina@gmail.com', 62223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000004, 'veliz', 'veliz@gmail.com', 74445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000001, 'isabella', 'isabella@gmail.com', 71223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000002, 'paola', 'paola@gmail.com', 72334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000003, 'pepi', 'pepi@gmail.com', 73334455, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000003, 'claudia', 'claudia@gmail.com', 73445566, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000002, 'pablo', 'pablo@gmail.com', 72223344, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000004, 'alejandra', 'alejandra@gmail.com', 74556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000005, 'carolina', 'carolina@gmail.com', 75667788, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000006, 'tatiana', 'tatiana@gmail.com', 76778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000007, 'veronica', 'veronica@gmail.com', 77889900, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000007, 'josue', 'josue@gmail.com', 77778899, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000008, 'raquel', 'raquel@gmail.com', 78990011, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000005, 'pampeño', 'pampeño@gmail.com', 75556677, 'usuario', 'inactivo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000009, 'vanessa', 'vanessa@gmail.com', 79001122, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000001, 'machaca', 'machaca@gmail.com', 71112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(30000010, 'elizabeth', 'elizabeth@gmail.com', 60112233, 'usuario', 'activo', '2026-09-08 10:12:18', 'imgperfil.avif'),
+(10000008, 'lorena', 'lorena@gmail.com', 78889900, 'usuario', 'activo', '2025-01-15 09:24:00', 'imgperfil.avif'),
+(10000009, 'maria', 'maria@gmail.com', 79990011, 'usuario', 'activo', '2025-02-03 14:17:00', 'imgperfil.avif'),
+(10000010, 'denis', 'denis@gmail.com', 60001122, 'usuario', 'activo', '2025-02-21 10:42:00', 'imgperfil.avif'),
+(10000011, 'carmelita', 'carmelita@gmail.com', 61112233, 'usuario', 'inactivo', '2025-03-08 16:35:00', 'imgperfil.avif'),
+(10000012, 'valentina', 'valentina@gmail.com', 62223344, 'usuario', 'activo', '2025-03-27 11:08:00', 'imgperfil.avif'),
+(10000004, 'veliz', 'veliz@gmail.com', 74445566, 'usuario', 'activo', '2025-04-12 08:51:00', 'imgperfil.avif'),
+(30000001, 'isabella', 'isabella@gmail.com', 71223344, 'usuario', 'activo', '2025-04-29 13:26:00', 'imgperfil.avif'),
+(30000002, 'paola', 'paola@gmail.com', 72334455, 'usuario', 'activo', '2025-05-16 15:44:00', 'imgperfil.avif'),
+(10000003, 'pepi', 'pepi@gmail.com', 73334455, 'usuario', 'activo', '2025-06-02 09:13:00', 'imgperfil.avif'),
+(30000003, 'claudia', 'claudia@gmail.com', 73445566, 'usuario', 'activo', '2025-06-19 17:22:00', 'imgperfil.avif'),
+(10000002, 'pablo', 'pablo@gmail.com', 72223344, 'usuario', 'activo', '2025-07-05 10:37:00', 'imgperfil.avif'),
+(30000004, 'alejandra', 'alejandra@gmail.com', 74556677, 'usuario', 'inactivo', '2025-07-23 12:49:00', 'imgperfil.avif'),
+(30000005, 'carolina', 'carolina@gmail.com', 75667788, 'usuario', 'activo', '2025-08-11 14:05:00', 'imgperfil.avif'),
+(30000006, 'tatiana', 'tatiana@gmail.com', 76778899, 'usuario', 'activo', '2025-08-28 09:56:00', 'imgperfil.avif'),
+(30000007, 'veronica', 'veronica@gmail.com', 77889900, 'usuario', 'activo', '2025-09-14 16:18:00', 'imgperfil.avif'),
+(10000007, 'josue', 'josue@gmail.com', 77778899, 'usuario', 'activo', '2025-10-01 11:31:00', 'imgperfil.avif'),
+(30000008, 'raquel', 'raquel@gmail.com', 78990011, 'usuario', 'inactivo', '2025-10-19 13:47:00', 'imgperfil.avif'),
+(10000005, 'pampeño', 'pampeño@gmail.com', 75556677, 'usuario', 'inactivo', '2025-11-06 08:29:00', 'imgperfil.avif'),
+(30000009, 'vanessa', 'vanessa@gmail.com', 79001122, 'usuario', 'activo', '2025-11-24 15:12:00', 'imgperfil.avif'),
+(10000001, 'machaca', 'machaca@gmail.com', 71112233, 'usuario', 'activo', '2025-12-09 10:06:00', 'imgperfil.avif'),
+(30000010, 'elizabeth', 'elizabeth@gmail.com', 60112233, 'usuario', 'activo', '2026-01-18 14:38:00', 'imgperfil.avif'),
+(10000006, 'sebastian', 'sebastian@gmail.com', 76667788, 'usuario', 'activo', '2026-02-07 09:45:00', 'imgperfil.avif'),
+(40000001, 'fabricia', 'fabricia@gmail.com', 71334455, 'usuario', 'activo', '2026-02-25 16:21:00', 'imgperfil.avif'),
+(40000002, 'leonarda', 'leonarda@gmail.com', 72445566, 'usuario', 'activo', '2026-03-13 11:54:00', 'imgperfil.avif'),
+(40000003, 'matea', 'matea@gmail.com', 73556677, 'usuario', 'inactivo', '2026-04-02 13:16:00', 'imgperfil.avif'),
+(2147483647, 'machaca', 'rojas@gmail.com', 2147483647, 'usuario', 'activo', '2026-09-08 10:13:57', 'imgperfil.avif'),
+(931089239, 'vendedor', 'vendedor@gmail.com', 931089239, 'vendedor', 'activo', '2026-09-11 10:55:47', 'imgperfil.avif');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ventas`
+-- Table structure for table `ventas`
 --
 
 CREATE TABLE `ventas` (
@@ -167,94 +305,55 @@ CREATE TABLE `ventas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Índices para tablas volcadas
+-- Dumping data for table `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `pedidos_id`, `costo`, `metodo`, `estado`) VALUES
+(1, 2001, 138.00, 'QR', 'En proceso'),
+(2, 2002, 90.00, 'Efectivo', 'En proceso'),
+(3, 2003, 124.00, 'QR', 'En proceso'),
+(4, 2004, 110.00, 'Tarjeta', 'En proceso'),
+(5, 2005, 174.00, 'QR', 'En proceso'),
+(6, 2006, 120.00, 'Efectivo', 'En proceso'),
+(7, 2007, 200.00, 'QR', 'En proceso'),
+(8, 2008, 119.00, 'Tarjeta', 'En proceso'),
+(9, 2009, 94.00, 'Efectivo', 'En proceso'),
+(10, 2010, 186.00, 'QR', 'En proceso'),
+(11, 2011, 106.00, 'QR', 'En proceso'),
+(12, 2012, 150.00, 'Efectivo', 'En proceso'),
+(13, 2013, 108.00, 'Tarjeta', 'En proceso'),
+(14, 2014, 156.00, 'QR', 'En proceso'),
+(15, 2015, 128.00, 'Efectivo', 'En proceso'),
+(16, 2016, 258.00, 'QR', 'En proceso'),
+(17, 2017, 73.00, 'Tarjeta', 'En proceso'),
+(18, 2018, 148.00, 'QR', 'En proceso'),
+(19, 2019, 174.00, 'Efectivo', 'En proceso'),
+(20, 2020, 76.00, 'QR', 'En proceso'),
+(21, 2021, 231.00, 'Tarjeta', 'En proceso'),
+(22, 2022, 124.00, 'QR', 'En proceso'),
+(23, 2023, 134.00, 'Efectivo', 'En proceso'),
+(24, 2024, 130.00, 'QR', 'En proceso'),
+(25, 2025, 162.00, 'Tarjeta', 'En proceso');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `carrito`
+-- Indexes for table `ventas`
 --
-ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`pedidos_id`,`productos_codigo`),
-  ADD KEY `fk_carrito_producto` (`productos_codigo`);
-
---
--- Indices de la tabla `favoritos`
---
-ALTER TABLE `favoritos`
-  ADD KEY `favoritos_ibfk_1` (`ci`),
-  ADD KEY `favoritos_ibfk_2` (`codigo`);
-
---
--- Indices de la tabla `pedidos`
---
-ALTER TABLE `pedidos`
+ALTER TABLE `ventas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`codigo`);
-ALTER TABLE `productos` ADD FULLTEXT KEY `imagen` (`imagen`);
 
 --
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`CI`);
-
---
--- Indices de la tabla `ventas`
+-- AUTO_INCREMENT for table `ventas`
 --
 ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_ventas_pedido` (`pedidos_id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `pedidos`
---
-ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- AUTO_INCREMENT de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `carrito`
---
-ALTER TABLE `carrito`
-  ADD CONSTRAINT `fk_carrito_pedido` FOREIGN KEY (`pedidos_id`) REFERENCES `pedidos` (`id`),
-  ADD CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`productos_codigo`) REFERENCES `productos` (`codigo`);
-
---
--- Filtros para la tabla `favoritos`
---
-ALTER TABLE `favoritos`
-  ADD CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`ci`) REFERENCES `usuario` (`CI`),
-  ADD CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`codigo`) REFERENCES `productos` (`codigo`);
-
---
--- Filtros para la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `fk_ventas_pedido` FOREIGN KEY (`pedidos_id`) REFERENCES `pedidos` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

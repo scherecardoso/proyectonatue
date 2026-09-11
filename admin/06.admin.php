@@ -181,13 +181,10 @@ body {
 
 .contenido {
     grid-area: contenido;
-    display: grid;
-    grid-template-areas: "resumen pedidos";
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    margin-top: 560px;
+    display: flex;
+    gap: 20px;
+    margin-top: 2%;
     margin-left: 177px;
-    position: absolute;
 }
 
 .resumen {
@@ -198,7 +195,6 @@ body {
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
-    display: flex;
     display: flex;
     flex-direction: column;  
     align-items: center;   
@@ -454,43 +450,42 @@ i{
 <section class="cards">
     <a href="../usuario/13.formeditarusuario.php"><article class="card"><div class="icono"><i class="fa-solid fa-users"></i></div><h3><?php echo $totalUsuarios; ?></h3><p>Usuarios Registrados</p></article></a>
     <article class="card"><div class="icono"><i class="fa-solid fa-shield"></i></div><h3>2</h3><p>Roles Activos</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3><h3><?php echo $totalProductos; ?></h3></h3><p>Productos Registrados</p></article>
+    <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3><?php echo $totalProductos; ?></h3><p>Productos Registrados</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalUsuarios; ?></h3><p>Pedidos este mes</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3>$3.805</h3><p>Ventas este mes</p></article>
 </section>
 
 
 <section class="contenido">
- <section class="resumen">
-  <h3 class="titulo-caja">RESUMEN DE VENTAS</h3>
-  <div class="grafico-resumen">
-    <canvas id="graficoResumenVentas"></canvas>
-  </div>
-</section>
-</section>
+  <section class="resumen">
+    <h3 class="titulo-caja">RESUMEN DE VENTAS</h3>
+    <div class="grafico-resumen">
+      <canvas id="graficoResumenVentas"></canvas>
+    </div>
+  </section>
 
-<section class="pedidos"><h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
-  <table class="tabla-pedidos">
-<?php
-$pedidos = $conn->query("
-SELECT *
-    FROM pedidos
-    ORDER BY id DESC
-    LIMIT 5
-");
+  <section class="pedidos">
+    <h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
+    <table class="tabla-pedidos">
+      <?php
+      $pedidos = $conn->query("
+      SELECT *
+          FROM pedidos
+          ORDER BY id DESC
+          LIMIT 5
+      ");
 
-while($pedido = $pedidos->fetch_assoc()){
-?>
-<tr>
-    <td><?php echo $pedido['nombre']; ?></td>
-    <td><?php echo $pedido['fecha']; ?></td>
-    <td><?php echo $pedido['estado']; ?></td>
-    <td><?php echo $pedido['vendedor']; ?></td>
-</tr>
-<?php
-}
-?>
-
+      while($pedido = $pedidos->fetch_assoc()){
+      ?>
+      <tr>
+          <td><?php echo $pedido['nombre']; ?></td>
+          <td><?php echo $pedido['fecha']; ?></td>
+          <td><?php echo $pedido['estado']; ?></td>
+          <td><?php echo $pedido['vendedor']; ?></td>
+      </tr>
+      <?php
+      }
+      ?>
     </table>
   </section>
 </section>

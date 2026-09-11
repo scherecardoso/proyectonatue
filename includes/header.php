@@ -1,4 +1,3 @@
-
 <style>
 header {
   grid-area: barra;
@@ -63,23 +62,41 @@ nav a.activo::after {
   font-size: 18px;
   position: relative;
 }
-.usuario-info{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    color:#2b2b2b;
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #2b2b2b;
 }
 
-.nombre-usuario{
-    font-size:14px;
-    white-space:nowrap;
+.nombre-usuario {
+  font-size: 14px;
+  white-space: nowrap;
 }
-@media(max-width: 768px){
-    header {
+
+
+.icono-ambiental {
+  background-color: #dce8d5;
+  color: #4f6848 !important;
+  padding: 10px;
+  border-radius: 50%;
+  border: 2px solid #8fa586;
+  font-size: 20px !important;
+}
+
+.icono-ambiental:hover {
+  background-color: #6f8568;
+  color: white !important;
+}
+
+@media(max-width: 768px) {
+
+  header {
     padding: 20px;
     gap: 0px;
-    height: 130px; 
+    height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,68 +117,107 @@ nav a.activo::after {
 }
 </style>
 
+
 <header>
+
   <div class="logo">
     <h1>Natué</h1>
   </div>
 
+
   <nav>
     <ul>
-      <li><a href="../pagina/02.inicio.php">Inicio</a></li>
-      <li><a href="../pagina/03.productos.php">Cuidado</a></li>
-      <li><a href="../pagina/04.productos2.php">Cosmeticos</a></li>
-      <li><a href="../pagina/05.acercade.php">Nosotros</a></li>
-       <li><a href="../pagina/005.contactanos.php">Contactanos</a></li>
+
+      <li>
+        <a href="../pagina/02.inicio.php">
+          Inicio
+        </a>
+      </li>
+
+      <li>
+        <a href="../pagina/03.productos.php">
+          Cuidado
+        </a>
+      </li>
+
+      <li>
+        <a href="../pagina/04.productos2.php">
+          Cosmeticos
+        </a>
+      </li>
+
+      <li>
+        <a href="../pagina/05.acercade.php">
+          Nosotros
+        </a>
+      </li>
+
+      <li>
+        <a href="../pagina/005.contactanos.php">
+          Contactanos
+        </a>
+      </li>
+
     </ul>
   </nav>
 
-<div class="iconos-barra">
 
-<a href="<?php
+  <div class="iconos-barra">
 
-if(isset($_SESSION['rol'])){
+    <a href="<?php
 
-    if($_SESSION['rol'] == 'administrador'){
-        echo '../admin/06.admin.php';
+    if(isset($_SESSION['rol'])){
+
+        if($_SESSION['rol'] == 'administrador'){
+            echo '../admin/06.admin.php';
+        }
+
+        elseif($_SESSION['rol'] == 'vendedor'){
+            echo '../vendedor/07.vendedor.php';
+        }
+
+        else{
+            echo '../usuario/08.usuario.php';
+        }
+
+    }else{
+        echo '../usuario/09.register.php';
     }
 
-    elseif($_SESSION['rol'] == 'vendedor'){
-        echo '../vendedor/07.vendedor.php';
-    }
+    ?>" class="usuario-info">
 
-    else{
-        echo '../usuario/08.usuario.php';
-    }
+      <i class="fa-solid fa-user"></i>
 
-}else{
-    echo '../usuario/09.register.php';
-}
+      <span class="nombre-usuario">
 
-?>" class="usuario-info">
-
-    <i class="fa-solid fa-user"></i>
-
-    <span class="nombre-usuario">
         <?php
+
         if(isset($_SESSION['nombre'])){
             echo $_SESSION['nombre'];
         }else{
             echo 'Invitado';
         }
+
         ?>
-    </span>
 
-</a>
+      </span>
 
-</a>
+    </a>
+
     <a href="../ajax/index.php">
-        <i class="fa-solid fa-bag-shopping"></i>
+      <i class="fa-solid fa-bag-shopping"></i>
     </a>
 
-    </a>
-    <a href="../fichaaaaaaaaaaaaaaaaaa(1).pdf">
-        <i class="fa-solid fa-seedling"></i>
+
+    <a href="../fichaaaaaaaaaaaaaaaaaa(1).pdf"
+       class="icono-ambiental"
+       title="Ficha ambiental">
+
+      <i class="fa-solid fa-seedling"></i>
+
     </a>
 
-</div>
+
+  </div>
+
 </header>

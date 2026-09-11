@@ -1,4 +1,3 @@
-
 <?php
 $servidor = "localhost";
 $usuario = "root";
@@ -34,12 +33,12 @@ if ($resultado->num_rows > 0) {
     $_SESSION['estado'] = $fila['estado'];
     $_SESSION['fecha'] = $fila['fecha'];
 
-session_start();
+    session_start();
 
-if ($_SESSION['estado'] == "bloqueado") {
-    header("Location: ../admin/verbloqueo.php");
-    exit();
-}
+    if ($_SESSION['estado'] == "bloqueado") {
+        header("Location: ../admin/verbloqueo.php");
+        exit();
+    }
 
     if ($_SESSION['rol'] == "vendedor") {
 
@@ -63,7 +62,22 @@ if ($_SESSION['estado'] == "bloqueado") {
 
 } else {
 
-    echo "Usuario o datos incorrectos";
+    echo '<div style="
+        background-color: #f5e9e9;
+        color: #8b4f4f;
+        padding: 15px 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin: 30px auto;
+        width: 350px;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        border: 1px solid #dfc1c1;
+        box-shadow: 0 4px 12px rgba(120, 80, 80, 0.10);
+    ">
+        Usuario o datos incorrectos
+    </div>';
 }
 
 $conn->close();

@@ -23,6 +23,30 @@
             font-family: 'Open Sans', sans-serif;
         }
 
+        .botonvolver {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            padding: 14px 28px;
+            background-color: #737477;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            transition: 0.3s;
+            text-decoration:none;
+        }
+
+        .botonvolver:hover {
+            background-color: #997a95;
+            transform: translateY(-3px);
+            box-shadow: 0 9px 22px rgba(0, 0, 0, 0.22);
+        }
+
         form {
             width: 500px;
             max-width: 90%;
@@ -33,25 +57,40 @@
             position: relative;
         }
 
-        h1 {
+        .titulo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .titulo img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .titulo h1 {
             font-family: 'Playfair Display', serif;
             text-align: center;
-            font-size: 32px;
-            margin-top: 0;
-            margin-bottom: 10px;
+            font-size: 30px;
+            margin: 0;
             color: #4F4F4F;
         }
 
         .descripcion {
             text-align: center;
             margin-bottom: 30px;
-            color: #666;
+            color: #777777;
+            font-size: 14px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             color: #555555;
         }
@@ -66,11 +105,13 @@
             font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             outline: none;
+            background-color: #fafafa;
         }
 
         input[type="text"]:focus,
         textarea:focus {
-            border-color: #888;
+            border-color: #999999;
+            background-color: white;
         }
 
         textarea {
@@ -101,55 +142,41 @@
         }
 
         input[type="submit"]:hover {
-            transform: scale(1.03);
             background-color: #555555;
+            transform: translateY(-2px);
         }
 
         input[type="reset"] {
             background-color: #eeeeee;
-            color: #333;
+            color: #333333;
         }
 
         input[type="reset"]:hover {
             background-color: #dddddd;
+            transform: translateY(-2px);
         }
-
-        .titulo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-
-.titulo img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 10px;
-}
-
-.titulo h1 {
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    font-size: 30px;
-    margin: 0;
-    color: #4F4F4F;
-}
 
         @media (max-width: 768px) {
 
-           .titulo img {
-     width: 65px;
-    height: 65px;
-}
+            .botonvolver {
+                top: 15px;
+                left: 15px;
+                padding: 12px 22px;
+                font-size: 15px;
+            }
 
-.titulo h1 {
-    font-size: 25px;
-}
+            .titulo img {
+                width: 65px;
+                height: 65px;
+            }
+
+            .titulo h1 {
+                font-size: 25px;
+            }
 
             form {
                 padding: 35px 25px;
+                margin-top: 55px;
             }
 
         }
@@ -158,13 +185,18 @@
 </head>
 
 <body>
+    <a href="../pagina/02.inicio.php" class="botonvolver">← Volver</a>
 
     <form action="mensaje.php" method="POST">
 
         <div class="titulo">
-    <img src="../img/perrito-comentario.jpg" alt="Perrito usando una computadora">
-    <h1>Déjanos tu comentario</h1>
-</div>
+
+            <img src="../img/perrito-comentario.jpg" alt="Perrito usando una computadora">
+
+            <h1>Déjanos tu comentario</h1>
+
+        </div>
+
         <p class="descripcion">
             Tu opinión es muy importante para nosotros.
         </p>
@@ -176,8 +208,11 @@
         <textarea name="coment"></textarea>
 
         <div class="botones">
+
             <input type="submit" value="Enviar">
+
             <input type="reset" value="Limpiar">
+
         </div>
 
     </form>

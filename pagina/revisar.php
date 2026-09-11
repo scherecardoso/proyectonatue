@@ -29,7 +29,7 @@
 
         .encabezado {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         h1 {
@@ -52,6 +52,28 @@
             background: #D8CBC2;
             margin: 20px auto;
             border-radius: 10px;
+        }
+
+        .volver {
+            display: block;
+            width: 280px;
+            margin: 25px auto 35px;
+            padding: 14px 20px;
+            background: #5a5a63;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 6px 15px rgba(95, 111, 98, 0.25);
+            transition: 0.3s;
+        }
+
+        .volver:hover {
+            background: #726572;
+            transform: translateY(-3px);
+            box-shadow: 0 9px 20px rgba(95, 111, 98, 0.30);
         }
 
         .comentario {
@@ -92,6 +114,32 @@
             line-height: 1.7;
         }
 
+        @media (max-width: 768px) {
+
+            body {
+                padding: 40px 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .descripcion {
+                font-size: 14px;
+            }
+
+            .volver {
+                width: 90%;
+                font-size: 15px;
+                padding: 13px 15px;
+            }
+
+            .comentario {
+                padding: 25px 22px;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -112,6 +160,10 @@
 
     </div>
 
+    <a href="../pagina/02.inicio.php" class="volver">
+        ← Volver a la página principal
+    </a>
+
     <?php
 
     $archivo = fopen("recepcion.txt", "r");
@@ -129,7 +181,7 @@
 
             echo '<div class="asunto-titulo">Asunto</div>';
             echo '<div class="asunto">'.nl2br($asunto).'</div>';
-        
+
             echo '<div class="comentario-titulo">Comentario o sugerencia</div>';
             echo '<div class="texto-comentario">'.nl2br($comentario).'</div>';
 

@@ -65,7 +65,7 @@ body {
     grid-template-rows: 70px 1fr;
     grid-template-areas:
         "barra barra barra"
-        "menu contenido contenido";
+        "menu-lateral contenido contenido";
     gap: 10px;
     min-height: 100vh;
     background: #ffffff;
@@ -205,7 +205,7 @@ include("../includes/header.php");
 if ($rol == "administrador") {
     include("../includes/includeadmin.php");
 } else {
-    include("../includes/includevendedor.php");
+    include("../includes/includeVendedor.php");
 }
 ?>
 

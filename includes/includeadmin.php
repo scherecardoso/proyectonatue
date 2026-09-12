@@ -20,7 +20,7 @@
 }
 
 .titulo-menu {
-    font-size: 15px;
+    font-size: 25px;
     color: #ff5ca8;
     margin-bottom: 10px;
 }
@@ -106,7 +106,7 @@
         <div><i class="fa-solid fa-house"></i> Inicio</div>
     </a>
 
-    <a href="../admin/perfiladmin.php">
+    <a href="../perfil/perfiladmin.php">
         <div><i class="fa-solid fa-user"></i> Mi Perfil</div>
     </a>
 

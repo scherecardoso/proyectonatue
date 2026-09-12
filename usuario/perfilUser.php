@@ -79,12 +79,13 @@ body {
 }
 
 .icono i {
-    color: #f1ecef;
+    color: #ff5ca8;
     font-size: 20px;
 }
 
 h2 {
     font-size: 35px;
+    
 }
 
 p {
@@ -92,7 +93,7 @@ p {
 }
 
 div {
-    color: black;
+    color: #ff5ca8;
 }
 
 i {
@@ -158,7 +159,7 @@ i {
 .btn-editar-perfil {
     margin-bottom: 20px;
     padding: 10px 20px;
-    background: #080808;
+    background: #ff5ca8;
     color: white;
     border: none;
     border-radius: 20px;
@@ -168,7 +169,7 @@ i {
 }
 
 .btn-editar-perfil:hover {
-    background: #030303;
+    background: #f94599;
     transform: scale(1.05);
 }
 
@@ -185,7 +186,7 @@ i {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     margin: 0 0 20px 0;
-    color: #333;
+    color: #ff5ca8;
 }
 
 .info-dato {
@@ -200,14 +201,14 @@ i {
 .info-dato i {
     width: 50px;
     text-align: center;
-    color: #000000;
+    color: #ff5ca8;
     font-size: 26px;
 }
 
 .info-dato .etiqueta {
     font-family: 'Quicksand', sans-serif;
     font-size: 12px;
-    color: #999;
+    color: #ff5ca8;
     display: block;
 }
 
@@ -263,7 +264,7 @@ i {
     width: 100%;
     margin: 15px 0;
     padding: 10px;
-    border: 2px solid #020202;
+    border: 2px solid #ff5ca8;
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -271,7 +272,7 @@ i {
 .modal-content button {
     width: 100%;
     padding: 12px;
-    background: #000000;
+    background: #ff5ca8;
     color: white;
     border: none;
     border-radius: 8px;
@@ -372,7 +373,7 @@ i {
     <div class="modal-content">
         <span class="close" onclick="cerrarModal()">&times;</span>
         <h3>Cambiar foto de perfil</h3>
-        <form action="../usuario/actualizar_imagen_perfil.php" method="POST" enctype="multipart/form-data">
+        <form action="../perfil/actualizarimgperfil.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="imagen" accept="image/*" required>
             <button type="submit">Subir imagen</button>
         </form>

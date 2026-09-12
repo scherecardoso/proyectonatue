@@ -69,7 +69,7 @@ body {
     grid-template-rows: 70px 1fr;
     grid-template-areas:
         "barra barra barra"
-        "menu contenido contenido";
+        "menu-lateral contenido contenido";
     gap: 10px;
     min-height: 100vh;
     background: #ffffff;
@@ -274,7 +274,7 @@ tr:hover td {
 
 <?php
 include("../includes/header.php");
-include("../includes/includeadmin.php");
+include("../includes/includeVendedor.php");
 ?>
 
 <div class="contenido">

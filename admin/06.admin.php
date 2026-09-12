@@ -14,7 +14,22 @@ $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 if ($conn->connect_error) {
     die("Error de conexión");
 }
+$nombre_usuario = $_SESSION['nombre'];
 
+$sqlPerfil = "SELECT imagen_perfil FROM usuario WHERE nombre=?";
+$stmtPerfil = $conn->prepare($sqlPerfil);
+$stmtPerfil->bind_param("s", $nombre_usuario);
+$stmtPerfil->execute();
+$resultadoPerfil = $stmtPerfil->get_result();
+$perfil = $resultadoPerfil->fetch_assoc();
+$stmtPerfil->close();
+
+$imagenPerfil = !empty($perfil['imagen_perfil']) 
+    ? $perfil['imagen_perfil'] 
+    : 'imgperfil.avif';
+
+
+    
 $totalUsuarios = $conn->query(
     "SELECT COUNT(*) AS total FROM usuario"
 )->fetch_assoc()['total'];
@@ -442,9 +457,13 @@ i{
 <?php include("../includes/includeadmin.php"); ?>
 
 <main class="info">
-    <seccion class="bienvenida"><div class="circulo"></div>
+    <seccion class="bienvenida">
+      <div class="circulo"><img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"> </div>
+
     <div class="texto"><h2>BIENVENID@ <?php echo $_SESSION['nombre'];?></h2>
-    <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p></div></seccion>
+    <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
+  </div>
+</seccion>
 
 
 <section class="cards">

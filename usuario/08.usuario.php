@@ -11,7 +11,7 @@ $nombre_usuario = $_SESSION['nombre'];
 $sql = "SELECT imagen_perfil FROM usuario WHERE nombre=?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $nombre_usuario);
-$stmt->execute();
+$stmt->execute(); 
 $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 $stmt->close();
@@ -69,7 +69,6 @@ body {
 
 .bienvenida {
     grid-area: bienvenida;
-    background-image: url('../img/niuserç.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -88,6 +87,7 @@ body {
     gap: 15px;
     justify-content: flex-start;
     padding: 20px 40px;
+    background: #fdeff6;
 }
 
 
@@ -127,7 +127,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 18px rgba(172, 126, 126, 0.05);
     border: 1px solid #efefef;
 }
 
@@ -142,7 +142,7 @@ body {
 }
 
 .icono i {
-    color: rgb(17, 16, 16);
+    color: #ff78b8;
     font-size: 20px;
 }
 

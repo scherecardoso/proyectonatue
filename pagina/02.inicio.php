@@ -450,27 +450,27 @@ h3{
   <section class="productos">
 
     <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Crema Facial</center></p></div>
+    <div class="rectangulo-titulo"><p><center>Serum de Coco</center></p></div>
     <div class="cuadro-grande">
-    <img src="../img/zproducto1.jpg" alt=""></div>
+    <img src="../img/zpr2.jpeg" alt=""></div>
     <div class="rectangulo-info"><center><p>Hidrata,protege y mantiene el equilibrio de la humedad del rostro para una piel saludable </p></center></div></div>
 
     <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Retinol</center></p></div>
+    <div class="rectangulo-titulo"><p><center>Balsamo de frutilla</center></p></div>
     <div class="cuadro-grande">
-    <img src="../img/zproducto2.jpg" alt=""></div>
+    <img src="../img/zpr26.jpeg" alt=""></div>
     <div class="rectangulo-info"><center><p>Reduce arrugas, manchas y acne mejorando la textura de la piel</p></center></div></div>
 
     <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Crema Corporal </center></p></div>
+    <div class="rectangulo-titulo"><p><center>Jabon de Avena</center></p></div>
     <div class="cuadro-grande">
-    <img src="../img/zproducto3.png" alt=""></div>
+    <img src="../img/zpr44.jpeg" alt=""></div>
     <div class="rectangulo-info"><center><p>Hidrata, suaviza y protege la piel del cuerpo evitando resequedad para prevenir irritaciones </p></center></div></div>
 
     <div class="producto">
-    <div class="rectangulo-titulo"><center><p>Base en polvo</p></center></div>
+    <div class="rectangulo-titulo"><center><p>Polvo Facial</p></center></div>
     <div class="cuadro-grande">
-    <img src="../img/zproducto4.png" alt=""></div>
+    <img src="../img/zpr17.jpeg" alt=""></div>
     <div class="rectangulo-info"><center><p>Ayuda a unificar el tono de la piel, dando un acabado mate al rostro que cubre imperfecciones y sella el maquillaje liquido</p></center></div></div>
 </section>
 

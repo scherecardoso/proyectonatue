@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'usuario') {
     header("Location: ../pagina/login.php");
     exit();
 }
@@ -18,110 +18,70 @@ $sql = "SELECT CI, nombre, direccion, celular, rol, imagen_perfil FROM usuario W
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $nombre_usuario);
 $stmt->execute();
+
 $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
-
 $stmt->close();
+
 if (!$datosUsuario) {
     $datosUsuario = [
         'CI' => 'N/A',
         'nombre' => $nombre_usuario,
         'direccion' => 'No disponible',
         'celular' => 'No disponible',
-        'rol' => $_SESSION['rol'],
+        'rol' => 'usuario',
         'imagen_perfil' => 'imgperfil.avif'
     ];
 }
 
-$imagenPerfil = (!empty($datosUsuario['imagen_perfil'])) ? $datosUsuario['imagen_perfil'] : 'imgperfil.avif';
+$imagenPerfil = !empty($datosUsuario['imagen_perfil']) ? $datosUsuario['imagen_perfil'] : 'imgperfil.avif';
 
 $conexion->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
-
 body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
     grid-template-columns: 198px 1fr 260px;
-
     grid-template-rows: 70px 1fr;
     grid-template-areas:
         "barra barra barra"
-        "menu info act"
-        "pie pie pie";
-
+        "menu info act";
     gap: 10px;
-    height: 100vh;
+    min-height: 100vh;
     background: #ffffff;
 }
 
-.icono {
-    width: 50px;
-    height: 50px;
-    background: #fdfdfd;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icono i {
-    color: #f1ecef;
-    font-size: 20px;
-}
-
-h2 {
-    font-size: 35px;
-}
-
-p {
-    font-size: 20px;
-}
-
-div {
-    color: black;
-}
-
-i {
-    color: white;
-}
-
-.menu a {
-    text-decoration: none;
-    color: black;
-}
 .perfil-contenedor {
     grid-area: info;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 25px;
+    gap: 30px;
     padding-top: 35px;
-    padding-left: 170px;
+    padding-left: 80px;
+    box-sizing: border-box;
 }
 
 .perfil-card {
     width: 400px;
     background: white;
     border-radius: 25px;
-    border: 1px solid #ffffff;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 45px;
+    padding: 45px 20px 30px;
     box-sizing: border-box;
 }
 
@@ -136,6 +96,7 @@ i {
     overflow: hidden;
     margin-bottom: 20px;
     position: relative;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
 }
 
 .foto-perfil img {
@@ -143,8 +104,6 @@ i {
     height: 100%;
     object-fit: cover;
 }
-
-
 
 .nombre-perfil {
     font-family: 'Playfair Display', serif;
@@ -155,7 +114,7 @@ i {
 }
 
 .btn-editar-perfil {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px 20px;
     background: #080808;
     color: white;
@@ -167,12 +126,12 @@ i {
 }
 
 .btn-editar-perfil:hover {
-    background: #030303;
+    background: #333;
     transform: scale(1.05);
 }
 
 .info-card {
-    width: 1000px;
+    width: 700px;
     background: white;
     border-radius: 25px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -191,7 +150,7 @@ i {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 10px 15px;
+    padding: 12px 15px;
     margin-bottom: 8px;
     border-radius: 12px;
 }
@@ -200,7 +159,7 @@ i {
     width: 50px;
     text-align: center;
     color: #000000;
-    font-size: 26px;
+    font-size: 24px;
 }
 
 .info-dato .etiqueta {
@@ -217,7 +176,6 @@ i {
     display: block;
     margin-top: 2px;
 }
-
 
 .modal {
     display: none;
@@ -240,21 +198,20 @@ i {
 }
 
 .close {
-    color: #aaa;
+    color: #fdeff6;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
+.close:hover {
     color: black;
 }
 
 .modal-content h3 {
     margin-top: 0;
-    color: #333;
+    color: #ff5ca8;
     font-family: 'Playfair Display', serif;
 }
 
@@ -262,7 +219,7 @@ i {
     width: 100%;
     margin: 15px 0;
     padding: 10px;
-    border: 2px solid #020202;
+    border: 2px solid #ff5ca8;
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -270,7 +227,7 @@ i {
 .modal-content button {
     width: 100%;
     padding: 12px;
-    background: #000000;
+    background: #ff5ca8;
     color: white;
     border: none;
     border-radius: 8px;
@@ -280,28 +237,51 @@ i {
     transition: 0.3s;
 }
 
+.modal-content button:hover {
+    background: #333;
+}
 
+@media (max-width: 1000px) {
+    .perfil-contenedor {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .info-card {
+        width: 100%;
+    }
+}
 
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "barra"
+            "info";
+    }
+    .perfil-contenedor {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 15px;
+    }
+    .perfil-card,
+    .info-card {
+        width: 100%;
+        max-width: 500px;
+    }
+}
 </style>
-
 </head>
-
 <body>
 
 <?php include("../includes/header.php"); ?>
-<?php include("../includes/includeadmin.php"); ?>
+<?php include("../includes/includeUser.php"); ?>
 
 <div class="perfil-contenedor">
     <div class="perfil-card">
-
-
-
-
-<div class="foto-perfil">
-    <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
-
-</div>
-
+        <div class="foto-perfil">
+            <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
+        </div>
         <div class="nombre-perfil">
             <?php echo htmlspecialchars($datosUsuario['nombre']); ?>
         </div>
@@ -311,17 +291,13 @@ i {
     </div>
 
     <div class="info-card">
-        <h2 class="info-titulo">
-            Información personal
-        </h2>
+        <h2 class="info-titulo">Información personal</h2>
 
         <div class="info-dato">
             <i class="fa-solid fa-id-card"></i>
             <div>
                 <span class="etiqueta">CI</span>
-                <span class="valor">
-                    <?php echo htmlspecialchars($datosUsuario['CI']); ?>
-                </span>
+                <span class="valor"><?php echo htmlspecialchars($datosUsuario['CI']); ?></span>
             </div>
         </div>
 
@@ -329,19 +305,15 @@ i {
             <i class="fa-solid fa-user"></i>
             <div>
                 <span class="etiqueta">Nombre</span>
-                <span class="valor">
-                    <?php echo htmlspecialchars($datosUsuario['nombre']); ?>
-                </span>
+                <span class="valor"><?php echo htmlspecialchars($datosUsuario['nombre']); ?></span>
             </div>
         </div>
 
         <div class="info-dato">
-            <i class="fa-solid fa-envelope"></i>
+            <i class="fa-solid fa-location-dot"></i>
             <div>
-                <span class="etiqueta">Correo electrónico</span>
-                <span class="valor">
-                    <?php echo htmlspecialchars($datosUsuario['direccion']); ?>
-                </span>
+                <span class="etiqueta">Dirección</span>
+                <span class="valor"><?php echo htmlspecialchars($datosUsuario['direccion']); ?></span>
             </div>
         </div>
 
@@ -349,9 +321,7 @@ i {
             <i class="fa-solid fa-phone"></i>
             <div>
                 <span class="etiqueta">Celular</span>
-                <span class="valor">
-                    <?php echo htmlspecialchars($datosUsuario['celular']); ?>
-                </span>
+                <span class="valor"><?php echo htmlspecialchars($datosUsuario['celular']); ?></span>
             </div>
         </div>
 
@@ -359,9 +329,7 @@ i {
             <i class="fa-solid fa-user-shield"></i>
             <div>
                 <span class="etiqueta">Rol</span>
-                <span class="valor">
-                    <?php echo htmlspecialchars($datosUsuario['rol']); ?>
-                </span>
+                <span class="valor"><?php echo htmlspecialchars($datosUsuario['rol']); ?></span>
             </div>
         </div>
     </div>
@@ -387,7 +355,6 @@ function cerrarModal() {
     document.getElementById("modalImagen").style.display = "none";
 }
 
-
 window.onclick = function(event) {
     const modal = document.getElementById("modalImagen");
     if (event.target == modal) {
@@ -397,6 +364,4 @@ window.onclick = function(event) {
 </script>
 
 </body>
-
 </html>
- 

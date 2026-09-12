@@ -15,17 +15,15 @@ if ($_SESSION['rol'] != "vendedor") {
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
-<title>Maquetado Vendedor</title>
+<title>Vendedor</title>
 <style>
-
 body {
   display: grid; 
   font-family: Arial, sans-serif;
   margin: 0;
   grid-template-areas:
     "barra barra"
-    "menu-lateral contenido"
-    "pie pie";
+    "menu-lateral contenido";
   grid-template-columns: 320px 1fr;
   grid-template-rows: 70px 1fr 70px;
   min-height: 100vh;
@@ -34,13 +32,22 @@ body {
 
 
 
-.contenido {
-  grid-area: contenido;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 80px;
+
+
+.menu-lateral a:hover{
+  background: #ffdcec;
+  color: #ff5ca8;
+  padding-left: 22px;
+}
+
+.contenedor{
+    grid-area:contenido;
+    width:99%;
+    max-width:2100px;
+    margin:40px auto;
+    background:white;
+    padding:8px;
+  
 }
 .bienvenida {
   height: 140px;
@@ -465,6 +472,7 @@ body {
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeVendedor.php"); ?>
 
+<div class="contenedor">
 <main class="principal">
     <section class="bienvenida">
     <section class="contenido-bienvenida">

@@ -225,7 +225,7 @@ body {
 
 .contenido {
     grid-area: contenido;
-    padding: 30px;
+    padding: 10px;
     box-sizing: border-box;
     width: 80%;
     min-width: 0;

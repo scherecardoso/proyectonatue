@@ -160,13 +160,13 @@ body {
 .contenido {
     grid-area: contenido;
     box-sizing: border-box;
-    width: 80%;
+    width: 50%;
     min-width: 0;
     margin-left: 10%;
 }
 
 .contenedor {
-    width: 200%;
+    width: 170%;
     max-width: 1700px;
     margin: 0 auto;
 }

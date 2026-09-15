@@ -47,6 +47,8 @@ $conexion->close();
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    
     <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
@@ -78,7 +80,7 @@ body {
 }
 
 .icono i {
-    color: #f1ecef;
+    color: #ff5ca8;
     font-size: 20px;
 }
 
@@ -117,7 +119,6 @@ i {
     background: white;
     border-radius: 25px;
     border: 1px solid #ffffff;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,7 +150,7 @@ i {
 .nombre-perfil {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
-    color: #000000;
+    color: #ff5ca80;
     margin: 0 0 15px 0;
     text-align: center;
 }
@@ -157,7 +158,7 @@ i {
 .btn-editar-perfil {
     margin-bottom: 20px;
     padding: 10px 20px;
-    background: #080808;
+    background: #ff5ca8;
     color: white;
     border: none;
     border-radius: 20px;
@@ -167,7 +168,7 @@ i {
 }
 
 .btn-editar-perfil:hover {
-    background: #030303;
+    background: #f93c94;
     transform: scale(1.05);
 }
 
@@ -175,7 +176,7 @@ i {
     width: 1000px;
     background: white;
     border-radius: 25px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: #ff5ca8;
     padding: 30px;
     box-sizing: border-box;
 }
@@ -184,7 +185,7 @@ i {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     margin: 0 0 20px 0;
-    color: #333;
+    color: #ff5ca8;
 }
 
 .info-dato {
@@ -199,7 +200,7 @@ i {
 .info-dato i {
     width: 50px;
     text-align: center;
-    color: #000000;
+    color: #ff5ca8;
     font-size: 26px;
 }
 
@@ -227,7 +228,7 @@ i {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: ;
 }
 
 .modal-content {
@@ -236,7 +237,7 @@ i {
     padding: 30px;
     border-radius: 15px;
     width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin: #ff5ca8;;
 }
 
 .close {
@@ -262,7 +263,7 @@ i {
     width: 100%;
     margin: 15px 0;
     padding: 10px;
-    border: 2px solid #020202;
+    border: 2px solid #ff5ca8;
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -270,7 +271,7 @@ i {
 .modal-content button {
     width: 100%;
     padding: 12px;
-    background: #000000;
+    background: #ff5ca8;
     color: white;
     border: none;
     border-radius: 8px;

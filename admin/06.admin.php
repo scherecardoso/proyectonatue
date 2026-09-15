@@ -30,12 +30,21 @@ $imagenPerfil = !empty($perfil['imagen_perfil'])
 
 
     
+
+
+
+
 $totalUsuarios = $conn->query(
     "SELECT COUNT(*) AS total FROM usuario"
 )->fetch_assoc()['total'];
 
 $totalProductos = $conn->query(
     "SELECT COUNT(*) AS total FROM productos"
+)->fetch_assoc()['total'];
+
+
+$totalPedidos = $conn->query(
+    "SELECT COUNT(*) AS total FROM pedidos"
 )->fetch_assoc()['total'];
 
 
@@ -467,10 +476,10 @@ i{
 
 
 <section class="cards">
-    <a href="../usuario/13.formeditarusuario.php"><article class="card"><div class="icono"><i class="fa-solid fa-users"></i></div><h3><?php echo $totalUsuarios; ?></h3><p>Usuarios Registrados</p></article></a>
+    <article class="card"><div class="icono"><i class="fa-solid fa-users"></i></div><h3><?php echo $totalUsuarios; ?></h3><p>Usuarios Registrados</p></article></a>
     <article class="card"><div class="icono"><i class="fa-solid fa-shield"></i></div><h3>2</h3><p>Roles Activos</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3><?php echo $totalProductos; ?></h3><p>Productos Registrados</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3></h3><p>Pedidos este mes</p></article>
+    <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalPedidos; ?></h3><p>Pedidos este mes</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3><?php echo $totalesVentas; ?></h3><p>Ventas este mes</p></article>
 </section>
 
@@ -544,6 +553,7 @@ i{
 
 const diasVentas = <?php echo json_encode($diasVentas); ?>;
 const totalesVentas = <?php echo json_encode($totalesVentas); ?>;
+
 
 const ctxResumen = document.getElementById('graficoResumenVentas');
 

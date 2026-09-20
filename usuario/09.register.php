@@ -170,12 +170,7 @@ select {
     <input type="number" name="CI" placeholder="CI" required>
     <input type="email" name="direccion" placeholder="Correo electronico" required>
     
-   <select name="rol">
-         <option value="">Seleccione un rol</option>
-        <option value="usuario">Usuario</option>
-        <option value="vendedor">Vendedor</option>
-        <option value="administrador">Administrador</option>
-    </select>
+ 
 
         <button type="submit">Ingresar</button>
         
@@ -198,9 +193,6 @@ $(document).ready(function(){
             direccion:{
                 required:true,
                 email:true
-            },
-            rol:{
-                required:true,
             }
         },
 
@@ -214,9 +206,6 @@ $(document).ready(function(){
             direccion:{
                 required:"Por favor, ingresa tu correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"
-            },
-            rol:{
-                required:"Por favor, seleccione un rol"
             }
         }
 

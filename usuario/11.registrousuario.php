@@ -15,11 +15,10 @@ $CI = $_POST['CI'];
 $nombre = $_POST['nombre'];
 $direccion = $_POST['direccion'];
 $celular = $_POST['celular'];
-$rol = $_POST['rol'];
-$estado = $_POST['estado'];
 
 
-$sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado) VALUES ('$CI','$nombre', '$direccion', '$celular', '$rol','$estado')";
+
+$sql = "INSERT INTO usuario (CI, nombre, direccion, celular) VALUES ('$CI','$nombre', '$direccion', '$celular')";
 
 
 if ($conn->query($sql) === TRUE) {

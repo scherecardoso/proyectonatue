@@ -8,7 +8,8 @@ if (
     exit();
 
 }
-
+$nombreUsuario = $_SESSION['nombre'] ?? '';
+$telefonoUsuario = $_SESSION['celular'] ?? '';
 ?>
 
 
@@ -322,11 +323,13 @@ if (
 
         <h2>🛍 Finalizar Compra</h2>
 
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo">
+         <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" value="<?= htmlspecialchars($nombreUsuario) ?>" required>
 
-        <input type="text" id="telefono" name="telefono" placeholder="Teléfono">
+        <input type="text" id="telefono" name="telefono" placeholder="Teléfono" value="<?= htmlspecialchars($telefonoUsuario) ?>" required>
 
-        <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+        <input type="text" id="direccion" name="direccion" placeholder="Dirección"required value="">   
+
+    
 
         <select id="metodoPago" name="metodoPago">
             <option value="">Método de Pago</option>

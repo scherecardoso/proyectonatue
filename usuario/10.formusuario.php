@@ -166,14 +166,6 @@ select {
     <input type="email" name="direccion" placeholder="Correo electronico" required>
     <input type="number" name="celular" placeholder="Celular" required>
 
-    <select name="rol">
-         <option value="">Seleccione un rol</option>
-        <option value="usuario">Usuario</option>
-        <option value="vendedor">Vendedor</option>
-        <option value="administrador">Administrador</option>
-    </select>
-
-    <input type="text" name="estado" placeholder="Estado" required>
 
     <button type="submit">Registrar</button>
 </form>
@@ -190,7 +182,8 @@ $(document).ready(function(){
             CI:{
                 required:true,
                 number:true,
-                minlength:6
+                minlength:6,
+                maxlength:12
             },
             nombre:{
                 required:true
@@ -202,21 +195,18 @@ $(document).ready(function(){
             celular:{
                 required:true,
                 number:true,
-                minlength:8
-            },
-            rol:{
-                required:true
-            },
-            estado:{
-                required:true
+                minlength:8,
+                maxlength:8
             }
+
         },
 
         messages:{
             CI:{
                 required:"Por favor, ingresa tu CI",
                 number:"Solo se aceptan números",
-                minlength:"El CI debe tener al menos 6 números"
+                minlength:"El CI debe tener al menos 6 números",
+                maxlength:"El CI no puede tener más de 12 números"
             },
             nombre:{
                 required:"El nombre es obligatorio"
@@ -228,13 +218,8 @@ $(document).ready(function(){
             celular:{
                 required:"Este campo no puede ir vacío",
                 number:"Solo se aceptan números",
-                minlength:"El celular debe tener al menos 8 números"
-            },
-            rol:{
-                required:"Selecciona un rol para continuar"
-            },
-            estado:{
-                required:"El campo es obligatorio"
+                minlength:"El celular debe tener al menos 8 números",
+                maxlength:"El celular no puede tener más de 8 números"
             }
         }
 

@@ -480,7 +480,7 @@ i{
     <article class="card"><div class="icono"><i class="fa-solid fa-shield"></i></div><h3>2</h3><p>Roles Activos</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3><?php echo $totalProductos; ?></h3><p>Productos Registrados</p></article>
     <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalPedidos; ?></h3><p>Pedidos este mes</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3><?php echo $totalesVentas; ?></h3><p>Ventas este mes</p></article>
+    <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3></h3><p>Ventas este mes</p></article>
 </section>
 
 

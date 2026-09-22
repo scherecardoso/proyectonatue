@@ -5,28 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comentarios</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
     <style>
 
-        * {
-            box-sizing: border-box;
-        }
+      body {
+         display: grid;
+         margin: 0;
+         font-family: Arial, sans-serif;
+         grid-template-columns: 1fr;   
+         grid-template-areas:
+         "barra"
+         "banner"
+         "coment"
+         "pie";
+         gap: 10px;
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f7f5f2;
-            font-family: 'Open Sans', sans-serif;
-        }
-
+}
         .botonvolver {
             position: fixed;
-            top: 25px;
-            left: 25px;
+            margin-left: 15%;
+            margin-top: 5%;
             padding: 14px 28px;
             background-color: #737477;
             color: white;
@@ -48,6 +49,7 @@
         }
 
         form {
+            margin-left: 35%;
             width: 500px;
             max-width: 90%;
             background-color: white;
@@ -185,6 +187,7 @@
 </head>
 
 <body>
+    <?php include("../includes/header.php"); ?>
     <a href="../pagina/02.inicio.php" class="botonvolver">← Volver</a>
 
     <form action="mensaje.php" method="POST">

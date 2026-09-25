@@ -280,7 +280,7 @@ body {
 <div class="perfil-contenedor">
     <div class="perfil-card">
         <div class="foto-perfil">
-            <img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
+            <img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
         </div>
         <div class="nombre-perfil">
             <?php echo htmlspecialchars($datosUsuario['nombre']); ?>

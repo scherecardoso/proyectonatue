@@ -113,25 +113,56 @@ body {
 }
 
 
+
 .bienvenida {
     grid-area: bienvenida;
-    background: #fdeff6;
-    height: 220px;
-    width: 900px;
-    left: 20%;
-    position: absolute;
-    border-radius: 33px;
-    margin-left: 40px;
+    width: 100%;
+    max-width: 900px;
+    min-height: 220px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 25px;
+    padding: 20px 40px;
+    background: #fdeff6;
     font-size: 30px;
     font-family: 'Playfair Display', serif;
-    color: #2b2b2b;
-    gap: 15px;
-    justify-content: flex-start;
-    padding: 20px 40px;
+    color: #272020;
+    margin: 0 auto;
+    transform: translateX(-65px);
+    position: relative;
+    z-index: 1;
+    border-radius: 38px 48px 35px 45px / 35px 30px 42px 38px;
+    box-sizing: border-box;
 }
+
+.bienvenida::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    bottom: -6px;
+    left: -8px;
+    border: 3.5px solid #ff9cca;
+    border-radius: 45px 55px 42px 50px / 48px 38px 52px 43px;
+    transform: rotate(-0.7deg);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bienvenida::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: -4px;
+    bottom: -4px;
+    left: -3px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 35px 50px 38px 48px / 40px 34px 48px 37px;
+    transform: rotate(0.4deg);
+    pointer-events: none;
+}
+
 
 
 .circulo {
@@ -156,7 +187,7 @@ body {
     grid-area: cards;
     display: flex;
     gap: 10px;
-    margin-top: 250px;
+    margin-top: 50px;
     margin-left: 175px;
 }
 
@@ -186,14 +217,15 @@ body {
 
 .icono i {
     color: #ff5ca8;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 
 .card h3 {
     margin: 0;
-    font-size: 28px;
+    font-size: 29px;
     color: #000;
+    font-family: 'Playfair Display', serif;
 }
 
 .card p {
@@ -249,6 +281,51 @@ body {
     font-size: 28px;
 }
 
+.tabla-pedidos {
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 16px;
+    color: #555;
+    min-width: 500px;
+}
+
+.tabla-pedidos th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.tabla-pedidos td {
+    padding: 10px;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.estado {
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 80px;
+}
+
+.estado-aceptado {
+    background-color: #dff3e4;
+    color: #4f8a5b;
+}
+
+.estado-rechazado {
+    background-color: #f8dddd;
+    color: #b85c5c;
+}
+
+.estado-pendiente {
+    background-color: #fff1d6;
+    color: #a67c35;
+}
+
 .act {
     grid-area: act;
     display: flex;
@@ -263,8 +340,8 @@ body {
 
 .acciones {
     background: #ffffff;
-    width: 290px;
-    height: 320px;
+    width: 330px;
+    height: 360px;
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
@@ -277,8 +354,8 @@ body {
 
 .resumen-sistema {
     background: #ffffff;
-    width: 290px;
-    height: 320px;
+    width: 330px;
+    height: 360px;
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
@@ -294,8 +371,8 @@ body {
 
 .actividad {
     background: #ffffff;
-    width: 290px;
-    height: 320px;
+    width: 330px;
+    height: 360px;
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
@@ -467,9 +544,9 @@ i{
 
 <main class="info">
     <seccion class="bienvenida">
-      <div class="circulo"><img src="../img/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"> </div>
+      <div class="circulo"><img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"> </div>
 
-    <div class="texto"><h2>BIENVENID@ <?php echo $_SESSION['nombre'];?></h2>
+    <div class="texto"><h2>¡BIENVENIDA, <?php echo $_SESSION['nombre'];?>! 🌸</h2>
     <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
   </div>
 </seccion>
@@ -508,8 +585,29 @@ i{
       <tr>
           <td><?php echo $pedido['nombre']; ?></td>
           <td><?php echo $pedido['fecha']; ?></td>
-          <td><?php echo $pedido['estado']; ?></td>
+        
           <td><?php echo $pedido['vendedor']; ?></td>
+
+        
+                            <td><?php echo htmlspecialchars($pedido['id']); ?></td>
+                            <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
+                            <td>
+                                <?php
+                                $estado = strtolower(trim($pedido['estado']));
+
+                                if ($estado === 'aceptado') {
+                                    $claseEstado = 'estado-aceptado';
+                                } elseif ($estado === 'rechazado') {
+                                    $claseEstado = 'estado-rechazado';
+                                } else {
+                                    $claseEstado = 'estado-pendiente';
+                                }
+                                ?>
+                                <span class="estado <?php echo $claseEstado; ?>">
+                                    <?php echo htmlspecialchars($pedido['estado']); ?>
+                                </span>
+                            </td>
+                        
       </tr>
       <?php
       }

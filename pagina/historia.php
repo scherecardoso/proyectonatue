@@ -1,0 +1,414 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+  
+<style>
+
+
+
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    background-color:#f8f8f8;
+    gap: 10px;
+}
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  color: #000000;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 0;
+}
+
+.contenido h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.contenido > p {
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.bloque-nosotros {
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.bloque-nosotros p {
+  max-width: 800px;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.bloque {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  width: 85%;
+  margin: auto;
+}
+
+.mision,
+.vision {
+  width: 50%;
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.mision p,
+.vision p {
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+.bloque-texto {
+  width: 50%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  position: relative;
+  left: 30px;
+}
+
+.bloque-texto h2 {
+  font-family: 'Playfair Display', serif;
+  color: #caa3a9;
+}
+
+.bloque-texto h2::after {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 2px;
+  background: #d8bfc4;
+  margin-top: 8px;
+}
+
+.valores {
+  width: 85%;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: 25px;
+  background: white;
+  text-align: center;
+}
+
+.valores h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.valor {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.valor:hover {
+  transform: translateY(-5px);
+}
+
+.valor i {
+  font-size: 22px;
+  color: pink;
+  margin-bottom: 10px;
+}
+
+.equipo {
+  width: 85%;
+  text-align: center;
+  margin: 40px auto;
+}
+
+.equipo h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.miembro {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.miembro img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.miembro h4 {
+  margin: 5px 0;
+}
+
+.miembro p {
+  color: #888;
+  font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .contenido {
+    width: 100%;
+    padding: 40px 15px;
+    gap: 30px;
+  }
+
+  .contenido h1 {
+    font-size: 38px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .contenido > p {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 5px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+
+  .bloque {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .mision,
+  .vision {
+    width: 100%;
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+
+  .mision h2,
+  .vision h2 {
+    font-size: 25px;
+    margin-top: 0;
+  }
+
+  .mision p,
+  .vision p {
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+
+  .equipo {
+    width: 100%;
+    padding: 0 15px;
+    margin: 30px auto;
+  }
+
+  .equipo h2 {
+    font-size: 28px;
+  }
+
+  .equipo-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .miembro {
+    width: 100%;
+    max-width: 320px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .miembro img {
+    width: 150px;
+    height: 150px;
+  }
+
+
+
+  .valores {
+    width: calc(100% - 30px);
+    padding: 30px 15px;
+    border-radius: 20px;
+  }
+
+  .valores h2 {
+    font-size: 28px;
+  }
+
+  .valores-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .valor {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .valor h4 {
+    font-size: 17px;
+  }
+
+  .valor p {
+    font-size: 14px;
+  }
+
+}
+
+
+
+
+</style>
+</head>
+<body>
+<?php include("../includes/header.php");?>
+<section class="contenido" >
+
+<h1>Nosotros</h1>
+
+  <p>NATUE es una marca boliviana de cosméticos naturales 
+    creada por jóvenes emprendedores, comprometida con el 
+    cuidado del medio ambiente y la belleza auténtica. 
+    Buscamos inspirar a las personas a valorar lo natural, 
+    promover el talento local y construir una Bolivia más
+     consciente y sostenible.</p>
+
+<div class="bloque">
+
+  <div class="mision">
+    <h2>MISIÓN</h2>
+    <p>En NATUE creamos cosméticos naturales y accesibles con ingredientes bolivianos, cuidando la salud y el medio ambiente. Buscamos reflejar la belleza de la naturaleza y el talento joven, impulsando el emprendimiento y el desarrollo sostenible en Bolivia. Cada producto representa nuestro compromiso con un futuro más consciente y responsable.</p>
+  </div>
+
+    <div class="vision">
+      <h2>VISIÓN</h2>
+      <p>En NATUE soñamos con ser una marca boliviana reconocida por cosméticos naturales que realzan la belleza auténtica y cuidan el medio ambiente. Queremos crecer con esfuerzo y responsabilidad, usando los recursos de nuestra tierra de forma sostenible. Aspiramos a ser un ejemplo de emprendimiento joven que inspire a crear proyectos y construir una Bolivia más consciente y unida con la naturaleza.</p>
+  
+  </div>
+</section>
+<section class="equipo">
+
+  <h2>Nuestro equipo</h2>
+
+  <div class="equipo-grid">
+
+    <div class="miembro">
+      <img src="../img/.angie.png">
+      <h4>Angie Alba</h4>
+      <p>Representante Legal</p>
+    </div>
+
+    <div class="miembro">
+      <img src="../img/.jess.png">
+      <h4>Jessenia Copa</h4>
+      <p>Jefa de Desarrollo</p>
+    </div>
+
+    <div class="miembro">
+      <img src="../img/.sheshe.png">
+      <h4>Scherezade Cardozo</h4>
+      <p>Jefa de Base de Datos</p>
+    </div>
+
+    <div class="miembro">
+      <img src="../img/.nahia.png">
+      <h4>Nahia Agreda</h4>
+      <p>Jefa de Control</p>
+    </div>
+
+  </div>
+
+</section>
+<section class="valores">
+
+  <h2>Nuestros valores</h2>
+
+  <div class="valores-grid">
+
+    <div class="valor">
+      <i class="fa-solid fa-leaf"></i>
+      <h4>Ingredientes naturales</h4>
+      <p>Fórmulas suaves y efectivas</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-paw"></i>
+      <h4>Cruelty free</h4>
+      <p>No testeamos en animales</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-recycle"></i>
+      <h4>Eco friendly</h4>
+      <p>Envases responsables</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-droplet"></i>
+      <h4>Cuidado consciente</h4>
+      <p>Bienestar para tu piel</p>
+    </div>
+
+  </div>
+
+</section>
+<?php include("../includes/footer.php");?>
+</body>
+</html>

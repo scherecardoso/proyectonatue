@@ -26,21 +26,17 @@ body {
     padding: 15px;
     margin-top: 27px;
     width: 330px;
-    border-right: 1px solid #ececec;
+    border-right: 3px solid #ececec;
 }
 
-.titulo-menu {
-    font-size: 15px;
-    color: #ff5ca8; 
-    margin-bottom: 10px;
-}
 
 .menu div{
     padding: 15px;
     border-radius: 12px;
-    font-size: 20px;
+    font-size: 25px;
     transition: .3s;
     cursor: pointer;
+    color: #ff5ca8;
 }
 
 .menu div:hover{
@@ -51,8 +47,8 @@ body {
 
 
 .icono {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: #f3f3f3;
     border-radius: 50%;
     display: flex;

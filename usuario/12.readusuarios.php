@@ -47,47 +47,37 @@ body {
 
 
 h2 {
-    font-size: 28px;
+    text-align: center;
+    color: #ff5ca8;
+    margin-bottom: 25px;
+    font-size: 35px;
+    font-family: 'Playfair Display', serif;
 }
 
 h3{
     color: #000000;
 }
 
-.volver{
-    background:linear-gradient(135deg,#e6e6e6,#cfcfcf);
-    color:#444;
-    padding:12px 24px;
-    border-radius:12px;
-    text-decoration:none;
-    display:inline-block;
-    margin-bottom:25px;
-    font-weight:bold;
-    box-shadow:0 3px 8px rgba(0,0,0,0.12);
-    transition:0.3s;
-}
-
-.volver:hover{
-    background:linear-gradient(135deg,#d8d8d8,#bdbdbd);
-    transform:translateY(-2px);
-}
 
 table{
     width:100%;
-    border-collapse:separate;
+    border-collapse:collapse;
     border-spacing:0 15px;
 }
 
-th{
-    background:#f7e8ee;
-    color:#ff4f8b;
-    padding:18px;
+
+th {
+    background: #fff1f7;
+    padding: 16px;
+    font-size: 14px;
+    color: #ff5ca8;
+    text-align: center;
 }
 
-td{
-    background:white;
-    padding:18px;
-    text-align:center;
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
 .btn{
@@ -135,7 +125,7 @@ td{
 <?php include("../includes/includeadmin.php"); ?>
 <div class="contenedor">
 
-<h1>Lista de Usuarios</h1>
+<h2>Lista de Usuarios</h2>
 
 
 

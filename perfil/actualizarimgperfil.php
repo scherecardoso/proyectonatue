@@ -15,7 +15,7 @@ if ($conexion->connect_error) {
 $nombre_usuario = $_SESSION['nombre'] ?? '';
 $rol = $_SESSION['rol'];
 
-$carpetaImagenes = "../img/";
+$carpetaImagenes = "../img_perfil/";
 
 if (isset($_FILES["imagen"]) && $_FILES["imagen"]["name"] != "") {
 

@@ -16,11 +16,12 @@
     margin: 0;
     width: 330px;
     box-sizing: border-box;
-    border-right: 1px solid #ececec;
+    border-right: 3px solid #ececec;
+    margin-top: 0;
 }
 
 .titulo-menu {
-    font-size: 25px;
+    font-size: 28px;
     color: #ff5ca8;
     margin-bottom: 10px;
 }

@@ -45,24 +45,36 @@ $resultado = $conn->query($sql);
 
 <style>
 
+
 body {
+    display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f8f8f8;
+
+    grid-template-columns: 198px minmax(0, 1fr) 300px;
+    grid-template-rows: 70px 1fr;
+
+    grid-template-areas:
+        "barra barra barra"
+        "menu info act";
+
+    gap: 10px;
+
+    min-height: 100vh;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
 }
 
 .contenedor {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
+    width: 190%;
+    max-width: 1500px;
+    margin: 40px auto;
+    margin-left:13%;
 }
 
-h1 {
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 40px;
-    margin-bottom: 40px;
-}
+
 
 .lista-favoritos {
     display: flex;
@@ -91,6 +103,20 @@ h1 {
     margin: 10px 0;
 }
 
+h4{
+     margin: 0 0 20px 0;
+
+    text-align: center;
+
+    font-family:
+        'Playfair Display', serif;
+
+    font-size: 40px;
+
+    font-weight: 600;
+
+    color: #ff5ca8;
+}
 .precio {
     font-size: 20px;
     font-weight: bold;
@@ -128,9 +154,12 @@ h1 {
 
 <?php include("../includes/header.php"); ?>
 
+<?php include("../includes/includeuser.php"); ?>
+
+
 <div class="contenedor">
 
-<h1>Mis Favoritos ♥</h1>
+<h4>Mis Favoritos ♥</h4>
 
 <div class="lista-favoritos">
 

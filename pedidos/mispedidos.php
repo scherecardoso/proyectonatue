@@ -132,9 +132,13 @@ table {
 }
 
 
+
 th {
-    background: #ffadd3;
-    padding: 12px;
+    background: #fff1f7;
+    padding: 16px;
+    font-size: 14px;
+    color: #ff5ca8;
+    text-align: center;
 }
 
 

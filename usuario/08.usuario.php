@@ -366,7 +366,7 @@ body {
 
 .cuadrado-vertical {
     width: 210%;
-    height: 40%;
+    height: 65%;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
     border-radius: 25px;
@@ -408,8 +408,8 @@ body {
 
 .favorito {
     display: none;
-    width: 100%;
-    height: 200%;
+    width: 200%;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -420,7 +420,7 @@ body {
 }
 
 .favorito img {
-    width: 78%;
+    width: 70%;
     object-fit: cover;
     border-radius: 18px;
     display: block;

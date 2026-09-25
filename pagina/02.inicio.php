@@ -106,15 +106,14 @@ h3{
   border-radius: 20%;
 }
 .titulo-productos {
- 
   position: relative;
-  width: 550px;
+  width: 190px;
   height: 60px;
   background-color: #ffffff;
   top: 150px;
   justify-content: center;
   align-items: center;
-  left: 35%;
+  left: 50%;
   font-family: 'Playfair Display', serif;
   font-size: 35px; 
   color: #000;

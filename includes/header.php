@@ -57,9 +57,6 @@ nav a {
 }
 
 
-/* =========================
-   SUBMENUS
-========================= */
 
 .submenu {
   position: absolute;
@@ -90,7 +87,6 @@ nav a {
 }
 
 
-/* Mostrar submenu al pasar el mouse */
 
 nav li:hover > .submenu {
   opacity: 1;
@@ -100,7 +96,6 @@ nav li:hover > .submenu {
 }
 
 
-/* Elementos del submenu */
 
 .submenu li {
   width: 100%;
@@ -119,8 +114,6 @@ nav li:hover > .submenu {
 }
 
 
-/* Efecto al pasar el mouse */
-
 .submenu a:hover {
   background: #ffdcec;
 
@@ -128,7 +121,7 @@ nav li:hover > .submenu {
 }
 
 
-/* Flechita */
+
 
 .menu-con-submenu > a::after {
   content: "⌄";
@@ -143,9 +136,7 @@ nav li:hover > .submenu {
 }
 
 
-/* =========================
-   ENLACE ACTIVO
-========================= */
+
 
 nav a.activo::after {
   content: "";
@@ -164,9 +155,6 @@ nav a.activo::after {
 }
 
 
-/* =========================
-   ICONOS
-========================= */
 
 .iconos-barra {
   display: flex;
@@ -196,9 +184,7 @@ nav a.activo::after {
 }
 
 
-/* =========================
-   ICONO AMBIENTAL
-========================= */
+
 
 .icono-ambiental {
   background-color: #dce8d5;
@@ -218,10 +204,6 @@ nav a.activo::after {
   color: white !important;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width: 768px) {
 

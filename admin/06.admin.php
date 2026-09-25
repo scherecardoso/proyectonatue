@@ -616,12 +616,11 @@ i{
   </section>
 </section>
 
-<aside class="act">
+<aside class="act"> 
   <section class="acciones"><h3 class="titulo-caja">ACCIONES RAPIDAS</h3>
   <ul class="lista-acciones">
-    <li><i class="fa-solid fa-user-plus"></i>Crear Usuario</li>
-    <li><i class="fa-solid fa-shield-halved"></i>Asignar Rol</li>
-    <li><i class="fa-solid fa-box"></i>Registrar Producto</li>
+    <li><a href="../admin/crearuser.php"><i class="fa-solid fa-user-plus"></i>Crear Usuario</li></a>
+    <li><a href="../productos/16.formproductos.php"><i class="fa-solid fa-box"></i>Registrar Producto</li></a>
     <li><i class="fa-solid fa-chart-column"></i>Ver Reportes</li>
   </ul>
   </section>

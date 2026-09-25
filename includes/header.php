@@ -10,7 +10,7 @@ header {
   padding: 15px 6%;
   top: 0;
   position: sticky;
-  height: 60px;
+  
   z-index: 100;
   box-sizing: border-box;
   width: 100%;
@@ -24,10 +24,6 @@ header {
   margin: 0;
 }
 
-
-/* =========================
-   MENU PRINCIPAL
-========================= */
 
 nav {
   display: flex;
@@ -267,10 +263,7 @@ nav a.activo::after {
     align-items: center;
   }
 
-  /*
-   * En celular los submenús se mantienen
-   * debajo de su opción correspondiente.
-   */
+
 
   .submenu {
     left: 0;
@@ -300,11 +293,6 @@ nav a.activo::after {
 
     <ul>
 
-
-      <!-- =========================
-           INICIO
-      ========================== -->
-
       <li>
 
         <a href="../pagina/02.inicio.php">
@@ -313,10 +301,6 @@ nav a.activo::after {
 
       </li>
 
-
-      <!-- =========================
-           PRODUCTOS
-      ========================== -->
 
       <li class="menu-con-submenu">
 
@@ -343,11 +327,6 @@ nav a.activo::after {
 
       </li>
 
-
-      <!-- =========================
-           NOSOTROS
-      ========================== -->
-
       <li class="menu-con-submenu">
 
         <a href="#">
@@ -370,7 +349,7 @@ nav a.activo::after {
           </li>
 
             <li>
-            <a href="../pagina/equipo.php">
+            <a href="../pagina/valores.php">
               Nuestros valores 
             </a>
           </li>
@@ -379,10 +358,6 @@ nav a.activo::after {
 
       </li>
 
-
-      <!-- =========================
-           CONTACTANOS
-      ========================== -->
 
       <li>
 

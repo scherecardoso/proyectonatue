@@ -319,31 +319,41 @@ h3 {
 </head>
 <body>
 <?php include("../includes/header.php");?>
-<section class="contenido" >
 
-<h1>Nosotros</h1>
 
-  <p>NATUE es una marca boliviana de cosméticos naturales 
-    creada por jóvenes emprendedores, comprometida con el 
-    cuidado del medio ambiente y la belleza auténtica. 
-    Buscamos inspirar a las personas a valorar lo natural, 
-    promover el talento local y construir una Bolivia más
-     consciente y sostenible.</p>
+<section class="valores">
 
-<div class="bloque">
+  <h2>Nuestros valores</h2>
 
-  <div class="mision">
-    <h2>MISIÓN</h2>
-    <p>En NATUE creamos cosméticos naturales y accesibles con ingredientes bolivianos, cuidando la salud y el medio ambiente. Buscamos reflejar la belleza de la naturaleza y el talento joven, impulsando el emprendimiento y el desarrollo sostenible en Bolivia. Cada producto representa nuestro compromiso con un futuro más consciente y responsable.</p>
+  <div class="valores-grid">
+
+    <div class="valor">
+      <i class="fa-solid fa-leaf"></i>
+      <h4>Ingredientes naturales</h4>
+      <p>Fórmulas suaves y efectivas</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-paw"></i>
+      <h4>Cruelty free</h4>
+      <p>No testeamos en animales</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-recycle"></i>
+      <h4>Eco friendly</h4>
+      <p>Envases responsables</p>
+    </div>
+
+    <div class="valor">
+      <i class="fa-solid fa-droplet"></i>
+      <h4>Cuidado consciente</h4>
+      <p>Bienestar para tu piel</p>
+    </div>
+
   </div>
 
-    <div class="vision">
-      <h2>VISIÓN</h2>
-      <p>En NATUE soñamos con ser una marca boliviana reconocida por cosméticos naturales que realzan la belleza auténtica y cuidan el medio ambiente. Queremos crecer con esfuerzo y responsabilidad, usando los recursos de nuestra tierra de forma sostenible. Aspiramos a ser un ejemplo de emprendimiento joven que inspire a crear proyectos y construir una Bolivia más consciente y unida con la naturaleza.</p>
-  
-  </div>
 </section>
-
 <?php include("../includes/footer.php");?>
 </body>
 </html>

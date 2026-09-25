@@ -30,13 +30,6 @@ if ($conn->connect_error) {
         color: "#7a263a",
         confirmButtonColor: "#c94f68",
         confirmButtonText: "Aceptar",
-
-        customClass: {
-            popup: "alertaRosa",
-            title: "tituloRosa",
-            htmlContainer: "textoRosa",
-            confirmButton: "botonRosa"
-        }
     });
     </script>
     <style>
@@ -139,13 +132,6 @@ if ($resultado->num_rows > 0) {
             color: "#7a263a",
             confirmButtonColor: "#c94f68",
             confirmButtonText: "Aceptar",
-
-            customClass: {
-                popup: "alertaRosa",
-                title: "tituloRosa",
-                htmlContainer: "textoRosa",
-                confirmButton: "botonRosa"
-            }
         });
         </script>
         <style>
@@ -192,7 +178,7 @@ if ($resultado->num_rows > 0) {
     Swal.fire({
         title: "Datos incorrectos",
         text: "El usuario o los datos ingresados no son correctos.",
-        imageUrl: "https://unsplash.it/400/200",
+        imageURL: "https://unsplash.it/400/200",
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: "Datos incorrectos",
@@ -201,13 +187,6 @@ if ($resultado->num_rows > 0) {
         color: "#7a263a",
         confirmButtonColor: "#c94f68",
         confirmButtonText: "Aceptar",
-
-        customClass: {
-            popup: "alertaRoja",
-            title: "tituloRojo",
-            htmlContainer: "textoRojo",
-            confirmButton: "botonRojo"
-        }
     });
     </script>
     <style>

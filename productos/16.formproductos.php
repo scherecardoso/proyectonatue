@@ -1,9 +1,12 @@
 <?php
 session_start();
-
-if ($_SESSION['rol'] != 'vendedor') {
-    header("Location: ../usuario/09.register.php");
+if (
+    !isset($_SESSION['rol']) ||
+    !in_array(strtolower(trim((string) $_SESSION['rol'])), ['administrador', 'admin', 'vendedor'], true)
+) {
+    echo "Acceso denegado";
     exit();
+
 }
 ?>
 <!DOCTYPE html>

@@ -1,9 +1,13 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ['vendedor', 'administrador'], true)) {
-    header("Location: ../pagina/login.php");
+$rol = strtolower(trim((string) ($_SESSION['rol'] ?? '')));
+if (
+    !isset($_SESSION['rol']) ||
+    !in_array($rol, ['administrador', 'admin', 'vendedor'], true)
+) {
+    echo "Acceso denegado";
     exit();
+
 }
 ?>
 <?php
@@ -26,38 +30,32 @@ $costo = $_POST['costo'];
 $stock = $_POST['stock'];
 $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo', '$nombre', '$descripcion', '$precio',  '$costo','$stock')";
 if ($conn->query($sql) === TRUE) {
-    //Define a que carpeta irá el archivo
+
      $carpetaImagenes = "../img/";
     if ($_FILES["IMAGEN"]["NAME"]==""){
         $nuevoNombre=".angie.png";
         
     } else{
          $extension = strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
-    //Define el nombre del archivo P-[codigo del producto]
     $nuevoNombre = "P-".$codigo.".".$extension;
-    //Ejemplo: P-233.jpg
     }
 
    
-   
-
-    //ruta comppleta de carpeta+nombre donde se guardara el archivo
+  
     $ruta = $carpetaImagenes . $nuevoNombre;
     $bandera=1;
-    // Verificar si el archivo existe
     if (file_exists($ruta)) {
         echo "Lo sentimos, ya subiste este archivo.";
         $bandera = 0;
     }
 
-    // Validar extensiones permitidas
+
     if($extension != "jpg" && $extension != "jpeg" && $extension != "png" &&$extension != "gif")
     {
         echo "Solo se permiten imágenes JPG, JPEG, PNG o GIF.<br>";
         $bandera = 0;
     }
 
-     //subir archivo
     if ($bandera == 0) {
         echo "Ocurrió algun error.";
     } else {
@@ -68,7 +66,11 @@ if ($conn->query($sql) === TRUE) {
         }
     }
 
-    header("Location: ../productos/22.readproductos.php");
+    if ($rol === 'admin' || $rol === 'administrador') {
+        header("Location: ../admin/gestionproductos.php");
+    } else {
+        header("Location: ../productos/22.readproductos.php");
+    }
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

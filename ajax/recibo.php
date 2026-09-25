@@ -38,42 +38,6 @@ $total = 0;
 <title>Recibo<?php echo $pedido["id"]; ?></title>
 <link rel="stylesheet" href="css/ticket.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<style>
-  /*qr pago en la esquina */
-  .encabezado{
-    position:relative;
-  }
-  .qrEsquina{
-    position:absolute;
-    top:20px;
-    right:20px;
-    width: 120;
-    text-align:center;
-  }
-  .qrEsquina img{
-   width:100%;
-    height:auto;
-    background:#fff;
-    padding:4px;
-    border:1px solid #ddd;
-    border-radius:8px;
-  }
-  .qrEsquina span{
-    display:block;
-    margin-top:4px;
-    font-size:11px;
-    font-weight:600;
-    color:#555;
-  }
-@media(max-width:600px){
-    .qrEsquina{
-        position:static;
-        margin:0 auto 20px;
-        width:110px;
-    }
-}
-</style>
 </head>
 
 <body>
@@ -83,12 +47,6 @@ $total = 0;
 
 <div class="encabezado">
   
-<?php if($qrexiste){ ?>
-<div class="qrEsquina">
-    <img src="<?php echo $qrPago; ?>" alt="QR de pago">
-    <span>Paga con QR</span>
-</div>
-<?php } ?>
  
 <h1>NATUÉ</h1>
 <p>Productos naturales</p>

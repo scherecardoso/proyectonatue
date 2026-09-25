@@ -214,7 +214,8 @@ body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8%;
     margin: 0 auto;
-    transform: translateX(-90px);
+    transform: translateX(-60px);
+    
 }
 
 .card {
@@ -408,7 +409,7 @@ body {
 .favorito {
     display: none;
     width: 100%;
-    height: 100%;
+    height: 200%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -561,55 +562,8 @@ body {
     color: black;
 }
 
-@media (max-width: 1200px) {
-    body {
-        grid-template-columns: 180px minmax(0, 1fr);
-        grid-template-areas:
-            "barra barra"
-            "menu info";
-    }
 
-    .act {
-        display: none;
-    }
 
-    .info {
-        padding: 25px;
-    }
-
-    .bienvenida,
-    .cards,
-    .contenido {
-        max-width: 950px;
-    }
-}
-
-@media (max-width: 900px) {
-    body {
-        grid-template-columns: 160px minmax(0, 1fr);
-    }
-
-    .bienvenida {
-        padding: 20px;
-        gap: 20px;
-        transform: none;
-    }
-
-    .circulo {
-        width: 140px;
-        height: 140px;
-        min-width: 140px;
-    }
-
-    .texto h2 {
-        font-size: 28px;
-    }
-
-    .texto p {
-        font-size: 17px;
-    }
-
-    .cards {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 20px;
         transform: none;

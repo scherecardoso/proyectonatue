@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../includes/verificarbloqueo.php");
 if ($_SESSION['rol'] != "administrador") {
   header("Location: ../usuario/09.register.php");
 }

@@ -16,7 +16,33 @@ $CI = $_POST["CI"] ?? "";
 $direccion = $_POST["direccion"] ?? "";
 
 if ($CI == "" || $direccion == "") {
-    echo "Usuario o datos incorrectos";
+     echo '
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Datos incorrectos</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+    <body>
+    <script>
+    Swal.fire({
+        title: "Datos incorrectos",
+        text: "El usuario o los datos ingresados no son correctos.",
+        imageUrl: "../img/perrito-triste.gif",
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: "Perrito triste",
+        background: "#fff1f4",
+        color: "#7a263a",
+        confirmButtonColor: "#c94f68",
+        confirmButtonText: "Aceptar"
+    });
+    </script>
+
+    </body>
+    </html>
+    ';
     $conn->close();
     exit();
 }
@@ -66,12 +92,63 @@ if ($resultado->num_rows > 0) {
 
     } else {
 
-        echo "Rol no reconocido";
+         echo '
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Error</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: "Rol no reconocido",
+            text: "El rol del usuario no es válido.",
+            imageUrl: "../img/perrito-triste.gif",
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "Perrito triste",
+            background: "#fff5f7",
+            color: "#7a263a",
+            confirmButtonColor: "#c94f68",
+            confirmButtonText: "Aceptar"
+        });
+        </script>
+        </body>
+        </html>
+        ';
     }
 
 } else {
 
-    echo "Usuario o datos incorrectos";
+      echo '
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Datos incorrectos</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+    <body>
+    <script>
+    Swal.fire({
+        title: "Datos incorrectos",
+        text: "El usuario o los datos ingresados no son correctos.",
+        imageUrl: "../img/perrito-triste.gif",
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: "Perrito triste",
+        background: "#fff1f4",
+        color: "#7a263a",
+        confirmButtonColor: "#c94f68",
+        confirmButtonText: "Aceptar"
+    });
+    </script>
+
+    </body>
+    </html>
+    ';
 }
 
 $stmt->close();

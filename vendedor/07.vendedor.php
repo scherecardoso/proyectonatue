@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../includes/verificarbloqueo.php");
 
 if ($_SESSION['rol'] != "vendedor") {
     echo "Acceso denegado";

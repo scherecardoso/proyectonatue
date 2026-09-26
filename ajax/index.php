@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../includes/verificarbloqueo.php");
 if (
     !isset($_SESSION['rol']) ||
     !in_array($_SESSION['rol'], ['usuario', 'vendedor'])

@@ -724,7 +724,7 @@ body {
 <aside class="act">
 
     <div class="cuadrado-vertical favoritos-panel">
-        <h3>Mis favoritos ✨</h3>
+        <h3>Mis favoritos</h3>
 
         <?php if ($favoritos->num_rows > 0): ?>
             <div class="carrusel">
@@ -791,7 +791,7 @@ body {
         </div>
 
         <div class="texto">
-            <h2>¡Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! 🌸</h2>
+            <h2>¡Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! </h2>
             <p>Este es tu espacio. Revisa tus pedidos, guarda tus favoritos y disfruta de tu experiencia en Natué.</p>
         </div>
     </section>

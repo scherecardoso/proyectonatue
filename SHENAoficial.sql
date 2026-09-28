@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2026 at 05:10 AM
+-- Generation Time: Sep 28, 2026 at 06:44 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -128,7 +128,13 @@ INSERT INTO `favoritos` (`ci`, `codigo`) VALUES
 (13950742, 5),
 (13950742, 7),
 (13950742, 16),
-(13950742, 20);
+(13950742, 20),
+(18536490, 2),
+(18536490, 4),
+(18536490, 5),
+(18536490, 16),
+(18536490, 20),
+(13950742, 25);
 
 -- --------------------------------------------------------
 
@@ -153,11 +159,11 @@ CREATE TABLE `pedidos` (
 
 INSERT INTO `pedidos` (`id`, `nombre`, `fecha`, `estado`, `vendedor`, `telefono`, `direccion`, `metodoPago`) VALUES
 (1, 'Isabella', '2026-09-19', 'Rechazado', 'Sin asignar', '60539067', 'Av. América Oeste #245', 'Efectivo'),
-(2, 'Camila', '2026-09-19', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Tarjeta'),
-(3, 'Camila', '2026-09-19', 'Aceptado', 'Gabriela', '97745026', 'Calle Aniceto Padilla #318', 'QR'),
-(4, 'Camila', '2026-09-19', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Tarjeta'),
+(2, 'Varguinas', '2026-09-19', 'Entregado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Tarjeta'),
+(3, 'Varguinas', '2026-09-19', 'Aceptado', 'Gabriela', '97745026', 'Calle Aniceto Padilla #318', 'QR'),
+(4, 'Varguinas', '2026-09-19', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Tarjeta'),
 (5, 'Dania', '2026-09-19', 'Rechazado', 'Sin asignar', '95734969', 'Calle Aniceto Padilla #318', 'Efectivo'),
-(6, 'Sofia', '2026-09-19', 'Aceptado', 'Fernanda', '49673585', 'Calle Sucre #345', 'Efectivo'),
+(6, 'Sofia', '2026-09-19', 'Entregado', 'Fernanda', '49673585', 'Calle Sucre #345', 'Efectivo'),
 (7, 'Valeria', '2026-09-19', 'Aceptado', 'Lucía', '70585430', 'Av. Blanco Galindo #514', 'Efectivo'),
 (8, 'Valeria', '2026-09-19', 'Aceptado', 'Lucía', '70585430', 'Av. Circunvalación #892', 'Efectivo'),
 (9, 'Belen', '2026-09-19', 'Aceptado', 'Gabriela', '74597748', 'Calle Quijarro #421', 'Efectivo'),
@@ -165,7 +171,14 @@ INSERT INTO `pedidos` (`id`, `nombre`, `fecha`, `estado`, `vendedor`, `telefono`
 (11, 'lorena', '2026-09-19', 'Aceptado', 'Rafa', '56997643', 'Calle Baptista #379', 'Tarjeta'),
 (12, 'Fabiana', '2026-09-19', 'Aceptado', 'Rafa', '69673579', 'Calle Sucre #345', 'Efectivo'),
 (13, 'Nicole', '2026-09-19', 'Aceptado', 'Rafa', '37856536', 'Calle Jordana #193', 'Efectivo'),
-(14, 'Emma', '2026-09-19', 'Aceptado', 'Gabriela', '46676770', 'Av. Melchor Pérez #456', 'Efectivo');
+(14, 'Emma', '2026-09-19', 'Aceptado', 'Gabriela', '46676770', 'Av. Melchor Pérez #456', 'Efectivo'),
+(15, 'Varguinas', '2026-07-03', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Tarjeta'),
+(16, 'Varguinas', '2026-07-10', 'Aceptado', 'Gabriela', '97745026', 'Calle Aniceto Padilla #318', 'QR'),
+(17, 'Varguinas', '2026-07-16', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'Efectivo'),
+(18, 'Varguinas', '2026-07-23', 'Aceptado', 'Gabriela', '97745026', 'Av. Santa Cruz #643', 'Tarjeta'),
+(19, 'Varguinas', '2026-07-29', 'Aceptado', 'Rafa', '97745026', 'Calle Aniceto Padilla #318', 'QR'),
+(20, 'Varguinas', '2026-08-08', 'Aceptado', 'Gabriela', '97745026', 'Calle Aniceto Padilla #318', 'Efectivo'),
+(21, 'Varguinas', '2026-08-21', 'Aceptado', 'Rafa', '97745026', 'Av. Santa Cruz #643', 'Tarjeta');
 
 -- --------------------------------------------------------
 
@@ -193,11 +206,9 @@ INSERT INTO `productos` (`codigo`, `nombre`, `descripcion`, `precio`, `costo`, `
 (2, 'Despigmentante de Achachairu', 'Despigmentante natural de Achachairu', 55.00, 40.00, 28, 'zpr6.jpeg', 'Activo'),
 (3, 'Serum de Tamarindo', 'Serum natural de tamarindo', 48.00, 35.00, 23, 'zpr19.jpeg', 'Activo'),
 (4, 'Aceite Antiestres de Cacao', 'Aceite relajante de cacao', 40.00, 28.00, 26, 'zpr16.jpeg', 'Activo'),
-(5, 'Serum de Chirimoya', 'Serum de chirimoya para la piel', 47.00, 34.00, 24, 'zpr18.jpeg', 'Activo'),
 (6, 'Flores de Kantuta', 'Producto natural de flores de kantuta', 35.00, 22.00, 29, 'zpr21.jpeg', 'Activo'),
 (7, 'Aceite de Copaiba', 'Aceite natural de copaiba', 50.00, 36.00, 30, 'zpr22.jpeg', 'Activo'),
 (8, 'Gel de Quinua', 'Gel natural de quinua', 33.00, 20.00, 30, 'zpr11.jpeg', 'Activo'),
-(9, 'Gel de Pepino', 'Gel refrescante de pepino', 30.00, 18.00, 30, 'zpr5.jpeg', 'Activo'),
 (10, 'Gel de Sabila', 'Gel de sábila hidratante', 28.00, 16.00, 30, 'zpr7.jpeg', 'Activo'),
 (11, 'Aceite de Coco', 'Aceite natural de coco', 38.00, 25.00, 29, 'zpr14.jpeg', 'Activo'),
 (12, 'Bruma de Eucalipto', 'Bruma refrescante de eucalipto', 32.00, 20.00, 30, 'zpr24.jpeg', 'Activo'),
@@ -258,12 +269,12 @@ INSERT INTO `usuario` (`CI`, `nombre`, `direccion`, `celular`, `rol`, `estado`, 
 (9463748, 'Angie', 'angie@gmail.com', 62731919, 'administrador', 'activo', '2026-09-19 22:36:09', 'perfil-Angie.png'),
 (13969703, 'Scherezade', 'scherezade@gmail.com', 69957473, 'administrador', 'activo', '2026-09-19 22:36:44', 'perfil-Scherezade.png'),
 (12372096, 'Jessenia', 'jessenia@gmail.com', 62731772, 'administrador', 'activo', '2026-09-19 22:37:13', 'perfil-Jessenia.png'),
-(13875379, 'Nahia', 'nahia@gmail.com', 68487759, 'administrador', 'activo', '2026-09-11 22:36:26', 'perfil-Nahia.png'),
+(13875379, 'Nahia Agreda', 'nahia@gmail.com', 68487759, 'administrador', 'activo', '2026-09-26 14:00:47', 'perfil-Nahia.png'),
 (17482635, 'Isabella', 'isabella@gmail.com', 60539067, 'usuario', 'activo', '2026-09-19 22:19:04', 'imgperfil.avif'),
-(13950742, 'Camila', 'cam@gmail.com', 97745026, 'usuario', 'activo', '2026-09-19 22:19:31', 'imgperfil.avif'),
+(13950742, 'Varguinas', 'cam@gmail.com', 97745026, 'usuario', 'activo', '2026-09-24 23:47:57', 'perfil-Camila.jpg'),
 (18536490, 'Dania', 'dania@gmail.com', 95734969, 'usuario', 'activo', '2026-09-19 22:24:49', 'imgperfil.avif'),
 (12694853, 'Sofia', 'sofii@gmail.com', 49673585, 'usuario', 'activo', '2026-09-19 22:25:50', 'imgperfil.avif'),
-(19730584, 'Valeria', 'val@gmail.com', 70585430, 'usuario', 'activo', '2026-09-19 22:26:25', 'imgperfil.avif'),
+(19730584, 'Valeria', 'val@gmail.com', 70585430, 'usuario', 'activo', '2026-09-22 20:06:58', 'perfil-Valeria.jpg'),
 (14382761, 'Belen', 'belen@gmail.com', 74597748, 'usuario', 'activo', '2026-09-19 22:26:58', 'imgperfil.avif'),
 (16859204, 'lorena', 'lore@gmail.com', 56997643, 'usuario', 'activo', '2026-09-19 22:27:33', 'imgperfil.avif'),
 (11573486, 'Fabiana', 'fabi@gmail.com', 69673579, 'usuario', 'activo', '2026-09-19 22:28:27', 'imgperfil.avif'),
@@ -272,7 +283,19 @@ INSERT INTO `usuario` (`CI`, `nombre`, `direccion`, `celular`, `rol`, `estado`, 
 (10937524, 'Gabriela', 'gabi@gmail.com', 89773496, 'vendedor', 'activo', '2026-09-19 22:34:13', 'imgperfil.avif'),
 (17643095, 'Lucía', 'lucia@gmail.com', 98748221, 'vendedor', 'activo', '2026-09-19 22:34:13', 'imgperfil.avif'),
 (13278541, 'Rafa', 'rafa@gmail.com', 96735769, 'vendedor', 'activo', '2026-09-19 22:34:13', 'imgperfil.avif'),
-(19462173, 'Fernanda', 'fernanda@gmail.com', 94725750, 'vendedor', 'activo', '2026-09-19 22:34:13', 'imgperfil.avif');
+(19462173, 'Fernanda', 'fernanda@gmail.com', 94725750, 'vendedor', 'activo', '2026-09-19 22:34:13', 'imgperfil.avif'),
+(343434, 'weewwewew', 'ewewe@gmail.com', 43434333, 'usuario', 'activo', '2026-09-26 12:40:12', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:46:59', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:46:59', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:00', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:00', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:01', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:01', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:01', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:02', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:02', 'imgperfil.avif'),
+(54545, 'ererer', 'dsd@gmail.com', 4545454, 'usuario', 'activo', '2026-09-26 12:47:02', 'imgperfil.avif'),
+(45454657, 'pepe', 'erereer@gmail.com', 43556765, 'administrador', 'activo', '2026-09-27 21:27:55', 'imgperfil.avif');
 
 -- --------------------------------------------------------
 
@@ -285,27 +308,27 @@ CREATE TABLE `ventas` (
   `pedidos_id` int(11) NOT NULL,
   `costo` decimal(10,2) DEFAULT 0.00,
   `metodo` varchar(45) DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL,
-  `fecha` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `estado` varchar(30) NOT NULL DEFAULT 'En proceso'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `pedidos_id`, `costo`, `metodo`, `estado`, `fecha`) VALUES
-(30, 14, 130.00, 'Efectivo', 'En proceso', '2026-09-19 23:04:22'),
-(31, 9, 182.00, 'Efectivo', 'En proceso', '2026-09-19 23:04:28'),
-(32, 3, 371.00, 'QR', 'En proceso', '2026-09-19 23:04:41'),
-(33, 10, 47.00, 'Efectivo', 'En proceso', '2026-09-19 23:04:52'),
-(34, 8, 294.00, 'Efectivo', 'En proceso', '2026-09-19 23:05:28'),
-(35, 7, 255.00, 'Efectivo', 'En proceso', '2026-09-19 23:05:31'),
-(36, 4, 198.00, 'Tarjeta', 'En proceso', '2026-09-19 23:05:52'),
-(37, 12, 88.00, 'Efectivo', 'En proceso', '2026-09-19 23:05:55'),
-(38, 11, 92.00, 'Tarjeta', 'En proceso', '2026-09-19 23:06:01'),
-(39, 13, 103.00, 'Efectivo', 'En proceso', '2026-09-19 23:06:04'),
-(40, 2, 241.00, 'Tarjeta', 'En proceso', '2026-09-19 23:06:14'),
-(41, 6, 126.00, 'Efectivo', 'En proceso', '2026-09-19 23:06:34');
+INSERT INTO `ventas` (`id`, `pedidos_id`, `costo`, `metodo`, `fecha`, `estado`) VALUES
+(30, 14, 130.00, 'Efectivo', '2026-09-19 23:04:22', 'En proceso'),
+(31, 9, 182.00, 'Efectivo', '2026-09-19 23:04:28', 'En proceso'),
+(32, 3, 371.00, 'QR', '2026-09-19 23:04:41', 'En proceso'),
+(33, 10, 47.00, 'Efectivo', '2026-09-19 23:04:52', 'En proceso'),
+(34, 8, 294.00, 'Efectivo', '2026-09-19 23:05:28', 'En proceso'),
+(35, 7, 255.00, 'Efectivo', '2026-09-19 23:05:31', 'En proceso'),
+(36, 4, 198.00, 'Tarjeta', '2026-09-19 23:05:52', 'En proceso'),
+(37, 12, 88.00, 'Efectivo', '2026-09-19 23:05:55', 'En proceso'),
+(38, 11, 92.00, 'Tarjeta', '2026-09-19 23:06:01', 'En proceso'),
+(39, 13, 103.00, 'Efectivo', '2026-09-19 23:06:04', 'En proceso'),
+(40, 2, 241.00, 'Tarjeta', '2026-09-28 06:32:36', 'Entregado'),
+(41, 6, 126.00, 'Efectivo', '2026-09-28 06:32:32', 'Entregado');
 
 --
 -- Indexes for dumped tables
@@ -331,7 +354,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ventas`

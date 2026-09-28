@@ -188,7 +188,7 @@
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <a href="../pagina/02.inicio.php" class="botonvolver">← Volver</a>
+    <a href="../pagina/index.php" class="botonvolver">← Volver</a>
 
     <form action="mensaje.php" method="POST">
 

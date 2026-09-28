@@ -436,7 +436,7 @@ $(document).ready(function(){
                 let p = data.pedido;
                 let estado = String(p.estado || 'Pendiente');
 
-                // Determinar clase de estado
+    
                 let estadoClase = "pendiente";
                 if (estado.toLowerCase().includes("completado")) {
                     estadoClase = "completado";

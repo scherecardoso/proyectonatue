@@ -18,7 +18,7 @@ $sql = "UPDATE pedidos SET estado='Pendiente' WHERE id='$idPedido'";
 
 if($conn->query($sql)){
     unset($_SESSION["pedidos_id"]);
-    echo " <script> alert('Pedido enviado correctamente');window.location='../pagina/03.productos.php';</script>";
+    echo " <script> ('Pedido enviado correctamente');window.location='../pagina/03.productos.php';</script>";
 
 }else{
     echo $conn->error;

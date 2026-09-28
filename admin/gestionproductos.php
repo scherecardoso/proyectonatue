@@ -26,9 +26,7 @@ if ($conn->connect_error) {
 
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -41,7 +39,7 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 
-    /* Computadora (1200px o más): menú lateral + contenido */
+ 
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -51,7 +49,6 @@ body {
     gap: 0;
 }
 
-/* Tablet y celular: el menú sube arriba en horizontal */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -64,9 +61,7 @@ body {
 }
 
 
-/* =========================
-   CONTENEDOR
-========================== */
+
 .contenido {
     grid-area: contenido;
     padding: clamp(12px, 3vw, 30px);
@@ -97,12 +92,10 @@ body {
 }
 
 
-/* =========================
-   TABLA (computadora y tablet)
-========================== */
+
 .tabla-contenedor {
     width: 100%;
-    overflow-x: auto;               /* si no cabe, se desliza de lado sin romper la página */
+    overflow-x: auto;              
 }
 
 table {
@@ -199,9 +192,7 @@ tr:hover td {
 }
 
 
-/* =========================
-   CELULAR (768px o menos): cada producto es una tarjeta
-========================== */
+
 @media (max-width: 768px) {
 
     .tabla-contenedor {
@@ -219,7 +210,7 @@ tr:hover td {
     }
 
     thead {
-        display: none;               /* los títulos pasan a cada dato con data-label */
+        display: none;             
     }
 
     tr {
@@ -259,7 +250,7 @@ tr:hover td {
         flex-shrink: 0;
     }
 
-    /* Celda de acciones: botones en fila, sin título */
+   
     td.celda-acciones,
     tr td.celda-acciones:last-child {
         display: block;

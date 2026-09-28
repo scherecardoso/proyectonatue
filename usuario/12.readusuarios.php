@@ -18,9 +18,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "administrador") {
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -205,7 +203,7 @@ td {
         flex-shrink: 0;
     }
 
-    /* La celda de acciones: botones en fila que se acomodan */
+
     td.acciones {
         display: flex;
         flex-wrap: wrap;

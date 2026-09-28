@@ -59,29 +59,57 @@ $mesActual = date("F Y");
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body {
-    display: grid;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
-    grid-template-areas:
-        "barra barra barra"
-        "menu contenido contenido";
-    gap: 10px;
-    min-height: 100vh;
-    background: #ffffff;
+
+/* =========================
+   BASE
+========================== */
+html {
+    overflow-x: hidden;
 }
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    /* Computadora (1200px o más): menú lateral + contenido */
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    gap: 0;
+}
+
+/* Tablet y celular: el menú sube arriba en horizontal */
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "contenido";
+    }
+}
+
+
+/* =========================
+   CONTENIDO
+========================== */
 .contenido {
     grid-area: contenido;
-    padding: 30px;
+    padding: clamp(15px, 3vw, 30px);
     box-sizing: border-box;
-    width: 80%;
+    width: 100%;
     min-width: 0;
-    margin-left: 10%;
 }
 
 .contenedor {
@@ -92,17 +120,19 @@ body {
 
 .encabezado {
     display: flex;
+    flex-wrap: wrap;                 /* el mes baja debajo del título si no cabe */
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     margin-bottom: 30px;
 }
 
 .titulo h1 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 32px;
+    font-size: clamp(26px, 4vw, 32px);
     font-weight: 600;
-    color: #222222;
+    color: #ff5ca8;
 }
 
 .titulo p {
@@ -113,8 +143,8 @@ body {
 }
 
 .mes {
-    background: #f8e6ee;
-    color: #d94f87;
+    background: #fff1f7;
+    color: #ff5ca8;
     padding: 10px 18px;
     border-radius: 20px;
     font-family: "Quicksand", sans-serif;
@@ -122,19 +152,25 @@ body {
     font-weight: 600;
 }
 
+
+/* =========================
+   TARJETAS RESUMEN (se acomodan solas)
+========================== */
 .resumen {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: 25px;
     margin-bottom: 30px;
 }
 
 .tarjeta {
+    min-width: 0;
+    box-sizing: border-box;
     background: #ffffff;
     border: 1px solid #eeeeee;
     border-radius: 18px;
-    padding: 32px;
-    min-height: 170px;
+    padding: clamp(20px, 3vw, 32px);
+    min-height: 150px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
     display: flex;
     flex-direction: column;
@@ -150,25 +186,32 @@ body {
 
 .tarjeta .valor {
     font-family: "Playfair Display", serif;
-    font-size: 28px;
+    font-size: clamp(22px, 3.5vw, 28px);
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 6px;
+    word-break: break-word;
 }
 
 .tarjeta .numero {
     font-size: 16px;
-    color: #d94f87;
+    color: #ff5ca8;
     font-weight: 600;
 }
 
+
+/* =========================
+   GRÁFICO
+========================== */
 .grafico {
     background: #ffffff;
     border: 1px solid #eeeeee;
     border-radius: 18px;
-    padding: 30px;
+    padding: clamp(18px, 3vw, 30px);
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
     margin-bottom: 30px;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .titulo-grafico {
@@ -178,7 +221,7 @@ body {
 .titulo-grafico h2 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     font-weight: 600;
 }
 
@@ -189,23 +232,25 @@ body {
 }
 
 .grafico-contenido {
-    height: 520px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 750px;
+    height: 480px;
+    margin: 0 auto;
 }
 
-.grafico-contenido canvas {
-    max-width: 650px;
-    max-height: 500px;
-}
 
+/* =========================
+   TABLA
+========================== */
 .tabla-contenedor {
     background: #ffffff;
     border: 1px solid #eeeeee;
     border-radius: 18px;
-    padding: 30px;
+    padding: clamp(18px, 3vw, 30px);
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .tabla-titulo {
@@ -215,8 +260,14 @@ body {
 .tabla-titulo h2 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     font-weight: 600;
+    color: #ff5ca8;
+}
+
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
 }
 
 table {
@@ -225,18 +276,21 @@ table {
 }
 
 th {
-    background: #f7f7f7;
+    background: #fff1f7;
     padding: 15px;
     text-align: left;
     font-size: 14px;
-    color: #555555;
+    color: #ff5ca8;
     font-weight: 600;
 }
 
 td {
     padding: 15px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #f3f3f3;
+    border-top: 1px solid #f3f3f3;
     font-size: 14px;
+    background: #ffffff;
+    word-break: break-word;
 }
 
 tr:hover td {
@@ -244,7 +298,7 @@ tr:hover td {
 }
 
 .numero-tabla {
-    color: #d94f87;
+    color: #ff4f8b;
     font-weight: 600;
 }
 
@@ -252,20 +306,47 @@ tr:hover td {
     color: #999999;
 }
 
+
+/* =========================
+   TABLET (900px o menos)
+========================== */
 @media (max-width: 900px) {
-    .contenido {
-        padding: 30px;
-    }
-    .resumen {
-        grid-template-columns: 1fr;
-    }
-    .encabezado {
-        align-items: flex-start;
-        gap: 15px;
-        flex-direction: column;
-    }
     .grafico-contenido {
-        height: 450px;
+        height: 420px;
+    }
+}
+
+
+/* =========================
+   CELULAR (600px o menos)
+========================== */
+@media (max-width: 600px) {
+    .contenido {
+        padding: 15px 12px;
+    }
+
+    .encabezado {
+        margin-bottom: 20px;
+    }
+
+    .resumen {
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .grafico,
+    .tabla-contenedor {
+        margin-bottom: 20px;
+        border-radius: 14px;
+    }
+
+    .grafico-contenido {
+        height: 400px;          /* más alto porque la leyenda pasa abajo */
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
     }
 }
 </style>
@@ -319,6 +400,7 @@ include("../includes/includeadmin.php");
                 <h2>Detalle de productos</h2>
             </div>
 
+            <div class="tabla-scroll">
             <table>
                 <thead>
                     <tr>
@@ -355,6 +437,7 @@ include("../includes/includeadmin.php");
                     ?>
                 </tbody>
             </table>
+            </div>
         </div>
 
     </div>
@@ -366,7 +449,12 @@ const cantidades = <?php echo json_encode($cantidades); ?>;
 
 const ctx = document.getElementById("graficoProductos");
 
-new Chart(ctx, {
+/* La leyenda va a la derecha en pantallas anchas y abajo en celular */
+function posicionLeyenda() {
+    return window.innerWidth < 700 ? "bottom" : "right";
+}
+
+const grafico = new Chart(ctx, {
     type: "pie",
     data: {
         labels: nombres,
@@ -387,9 +475,9 @@ new Chart(ctx, {
         plugins: {
             legend: {
                 display: true,
-                position: "right",
+                position: posicionLeyenda(),
                 labels: {
-                    padding: 18,
+                    padding: 14,
                     usePointStyle: true,
                     font: {
                         size: 13
@@ -404,6 +492,14 @@ new Chart(ctx, {
                 }
             }
         }
+    }
+});
+
+window.addEventListener("resize", function () {
+    const nueva = posicionLeyenda();
+    if (grafico.options.plugins.legend.position !== nueva) {
+        grafico.options.plugins.legend.position = nueva;
+        grafico.update();
     }
 });
 </script>

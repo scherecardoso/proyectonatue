@@ -194,7 +194,6 @@ h3 {
   font-size: 14px;
 }
 
-
 @media (max-width: 768px) {
 
   body {
@@ -203,6 +202,7 @@ h3 {
 
   .contenido {
     width: 100%;
+    box-sizing: border-box;
     padding: 40px 15px;
     gap: 30px;
   }
@@ -216,23 +216,26 @@ h3 {
   .contenido > p {
     width: 100%;
     max-width: 600px;
+    box-sizing: border-box;
     padding: 0 5px;
     font-size: 16px;
     line-height: 1.6;
+    margin: 0;
   }
-
 
   .bloque {
     width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
+    align-items: stretch;
   }
 
   .mision,
   .vision {
     width: 100%;
+    box-sizing: border-box;
     padding: 25px 20px;
     border-radius: 20px;
   }
@@ -241,6 +244,7 @@ h3 {
   .vision h2 {
     font-size: 25px;
     margin-top: 0;
+    text-align: center;
   }
 
   .mision p,
@@ -248,11 +252,12 @@ h3 {
     font-size: 15px;
     line-height: 1.6;
     text-align: center;
+    margin-bottom: 0;
   }
-
 
   .equipo {
     width: 100%;
+    box-sizing: border-box;
     padding: 0 15px;
     margin: 30px auto;
   }
@@ -270,6 +275,7 @@ h3 {
   .miembro {
     width: 100%;
     max-width: 320px;
+    box-sizing: border-box;
     margin: auto;
     padding: 20px;
   }
@@ -279,11 +285,10 @@ h3 {
     height: 150px;
   }
 
-
-
   .valores {
-    width: calc(100% - 30px);
-    padding: 30px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 20px;
     border-radius: 20px;
   }
 
@@ -299,6 +304,7 @@ h3 {
 
   .valor {
     width: 100%;
+    box-sizing: border-box;
     padding: 20px;
   }
 
@@ -311,8 +317,6 @@ h3 {
   }
 
 }
-
-
 
 
 </style>

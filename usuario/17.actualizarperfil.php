@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario' || empty($_SESSION['CI'])) {
+if (!isset($_SESSION['rol']) || empty($_SESSION['CI'])) {
     header('Location: ../pagina/login.php');
     exit();
 }
@@ -26,27 +26,26 @@ $conn->set_charset('utf8mb4');
 $stmtAnterior = $conn->prepare(
     'SELECT nombre 
      FROM usuario 
-     WHERE CI = ? AND rol = ?'
+     WHERE CI = ?'
 );
 
-$rol = 'usuario';
-
 $stmtAnterior->bind_param(
-    'ss',
-    $CI,
-    $rol
+    's',
+    $CI
 );
 
 $stmtAnterior->execute();
 $resultadoAnterior = $stmtAnterior->get_result();
 $usuarioAnterior = $resultadoAnterior->fetch_assoc();
 $stmtAnterior->close();
+
 if (!$usuarioAnterior) {
     $conn->close();
     die('Usuario no encontrado.');
 }
 
 $nombreAnterior = $usuarioAnterior['nombre'];
+
 $conn->begin_transaction();
 
 try {
@@ -54,16 +53,15 @@ try {
     $stmt = $conn->prepare(
         'UPDATE usuario 
          SET nombre = ?, direccion = ?, celular = ? 
-         WHERE CI = ? AND rol = ?'
+         WHERE CI = ?'
     );
 
     $stmt->bind_param(
-        'sssss',
+        'ssss',
         $nombre,
         $direccion,
         $celular,
-        $CI,
-        $rol
+        $CI
     );
 
     if (!$stmt->execute()) {
@@ -94,23 +92,33 @@ try {
     }
 
     $conn->commit();
+
     $_SESSION['nombre'] = $nombre;
     $_SESSION['direccion'] = $direccion;
     $_SESSION['celular'] = $celular;
 
+    $rol = $_SESSION['rol'];
 
     $conn->close();
 
+    if ($rol == 'administrador') {
+        header('Location: ../perfil/perfiladmin.php');
+        exit();
+    }
 
-    header('Location: ../usuario/perfilUser.php');
-    exit();
+    if ($rol == 'usuario') {
+        header('Location: ../perfil/perfilusuario.php');
+        exit();
+    }
 
+    if ($rol == 'vendedor') {
+        header('Location: ../usuario/perfilUser.php');
+        exit();
+    }
 
 } catch (Exception $e) {
 
-
     $conn->rollback();
-
     $conn->close();
 
     die('No se pudo actualizar la información.');

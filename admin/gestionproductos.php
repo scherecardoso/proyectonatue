@@ -1,4 +1,3 @@
-```php
 <?php
 session_start();
 
@@ -26,23 +25,51 @@ if ($conn->connect_error) {
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <style>
-body {
-    display: grid;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
-    grid-template-areas:
-        "barra barra barra"
-        "menu contenido contenido";
-    gap: 10px;
-    min-height: 100vh;
-    background: #ffffff;
+
+/* =========================
+   BASE
+========================== */
+html {
+    overflow-x: hidden;
 }
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    /* Computadora (1200px o más): menú lateral + contenido */
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    gap: 0;
+}
+
+/* Tablet y celular: el menú sube arriba en horizontal */
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "contenido";
+    }
+}
+
+
+/* =========================
+   CONTENEDOR
+========================== */
 .contenido {
     grid-area: contenido;
-    padding: 30px;
+    padding: clamp(12px, 3vw, 30px);
     box-sizing: border-box;
     width: 100%;
     min-width: 0;
@@ -53,7 +80,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     background: #fff;
-    padding: 30px;
+    padding: clamp(15px, 3vw, 30px);
     border-radius: 20px;
     box-shadow: 0 10px 35px rgba(0,0,0,.08);
     border: 1px solid #f3f3f3;
@@ -66,15 +93,21 @@ body {
     margin-bottom: 30px;
     color: #ff5ca8;
     font-family: "Playfair Display", serif;
+    font-size: clamp(26px, 4vw, 35px);
 }
 
+
+/* =========================
+   TABLA (computadora y tablet)
+========================== */
 .tabla-contenedor {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: auto;               /* si no cabe, se desliza de lado sin romper la página */
 }
 
 table {
     width: 100%;
+    min-width: 900px;
     border-collapse: separate;
     border-spacing: 0 12px;
     color: inherit;
@@ -165,19 +198,82 @@ tr:hover td {
     color: #777;
 }
 
-@media (max-width: 900px) {
-    body {
-        display: flex;
-        flex-direction: column;
+
+/* =========================
+   CELULAR (768px o menos): cada producto es una tarjeta
+========================== */
+@media (max-width: 768px) {
+
+    .tabla-contenedor {
+        overflow-x: visible;
     }
 
-    .contenido {
-        padding: 15px;
-    }
-
-    .contenedor {
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
         width: 100%;
-        padding: 20px;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    thead {
+        display: none;               /* los títulos pasan a cada dato con data-label */
+    }
+
+    tr {
+        margin-bottom: 18px;
+        padding: 8px 14px;
+        border: 1px solid #f0d5e2;
+        border-radius: 16px;
+        background: #fffafc;
+    }
+
+    td,
+    tr td:first-child,
+    tr td:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 9px 0;
+        text-align: right;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #f3e3ea;
+        border-radius: 0;
+        font-size: 15px;
+        word-break: break-word;
+    }
+
+    tr:hover td {
+        background: transparent;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ff5ca8;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    /* Celda de acciones: botones en fila, sin título */
+    td.celda-acciones,
+    tr td.celda-acciones:last-child {
+        display: block;
+        border-bottom: none;
+        padding-top: 12px;
+        text-align: left;
+    }
+
+    td.celda-acciones::before {
+        display: none;
+    }
+
+    .acciones {
+        justify-content: flex-start;
     }
 }
 </style>
@@ -202,6 +298,7 @@ if ($result && $result->num_rows > 0) {
 ?>
 
             <table>
+                <thead>
                 <tr>
                     <th>Código</th>
                     <th>Nombre</th>
@@ -212,7 +309,9 @@ if ($result && $result->num_rows > 0) {
                     <th>Imagen</th>
                     <th>Acciones</th>
                 </tr>
+                </thead>
 
+                <tbody>
 <?php
 while ($fila = $result->fetch_assoc()) {
     $codigo = $fila['codigo'];
@@ -227,19 +326,19 @@ while ($fila = $result->fetch_assoc()) {
 ?>
 
                 <tr>
-                    <td><?php echo htmlspecialchars($fila['codigo']); ?></td>
-                    <td><?php echo htmlspecialchars($fila['nombre']); ?></td>
-                    <td><?php echo htmlspecialchars($fila['descripcion']); ?></td>
-                    <td>Bs <?php echo htmlspecialchars($fila['precio']); ?></td>
-                    <td>Bs <?php echo htmlspecialchars($fila['costo']); ?></td>
+                    <td data-label="Código"><?php echo htmlspecialchars($fila['codigo']); ?></td>
+                    <td data-label="Nombre"><?php echo htmlspecialchars($fila['nombre']); ?></td>
+                    <td data-label="Descripción"><?php echo htmlspecialchars($fila['descripcion']); ?></td>
+                    <td data-label="Precio">Bs <?php echo htmlspecialchars($fila['precio']); ?></td>
+                    <td data-label="Costo">Bs <?php echo htmlspecialchars($fila['costo']); ?></td>
 
-                    <td>
+                    <td data-label="Stock">
                         <span style="color:<?php echo $colorStock; ?>; font-weight:bold;">
                             <?php echo htmlspecialchars($stock); ?>
                         </span>
                     </td>
 
-                    <td>
+                    <td data-label="Imagen">
 <?php if (!empty($fila['imagen']) && file_exists($archivoImagen)) { ?>
                         <img
                             src="<?php echo htmlspecialchars($archivoImagen); ?>"
@@ -250,18 +349,18 @@ while ($fila = $result->fetch_assoc()) {
 <?php } ?>
                     </td>
 
-                    <td>
+                    <td class="celda-acciones">
                         <div class="acciones">
                             <a
                                 class="btn editar"
-                                href="../productos/18.formeditarproductos.php?codigo=<?php echo $codigo; ?>">
+                                href="../productos/18.formeditarproductos.php?codigo=<?php echo urlencode($codigo); ?>">
                                 <i class="fa-solid fa-pen"></i>
                                 Editar
                             </a>
 
                             <a
                                 class="btn eliminar"
-                                href="../productos/20.eliminarproductos.php?codigo=<?php echo $codigo; ?>"
+                                href="../productos/20.eliminarproductos.php?codigo=<?php echo urlencode($codigo); ?>"
                                 onclick="return confirm('¿Está seguro de eliminar este producto?');">
                                 <i class="fa-solid fa-trash"></i>
                                 Eliminar
@@ -273,7 +372,7 @@ while ($fila = $result->fetch_assoc()) {
 <?php
 }
 ?>
-
+                </tbody>
             </table>
 
 <?php
@@ -296,4 +395,3 @@ while ($fila = $result->fetch_assoc()) {
 <?php
 $conn->close();
 ?>
-```

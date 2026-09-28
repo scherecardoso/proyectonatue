@@ -1,19 +1,19 @@
 <?php
 session_start();
 require("../ajax/php/conexion.php");
-if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])){
+if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
 $rol = $_SESSION['rol'];
-$sql = "SELECT nombre,COUNT(*) AS cantidad_pedidos FROM pedidos WHERE nombre IS NOT NULL AND nombre != '' GROUP BY nombre ORDER BY cantidad_pedidos DESC, nombre ASC";
+$sql = "SELECT nombre, COUNT(*) AS cantidad_pedidos FROM pedidos WHERE nombre IS NOT NULL AND nombre != '' GROUP BY nombre ORDER BY cantidad_pedidos DESC, nombre ASC";
 $resultado = $conn->query($sql);
 
 $clienteMasFrecuente = "Sin datos";
 $cantidadMayor = 0;
 
-if($resultado && $resultado->num_rows > 0){
+if ($resultado && $resultado->num_rows > 0) {
     $primero = $resultado->fetch_assoc();
     $clienteMasFrecuente = $primero['nombre'];
     $cantidadMayor = $primero['cantidad_pedidos'];
@@ -23,17 +23,13 @@ if($resultado && $resultado->num_rows > 0){
 $nombres = [];
 $cantidades = [];
 
-if($resultado){
-    while($cliente = $resultado->fetch_assoc()){
+if ($resultado) {
+    while ($cliente = $resultado->fetch_assoc()) {
         $nombres[] = $cliente['nombre'];
         $cantidades[] = $cliente['cantidad_pedidos'];
-
     }
-
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -76,6 +72,7 @@ body {
     font-family:'Playfair Display', serif;
     font-size:32px;
     margin-bottom:10px;
+     color: #ff5ca8;
 }
 
 
@@ -98,13 +95,15 @@ body {
 .tarjeta-principal h2{
     margin:0 0 15px 0;
     font-family:'Playfair Display', serif;
+    color: #ff5ca8;
 }
 
 
-.cliente{
-    font-size:28px;
-    font-weight:bold;
-    color:#ff5ca8;
+
+.cliente {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
 }
 
 
@@ -139,40 +138,37 @@ body {
     box-shadow:0 2px 10px rgba(0,0,0,0.06);
 }
 
-
-.tabla h2{
-    font-family:'Playfair Display', serif;
-    margin-top:0;
+.tabla h2 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 0;
+    color: #ff5ca8;
 }
 
 
-table{
-    width:100%;
-    border-collapse:collapse;
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-
-th{
-    text-align:left;
-    padding:13px;
-    background:#fff0f7;
+th {
+    text-align: left;
+    color: #ff5ca8;
+    padding: 13px;
+    background: #fff1f7;
 }
 
-
-td{
-    padding:13px;
-    border-bottom:1px solid #eeeeee;
+td {
+    background: #ffffff;
+    padding: 13px;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
 }
 
-
-tr:hover{
-    background:#fafafa;
-}
-
-.sin-datos{
-    text-align:center;
-    padding:30px;
-    color:#888;
+.sin-datos {
+    text-align: center;
+    padding: 30px;
+    color: #888;
 }
 
 
@@ -194,6 +190,8 @@ tr:hover{
 
 
 <?php
+include("../includes/header.php");
+
 if ($rol == "administrador") {
     include("../includes/includeadmin.php");
 } else {

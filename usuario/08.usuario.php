@@ -94,12 +94,13 @@ while ($fila = $resultadoPedidosMes->fetch_assoc()) {
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <style>
+
 body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px minmax(0, 1fr) 300px;
-    grid-template-rows: 70px 1fr;
+    grid-template-columns: 330px minmax(0, 1fr) clamp(300px, 28vw, 480px);
+    grid-template-rows: auto 1fr;
     grid-template-areas:
         "barra barra barra"
         "menu info act";
@@ -108,6 +109,7 @@ body {
     background: #ffffff;
     overflow-x: hidden;
 }
+
 
 .info {
     grid-area: info;
@@ -121,6 +123,7 @@ body {
     padding: 25px 10px;
     min-width: 0;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .bienvenida {
@@ -138,7 +141,6 @@ body {
     font-family: 'Playfair Display', serif;
     color: #272020;
     margin: 0 auto;
-    transform: translateX(-65px);
     position: relative;
     z-index: 1;
     border-radius: 38px 48px 35px 45px / 35px 30px 42px 38px;
@@ -207,16 +209,15 @@ body {
     line-height: 1.5;
 }
 
+
 .cards {
     grid-area: cards;
     width: 100%;
-    max-width: 980px;
+    max-width: 900px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8%;
+    gap: 25px;
     margin: 0 auto;
-    transform: translateX(-60px);
-    
 }
 
 .card {
@@ -233,6 +234,7 @@ body {
     border: 3px solid #efefef;
     text-align: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .card a {
@@ -245,6 +247,16 @@ body {
     gap: 10px;
     width: 100%;
     height: 100%;
+}
+
+.icono {
+    width: 60px;
+    height: 60px;
+    background: #f3f3f3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icono i {
@@ -264,6 +276,7 @@ body {
     font-size: 14px;
     color: #777;
 }
+
 
 .contenido {
     grid-area: contenido;
@@ -291,7 +304,6 @@ body {
     color: #ff5ca8;
     font-size: 28px;
     overflow-x: auto;
-    transform: translateX(-80px);
     box-sizing: border-box;
 }
 
@@ -312,7 +324,7 @@ body {
     border-collapse: collapse;
     font-size: 16px;
     color: #555;
-    min-width: 500px;
+    min-width: 400px;
 }
 
 .tabla-pedidos th {
@@ -356,18 +368,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px;
-    margin-top: 2px;
-    margin-left: -90%;
-    width: 85%;
-    max-width: 300px;
-    justify-self: start;
-    border-radius: 25px;
+    padding: 25px 10px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .cuadrado-vertical {
-    width: 210%;
-    height: 65%;
+    width: 100%;
+    min-height: 440px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
     border-radius: 25px;
@@ -386,7 +395,7 @@ body {
 
 .grafico-contenedor {
     width: 100%;
-    height: 230px;
+    height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -400,7 +409,7 @@ body {
 
 .carrusel {
     width: 100%;
-    height: calc(100% - 45px);
+    min-height: 340px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -409,8 +418,7 @@ body {
 
 .favorito {
     display: none;
-    width: 200%;
-    height: 100%;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -421,7 +429,8 @@ body {
 }
 
 .favorito img {
-    width: 70%;
+    width: 75%;
+    max-height: 300px;
     object-fit: cover;
     border-radius: 18px;
     display: block;
@@ -495,93 +504,78 @@ body {
     margin-top: 50px;
 }
 
-.acciones,
-.resumen-sistema,
-.actividad {
-    background: #ffffff;
-    width: 100%;
-    min-height: 320px;
-    border-radius: 35px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    border: 1px solid #efefef;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 25px;
-    box-sizing: border-box;
-}
-
-.lista-acciones {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px 35px;
-    margin: 0;
-    font-size: 18px;
-    color: #444;
-}
-
-.lista-acciones i {
-    color: #ff5ca8;
-    margin-right: 12px;
-}
-
-.lista-sistema {
-    list-style: none;
-    padding: 20px 35px;
-    margin: 0;
-}
-
-.lista-sistema li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 22px;
-    font-size: 18px;
-    color: #444;
-}
-
-.lista-actividad {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px 35px;
-    margin: 0;
-    font-size: 17px;
-    color: #444;
-}
-
-.lista-actividad i {
-    color: #ff5ca8;
-    margin-right: 12px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: black;
-}
-
-
-
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
-        transform: none;
+@media (max-width: 1400px) and (min-width: 1200px) {
+    .circulo {
+        width: 130px;
+        height: 130px;
+        min-width: 130px;
     }
 
-    .card {
-        min-height: 190px;
+    .bienvenida {
+        padding: 20px 25px;
+    }
+
+    .texto h2 {
+        font-size: 28px;
+    }
+
+    .texto p {
+        font-size: 16px;
+    }
+
+    .card h3 {
+        font-size: 24px;
     }
 }
+
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "info"
+            "act";
+        gap: 0;
+    }
+
+    .info {
+        padding: 20px 15px;
+    }
+
+    
+    .act {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        padding: 10px 15px 30px;
+    }
+
+    .cuadrado-vertical {
+        flex: 0 1 340px;
+        width: 340px;
+        max-width: 100%;
+        min-height: 340px;
+    }
+
+    .carrusel {
+        min-height: 260px;
+    }
+
+    .favorito img {
+        width: 70%;
+        max-height: 220px;
+    }
+
+    .grafico-contenedor {
+        height: 230px;
+    }
+}
+
 
 @media (max-width: 768px) {
-    body {
-        display: block;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
     .info {
         display: flex;
         flex-direction: column;
@@ -598,7 +592,6 @@ body {
         text-align: center;
         border-radius: 25px;
         gap: 20px;
-        transform: none;
     }
 
     .circulo {
@@ -618,15 +611,12 @@ body {
 
     .cards {
         width: 100%;
-        margin-left: 0;
-        display: grid;
         grid-template-columns: 1fr;
         gap: 20px;
     }
 
     .card {
         min-height: 150px;
-        width: 100%;
     }
 
     .contenido {
@@ -638,7 +628,6 @@ body {
     }
 
     .resumen {
-        transform: none;
         width: 100%;
         min-height: 250px;
         padding: 15px;
@@ -652,7 +641,7 @@ body {
 
     .tabla-pedidos {
         width: 100%;
-        min-width: 450px;
+        min-width: 350px;
         font-size: 13px;
     }
 
@@ -661,6 +650,35 @@ body {
         padding: 8px;
     }
 }
+
+
+@media (max-width: 600px) {
+    .act {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 10px 25px;
+    }
+
+    .cuadrado-vertical {
+        width: 300px;
+        max-width: 100%;
+        min-height: 300px;
+        flex: none;
+    }
+
+    .carrusel {
+        min-height: 230px;
+    }
+
+    .favorito img {
+        max-height: 190px;
+    }
+
+    .grafico-contenedor {
+        height: 210px;
+    }
+}
+
 
 @media (max-width: 480px) {
     .info {
@@ -696,6 +714,10 @@ body {
         height: 45px;
     }
 
+    .icono i {
+        font-size: 22px;
+    }
+
     .card h3 {
         font-size: 24px;
     }
@@ -711,6 +733,10 @@ body {
 
     .titulo-caja {
         font-size: 21px;
+    }
+
+    .favorito img {
+        width: 80%;
     }
 }
 </style>

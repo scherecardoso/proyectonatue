@@ -42,7 +42,8 @@ if ($metodo == "" || $pedidos_id <= 0) {
 
 }
 
-$estado = "Pendiente";
+$estado = "En proceso";
+$fecha = date("Y-m-d");
 
 
 $sqlPedido = "
@@ -235,7 +236,7 @@ while ($productos = $resultadoCarrito->fetch_assoc()) {
 
 $sqlPedido = "
     UPDATE pedidos
-    SET estado = 'Pendiente'
+    SET estado = 'En proceso'
     WHERE id = '$pedidos_id'
 ";
 

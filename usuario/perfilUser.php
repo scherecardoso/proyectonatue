@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "usuario") {
-    header("Location: ../usuario/09.register.php");
+if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor", "usuario"])) {
+    header("Location: ../pagina/login.php");
     exit();
 }
 
@@ -29,23 +29,15 @@ $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 
 $stmt->close();
+$conexion->close();
 
 if (!$datosUsuario) {
-    $datosUsuario = [
-        'CI' => 'N/A',
-        'nombre' => $_SESSION['nombre'] ?? '',
-        'direccion' => 'No disponible',
-        'celular' => 'No disponible',
-        'rol' => $_SESSION['rol'],
-        'imagen_perfil' => 'imgperfil.avif'
-    ];
+    die("Usuario no encontrado");
 }
 
 $imagenPerfil = !empty($datosUsuario['imagen_perfil'])
     ? $datosUsuario['imagen_perfil']
     : 'imgperfil.avif';
-
-$conexion->close();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,49 +49,44 @@ $conexion->close();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
+
 body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px minmax(0, 1fr) 300px;
-    grid-template-rows: 70px 1fr;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     grid-template-areas:
-        "barra barra barra"
-        "menu info act";
+        "barra barra"
+        "menu info";
     gap: 10px;
     min-height: 100vh;
     background: #ffffff;
     overflow-x: hidden;
 }
 
-.menu a {
-    text-decoration: none;
-    color: black;
-}
 
 .perfil-contenedor {
-    flex: 1 1 58%;
-    width: 58%;
-    max-width: 1250px;
-    margin: 0 0 0 2%;
-    margin-left: 10%;
-    padding: 35px 2% 35px;
+    grid-area: info;
+    width: 100%;
+    min-width: 0;
+    padding: 35px 30px;
     box-sizing: border-box;
 }
 
 .perfil-principal {
-    width: 190%;
-    height: 70%;
-    min-height: 0;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
     background: white;
     border-radius: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-wrap: wrap;
-    gap: 5%;
-    padding: 5%;
-    box-sizing: border-box;
     align-items: center;
+    gap: 40px;
+    padding: 50px 40px;
+    box-sizing: border-box;
     position: relative;
 }
 
@@ -123,8 +110,8 @@ body {
 }
 
 .perfil-foto-seccion {
-    flex: 1 1 30%;
-    min-width: 220px;
+    flex: 1 1 250px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -132,7 +119,8 @@ body {
 }
 
 .foto-perfil {
-    width: 70%;
+    width: 100%;
+    max-width: 230px;
     aspect-ratio: 1;
     height: auto;
     border-radius: 50%;
@@ -158,6 +146,7 @@ body {
     color: #000000;
     margin-bottom: 18px;
     text-align: center;
+    word-break: break-word;
 }
 
 .btn-editar-perfil {
@@ -177,9 +166,8 @@ body {
 }
 
 .info-card {
-    flex: 1 1 55%;
-    min-width: 260px;
-    width: 55%;
+    flex: 1 1 340px;
+    min-width: 0;
     box-sizing: border-box;
 }
 
@@ -206,9 +194,14 @@ body {
 
 .info-dato i {
     width: 45px;
+    min-width: 45px;
     text-align: center;
     color: #020202;
     font-size: 23px;
+}
+
+.info-dato > div {
+    min-width: 0;
 }
 
 .info-dato .etiqueta {
@@ -224,6 +217,7 @@ body {
     color: #333;
     display: block;
     margin-top: 3px;
+    word-break: break-word;
 }
 
 .modal {
@@ -239,11 +233,12 @@ body {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 15vh auto;
     padding: 30px;
     border-radius: 15px;
     border: 1px solid #efefef;
     width: 400px;
+    max-width: 90%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
 }
@@ -293,39 +288,117 @@ body {
     background: #fd78b6;
 }
 
-@media (max-width: 1100px) {
-    .perfil-principal {
-        gap: 4%;
-        padding: 4%;
+
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "info";
+        gap: 0;
     }
 
-    .foto-perfil {
-        width: 65%;
+    .perfil-contenedor {
+        padding: 30px 20px 40px;
     }
 }
+
 
 @media (max-width: 850px) {
     .perfil-principal {
-        text-align: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: 25px;
+        padding: 70px 30px 35px;
     }
 
-    .cajas-inferiores {
-        flex-direction: column;
+    .perfil-foto-seccion {
+        flex: none;
+        width: 100%;
+    }
+
+    .info-card {
+        flex: none;
+        width: 100%;
+    }
+
+    .info-titulo {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 15px;
     }
 }
 
+
 @media (max-width: 600px) {
     .perfil-contenedor {
-        width: 100%;
-        padding: 15px 3% 30px;
+        padding: 15px 10px 30px;
     }
 
     .perfil-principal {
-        padding: 6% 4%;
+        padding: 65px 15px 25px;
+        border-radius: 16px;
     }
 
-    .caja-inferior {
-        padding: 6%;
+    .btn-editar-lateral {
+        top: 15px;
+        right: 15px;
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .foto-perfil {
+        max-width: 170px;
+    }
+
+    .nombre-perfil {
+        font-size: 24px;
+    }
+
+    .info-titulo {
+        font-size: 22px;
+    }
+
+    .info-dato {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .info-dato i {
+        width: 32px;
+        min-width: 32px;
+        font-size: 19px;
+    }
+
+    .info-dato .etiqueta {
+        font-size: 13px;
+    }
+
+    .info-dato .valor {
+        font-size: 16px;
+    }
+
+    .modal-content {
+        margin: 20vh auto;
+        padding: 22px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .foto-perfil {
+        max-width: 140px;
+    }
+
+    .nombre-perfil {
+        font-size: 21px;
+    }
+
+    .info-dato .valor {
+        font-size: 15px;
     }
 }
 </style>

@@ -38,35 +38,66 @@ if ($resultado) {
 <title>Cliente más frecuente</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body {
-    display: grid;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
-    grid-template-areas:
-        "barra barra barra"
-        "menu contenido contenido";
-    gap: 10px;
-    min-height: 100vh;
-    background: #ffffff;
+
+/* =========================
+   BASE
+========================== */
+html {
+    overflow-x: hidden;
 }
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    /* Computadora (1200px o más): menú lateral + contenido */
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    gap: 0;
+}
+
+/* Tablet y celular: el menú sube arriba en horizontal */
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "contenido";
+    }
+}
+
+
+/* =========================
+   CONTENIDO
+========================== */
 .contenido {
     grid-area: contenido;
-    padding: 30px;
     box-sizing: border-box;
-    width: 80%;
+    width: 100%;
+    max-width: 1100px;
     min-width: 0;
-    margin-left: 10%;
+    justify-self: center;
+    padding: clamp(15px, 3vw, 30px);
 }
 
 .titulo {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: clamp(26px, 4vw, 32px);
     margin-bottom: 10px;
+    color: #ff5ca8;
 }
 
 .descripcion {
@@ -74,36 +105,34 @@ body {
     margin-bottom: 30px;
 }
 
-.tarjeta-principal {
+.tarjeta-principal,
+.grafico,
+.tabla {
     background: white;
-    padding: 25px;
+    padding: clamp(18px, 3vw, 25px);
     border-radius: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     margin-bottom: 30px;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .tarjeta-principal h2 {
     margin: 0 0 15px 0;
     font-family: 'Playfair Display', serif;
+    color: #ff5ca8;
 }
 
 .cliente {
-    font-size: 28px;
+    font-size: clamp(22px, 3.5vw, 28px);
     font-weight: bold;
-    color: #ff5ca8;
+    font-family: 'Playfair Display', serif;
+    word-break: break-word;
 }
 
 .pedidos {
     color: #777;
     margin-top: 5px;
-}
-
-.grafico {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    margin-bottom: 30px;
 }
 
 .grafico h2 {
@@ -112,19 +141,19 @@ body {
 }
 
 .grafico-contenedor {
+    position: relative;
     height: 450px;
-}
-
-.tabla {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 
 .tabla h2 {
     font-family: 'Playfair Display', serif;
     margin-top: 0;
+    color: #ff5ca8;
+}
+
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
 }
 
 table {
@@ -134,16 +163,20 @@ table {
 
 th {
     text-align: left;
+    color: #ff5ca8;
     padding: 13px;
-    background: #fff0f7;
+    background: #fff1f7;
 }
 
 td {
+    background: #ffffff;
     padding: 13px;
-    border-bottom: 1px solid #eeeeee;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+    word-break: break-word;
 }
 
-tr:hover {
+tr:hover td {
     background: #fafafa;
 }
 
@@ -153,15 +186,56 @@ tr:hover {
     color: #888;
 }
 
+
+/* =========================
+   TABLET (900px o menos)
+========================== */
 @media (max-width: 900px) {
+    .grafico-contenedor {
+        height: 380px;
+    }
+}
+
+
+/* =========================
+   CELULAR (600px o menos)
+========================== */
+@media (max-width: 600px) {
     .contenido {
-        margin-left: 0;
-        padding: 20px;
+        padding: 15px 12px;
+    }
+
+    .descripcion {
+        margin-bottom: 20px;
+    }
+
+    .tarjeta-principal,
+    .grafico,
+    .tabla {
+        margin-bottom: 20px;
+    }
+
+    .grafico h2,
+    .tabla h2,
+    .tarjeta-principal h2 {
+        font-size: 20px;
+    }
+
+    .grafico-contenedor {
+        height: 300px;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+        font-size: 14px;
     }
 }
 </style>
 </head>
 <body>
+
+<?php include("../includes/header.php"); ?>
 
 <?php
 if ($rol == "administrador") {
@@ -200,18 +274,24 @@ if ($rol == "administrador") {
         <?php $resultadoTabla = $conn->query($sql); ?>
 
         <?php if ($resultadoTabla && $resultadoTabla->num_rows > 0) { ?>
+        <div class="tabla-scroll">
         <table>
+            <thead>
             <tr>
                 <th>Cliente</th>
                 <th>Cantidad de pedidos</th>
             </tr>
+            </thead>
+            <tbody>
             <?php while ($cliente = $resultadoTabla->fetch_assoc()) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
                 <td><?php echo $cliente['cantidad_pedidos']; ?></td>
             </tr>
             <?php } ?>
+            </tbody>
         </table>
+        </div>
         <?php } else { ?>
             <div class="sin-datos">No hay clientes registrados.</div>
         <?php } ?>
@@ -232,7 +312,7 @@ new Chart(ctx, {
         datasets: [{
             label: 'Cantidad de pedidos',
             data: cantidades,
-            backgroundColor: '#ff9bc5',
+            backgroundColor: '#ff89c0',
             borderWidth: 1
         }]
     },

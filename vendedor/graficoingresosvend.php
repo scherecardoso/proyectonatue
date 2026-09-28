@@ -17,12 +17,9 @@ $ingresos = [];
 $titulo = "";
 
 if ($periodo == "dia") {
-
     $titulo = "Ingresos por día";
 
-    $sql = "SELECT
-                p.fecha,
-                SUM(v.costo) AS total_ingresos
+    $sql = "SELECT p.fecha, SUM(v.costo) AS total_ingresos
             FROM ventas v
             INNER JOIN pedidos p ON v.pedidos_id = p.id
             WHERE p.fecha IS NOT NULL
@@ -32,25 +29,16 @@ if ($periodo == "dia") {
     $resultado = $conn->query($sql);
 
     if ($resultado) {
-
         while ($fila = $resultado->fetch_assoc()) {
-
             $periodos[] = date("d/m/Y", strtotime($fila["fecha"]));
             $ingresos[] = (float)$fila["total_ingresos"];
-
         }
     }
 
-}
-
-elseif ($periodo == "semana") {
-
+} elseif ($periodo == "semana") {
     $titulo = "Ingresos por semana";
 
-    $sql = "SELECT
-                YEAR(p.fecha) AS anio,
-                WEEK(p.fecha, 1) AS semana,
-                SUM(v.costo) AS total_ingresos
+    $sql = "SELECT YEAR(p.fecha) AS anio, WEEK(p.fecha, 1) AS semana, SUM(v.costo) AS total_ingresos
             FROM ventas v
             INNER JOIN pedidos p ON v.pedidos_id = p.id
             WHERE p.fecha IS NOT NULL
@@ -60,25 +48,16 @@ elseif ($periodo == "semana") {
     $resultado = $conn->query($sql);
 
     if ($resultado) {
-
         while ($fila = $resultado->fetch_assoc()) {
-
             $periodos[] = "Semana " . $fila["semana"] . " - " . $fila["anio"];
             $ingresos[] = (float)$fila["total_ingresos"];
-
         }
     }
 
-}
-
-elseif ($periodo == "mes") {
-
+} elseif ($periodo == "mes") {
     $titulo = "Ingresos por mes";
 
-    $sql = "SELECT
-                YEAR(p.fecha) AS anio,
-                MONTH(p.fecha) AS mes,
-                SUM(v.costo) AS total_ingresos
+    $sql = "SELECT YEAR(p.fecha) AS anio, MONTH(p.fecha) AS mes, SUM(v.costo) AS total_ingresos
             FROM ventas v
             INNER JOIN pedidos p ON v.pedidos_id = p.id
             WHERE p.fecha IS NOT NULL
@@ -88,39 +67,22 @@ elseif ($periodo == "mes") {
     $resultado = $conn->query($sql);
 
     $meses = [
-        1 => "Enero",
-        2 => "Febrero",
-        3 => "Marzo",
-        4 => "Abril",
-        5 => "Mayo",
-        6 => "Junio",
-        7 => "Julio",
-        8 => "Agosto",
-        9 => "Septiembre",
-        10 => "Octubre",
-        11 => "Noviembre",
-        12 => "Diciembre"
+        1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril",
+        5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto",
+        9 => "Septiembre", 10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre"
     ];
 
     if ($resultado) {
-
         while ($fila = $resultado->fetch_assoc()) {
-
             $periodos[] = $meses[(int)$fila["mes"]] . " " . $fila["anio"];
             $ingresos[] = (float)$fila["total_ingresos"];
-
         }
     }
 
-}
-
-elseif ($periodo == "anio") {
-
+} elseif ($periodo == "anio") {
     $titulo = "Ingresos por año";
 
-    $sql = "SELECT
-                YEAR(p.fecha) AS anio,
-                SUM(v.costo) AS total_ingresos
+    $sql = "SELECT YEAR(p.fecha) AS anio, SUM(v.costo) AS total_ingresos
             FROM ventas v
             INNER JOIN pedidos p ON v.pedidos_id = p.id
             WHERE p.fecha IS NOT NULL
@@ -130,47 +92,31 @@ elseif ($periodo == "anio") {
     $resultado = $conn->query($sql);
 
     if ($resultado) {
-
         while ($fila = $resultado->fetch_assoc()) {
-
             $periodos[] = $fila["anio"];
             $ingresos[] = (float)$fila["total_ingresos"];
-
         }
     }
 
-}
-
-else {
-
+} else {
     $periodo = "dia";
     $titulo = "Ingresos por día";
-
 }
 
-
-$sqlTotal = "SELECT
-                SUM(v.costo) AS total
+$sqlTotal = "SELECT SUM(v.costo) AS total
              FROM ventas v
              INNER JOIN pedidos p ON v.pedidos_id = p.id
              WHERE p.fecha IS NOT NULL";
 
 $resultadoTotal = $conn->query($sqlTotal);
-
 $totalIngresos = 0;
 
 if ($resultadoTotal) {
-
     $filaTotal = $resultadoTotal->fetch_assoc();
-
     $totalIngresos = (float)($filaTotal["total"] ?? 0);
-
 }
 
-
-$sqlMetodos = "SELECT
-                    v.metodo,
-                    SUM(v.costo) AS total
+$sqlMetodos = "SELECT v.metodo, SUM(v.costo) AS total
                FROM ventas v
                INNER JOIN pedidos p ON v.pedidos_id = p.id
                WHERE p.fecha IS NOT NULL
@@ -183,15 +129,11 @@ $metodos = [];
 $totalesMetodos = [];
 
 if ($resultadoMetodos) {
-
     while ($fila = $resultadoMetodos->fetch_assoc()) {
-
         $metodos[] = $fila["metodo"];
         $totalesMetodos[] = (float)$fila["total"];
-
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -235,505 +177,302 @@ body {
 
 
 
-
 .encabezado {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     margin-bottom: 25px;
 }
 
-
 .titulo h1 {
-
     margin: 0;
-
     font-family: "Playfair Display", serif;
-
     font-size: 32px;
-
     font-weight: 600;
-
-    color: #292929;
+    color: #ff5ca8;
 }
 
-
 .titulo p {
-
     margin: 7px 0 0;
-
     color: #777;
-
     font-family: "Quicksand", sans-serif;
-
     font-size: 15px;
 }
 
-
 .badge {
-
-    background: #f8e5ee;
-
-    color: #d94f87;
-
+    background: #fff1f7;
+    color: #ff5ca8;
     padding: 10px 18px;
-
     border-radius: 20px;
-
     font-family: "Quicksand", sans-serif;
-
     font-size: 14px;
-
     font-weight: 600;
 }
 
-
 .resumen {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 22px;
-
     margin-bottom: 25px;
 }
 
-
 .tarjeta {
-
     background: white;
-
     border: 1px solid #eeeeee;
-
     border-radius: 18px;
-
     padding: 30px;
-
     min-height: 155px;
-
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
 }
 
-
 .tarjeta-titulo {
-
     color: #777;
-
     font-family: "Quicksand", sans-serif;
-
     font-size: 15px;
-
     margin-bottom: 10px;
 }
 
-
 .tarjeta-valor {
-
     font-family: "Playfair Display", serif;
-
     font-size: 32px;
-
     font-weight: 600;
-
     color: #292929;
 }
 
-
 .tarjeta-sub {
-
     margin-top: 7px;
-
-    color: #d94f87;
-
+    color: #ff5ca8;
     font-size: 14px;
-
     font-weight: 600;
 }
 
-
 .botones {
-
     display: flex;
-
     justify-content: center;
-
     gap: 10px;
-
     margin-bottom: 25px;
-
     flex-wrap: wrap;
 }
 
-
 .botones a {
-
     text-decoration: none;
-
     color: #555;
-
     background: #ffffff;
-
     border: 1px solid #dddddd;
-
     padding: 11px 25px;
-
     border-radius: 25px;
-
     font-family: "Quicksand", sans-serif;
-
     font-size: 14px;
-
     font-weight: 600;
-
     transition: 0.2s;
 }
 
-
 .botones a:hover {
-
     background: #f8e5ee;
-
     color: #d94f87;
-
-    border-color: #f0bfd2;
+    border-color: #ff90ba;
 }
-
 
 .botones a.activo {
-
-    background: #d94f87;
-
+    background: #ff5ca8;
     color: white;
-
-    border-color: #d94f87;
+    border-color: #ff65a2;
 }
 
-
 .grafico-principal {
-
     background: white;
-
     border: 1px solid #eeeeee;
-
     border-radius: 18px;
-
     padding: 30px;
-
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-
     margin-bottom: 25px;
 }
 
-
 .grafico-titulo {
-
     margin-bottom: 20px;
 }
 
-
 .grafico-titulo h2 {
-
     margin: 0;
-
     font-family: "Playfair Display", serif;
-
     font-size: 24px;
-
     font-weight: 600;
-
     color: #292929;
 }
 
-
 .grafico-titulo p {
-
     margin: 6px 0 0;
-
     color: #888;
-
     font-size: 14px;
 }
 
-
 .grafico {
-
     height: 390px;
-
     width: 100%;
 }
 
-
 .graficos-secundarios {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 25px;
-
     margin-bottom: 25px;
 }
 
-
 .grafico-metodo {
-
     background: white;
-
     border: 1px solid #eeeeee;
-
     border-radius: 18px;
-
     padding: 30px;
-
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
 }
 
-
 .grafico-metodo h2 {
-
     margin: 0;
-
     font-family: "Playfair Display", serif;
-
     font-size: 23px;
-
     font-weight: 600;
+    color: #ff5ca8;
 }
 
-
 .grafico-metodo p {
-
     color: #888;
-
     font-size: 14px;
-
     margin: 7px 0 20px;
 }
 
-
 .grafico-dona {
-
     height: 330px;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 }
 
-
 .grafico-dona canvas {
-
     max-width: 100%;
-
     max-height: 320px;
 }
 
-
 .informacion {
-
-    background: #fafafa;
-
-    border-radius: 15px;
-
-    padding: 25px;
-
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
 }
-
 
 .informacion h2 {
-
     margin: 0 0 15px;
-
     font-family: "Playfair Display", serif;
-
     font-size: 22px;
+    color: #ff5ca8;
 }
 
-
 .dato {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding: 13px 0;
-
     border-bottom: 1px solid #e8e8e8;
-
     font-size: 14px;
 }
 
-
 .dato:last-child {
-
     border-bottom: none;
 }
 
-
 .dato strong {
-
-    color: #d94f87;
+    color: #ff5ca8;
 }
 
-
 .tabla-contenedor {
-
     background: white;
-
     border: 1px solid #eeeeee;
-
     border-radius: 18px;
-
     padding: 30px;
-
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-
     margin-top: 25px;
 }
 
-
 .tabla-titulo {
-
     margin-bottom: 20px;
 }
 
-
 .tabla-titulo h2 {
-
     margin: 0;
-
     font-family: "Playfair Display", serif;
-
     font-size: 24px;
-
     font-weight: 600;
+    color: #ff5ca8;
 }
 
-
 .tabla-titulo p {
-
     margin: 6px 0 0;
-
     color: #888;
-
     font-size: 14px;
 }
 
-
 table {
-
     width: 100%;
-
     border-collapse: collapse;
 }
 
-
 th {
-
-    background: #333333;
-
+    background: #fff1f7;
     color: white;
-
     padding: 15px;
-
     text-align: center;
-
     font-size: 14px;
-
     font-weight: 600;
+    color: #ff5ca8;
 }
-
 
 td {
-
+    background: #ffffff;
     padding: 15px;
-
     text-align: center;
-
-    border-bottom: 1px solid #eeeeee;
-
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
     font-size: 14px;
+    
 }
 
-
 tr:hover td {
-
     background: #fff8fb;
 }
 
-
 .ingreso {
-
-    color: #d94f87;
-
+    color: #ff5ca8;
     font-weight: 700;
 }
 
-
 @media (max-width: 1000px) {
-
     .contenido {
-
         padding: 20px;
-
     }
-
     .graficos-secundarios {
-
         grid-template-columns: 1fr;
-
     }
-
 }
-
 
 @media (max-width: 700px) {
-
     .resumen {
-
         grid-template-columns: 1fr;
-
     }
-
     .encabezado {
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 15px;
-
     }
-
     .contenedor {
-
         width: 100%;
-
     }
-
     .grafico {
-
         height: 320px;
-
     }
-
 }
-
 </style>
 
 </head>
@@ -1067,230 +806,109 @@ if ($rol == "administrador") {
 
 
 <script>
-
 const periodos = <?php echo json_encode($periodos); ?>;
-
 const ingresos = <?php echo json_encode($ingresos); ?>;
-
 const metodos = <?php echo json_encode($metodos); ?>;
-
 const totalesMetodos = <?php echo json_encode($totalesMetodos); ?>;
 
-
-const contextoIngresos =
-    document.getElementById("graficoIngresos");
-
+const contextoIngresos = document.getElementById("graficoIngresos");
 
 new Chart(contextoIngresos, {
-
     type: "line",
-
     data: {
-
         labels: periodos,
-
         datasets: [{
-
             label: "Ingresos (Bs)",
-
             data: ingresos,
-
-            borderColor: "#d94f87",
-
+            borderColor: "#ff5ca8",
             backgroundColor: "rgba(217, 79, 135, 0.12)",
-
             borderWidth: 3,
-
-            pointBackgroundColor: "#d94f87",
-
+            pointBackgroundColor: "#ff5ca8",
             pointBorderColor: "#ffffff",
-
             pointBorderWidth: 2,
-
             pointRadius: 5,
-
             pointHoverRadius: 7,
-
             tension: 0.3,
-
             fill: true
-
         }]
-
     },
-
     options: {
-
         responsive: true,
-
         maintainAspectRatio: false,
-
         interaction: {
-
             intersect: false,
-
             mode: "index"
-
         },
-
         plugins: {
-
             legend: {
-
                 display: true
-
             },
-
             tooltip: {
-
                 callbacks: {
-
                     label: function(context) {
-
-                        return " Bs " +
-                            Number(context.raw).toFixed(2);
-
+                        return " Bs " + Number(context.raw).toFixed(2);
                     }
-
                 }
-
             }
-
         },
-
         scales: {
-
             y: {
-
                 beginAtZero: true,
-
                 title: {
-
                     display: true,
-
                     text: "Ingresos en Bs"
-
                 }
-
             },
-
             x: {
-
                 title: {
-
                     display: true,
-
                     text: "<?php echo $titulo; ?>"
-
                 }
-
             }
-
         }
-
     }
-
 });
 
-
-const contextoMetodos =
-    document.getElementById("graficoMetodos");
-
+const contextoMetodos = document.getElementById("graficoMetodos");
 
 new Chart(contextoMetodos, {
-
     type: "doughnut",
-
     data: {
-
         labels: metodos,
-
         datasets: [{
-
             data: totalesMetodos,
-
-            backgroundColor: [
-
-                "#d94f87",
-
-                "#f28eb4",
-
-                "#f7c4d7",
-
-                "#bdbdbd",
-
-                "#777777",
-
-                "#444444"
-
-            ],
-
+            backgroundColor: ["#ff5ca8", "#f28eb4", "#f7c4d7", "#bdbdbd", "#777777", "#444444"],
             borderColor: "#ffffff",
-
             borderWidth: 3,
-
             hoverOffset: 10
-
         }]
-
     },
-
     options: {
-
         responsive: true,
-
         maintainAspectRatio: false,
-
         cutout: "58%",
-
         plugins: {
-
             legend: {
-
                 position: "bottom",
-
                 labels: {
-
                     padding: 18,
-
                     usePointStyle: true,
-
                     font: {
-
                         size: 13
-
                     }
-
                 }
-
             },
-
             tooltip: {
-
                 callbacks: {
-
                     label: function(context) {
-
-                        return " " +
-                            context.label +
-                            ": Bs " +
-                            Number(context.raw).toFixed(2);
-
+                        return " " + context.label + ": Bs " + Number(context.raw).toFixed(2);
                     }
-
                 }
-
             }
-
         }
-
     }
-
 });
-
 </script>
 
-
 </body>
-
 </html>

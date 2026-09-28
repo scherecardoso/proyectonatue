@@ -1,18 +1,16 @@
+
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ['vendedor', 'administrador'])) {
+if ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador') {
     header("Location: ../pagina/login.php");
     exit();
 }
-?>
 
-<?php
-    
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -20,15 +18,15 @@ if ($conn->connect_error) {
     die("Conexion fallida: " . $conn->connect_error);
 }
 
-$codigo = $_GET['codigo'];
+$codigo_original = $_GET['codigo'];
 
-$sql ="SELECT * FROM productos WHERE codigo=$codigo";
+$sql = "SELECT * FROM productos WHERE codigo=$codigo_original";
 
 $resultado = $conn->query($sql);
 
-if($resultado->num_rows > 0){
+if ($resultado->num_rows > 0) {
 
-    while($fila = $resultado->fetch_assoc()){
+    while ($fila = $resultado->fetch_assoc()) {
 
         $codigo = $fila['codigo'];
         $nombre = $fila['nombre'];
@@ -161,6 +159,7 @@ input.error{
 </head>
 
 <body>
+
 <div class="contenedor">
 
     <div class="logo">
@@ -174,39 +173,39 @@ input.error{
 
     <form action="../productos/19.actualizarproductos.php" method="post" id="valieditarpro">
 
-        <input type="hidden" name="codigo" value="<?=$codigo?>">
+        <input type="hidden" name="codigo_original" value="<?= htmlspecialchars($codigo_original, ENT_QUOTES, 'UTF-8') ?>">
 
         <label class="campo">
             <i class="fa-solid fa-barcode"></i>
-            <input type="number" name="codigo" value="<?=$codigo?>" placeholder="Código">
+            <input type="number" name="codigo" value="<?= htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8') ?>" placeholder="Código">
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-box"></i>
-            <input type="text" name="nombre" value="<?=$nombre?>" placeholder="Nombre del producto">
+            <input type="text" name="nombre" value="<?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?>" placeholder="Nombre del producto">
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-file-lines"></i>
-            <input type="text" name="descripcion" value="<?=$descripcion?>" placeholder="Descripción">
+            <input type="text" name="descripcion" value="<?= htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8') ?>" placeholder="Descripción">
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-dollar-sign"></i>
-            <input type="number" name="precio" value="<?=$precio?>" placeholder="Precio">
+            <input type="number" name="precio" value="<?= htmlspecialchars($precio, ENT_QUOTES, 'UTF-8') ?>" placeholder="Precio">
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-money-bill"></i>
-            <input type="number" name="costo" value="<?=$costo?>" placeholder="Costo">
+            <input type="number" name="costo" value="<?= htmlspecialchars($costo, ENT_QUOTES, 'UTF-8') ?>" placeholder="Costo">
         </label>
 
         <label class="campo">
             <i class="fa-solid fa-warehouse"></i>
-            <input type="number" name="stock" value="<?=$stock?>" placeholder="Stock">
+            <input type="number" name="stock" value="<?= htmlspecialchars($stock, ENT_QUOTES, 'UTF-8') ?>" placeholder="Stock">
         </label>
 
-        <button>Actualizar producto</button>
+        <button type="submit">Actualizar producto</button>
 
     </form>
 </div>
@@ -241,6 +240,7 @@ $(document).ready(function(){
                 number:true
             }
         },
+
         messages:{
             codigo:{
                 required:"Este campo no puede ir vacío",
@@ -265,9 +265,13 @@ $(document).ready(function(){
                 number:"Solo se aceptan números"
             }
         }
+
     });
+
 });
+
 </script>
 
 </body>
 </html>
+```

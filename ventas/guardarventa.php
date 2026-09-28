@@ -9,7 +9,7 @@ if($conexion->connect_error){
 
 $costo = $_POST['costo'];
 $metodo = $_POST['metodo'];
-$estado = $_POST['estado'];
+$estado = 'En proceso';
 $sql = "INSERT INTO ventas(costo, metodo, estado)VALUES('$costo','$metodo','$estado')";
 
 if($conexion->query($sql)){

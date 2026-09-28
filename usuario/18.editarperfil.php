@@ -1,11 +1,12 @@
+
 <?php
 session_start();
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario' || empty($_SESSION['CI'])) {
-    header('Location: ../pagina/login.php');
-    exit();
-}
-
+if ($_SESSION['rol'] == 'administrador') {
+    $perfil = '../perfil/perfiladmin.php';
+} elseif ($_SESSION['rol'] == 'usuario') {
+    $perfil = '../perfil/perfilusuario.php';
+} 
 $conn = new mysqli('localhost', 'root', '', 'shena');
 
 if ($conn->connect_error) {
@@ -13,12 +14,14 @@ if ($conn->connect_error) {
 }
 
 $CI = (string) $_SESSION['CI'];
-$stmt = $conn->prepare('SELECT nombre, direccion, celular FROM usuario WHERE CI = ? AND rol = ?');
-$rol = 'usuario';
-$stmt->bind_param('ss', $CI, $rol);
+
+$stmt = $conn->prepare('SELECT nombre, direccion, celular FROM usuario WHERE CI = ?');
+$stmt->bind_param('s', $CI);
 $stmt->execute();
+
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
+
 $stmt->close();
 $conn->close();
 
@@ -26,12 +29,14 @@ if (!$usuario) {
     die('Usuario no encontrado');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar mi información</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -104,30 +109,44 @@ if (!$usuario) {
         }
     </style>
 </head>
+
 <body>
-    <form action="../usuario/17.actualizarperfil.php" method="post">
-        <h2>Editar mi información</h2>
 
-        <input
-            type="text"
-            name="nombre"
-            value="<?= htmlspecialchars($usuario['nombre'], ENT_QUOTES, 'UTF-8') ?>"
-            placeholder="Nombre completo"
-            required
-        >
+<form action="../usuario/17.actualizarperfil.php" method="post">
 
-        <input
-            type="text"
-            name="direccion"
-            value="<?= htmlspecialchars($usuario['direccion'], ENT_QUOTES, 'UTF-8') ?>"
-            placeholder="Dirección"
-            required
-        >
+    <h2>Editar mi información</h2>
 
-        <input type="text" name="celular" value="<?= htmlspecialchars($usuario['celular'], ENT_QUOTES, 'UTF-8') ?>" placeholder="Celular" required>
+    <input
+        type="text"
+        name="nombre"
+        value="<?= htmlspecialchars($usuario['nombre'], ENT_QUOTES, 'UTF-8') ?>"
+        placeholder="Nombre completo"
+        required
+    >
 
-        <button type="submit">Guardar cambios</button>
-        <a class="volver" href="../usuario/perfilUser.php">Cancelar</a>
-    </form>
+    <input
+        type="text"
+        name="direccion"
+        value="<?= htmlspecialchars($usuario['direccion'], ENT_QUOTES, 'UTF-8') ?>"
+        placeholder="Dirección"
+        required
+    >
+
+    <input
+        type="text"
+        name="celular"
+        value="<?= htmlspecialchars($usuario['celular'], ENT_QUOTES, 'UTF-8') ?>"
+        placeholder="Celular"
+        required
+    >
+
+    <button type="submit">Guardar cambios</button>
+
+<a class="volver" href="<?= $perfil ?>">
+    Cancelar
+</a>>
+
+</form>
+
 </body>
 </html>

@@ -5,16 +5,11 @@ header {
   background-color: #ffffffb5;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 15px 6%;
+  padding: 9px 6%;
   top: 0;
   position: sticky;
-  
-  z-index: 100;
-  box-sizing: border-box;
-  width: 100%;
-  flex-wrap: wrap;
+  z-index: 1000;   
+
 }
 
 .logo {
@@ -28,10 +23,10 @@ header {
 nav {
   display: flex;
   align-items: center;
-  gap: 40px;
-  flex: 1 1 320px;
+  gap: 4px;
+  flex:  1;
   justify-content: center;
-  min-width: 0;
+
 }
 
 nav ul {
@@ -82,8 +77,8 @@ nav a {
   visibility: hidden;
 
   transition: all .2s ease;
+  z-index: 1001;  
 
-  z-index: 200;
 }
 
 
@@ -205,62 +200,89 @@ nav a.activo::after {
 }
 
 
-@media(max-width: 768px) {
 
+@media (min-width: 769px) and (max-width: 1024px) {
   header {
-    padding: 20px;
-
+    padding: 9px 4%;
     gap: 10px;
+  }
 
-    height: auto;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
+  .logo h1 {
+    margin: 0;
+    font-size: 16px;
   }
 
   nav ul {
-    gap: 15px;
+    gap: 16px;
+  }
 
-    flex-wrap: wrap;
-
-    justify-content: center;
+  nav a {
+    font-size: 14px;
   }
 
   .iconos-barra {
-    display: flex;
+    gap: 16px;
+  }
 
-    flex-direction: row;
+  .nombre-usuario {
+    font-size: 13px;
+  }
 
-    gap: 20px;
+  .icono-ambiental {
+    padding: 8px;
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 4%;
+  }
+
+  .logo h1 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  nav {
+    flex: none;        
+    width: 100%;
+  }
+
+  nav ul {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .iconos-barra {
+    justify-content: center;
+    gap: 18px;
   }
 
   .iconos-barra a {
-    display: flex;
-
-    align-items: center;
+    font-size: 16px;
   }
 
+  .nombre-usuario {
+    font-size: 12px;
+  }
 
+  .icono-ambiental {
+    padding: 8px;
+    font-size: 16px !important;
+  }
 
   .submenu {
-    left: 0;
-
-    transform: translateY(10px);
-
     min-width: 150px;
   }
-
-  nav li:hover > .submenu {
-    transform: translateY(0);
-  }
-
 }
-
 </style>
 
 

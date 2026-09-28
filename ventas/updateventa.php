@@ -16,7 +16,11 @@ if ($conexion->connect_error) {
 $id = $_POST['id'];
 $costo = $_POST['costo'];
 $metodo = $_POST['metodo'];
-$estado = $_POST['estado'];
+$estado = $_POST['estado'] ?? 'En proceso';
+
+if (!in_array($estado, ['En proceso', 'Entregado'], true)) {
+    die('Estado de venta no válido');
+}
 
 $sql = "UPDATE ventas SET costo='$costo',metodo='$metodo',estado='$estado' WHERE id='$id'";
 

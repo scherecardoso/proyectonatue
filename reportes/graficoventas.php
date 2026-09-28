@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -9,21 +10,33 @@ if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "v
 }
 
 $rol = $_SESSION['rol'];
+$fechaConsulta = '2026-09-19';
 
 $sql = "SELECT v.id, v.pedidos_id, v.costo, v.metodo, v.estado, p.nombre, p.fecha
         FROM ventas v
         INNER JOIN pedidos p ON v.pedidos_id = p.id
-        WHERE p.fecha = '2026-09-12'
+        WHERE p.fecha = '$fechaConsulta'
+        AND v.estado = 'Entregado'
         ORDER BY v.id DESC";
 
 $resultado = $conn->query($sql);
 
+if (!$resultado) {
+    die("Error en la consulta: " . $conn->error);
+}
+
 $sqlTotal = "SELECT COALESCE(SUM(v.costo), 0) AS total, COUNT(*) AS cantidad
              FROM ventas v
              INNER JOIN pedidos p ON v.pedidos_id = p.id
-             WHERE p.fecha = '2026-09-12'";
+             WHERE p.fecha = '$fechaConsulta'
+             AND v.estado = 'Entregado'";
 
 $resultadoTotal = $conn->query($sqlTotal);
+
+if (!$resultadoTotal) {
+    die("Error al calcular el total: " . $conn->error);
+}
+
 $datosTotal = $resultadoTotal->fetch_assoc();
 
 $total = $datosTotal['total'];
@@ -35,7 +48,8 @@ $ingresosGrafico = [];
 $sqlGrafico = "SELECT v.id, v.costo
                FROM ventas v
                INNER JOIN pedidos p ON v.pedidos_id = p.id
-               WHERE p.fecha = '2026-09-12'
+               WHERE p.fecha = '$fechaConsulta'
+               AND v.estado = 'Entregado'
                ORDER BY v.id ASC";
 
 $resultadoGrafico = $conn->query($sqlGrafico);
@@ -43,19 +57,24 @@ $resultadoGrafico = $conn->query($sqlGrafico);
 if ($resultadoGrafico) {
     while ($fila = $resultadoGrafico->fetch_assoc()) {
         $ventasGrafico[] = "Venta " . $fila['id'];
-        $ingresosGrafico[] = (float)$fila['costo'];
+        $ingresosGrafico[] = (float) $fila['costo'];
     }
 }
+
+$fechaMostrar = date("d/m/Y", strtotime($fechaConsulta));
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ventas totales del día</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 body {
     display: grid;
@@ -71,18 +90,29 @@ body {
     background: #ffffff;
 }
 
+
 .contenido {
     grid-area: contenido;
-    padding: 40px 40px 40px 200px;
+    padding: 30px;
     box-sizing: border-box;
     width: 100%;
     min-width: 0;
+       width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    border: 1px solid #f3f3f3;
+    box-sizing: border-box;
 }
 
 .titulo {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
     margin-bottom: 10px;
+    color: #ff5ca8;
 }
 
 .fecha {
@@ -94,6 +124,7 @@ body {
     display: flex;
     gap: 25px;
     margin-bottom: 35px;
+    flex-wrap: wrap;
 }
 
 .tarjeta {
@@ -111,7 +142,7 @@ body {
 }
 
 .tarjeta h3 {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
     font-size: 16px;
     color: #777;
 }
@@ -150,11 +181,14 @@ body {
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    overflow-x: auto;
+    
 }
 
 .tabla-contenedor h2 {
     font-family: 'Playfair Display', serif;
     margin-top: 0;
+    color: #ff5ca8;
 }
 
 table {
@@ -163,19 +197,34 @@ table {
 }
 
 th {
-    text-align: left;
-    padding: 13px;
-    background: #fff0f7;
-    color: #444;
+    background: #fff1f7;
+    padding: 16px;
+    font-size: 14px;
+    color: #ff5ca8;
+    text-align: center;
 }
 
 td {
-    padding: 13px;
-    border-bottom: 1px solid #eeeeee;
+    background: #ffffff;
+    padding: 16px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
 }
 
 tr:hover {
     background: #fff8fb;
+}
+
+.estado {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff1f7;
+    color: #ff5ca8;
+    font-size: 13px;
+    white-space: nowrap;
 }
 
 .sin-ventas {
@@ -185,18 +234,26 @@ tr:hover {
 }
 
 @media (max-width: 900px) {
+    body {
+        display: block;
+    }
+
     .contenido {
         padding: 20px;
     }
-    .tarjetas {
-        flex-wrap: wrap;
+
+    .tarjeta {
+        flex: 1 1 180px;
+        width: auto;
     }
+
     .grafico {
         height: 300px;
     }
 }
 </style>
 </head>
+
 <body>
 
 <?php
@@ -209,10 +266,10 @@ if ($rol == "administrador") {
 }
 ?>
 
-<div class="contenido">
+<main class="contenido">
 
-    <div class="titulo">Ventas totales del día</div>
-    <div class="fecha">12/09/2026</div>
+    <h1 class="titulo">Ventas totales del día</h1>
+    <div class="fecha"><?php echo $fechaMostrar; ?></div>
 
     <div class="tarjetas">
 
@@ -229,44 +286,72 @@ if ($rol == "administrador") {
     </div>
 
     <div class="grafico-contenedor">
-        <h2>Ingresos de las ventas de hoy</h2>
+        <h2>Ingresos de las ventas del día</h2>
+
         <div class="grafico">
             <canvas id="graficoVentas"></canvas>
         </div>
     </div>
 
     <div class="tabla-contenedor">
-        <h2>Ventas registradas hoy</h2>
+        <h2>Ventas registradas del día</h2>
 
-        <?php if ($resultado && $resultado->num_rows > 0) { ?>
+        <?php if ($resultado->num_rows > 0) { ?>
+
         <table>
-            <tr>
-                <th>ID Venta</th>
-                <th>Pedido</th>
-                <th>Cliente</th>
-                <th>Método de pago</th>
-                <th>Estado</th>
-                <th>Total</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Método de pago</th>
+                    <th>Estado del pedido</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
 
-            <?php while ($venta = $resultado->fetch_assoc()) { ?>
-            <tr>
-                <td><?php echo $venta['id']; ?></td>
-                <td><?php echo $venta['pedidos_id']; ?></td>
-                <td><?php echo htmlspecialchars($venta['nombre']); ?></td>
-                <td><?php echo htmlspecialchars($venta['metodo']); ?></td>
-                <td><?php echo htmlspecialchars($venta['estado']); ?></td>
-                <td>Bs <?php echo number_format($venta['costo'], 2); ?></td>
-            </tr>
-            <?php } ?>
+            <tbody>
+                <?php while ($venta = $resultado->fetch_assoc()) { ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($venta['id']); ?></td>
+
+                    <td>
+                        <?php echo htmlspecialchars($venta['pedidos_id']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($venta['nombre']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($venta['metodo']); ?>
+                    </td>
+
+                    <td>
+                        <span class="estado">
+                            <?php echo htmlspecialchars($venta['estado']); ?>
+                        </span>
+                    </td>
+
+                    <td>
+                        Bs <?php echo number_format((float) $venta['costo'], 2); ?>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
         </table>
+
         <?php } else { ?>
-        <div class="sin-ventas">No hay ventas registradas hoy.</div>
+
+        <div class="sin-ventas">
+            No hay ventas registradas para esta fecha.
+        </div>
+
         <?php } ?>
 
     </div>
 
-</div>
+</main>
 
 <script>
 const ventas = <?php echo json_encode($ventasGrafico); ?>;
@@ -302,12 +387,6 @@ new Chart(contexto, {
             },
             tooltip: {
                 backgroundColor: "#333",
-                titleFont: {
-                    family: "Arial"
-                },
-                bodyFont: {
-                    family: "Arial"
-                },
                 callbacks: {
                     label: function(context) {
                         return " Bs " + context.parsed.y.toFixed(2);
@@ -342,3 +421,7 @@ new Chart(contexto, {
 
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

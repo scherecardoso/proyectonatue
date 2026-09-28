@@ -1,12 +1,9 @@
 <?php
 session_start();
-if (
-    !isset($_SESSION['rol']) ||
-    !in_array(strtolower(trim((string) $_SESSION['rol'])), ['administrador', 'admin', 'vendedor'], true)
-) {
-    echo "Acceso denegado";
-    exit();
 
+if ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador') {
+    header("Location: ../pagina/login.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -178,7 +175,7 @@ input.error{
         </label>
         </label>
         <div class="volver">
-       <a href="../vendedor/07.vendedor.php" style="text-decoration:none; color:#fff;">VOLVER</a>
+           <a href="<?php echo $_SESSION['rol'] === 'administrador' ? '../admin/06.admin.php' : '../vendedor/07.vendedor.php'; ?>" style="text-decoration:none; color:#fff;">VOLVER</a>
         </div>
 
         <button type="submit">Guardar</button>

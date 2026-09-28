@@ -1,9 +1,15 @@
 <?php
 session_start();
 
-if ($_SESSION['rol'] != 'vendedor') {
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador')) {
     header("Location: ../pagina/login.php");
     exit();
+}
+
+$conn = new mysqli("localhost", "root", "", "shena");
+
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }
 ?>
 <!DOCTYPE html>
@@ -46,83 +52,107 @@ body {
     border:1px solid #f3f3f3;
 }
 
-
+.contenedor h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #ff5ca8;
+    font-family: "Playfair Display", serif;
+}
 
 table{
-    width:100%;
-    border-collapse:separate;
-    border-spacing:0 12px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    color: inherit;
 }
 
-th{
-    background:#fff1f7;
-    padding:18px;
-    font-size:15px;
-    color:#ff5ca8;
-    border:none;
+th {
+    background: #fff1f7;
+    padding: 16px;
+    font-size: 14px;
+    color: #ff5ca8;
+    text-align: center;
 }
 
-td{
-    background:white;
-    padding:18px;
-    font-size:14px;
-    text-align:center;
-    border-top:1px solid #f3f3f3;
-    border-bottom:1px solid #f3f3f3;
-}
 
-tr td:first-child{
-    border-left:1px solid #f3f3f3;
-    border-radius:15px 0 0 15px;
-}
-
-tr td:last-child{
-    border-right:1px solid #f3f3f3;
-    border-radius:0 15px 15px 0;
-}
-
-tr:hover td{
-    background:#fff8fb;
+td {
+    background: #ffffff;
+    padding: 16px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
 }
 
 
 
-.btn{
-    padding:8px 20px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:500;
-    text-decoration:none;
-
+tr td:first-child {
+    border-left: 1px solid #f3f3f3;
+    border-radius: 15px 0 0 15px;
 }
 
-.editar{
-    background:#ffe4ef;
-    color:#ff4f8b;
-    
+tr td:last-child {
+    border-right: 1px solid #f3f3f3;
+    border-radius: 0 15px 15px 0;
 }
 
-.eliminar{
-    background:#fff0f0;
-    color:#ff4d4d;
+tr:hover td {
+    background: #fff8fb;
 }
 
-.sin-datos{
-    text-align:center;
-    margin-top:40px;
-    color:#777;
+.producto-imagen {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #eee;
 }
-.stock-bajo {
-    color: #ff0000;
-    font-weight: bold;
+.acciones {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.stock-normal {
-    color: #008000;
-    font-weight: bold;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: .2s;
 }
 
+.editar {
+    background: #ffe4ef;
+    color: #ff4f8b;
+}
 
+.editar:hover {
+    background: #ffd0e2;
+    transform: translateY(-2px);
+}
+
+.eliminar {
+    background: #fff0f0;
+    color: #ff4d4d;
+}
+
+.eliminar:hover {
+    background: #ffdada;
+    transform: translateY(-2px);
+}
+
+.sin-datos {
+    text-align: center;
+    margin: 30px 0;
+    color: #777;
+}
 
 @media (max-width:768px){
 
@@ -171,26 +201,12 @@ h1{
 
 <?php
 
-$servidor = "localhost";
-$usuario = "root";
-$contra = "";
-$baseDeDatos = "shena";
-
-$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
-if ($conn->connect_error) {
-    die("Error de conexión");
-}
-if ($_SESSION['rol'] == 'vendedor' || $_SESSION['rol'] == 'administrador') {
- 
-
-$sql = "SELECT * FROM productos";
+$sql = "SELECT * FROM productos ORDER BY codigo ASC";
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
-
-    echo "<table>";
-    echo "
+?>
+    <table>
     <tr>
         <th>Código</th>
         <th>Nombre</th>
@@ -201,71 +217,91 @@ if ($result && $result->num_rows > 0) {
         <th>Imagen</th>
         <th>Acciones</th>
     </tr>
-    ";
-
+    
+<?php
     while($fila = $result->fetch_assoc()) {
 
-        $codigo = $fila['codigo'];
-         $stock = $fila['stock'];
-
+    $codigo = $fila['codigo'];
+    $archivoImagen = "../img/" . $fila['imagen'];
+    $stock = (int)$fila['stock'];
 
     if ($stock <= 5) {
-        $colorStock = "red";
+        $colorStock = "#ff0000";
     } else {
-        $colorStock = "green";
+        $colorStock = "#008000";
     }
-
-
-        echo "
-        <tr>
-            <td>{$fila['codigo']}</td>
-            <td>{$fila['nombre']}</td>
-            <td>{$fila['descripcion']}</td>
-            <td>$ {$fila['precio']}</td>
-            <td>$ {$fila['costo']}</td>
-            <td><span style='color:{$colorStock}; font-weight:bold;'>{$stock}</span></td>";
-$directorio = "../img/";
-$archivoImagen = $directorio . $fila['imagen'];
-
-if (file_exists($archivoImagen)) {
-    echo "<td><img src='".$archivoImagen."' width='150'></td>";
-} else {
-    echo "<td>No imagen</td>";
-}
-        echo "
-            <td>
-                <a class='btn editar'
-                href='../productos/18.formeditarproductos.php?codigo=$codigo'>
-                Editar
-                </a>
-
-                <a class='btn eliminar'
-                href='../productos/20.eliminarproductos.php?codigo=$codigo'>
-                Eliminar
-                </a>
-            </td>
-        </tr>
-        ";
-    }
-
-    echo "</table>";
-
-} else {
-
-    echo "<p class='sin-datos'>
-    No hay productos registrados
-    </p>";
-
-}  }else{ echo "Acceso denegado";
-    exit();
-}
-
-$conn->close();
-
 ?>
 
-</div>
+        <tr>
+                    <td><?php echo htmlspecialchars($fila['codigo']); ?></td>
+                    <td><?php echo htmlspecialchars($fila['nombre']); ?></td>
+                    <td><?php echo htmlspecialchars($fila['descripcion']); ?></td>
+                    <td>Bs <?php echo htmlspecialchars($fila['precio']); ?></td>
+                    <td>Bs <?php echo htmlspecialchars($fila['costo']); ?></td>
 
-</div>
+                    <td>
+                        <span style="color:<?php echo $colorStock; ?>; font-weight:bold;">
+                            <?php echo htmlspecialchars($stock); ?>
+                        </span>
+                    </td>
+
+                    <td>
+
+
+<?php if (!empty($fila['imagen']) && file_exists($archivoImagen)) { ?>
+                        <img
+                            src="<?php echo htmlspecialchars($archivoImagen); ?>"
+                            alt="<?php echo htmlspecialchars($fila['nombre']); ?>"
+                            class="producto-imagen">
+<?php } else { ?>
+                        <span>No imagen</span>
+<?php } ?>
+                    </td>
+
+
+                    <td>
+                        <div class="acciones">
+                            <a
+                                class="btn editar"
+                                href="../productos/18.formeditarproductos.php?codigo=<?php echo $codigo; ?>">
+                                <i class="fa-solid fa-pen"></i>
+                                Editar
+                            </a>
+
+                            <a
+                                class="btn eliminar"
+                                href="../productos/20.eliminarproductos.php?codigo=<?php echo $codigo; ?>"
+                                onclick="return confirm('¿Está seguro de eliminar este producto?');">
+                                <i class="fa-solid fa-trash"></i>
+                                Eliminar
+                            </a>
+                        </div>
+                    </td>
+        </tr>
+ 
+<?php
+}
+?>
+
+            </table>
+
+<?php
+} else {
+?>
+
+            <p class="sin-datos">No hay productos registrados.</p>
+
+<?php
+}
+?>
+
+        </div>
+    </div>
+</main>
+
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

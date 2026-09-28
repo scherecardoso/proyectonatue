@@ -1,17 +1,17 @@
+```php
 <?php
 session_start();
 
-if ($_SESSION['rol'] != 'vendedor') {
+if ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador') {
     header("Location: ../pagina/login.php");
     exit();
 }
-?>
-<?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
-    
+
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
+
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
 if ($conn->connect_error) {
@@ -20,14 +20,24 @@ if ($conn->connect_error) {
 
 $codigo = $_GET['codigo'];
 
-$sql = "DELETE  FROM productos WHERE codigo=$codigo";
+$sql = "DELETE FROM productos WHERE codigo=$codigo";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Producto eliminado exitosamente";
-    header("Location: ../productos/22.readproductos.php");
-} else { 
+
+    if ($_SESSION['rol'] == 'vendedor') {
+        header("Location: ../productos/22.readproductos.php");
+        exit();
+    }
+
+    if ($_SESSION['rol'] == 'administrador') {
+        header("Location: ../admin/gestionproductos.php");
+        exit();
+    }
+
+} else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-$conn->close();
 
+$conn->close();
 ?>
+```

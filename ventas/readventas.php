@@ -114,7 +114,7 @@ body {
 
     margin-bottom: 30px;
 
-    color: #ff4f94;
+    color: #ff5ca8;
 
     font-family: "Playfair Display", serif;
 
@@ -387,21 +387,7 @@ body {
                         </div>
 
 
-                        <div class="dato">
 
-                            <strong>
-                                Estado
-                            </strong>
-
-                            <span class="estado">
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['estado']
-                                );
-                                ?>
-
-                            </span>
 
                         </div>
                         <div class="dato">
@@ -422,6 +408,23 @@ body {
 
                         </div>
 
+                        
+                        <div class="dato">
+
+                            <strong>
+                                Estado
+                            </strong>
+
+                            <span class="estado">
+
+                                <?php
+                                echo htmlspecialchars(
+                                    $fila['estado']
+                                );
+                                ?>
+
+                            </span>
+  </div>
                     </div>
 
 

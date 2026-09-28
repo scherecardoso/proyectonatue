@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SESSION['rol'] != 'vendedor') {
+if ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador') {
     header("Location: ../pagina/login.php");
     exit();
 }

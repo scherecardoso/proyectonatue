@@ -102,7 +102,7 @@ body {
     font-family: "Playfair Display", serif;
     font-size: 32px;
     font-weight: 600;
-    color: #222222;
+    color: #ff5ca8;
 }
 
 .titulo p {
@@ -113,8 +113,8 @@ body {
 }
 
 .mes {
-    background: #f8e6ee;
-    color: #d94f87;
+    background: #fff1f7;
+    color: #ff5ca8;
     padding: 10px 18px;
     border-radius: 20px;
     font-family: "Quicksand", sans-serif;
@@ -158,7 +158,7 @@ body {
 
 .tarjeta .numero {
     font-size: 16px;
-    color: #d94f87;
+    color: #ff5ca8;
     font-weight: 600;
 }
 
@@ -180,6 +180,7 @@ body {
     font-family: "Playfair Display", serif;
     font-size: 24px;
     font-weight: 600;
+    
 }
 
 .titulo-grafico p {
@@ -217,6 +218,7 @@ body {
     font-family: "Playfair Display", serif;
     font-size: 24px;
     font-weight: 600;
+    color: #ff5ca8;
 }
 
 table {
@@ -225,18 +227,20 @@ table {
 }
 
 th {
-    background: #f7f7f7;
+    background: #fff1f7;
     padding: 15px;
     text-align: left;
     font-size: 14px;
-    color: #555555;
+    color: #ff5ca8;
     font-weight: 600;
 }
 
 td {
     padding: 15px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #f3f3f3;
+    border-top: 1px solid #f3f3f3;
     font-size: 14px;
+    background: #ffffff;
 }
 
 tr:hover td {
@@ -244,7 +248,7 @@ tr:hover td {
 }
 
 .numero-tabla {
-    color: #d94f87;
+    color: #ff4f8b;
     font-weight: 600;
 }
 

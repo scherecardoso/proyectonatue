@@ -1,7 +1,27 @@
 <?php
 session_start();
-include("../includes/verificarbloqueo.php");
+require("../ajax/php/conexion.php");
+
+$sqlDestacados = "SELECT
+                    p.codigo,
+                    p.nombre,
+                    p.descripcion,
+                    p.imagen,
+                    SUM(c.cantidad) AS cantidad_vendida
+                FROM carrito c
+                INNER JOIN productos p ON c.productos_codigo = p.codigo
+                INNER JOIN ventas v ON c.pedidos_id = v.pedidos_id
+                INNER JOIN pedidos pe ON v.pedidos_id = pe.id
+                WHERE MONTH(pe.fecha) = MONTH(CURDATE())
+                AND YEAR(pe.fecha) = YEAR(CURDATE())
+                GROUP BY p.codigo, p.nombre, p.descripcion, p.imagen
+                HAVING cantidad_vendida > 0
+                ORDER BY cantidad_vendida DESC
+                LIMIT 4";
+
+$destacados = $conn->query($sqlDestacados);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +33,28 @@ include("../includes/verificarbloqueo.php");
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <style>
+
+  * {
+  box-sizing: border-box;
+}
+
+html,
 body {
- display: grid;
- margin: 0;
- font-family: Arial, sans-serif;
- grid-template-columns: 1fr;   
- grid-template-areas:
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+body {
+  display: grid;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-family: Arial, sans-serif;
+  grid-template-columns: 1fr;
+  grid-template-areas:
     "barra"
     "banner"
     "nompro"
@@ -26,8 +62,8 @@ body {
     "contenido"
     "coment"
     "pie";
- gap: 10px;
-
+  gap: 10px;
+  overflow-x: hidden;
 }
 
 h2 {
@@ -98,29 +134,34 @@ h3{
 .productos {
   grid-area: productos;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: flex-start;
-  padding: 100px 0;
+  flex-wrap: wrap;
+  gap: 45px;
+  padding: 100px 30px;
   background-color: #ffffff;
   position: relative;
   top: 200px;
   border-radius: 20%;
 }
+
 .titulo-productos {
-  position: relative;
-  width: 190px;
-  height: 60px;
-  background-color: #ffffff;
-  top: 150px;
-  justify-content: center;
-  align-items: center;
-  left: 50%;
-  font-family: 'Playfair Display', serif;
-  font-size: 35px; 
-  color: #000;
-  border-radius: 20%;
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #000;
+    margin: 14px 10 65px;
+    left: 0;
+    top: 0;
 }
 
+.titulo-productos h2 {
+    font-size: 42px;
+    margin: 0;
+    font-weight: 600;
+}
 
 .rectangulo-titulo {
   width: 300px;
@@ -241,70 +282,92 @@ h3{
   transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
 
-  body {
-    display: block;
-    margin: 0;
-    overflow-x: hidden;
-  }
-  .banner-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .img-logo {
-    width: 180px;
-    height: auto;
-    top: 0;
-    margin: 20px auto;
-    background: transparent;
+@media (max-width: 1100px) {
+
+  .productos {
+    gap: 35px;
+    padding-left: 25px;
+    padding-right: 25px;
   }
 
-  .img-logo img {
-    width: 100%;
-    height: auto;
+  .cuadro-grande {
+    width: 300px;
+    height: 420px;
   }
 
-  .caja-correo {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 65%;
-    display: flex;
+  .rectangulo-titulo,
+  .rectangulo-info {
+    width: 280px;
+  }
+
+  .contenido {
+    gap: 30px;
+    padding: 40px;
+  }
+
+  .img-contenido {
+    width: 42%;
+    max-width: 450px;
+  }
+
+  .texto-contenido {
+    font-size: 18px;
+  }
+}
+
+
+
+@media (max-width: 900px) {
+
+  .productos {
+    gap: 30px;
+    padding: 80px 20px;
+  }
+
+  .cuadro-grande {
+    width: 280px;
+    height: 390px;
+  }
+
+  .rectangulo-titulo,
+  .rectangulo-info {
+    width: 260px;
+  }
+
+  .contenido {
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 0 15px;
-    box-sizing: border-box;
+    gap: 35px;
+    padding: 60px 30px;
+    min-height: auto;
   }
 
-  .input-correo {
-    width: 70%;
-    height: 50px;
-    font-size: 14px;
-  }
-
-  .boton-enviar {
-    width: 70px;
-    height: 50px;
-  }
-  .titulo-productos {
-    position: relative;
+  .texto-contenido {
     width: 100%;
-    height: auto;
-    left: 0;
-    top: 0;
-    margin: 40px 0 20px;
-    text-align: center;
-    font-size: 25px;
-    background-color: white;
+    max-width: 750px;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: justify;
   }
 
-  .titulo-productos h2 {
-    font-size: 28px;
-    margin: 0;
+  .img-contenido {
+    width: 70%;
+    max-width: 450px;
+    height: auto;
   }
+
+  .comentario {
+    width: 80%;
+    max-width: 500px;
+  }
+}
+
+
+
+@media (max-width: 768px) {
 
   .productos {
     position: relative;
@@ -313,8 +376,9 @@ h3{
     flex-direction: column;
     align-items: center;
     gap: 50px;
-    padding: 20px 20px 60px;
+    padding: 40px 15px 60px;
     background-color: white;
+    border-radius: 0;
   }
 
   .producto {
@@ -327,18 +391,17 @@ h3{
   .rectangulo-titulo {
     width: 90%;
     max-width: 300px;
-    height: auto;
     min-height: 50px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 22px;
-    background-color: white;
   }
 
   .rectangulo-titulo p {
-    margin: 10px 0;
+    margin: 10px;
   }
 
   .cuadro-grande {
@@ -361,7 +424,6 @@ h3{
     height: auto;
     min-height: 95px;
     padding: 10px;
-    box-sizing: border-box;
     text-align: center;
     font-size: 18px;
   }
@@ -372,33 +434,31 @@ h3{
 
   .contenido {
     width: 100%;
-    height: auto;
-    min-height: 0;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 35px;
     padding: 50px 20px;
-    box-sizing: border-box;
     text-align: center;
   }
 
   .texto-contenido {
     width: 100%;
+    max-width: 600px;
     padding: 0;
     margin: 0;
     font-size: 16px;
     line-height: 1.7;
     text-align: justify;
-    box-sizing: border-box;
   }
 
   .img-contenido {
     width: 90%;
-    max-width: 320px;
-    height: 320px;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 40px;
-    object-fit: cover;
   }
 
   .comentario {
@@ -408,7 +468,6 @@ h3{
     min-height: 280px;
     margin: 40px auto;
     padding: 30px 20px;
-    box-sizing: border-box;
     gap: 20px;
   }
 
@@ -421,18 +480,94 @@ h3{
   .contenido-comentario p {
     margin: 0;
   }
+}
 
-  .icono-comentario {
-    width: 65px;
-    height: 65px;
+
+
+@media (max-width: 500px) {
+
+  .titulo-productos {
+    margin: 30px 0 10px;
   }
 
-  .icono-comentario a {
-    font-size: 25px;
+  .titulo-productos h2 {
+    font-size: 26px;
+  }
+
+  .productos {
+    gap: 40px;
+    padding: 20px 10px 50px;
+  }
+
+  .cuadro-grande {
+    width: 90%;
+    max-width: 300px;
+    height: 370px;
+  }
+
+  .rectangulo-titulo {
+    max-width: 280px;
+    font-size: 20px;
+  }
+
+  .rectangulo-info {
+    max-width: 280px;
+    font-size: 16px;
+  }
+
+  .contenido {
+    padding: 40px 15px;
+  }
+
+  .texto-contenido {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .img-contenido {
+    width: 90%;
+    max-width: 320px;
+    border-radius: 30px;
+  }
+
+  .comentario {
+    width: 92%;
+    min-height: 250px;
+  }
+
+  .contenido-comentario {
+    font-size: 21px;
   }
 }
 
 
+@media (max-width: 360px) {
+
+  .titulo-productos h2 {
+    font-size: 23px;
+  }
+
+  .cuadro-grande {
+    width: 90%;
+    height: 330px;
+  }
+
+  .rectangulo-titulo {
+    font-size: 18px;
+  }
+
+  .rectangulo-info {
+    font-size: 15px;
+  }
+
+  .texto-contenido {
+    font-size: 14px;
+  }
+
+  .contenido-comentario {
+    font-size: 19px;
+  }
+}
 </style>
 </head>
 
@@ -440,6 +575,7 @@ h3{
 <body>
 
 <?php include("../includes/header.php"); ?>
+<?php require("../ajax/php/conexion.php");?>
   <section>
     <img src="../img/banner4 - Copy.png" alt="Banner" class="banner-img" id="banner">
   </section>
@@ -447,31 +583,45 @@ h3{
 
   <div class="titulo-productos"><h2>Productos Destacados</h2></div>
 
-  <section class="productos">
+ <section class="productos">
 
-    <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Serum de Coco</center></p></div>
-    <div class="cuadro-grande">
-    <img src="../img/zpr2.jpeg" alt=""></div>
-    <div class="rectangulo-info"><center><p>Hidrata,protege y mantiene el equilibrio de la humedad del rostro para una piel saludable </p></center></div></div>
+<?php if ($destacados && $destacados->num_rows > 0): ?>
 
-    <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Balsamo de frutilla</center></p></div>
-    <div class="cuadro-grande">
-    <img src="../img/zpr26.jpeg" alt=""></div>
-    <div class="rectangulo-info"><center><p>Reduce arrugas, manchas y acne mejorando la textura de la piel</p></center></div></div>
+    <?php while ($producto = $destacados->fetch_assoc()): ?>
 
-    <div class="producto">
-    <div class="rectangulo-titulo"><p><center>Jabon de Avena</center></p></div>
-    <div class="cuadro-grande">
-    <img src="../img/zpr44.jpeg" alt=""></div>
-    <div class="rectangulo-info"><center><p>Hidrata, suaviza y protege la piel del cuerpo evitando resequedad para prevenir irritaciones </p></center></div></div>
+        <div class="producto">
 
-    <div class="producto">
-    <div class="rectangulo-titulo"><center><p>Polvo Facial</p></center></div>
-    <div class="cuadro-grande">
-    <img src="../img/zpr17.jpeg" alt=""></div>
-    <div class="rectangulo-info"><center><p>Ayuda a unificar el tono de la piel, dando un acabado mate al rostro que cubre imperfecciones y sella el maquillaje liquido</p></center></div></div>
+            <div class="rectangulo-titulo">
+                <p>
+                    <?php echo htmlspecialchars($producto['nombre']); ?>
+                </p>
+            </div>
+
+            <div class="cuadro-grande">
+                <img 
+                    src="../img/<?php echo htmlspecialchars($producto['imagen']); ?>" 
+                    alt="<?php echo htmlspecialchars($producto['nombre']); ?>"
+                >
+            </div>
+
+            <div class="rectangulo-info">
+                <p>
+                    <?php echo htmlspecialchars($producto['descripcion']); ?>
+                </p>
+            </div>
+
+        </div>
+
+    <?php endwhile; ?>
+
+<?php else: ?>
+
+    <div class="sin-destacados">
+        <p>Aún no hay productos vendidos este mes.</p>
+    </div>
+
+<?php endif; ?>
+
 </section>
 
 

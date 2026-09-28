@@ -3,6 +3,7 @@ session_start();
 include("../includes/verificarbloqueo.php");
 if ($_SESSION['rol'] != "administrador") {
   header("Location: ../usuario/09.register.php");
+  exit;
 }
  
 $servidor = "localhost";
@@ -29,12 +30,6 @@ $imagenPerfil = !empty($perfil['imagen_perfil'])
     ? $perfil['imagen_perfil'] 
     : 'imgperfil.avif';
 
-
-    
-
-
-
-
 $totalUsuarios = $conn->query(
     "SELECT COUNT(*) AS total FROM usuario"
 )->fetch_assoc()['total'];
@@ -48,31 +43,72 @@ $totalPedidos = $conn->query(
     "SELECT COUNT(*) AS total FROM pedidos"
 )->fetch_assoc()['total'];
 
-
-$sqlVentasSemana = "SELECT  DATE(p.fecha) AS dia,
-        SUM(v.costo) AS total
+$totalVentasMes = $conn->query(
+    "SELECT COUNT(*) AS total
     FROM ventas v
     INNER JOIN pedidos p ON v.pedidos_id = p.id
-    WHERE p.fecha >= CURDATE() - INTERVAL 6 DAY
-    GROUP BY DATE(p.fecha)
-    ORDER BY dia ASC
-";
+    WHERE MONTH(p.fecha) = MONTH(CURDATE())
+    AND YEAR(p.fecha) = YEAR(CURDATE())
+    AND v.estado = 'Entregado'
+")->fetch_assoc()['total'];
+$totalUsuariosActivos = $conn->query(
+    "SELECT COUNT(*) AS total
+    FROM usuario
+    WHERE estado = 'Activo'
+")->fetch_assoc()['total'];
 
-$resultadoVentasSemana = $conn->query($sqlVentasSemana);
+$totalProductosActivos = $conn->query(
+    "SELECT COUNT(*) AS total
+    FROM productos
+    WHERE estado = 'Activo'
+")->fetch_assoc()['total'];
 
-$diasVentas = [];
-$totalesVentas = [];
+$totalPedidosMes = $conn->query(
+    "SELECT COUNT(*) AS total
+    FROM pedidos
+    WHERE MONTH(fecha) = MONTH(CURDATE())
+    AND YEAR(fecha) = YEAR(CURDATE())
+")->fetch_assoc()['total'];
 
-if ($resultadoVentasSemana) {
-    while ($fila = $resultadoVentasSemana->fetch_assoc()) {
-        $diasVentas[] = date("d/m", strtotime($fila['dia']));
-        $totalesVentas[] = (float)$fila['total'];
-    }
+$totalIngresosMes = $conn->query(
+    "SELECT COALESCE(SUM(v.costo), 0) AS total
+    FROM ventas v
+    INNER JOIN pedidos p ON v.pedidos_id = p.id
+    WHERE MONTH(p.fecha) = MONTH(CURDATE())
+    AND YEAR(p.fecha) = YEAR(CURDATE())
+    AND v.estado = 'Entregado'
+")->fetch_assoc()['total'];
+
+
+$ventasGrafico = [];
+$ingresosGrafico = [];
+
+$sqlGrafico = "SELECT v.id, v.costo
+               FROM ventas v
+               INNER JOIN pedidos p ON v.pedidos_id = p.id
+               WHERE p.fecha BETWEEN '2026-09-13' AND '2026-09-19'
+               AND v.estado = 'Entregado'
+               ORDER BY v.id ASC";
+
+$resultadoGrafico = $conn->query($sqlGrafico);
+
+if (!$resultadoGrafico) {
+    die("Error en gráfico: " . $conn->error);
 }
+
+while ($fila = $resultadoGrafico->fetch_assoc()) {
+    $ventasGrafico[] = "Venta " . $fila['id'];
+    $ingresosGrafico[] = (float)$fila['costo'];
+}
+
+$totalRoles = $conn->query(
+    "SELECT COUNT(DISTINCT rol) AS total FROM usuario"
+)->fetch_assoc()['total'];
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,43 +119,67 @@ if ($resultadoVentasSemana) {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
+
+html {
+    overflow-x: hidden;
+}
+
 body {
-    display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;   
-    grid-template-areas:
-        "barra barra barra"
-        "menu info act"
-        "pie pie pie";
-    gap: 10px;
-    height: 100vh;
     background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  info";
+    gap: 0;
 }
+
+h2 { font-size: 35px; }
+p  { font-size: 20px; }
+div { color: black; }
+i   { color: black; }
 
 
 
 .info {
     grid-area: info;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 25px;
+
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
         "bienvenida"
         "cards"
-        "contenido";
-    grid-template-rows: auto auto 1fr;
-    gap: 20px;
-    padding: 10px;
-    margin-top: 25px;
+        "contenido"
+        "act";
+    gap: 25px;
+    align-content: start;
 }
 
+
+@media (min-width: 1400px) {
+    .info {
+        grid-template-columns: minmax(0, 1fr) 350px;
+        grid-template-areas:
+            "bienvenida act"
+            "cards      act"
+            "contenido  act";
+    }
+}
 
 
 .bienvenida {
     grid-area: bienvenida;
     width: 100%;
-    max-width: 900px;
-    min-height: 220px;
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -129,8 +189,6 @@ body {
     font-size: 30px;
     font-family: 'Playfair Display', serif;
     color: #272020;
-    margin: 0 auto;
-    transform: translateX(-65px);
     position: relative;
     z-index: 1;
     border-radius: 38px 48px 35px 45px / 35px 30px 42px 38px;
@@ -164,11 +222,10 @@ body {
     pointer-events: none;
 }
 
-
-
 .circulo {
-    width: 180px;
-    height: 180px;
+    width: clamp(105px, 14vw, 170px);
+    height: clamp(105px, 14vw, 170px);
+    flex-shrink: 0;
     border-radius: 50%;
     background: white;
     border: 3px solid #cfcfcf;
@@ -184,17 +241,18 @@ body {
     object-fit: cover; 
 }
 
+
 .cards {
     grid-area: cards;
-    display: flex;
-    gap: 10px;
-    margin-top: 50px;
-    margin-left: 175px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
 }
 
 .card {
-    width: 205px;
-    height: 225px;
+    box-sizing: border-box;
+    min-height: 190px;
+    padding: 15px 10px;
     background-color: #ffffffe3;
     border-radius: 25px;
     display: flex;
@@ -202,6 +260,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    text-align: center;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
 }
@@ -221,7 +280,6 @@ body {
     font-size: 30px;
 }
 
-
 .card h3 {
     margin: 0;
     font-size: 29px;
@@ -238,57 +296,60 @@ body {
 
 .contenido {
     grid-area: contenido;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
     gap: 20px;
-    margin-top: 2%;
-    margin-left: 177px;
 }
 
-.resumen {
-    grid-area: resumen;
-    background: #ffffff;
-    height: 450px;
-    width: 530px;
-    border-radius: 35px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    border: 1px solid #efefef;
-    display: flex;
-    flex-direction: column;  
-    align-items: center;   
-    justify-content: flex-start; 
-    padding-top: 20px;
-    color: #ff78b8;
-    font-size: 28px;
-}
-.grafico-resumen {
-    width: 90%;
-    height: 350px;
-    padding: 10px;
-}
+.resumen,
 .pedidos {
-    grid-area: pedidos;
+    min-width: 0;
+    box-sizing: border-box;
+    min-height: 450px;
     background: #ffffff;
-    height: 450px;
-    width: 530px;
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
     display: flex;
-    flex-direction: column;  
-    align-items: center;   
-    justify-content: flex-start; 
-    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 15px;
     color: #ff78b8;
     font-size: 28px;
+}
+
+.grafico-resumen {
+    width: 100%;
+    height: 350px;
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.pedidos {
+    overflow-x: auto;
+    align-items: flex-start;
+}
+
+.titulo-caja {
+    color: #ff78b8;
+    font-size: 28px;
+    margin: 0 0 20px;
+}
+
+.resumen .titulo-caja,
+.pedidos .titulo-caja {
+    align-self: center;
+    text-align: center;
 }
 
 .tabla-pedidos {
-    width: 90%;
-    margin: auto;
+    width: 100%;
+    min-width: 500px;
     border-collapse: collapse;
     font-size: 16px;
     color: #555;
-    min-width: 500px;
 }
 
 .tabla-pedidos th {
@@ -312,230 +373,188 @@ body {
     min-width: 80px;
 }
 
-.estado-aceptado {
-    background-color: #dff3e4;
-    color: #4f8a5b;
-}
+.estado-aceptado  { background-color: #dff3e4; color: #4f8a5b; }
+.estado-rechazado { background-color: #f8dddd; color: #b85c5c; }
+.estado-pendiente { background-color: #fff1d6; color: #a67c35; }
 
-.estado-rechazado {
-    background-color: #f8dddd;
-    color: #b85c5c;
-}
 
-.estado-pendiente {
-    background-color: #fff1d6;
-    color: #a67c35;
-}
 
 .act {
     grid-area: act;
-    display: flex;
-    flex-direction: column;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 20px;
-    padding: 10px;
-    margin-top: 30px;
-    margin-left: 1270px;
-    border-radius: 25%;
-    position: absolute;
+    align-content: start;
 }
 
-.acciones {
-    background: #ffffff;
-    width: 330px;
-    height: 360px;
-    border-radius: 35px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    border: 1px solid #efefef;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 25px;
-}
-
+.acciones,
 .resumen-sistema {
+    box-sizing: border-box;
+    min-height: 300px;
     background: #ffffff;
-    width: 330px;
-    height: 360px;
     border-radius: 35px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.05);
     border: 1px solid #efefef;
-
     display: flex;
     flex-direction: column;
-
     align-items: flex-start;
     justify-content: flex-start;
-
     padding: 25px;
 }
 
-.actividad {
-    background: #ffffff;
-    width: 330px;
-    height: 360px;
-    border-radius: 35px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    border: 1px solid #efefef;
-
+.lista-acciones {
+    list-style: none;
     display: flex;
     flex-direction: column;
-
-    align-items: flex-start;
-    justify-content: flex-start;
-
-    padding: 25px;
+    gap: 25px;
+    margin: 0;
+    padding: 10px 10px;
+    font-size: 18px;
+    color: #444;
 }
 
-.titulo-caja{
-  color:#ff78b8;
-  font-size:28px;
-  margin-bottom:20px;
-}
-
-
-.tabla-pedidos{
-  width:90%;
-  margin:auto;
-  border-collapse:collapse;
-  font-size:16px;
-  color:#555;
-}
-
-.tabla-pedidos th{
-  text-align:left;
-  padding:10px;
-}
-
-.tabla-pedidos td{
-  padding:10px;
-}
-
-
-.lista-acciones{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  padding:20px 35px;
-  font-size:18px;
-  color:#444;
-}
-
-.lista-acciones i{
-  color:#ff78b8;
-  margin-right:12px;
-}
-
-
-
-.lista-sistema{
-  list-style:none;
-  padding:20px 35px;
-}
-
-.lista-sistema li{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:22px;
-  font-size:18px;
-  color:#444;
-}
-
-
-
-.lista-actividad{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  padding:20px 35px;
-  font-size:17px;
-  color:#444;
-}
-
-.lista-actividad i{
-  color:#ff78b8;
-  margin-right:12px;
-}
-
-h2{
-    font-size: 35px;
-}
-
-p{
-    font-size: 20px;
-}
-
-div{
-  color: black;
-}
-
-i{
-    color:black;
-}
-
-.menu a{
+.lista-acciones a {
+    color: inherit;
     text-decoration: none;
-    color: black;
 }
+
+.lista-acciones i {
+    color: #ff78b8;
+    margin-right: 12px;
+}
+
+.lista-sistema {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 10px 10px;
+    box-sizing: border-box;
+}
+
+.lista-sistema li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    font-size: 18px;
+    color: #444;
+    gap: 30px;
+}
+
+
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "info";
+    }
+
+    .info {
+        padding: 20px 15px;
+    }
+}
+
 
 @media (max-width: 768px) {
 
-  body{
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "barra"
-      "info";
-  }
+    .info {
+        gap: 22px;
+        padding: 18px 15px;
+    }
 
-  .menu,
-  .act {
-    display: none;
-  }
+    .bienvenida {
+        min-height: 230px;
+        padding: 25px 20px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
 
+    .bienvenida h2 {
+        font-size: 27px;
+        margin: 0 0 8px;
+    }
 
-  .bienvenida {
-    position: static;
-    width: 90%;
-    height: auto;
-    margin: 20px auto;
-  
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
+    .bienvenida p {
+        font-size: 15px;
+        line-height: 1.5;
+        margin: 0;
+    }
 
-  .circulo {
-    width: 120px;
-    height: 120px;
-  }
+    .cards {
+        gap: 12px;
+    }
 
-  .cards {
-    margin: 20px 0;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+    .card {
+        min-height: 170px;
+        border-radius: 22px;
+        gap: 8px;
+    }
 
-  .card {
-    width: 45%;
-  }
+    .icono {
+        width: 45px;
+        height: 45px;
+    }
 
-  .contenido {
-    position: static;
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+    .icono i {
+        font-size: 23px;
+    }
 
-  .resumen,
-  .pedidos {
-    width: 100%;
-    height: auto;
-  }
+    .card h3 {
+        font-size: 25px;
+    }
 
+    .card p {
+        font-size: 12px;
+    }
+
+    .resumen,
+    .pedidos {
+        min-height: 350px;
+        border-radius: 25px;
+        padding: 20px 10px;
+    }
+
+    .titulo-caja {
+        font-size: 22px;
+        margin: 5px 0 15px;
+    }
+
+    .grafico-resumen {
+        height: 280px;
+    }
+
+    .tabla-pedidos {
+        font-size: 13px;
+    }
+
+    .tabla-pedidos th,
+    .tabla-pedidos td {
+        padding: 8px;
+    }
+
+    .estado {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: 65px;
+    }
+
+    .acciones,
+    .resumen-sistema {
+        border-radius: 25px;
+        padding: 20px;
+        min-height: 0;
+    }
+
+    .lista-acciones,
+    .lista-sistema li {
+        font-size: 16px;
+    }
 }
 </style>
 </head>
@@ -544,126 +563,160 @@ i{
 <?php include("../includes/includeadmin.php"); ?>
 
 <main class="info">
-    <seccion class="bienvenida">
-      <div class="circulo"><img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"> </div>
+  <section class="bienvenida">
+    <div class="circulo"><img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"></div>
 
-    <div class="texto"><h2>¡BIENVENIDA, <?php echo $_SESSION['nombre'];?>! 🌸</h2>
-    <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
-  </div>
-</seccion>
-
-
-<section class="cards">
-    <article class="card"><div class="icono"><i class="fa-solid fa-users"></i></div><h3><?php echo $totalUsuarios; ?></h3><p>Usuarios Registrados</p></article></a>
-    <article class="card"><div class="icono"><i class="fa-solid fa-shield"></i></div><h3>2</h3><p>Roles Activos</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-box"></i></div><h3><?php echo $totalProductos; ?></h3><p>Productos Registrados</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-cart-shopping"></i></div><h3><?php echo $totalPedidos; ?></h3><p>Pedidos este mes</p></article>
-    <article class="card"><div class="icono"><i class="fa-solid fa-dollar-sign"></i></div><h3></h3><p>Ventas este mes</p></article>
-</section>
-
-
-<section class="contenido">
-  <section class="resumen">
-    <h3 class="titulo-caja">RESUMEN DE VENTAS</h3>
-    <div class="grafico-resumen">
-      <canvas id="graficoResumenVentas"></canvas>
+    <div class="texto">
+      <h2>¡BIENVENIDA, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! 🌸</h2>
+      <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
     </div>
   </section>
 
-  <section class="pedidos">
-    <h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
-    <table class="tabla-pedidos">
-      <?php
-      $pedidos = $conn->query("
-      SELECT *
-          FROM pedidos
-          ORDER BY id DESC
-          LIMIT 5
-      ");
 
-      while($pedido = $pedidos->fetch_assoc()){
-      ?>
-      <tr>
-          <td><?php echo $pedido['nombre']; ?></td>
-          <td><?php echo $pedido['fecha']; ?></td>
-        
-          <td><?php echo $pedido['vendedor']; ?></td>
+  <section class="cards">
+    <article class="card">
+      <div class="icono"><i class="fa-solid fa-users"></i></div>
+      <h3><?php echo $totalUsuarios; ?></h3>
+      <p>Usuarios Registrados</p>
+    </article>
 
-        
-                            <td><?php echo htmlspecialchars($pedido['id']); ?></td>
-                            <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
-                            <td>
-                                <?php
-                                $estado = strtolower(trim($pedido['estado']));
+    <article class="card">
+      <div class="icono"><i class="fa-solid fa-shield"></i></div>
+      <h3><?php echo $totalRoles; ?></h3>
+      <p>Roles Activos</p>
+    </article>
 
-                                if ($estado === 'aceptado') {
-                                    $claseEstado = 'estado-aceptado';
-                                } elseif ($estado === 'rechazado') {
-                                    $claseEstado = 'estado-rechazado';
-                                } else {
-                                    $claseEstado = 'estado-pendiente';
-                                }
-                                ?>
-                                <span class="estado <?php echo $claseEstado; ?>">
-                                    <?php echo htmlspecialchars($pedido['estado']); ?>
-                                </span>
-                            </td>
-                        
-      </tr>
-      <?php
-      }
-      ?>
-    </table>
-  </section>
-</section>
+    <article class="card">
+      <div class="icono"><i class="fa-solid fa-box"></i></div>
+      <h3><?php echo $totalProductos; ?></h3>
+      <p>Productos Registrados</p>
+    </article>
 
-<aside class="act"> 
-  <section class="acciones"><h3 class="titulo-caja">ACCIONES RAPIDAS</h3>
-  <ul class="lista-acciones">
-    <li><a href="../admin/crearuser.php"><i class="fa-solid fa-user-plus"></i>Crear Usuario</li></a>
-    <li><a href="../productos/16.formproductos.php"><i class="fa-solid fa-box"></i>Registrar Producto</li></a>
-    <li><i class="fa-solid fa-chart-column"></i>Ver Reportes</li>
-  </ul>
+    <article class="card">
+      <div class="icono"><i class="fa-solid fa-cart-shopping"></i></div>
+      <h3><?php echo $totalPedidos; ?></h3>
+      <p>Pedidos este mes</p>
+    </article>
+
+    <article class="card">
+      <div class="icono"><i class="fa-solid fa-dollar-sign"></i></div>
+      <h3><?php echo $totalVentasMes; ?></h3>
+      <p>Ventas este mes</p>
+    </article>
   </section>
 
-  <section class="resumen-sistema">
-    <h3 class="titulo-caja">RESUMEN DEL SISTEMA</h3>
-    <ul class="lista-sistema">
-    <li><span>Usuarios activos</span><strong>18</strong></li>
-    <li><span>Productos activos</span><strong>156</strong></li>
-    <li><span>Pedidos este mes</span><strong>128</strong></li>
-    <li><span>Ventas este mes</span><strong>$3.850</strong></li></ul>
+
+  <section class="contenido">
+    <section class="resumen">
+      <h3 class="titulo-caja">VENTAS DE LA SEMANA</h3>
+
+      <div class="grafico-resumen">
+        <canvas id="graficoResumenVentas"></canvas>
+      </div>
+    </section>
+
+    <section class="pedidos">
+      <h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
+      <table class="tabla-pedidos">
+        <?php
+        $pedidos = $conn->query(
+          "SELECT *
+            FROM pedidos
+            ORDER BY id DESC
+            LIMIT 5
+        ");
+
+        while($pedido = $pedidos->fetch_assoc()){
+        ?>
+        <tr>
+          <td><?php echo htmlspecialchars($pedido['nombre']); ?></td>
+          <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
+          <td><?php echo htmlspecialchars($pedido['vendedor']); ?></td>
+          <td><?php echo htmlspecialchars($pedido['id']); ?></td>
+          <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
+          <td>
+            <?php
+            $estado = strtolower(trim($pedido['estado']));
+
+            if ($estado === 'aceptado') {
+                $claseEstado = 'estado-aceptado';
+            } elseif ($estado === 'rechazado') {
+                $claseEstado = 'estado-rechazado';
+            } else {
+                $claseEstado = 'estado-pendiente';
+            }
+            ?>
+            <span class="estado <?php echo $claseEstado; ?>">
+              <?php echo htmlspecialchars($pedido['estado']); ?>
+            </span>
+          </td>
+        </tr>
+        <?php
+        }
+        ?>
+      </table>
+    </section>
   </section>
 
- 
-  <section class="actividad">
-    <h3 class="titulo-caja">ACTIVIDAD RECIENTE</h3>
-    <ul class="lista-actividad">
-      <li><i class="fa-solid fa-user"></i>Nuevo usuario creado</li>
-      <li><i class="fa-solid fa-box"></i>Producto registrado</li>
-      <li><i class="fa-solid fa-cart-shopping"></i>Pedido actualizado</li>
-      <li><i class="fa-solid fa-chart-line"></i>Reporte generado</li>
-    </ul>
-  </section>
-</aside>
+
+  <aside class="act">
+    <section class="acciones">
+      <h3 class="titulo-caja">ACCIONES RAPIDAS</h3>
+      <ul class="lista-acciones">
+        <li><a href="../admin/crearuser.php"><i class="fa-solid fa-user-plus"></i>Crear Usuario</a></li>
+        <li><a href="../productos/16.formproductos.php"><i class="fa-solid fa-box"></i>Registrar Producto</a></li>
+        <li><a href="../reportes/graficoingresos.php"><i class="fa-solid fa-chart-column"></i>Ver Reportes de Ingresos</a></li>
+      </ul>
+    </section>
+
+    <section class="resumen-sistema">
+      <h3 class="titulo-caja">RESUMEN DEL SISTEMA</h3>
+      <ul class="lista-sistema">
+        <li>
+          <span>Usuarios activos</span>
+          <strong><?php echo $totalUsuariosActivos; ?></strong>
+        </li>
+
+        <li>
+          <span>Productos activos</span>
+          <strong><?php echo $totalProductosActivos; ?></strong>
+        </li>
+
+        <li>
+          <span>Pedidos este mes</span>
+          <strong><?php echo $totalPedidosMes; ?></strong>
+        </li>
+
+        <li>
+          <span>Ventas este mes</span>
+          <strong><?php echo number_format($totalIngresosMes, 2); ?></strong>
+        </li>
+      </ul>
+    </section>
+  </aside>
 </main>
+
 <script>
+const ventas = <?php echo json_encode($ventasGrafico); ?>;
+const ingresos = <?php echo json_encode($ingresosGrafico); ?>;
 
-const diasVentas = <?php echo json_encode($diasVentas); ?>;
-const totalesVentas = <?php echo json_encode($totalesVentas); ?>;
+const contexto = document.getElementById("graficoResumenVentas");
 
-
-const ctxResumen = document.getElementById('graficoResumenVentas');
-
-new Chart(ctxResumen, {
-    type: 'line',
+new Chart(contexto, {
+    type: "line",
     data: {
-        labels: diasVentas,
+        labels: ventas,
         datasets: [{
-            label: 'Ventas (Bs)',
-            data: totalesVentas,
-            borderColor: '#ff5ca8',
-            backgroundColor: 'rgba(255,92,168,0.15)',
+            label: "Ventas (Bs)",
+            data: ingresos,
+            borderColor: "#ff5ca8",
+            backgroundColor: "rgba(255,92,168,0.15)",
+            borderWidth: 2,
+            pointBackgroundColor: "#ff5ca8",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1,
+            pointRadius: 3,
+            pointHoverRadius: 5,
             tension: 0.3,
             fill: true
         }]
@@ -672,14 +725,42 @@ new Chart(ctxResumen, {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: { display: false }
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return " Bs " + context.parsed.y.toFixed(2);
+                    }
+                }
+            }
         },
         scales: {
-            y: { beginAtZero: true }
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: "rgba(0,0,0,0.06)"
+                },
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+            }
         }
     }
 });
-
 </script>
 </body>
 </html>

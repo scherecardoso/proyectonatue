@@ -210,19 +210,14 @@ button:hover {
 
             <select name="estado" required>
 
-                <option value="Pendiente"
-                    <?php echo ($estado == "Pendiente") ? "selected" : ""; ?>>
-                    Pendiente
+                <option value="En proceso"
+                    <?php echo ($estado == "En proceso") ? "selected" : ""; ?>>
+                    En proceso
                 </option>
 
-                <option value="Aceptado"
-                    <?php echo ($estado == "Aceptado") ? "selected" : ""; ?>>
-                    Aceptado
-                </option>
-
-                <option value="Rechazado"
-                    <?php echo ($estado == "Rechazado") ? "selected" : ""; ?>>
-                    Rechazado
+                <option value="Entregado"
+                    <?php echo ($estado == "Entregado") ? "selected" : ""; ?>>
+                    Entregado
                 </option>
 
             </select>

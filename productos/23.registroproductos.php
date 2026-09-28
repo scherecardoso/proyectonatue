@@ -1,20 +1,15 @@
 <?php
 session_start();
-$rol = strtolower(trim((string) ($_SESSION['rol'] ?? '')));
-if (
-    !isset($_SESSION['rol']) ||
-    !in_array($rol, ['administrador', 'admin', 'vendedor'], true)
-) {
-    echo "Acceso denegado";
-    exit();
 
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador')) {
+    header("Location: ../pagina/login.php");
+    exit();
 }
-?>
-<?php
-$servidor ="localhost";
-$usuario ="root";
-$contra ="";
-$baseDeDatos ="shena";
+
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
 
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
@@ -28,52 +23,54 @@ $descripcion = $_POST['descripcion'];
 $precio = $_POST['precio'];
 $costo = $_POST['costo'];
 $stock = $_POST['stock'];
-$sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) VALUES ('$codigo', '$nombre', '$descripcion', '$precio',  '$costo','$stock')";
+
+$carpetaImagenes = "../img/";
+
+if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
+
+    $extension = strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION));
+
+    $extensionesPermitidas = ["jpg", "jpeg", "png", "gif"];
+
+    if (!in_array($extension, $extensionesPermitidas)) {
+        die("Solo se permiten imágenes JPG, JPEG, PNG o GIF.");
+    }
+
+    $nombreImagen = "P-" . $codigo . "." . $extension;
+    $ruta = $carpetaImagenes . $nombreImagen;
+
+    if (file_exists($ruta)) {
+        die("Ya existe una imagen para este producto.");
+    }
+
+    if (!move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta)) {
+        die("No se pudo subir la imagen.");
+    }
+
+} else {
+    $nombreImagen = "angie.png";
+}
+
+$sql = "INSERT INTO productos 
+(codigo, nombre, descripcion, precio, costo, stock, imagen) 
+VALUES 
+('$codigo', '$nombre', '$descripcion', '$precio', '$costo', '$stock', '$nombreImagen')";
+
 if ($conn->query($sql) === TRUE) {
 
-     $carpetaImagenes = "../img/";
-    if ($_FILES["IMAGEN"]["NAME"]==""){
-        $nuevoNombre=".angie.png";
-        
-    } else{
-         $extension = strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
-    $nuevoNombre = "P-".$codigo.".".$extension;
-    }
-
-   
-  
-    $ruta = $carpetaImagenes . $nuevoNombre;
-    $bandera=1;
-    if (file_exists($ruta)) {
-        echo "Lo sentimos, ya subiste este archivo.";
-        $bandera = 0;
-    }
-
-
-    if($extension != "jpg" && $extension != "jpeg" && $extension != "png" &&$extension != "gif")
-    {
-        echo "Solo se permiten imágenes JPG, JPEG, PNG o GIF.<br>";
-        $bandera = 0;
-    }
-
-    if ($bandera == 0) {
-        echo "Ocurrió algun error.";
-    } else {
-        if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta)) {
-            echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " se subió.";
-        } else {
-            echo "No se pudo subir tu archivo.";
-        }
-    }
-
-    if ($rol === 'admin' || $rol === 'administrador') {
+    if ($_SESSION['rol'] === 'administrador') {
         header("Location: ../admin/gestionproductos.php");
-    } else {
-        header("Location: ../productos/22.readproductos.php");
+        exit();
     }
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-$conn->close();
 
+    if ($_SESSION['rol'] === 'vendedor') {
+        header("Location: ../productos/22.readproductos.php");
+        exit();
+    }
+
+} else {
+    echo "Error: " . $conn->error;
+}
+
+$conn->close();
 ?>

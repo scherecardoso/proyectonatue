@@ -141,49 +141,81 @@ if ($resultadoMetodos) {
 <meta charset="UTF-8">
 <title>Reporte de ingresos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body {
-    display: grid;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
-    grid-template-areas:
-        "barra barra barra"
-        "menu contenido contenido";
-    gap: 10px;
-    min-height: 100vh;
-    background: #ffffff;
+
+/* =========================
+   BASE
+========================== */
+html {
+    overflow-x: hidden;
 }
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    /* Computadora (1200px o más): menú lateral + contenido */
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    gap: 0;
+}
+
+/* Tablet y celular: el menú sube arriba en horizontal */
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "contenido";
+    }
+}
+
+
+/* =========================
+   CONTENIDO
+========================== */
 .contenido {
     grid-area: contenido;
     box-sizing: border-box;
-    width: 50%;
+    width: 100%;
     min-width: 0;
-    margin-left: 10%;
+    padding: clamp(15px, 3vw, 30px);
 }
 
 .contenedor {
-    width: 170%;
-    max-width: 1700px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .encabezado {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
 .titulo h1 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 32px;
+    font-size: clamp(26px, 4vw, 32px);
     font-weight: 600;
-    color: #292929;
+    color: #ff5ca8;
 }
 
 .titulo p {
@@ -194,8 +226,8 @@ body {
 }
 
 .badge {
-    background: #f8e5ee;
-    color: #d94f87;
+    background: #fff1f7;
+    color: #ff5ca8;
     padding: 10px 18px;
     border-radius: 20px;
     font-family: "Quicksand", sans-serif;
@@ -203,19 +235,25 @@ body {
     font-weight: 600;
 }
 
+
+/* =========================
+   TARJETAS RESUMEN (se acomodan solas)
+========================== */
 .resumen {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: 22px;
     margin-bottom: 25px;
 }
 
 .tarjeta {
+    min-width: 0;
+    box-sizing: border-box;
     background: white;
     border: 1px solid #eeeeee;
     border-radius: 18px;
-    padding: 30px;
-    min-height: 155px;
+    padding: clamp(20px, 3vw, 30px);
+    min-height: 140px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
     display: flex;
     flex-direction: column;
@@ -231,18 +269,23 @@ body {
 
 .tarjeta-valor {
     font-family: "Playfair Display", serif;
-    font-size: 32px;
+    font-size: clamp(24px, 4vw, 32px);
     font-weight: 600;
     color: #292929;
+    word-break: break-word;
 }
 
 .tarjeta-sub {
     margin-top: 7px;
-    color: #d94f87;
+    color: #ff5ca8;
     font-size: 14px;
     font-weight: 600;
 }
 
+
+/* =========================
+   BOTONES DE PERIODO
+========================== */
 .botones {
     display: flex;
     justify-content: center;
@@ -267,21 +310,33 @@ body {
 .botones a:hover {
     background: #f8e5ee;
     color: #d94f87;
-    border-color: #f0bfd2;
+    border-color: #ff90ba;
 }
 
 .botones a.activo {
-    background: #d94f87;
+    background: #ff5ca8;
     color: white;
-    border-color: #d94f87;
+    border-color: #ff65a2;
 }
 
-.grafico-principal {
+
+/* =========================
+   GRÁFICOS
+========================== */
+.grafico-principal,
+.grafico-metodo,
+.informacion,
+.tabla-contenedor {
     background: white;
     border: 1px solid #eeeeee;
     border-radius: 18px;
-    padding: 30px;
+    padding: clamp(18px, 3vw, 30px);
     box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.grafico-principal {
     margin-bottom: 25px;
 }
 
@@ -292,7 +347,7 @@ body {
 .grafico-titulo h2 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     font-weight: 600;
     color: #292929;
 }
@@ -304,30 +359,25 @@ body {
 }
 
 .grafico {
+    position: relative;
     height: 390px;
     width: 100%;
 }
 
+/* Los dos cuadros de abajo van lado a lado si caben, si no uno debajo del otro */
 .graficos-secundarios {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
     gap: 25px;
     margin-bottom: 25px;
-}
-
-.grafico-metodo {
-    background: white;
-    border: 1px solid #eeeeee;
-    border-radius: 18px;
-    padding: 30px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
 }
 
 .grafico-metodo h2 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 23px;
+    font-size: clamp(19px, 3vw, 23px);
     font-weight: 600;
+    color: #ff5ca8;
 }
 
 .grafico-metodo p {
@@ -337,33 +387,23 @@ body {
 }
 
 .grafico-dona {
+    position: relative;
     height: 330px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.grafico-dona canvas {
-    max-width: 100%;
-    max-height: 320px;
-}
-
-.informacion {
-    background: #fafafa;
-    border-radius: 15px;
-    padding: 25px;
+    width: 100%;
 }
 
 .informacion h2 {
     margin: 0 0 15px;
     font-family: "Playfair Display", serif;
-    font-size: 22px;
+    font-size: clamp(19px, 3vw, 22px);
+    color: #ff5ca8;
 }
 
 .dato {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     padding: 13px 0;
     border-bottom: 1px solid #e8e8e8;
     font-size: 14px;
@@ -374,18 +414,14 @@ body {
 }
 
 .dato strong {
-    color: #d94f87;
+    color: #ff5ca8;
+    text-align: right;
 }
 
-.tabla-contenedor {
-    background: white;
-    border: 1px solid #eeeeee;
-    border-radius: 18px;
-    padding: 30px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-    margin-top: 25px;
-}
 
+/* =========================
+   TABLA
+========================== */
 .tabla-titulo {
     margin-bottom: 20px;
 }
@@ -393,8 +429,9 @@ body {
 .tabla-titulo h2 {
     margin: 0;
     font-family: "Playfair Display", serif;
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     font-weight: 600;
+    color: #ff5ca8;
 }
 
 .tabla-titulo p {
@@ -403,24 +440,31 @@ body {
     font-size: 14px;
 }
 
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
 th {
-    background: #333333;
-    color: white;
+    background: #fff1f7;
     padding: 15px;
     text-align: center;
     font-size: 14px;
     font-weight: 600;
+    color: #ff5ca8;
 }
 
 td {
+    background: #ffffff;
     padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #eeeeee;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
     font-size: 14px;
 }
 
@@ -429,33 +473,66 @@ tr:hover td {
 }
 
 .ingreso {
-    color: #d94f87;
+    color: #ff5ca8;
     font-weight: 700;
 }
 
-@media (max-width: 1000px) {
-    .contenido {
-        padding: 20px;
-    }
-    .graficos-secundarios {
-        grid-template-columns: 1fr;
+
+/* =========================
+   TABLET (900px o menos)
+========================== */
+@media (max-width: 900px) {
+    .grafico {
+        height: 350px;
     }
 }
 
-@media (max-width: 700px) {
-    .resumen {
-        grid-template-columns: 1fr;
+
+/* =========================
+   CELULAR (600px o menos)
+========================== */
+@media (max-width: 600px) {
+    .contenido {
+        padding: 15px 12px;
     }
+
     .encabezado {
-        flex-direction: column;
-        align-items: flex-start;
+        margin-bottom: 18px;
+    }
+
+    .resumen,
+    .graficos-secundarios {
         gap: 15px;
     }
-    .contenedor {
-        width: 100%;
+
+    .botones {
+        gap: 8px;
     }
+
+    .botones a {
+        flex: 1 1 40%;                /* los 4 botones se reparten en 2 filas */
+        text-align: center;
+        padding: 10px 12px;
+    }
+
     .grafico {
-        height: 320px;
+        height: 300px;
+    }
+
+    .grafico-dona {
+        height: 300px;
+    }
+
+    .grafico-principal,
+    .grafico-metodo,
+    .informacion,
+    .tabla-contenedor {
+        border-radius: 14px;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
     }
 }
 </style>
@@ -576,12 +653,16 @@ if ($rol == "administrador") {
         <p>Ingresos agrupados según el periodo seleccionado</p>
     </div>
 
+    <div class="tabla-scroll">
     <table>
+        <thead>
         <tr>
             <th>Periodo</th>
             <th>Ingresos</th>
         </tr>
+        </thead>
 
+        <tbody>
         <?php if (count($periodos) > 0) { ?>
             <?php for ($i = 0; $i < count($periodos); $i++) { ?>
             <tr>
@@ -594,7 +675,9 @@ if ($rol == "administrador") {
                 <td colspan="2">No hay ingresos registrados.</td>
             </tr>
         <?php } ?>
+        </tbody>
     </table>
+    </div>
 </div>
 
 </div>
@@ -605,6 +688,7 @@ const periodos = <?php echo json_encode($periodos); ?>;
 const ingresos = <?php echo json_encode($ingresos); ?>;
 const metodos = <?php echo json_encode($metodos); ?>;
 const totalesMetodos = <?php echo json_encode($totalesMetodos); ?>;
+const tituloPeriodo = <?php echo json_encode($titulo); ?>;
 
 const contextoIngresos = document.getElementById("graficoIngresos");
 
@@ -615,10 +699,10 @@ new Chart(contextoIngresos, {
         datasets: [{
             label: "Ingresos (Bs)",
             data: ingresos,
-            borderColor: "#d94f87",
+            borderColor: "#ff5ca8",
             backgroundColor: "rgba(217, 79, 135, 0.12)",
             borderWidth: 3,
-            pointBackgroundColor: "#d94f87",
+            pointBackgroundColor: "#ff5ca8",
             pointBorderColor: "#ffffff",
             pointBorderWidth: 2,
             pointRadius: 5,
@@ -657,7 +741,7 @@ new Chart(contextoIngresos, {
             x: {
                 title: {
                     display: true,
-                    text: "<?php echo $titulo; ?>"
+                    text: tituloPeriodo
                 }
             }
         }
@@ -672,7 +756,7 @@ new Chart(contextoMetodos, {
         labels: metodos,
         datasets: [{
             data: totalesMetodos,
-            backgroundColor: ["#d94f87", "#f28eb4", "#f7c4d7", "#bdbdbd", "#777777", "#444444"],
+            backgroundColor: ["#ff5ca8", "#f28eb4", "#f7c4d7", "#bdbdbd", "#777777", "#444444"],
             borderColor: "#ffffff",
             borderWidth: 3,
             hoverOffset: 10

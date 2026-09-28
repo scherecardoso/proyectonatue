@@ -318,154 +318,50 @@ body {
 .btnActualizar:hover{
     background:#666;
 }
-@keyframes cambiarImagen{
-    0%{
-        opacity: 0;
-    }
-    10%{
-        opacity: 1;
-    }
-    45%{
-        opacity: 1;
-    }
-    55%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-@media (max-width: 768px) {
+
+/* Mismo breakpoint que el menú */
+@media (max-width: 1199px) {
   body {
     grid-template-areas:
       "barra"
       "menu-lateral"
-      "principal"
-      "pie";
+      "contenido";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
-  
-  .contenido {
-   display: none;
-  }
-  .principal {
-    margin-top: 0;
+
+  .contenedor {
+    width: 100%;
+    margin: 10px auto;
     padding: 12px;
-    gap: 30px;
-  }
-  .bienvenida {
-    height: auto;
-    padding: 25px 15px;
-    border-radius: 25px;
-  }
-  .contenido-bienvenida {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-  }
-  .info-bienvenida {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .texto-bienvenida h1 {
-    margin: 0;
-    font-size: 28px;
-  }
-  .texto-bienvenida p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin: 10px 0 0 0;
-  }
-  .imagen-bienvenida {
-    width: 100%;
-    max-width: 220px;
-    height: auto;
-    margin: 0;
-    object-fit: contain;
-  }
-  .acciones {
-    padding: 10px;
-  }
-  .acciones h1 {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 20px;
-  }
-  .contenedor-acciones {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .accion {
-    width: 100%;
     box-sizing: border-box;
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
   }
-  .accion a {
-    text-align: center;
-    font-size: 26px;
-  }
-  .accion p {
-    text-align: center;
-    font-size: 18px;
-    margin-top: 10px;
-  }
+
   .contenido {
     flex-direction: column;
   }
-  .pedidos{
-    width:100%;
-    padding:20px;
-    border-radius:20px;
-}
-
-.encabezado-pedidos{
-    margin-bottom:20px;
-}
-
-.encabezado-pedidos h2{
-    font-size:24px;
-    text-align:center;
-}
-
-.tabla-pedidos{
-    overflow-x:auto;
-    padding:0;
-}
-
-.tabla-pedidos table{
-    min-width:600px;
-}
-
-.tabla-pedidos th{
-    padding:15px;
-    font-size:16px;
-}
-
-.tabla-pedidos td{
-    padding:18px 15px;
-    font-size:15px;
-}
-
-.estado-entregado,
-.estado-pendiente{
-    padding:10px 15px;
-    font-size:13px;
-}
   .acceso-rapido {
     width: 100%;
   }
-  .slider-bienvenida{
-    width: 220px;
-    height: 180px;
+  .contenedor-acciones {
+    flex-wrap: wrap;
+  }
+  .accion {
+    flex: 1 1 30%;
+  }
 }
+
+/* Solo móvil: aquí va el resto de lo que ya tenías (bienvenida, acciones, tabla) */
+@media (max-width: 768px) {
+  .contenedor-acciones {
+    flex-direction: column;
+  }
+  .accion {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  /* ...bienvenida, pedidos, tabla, etc. */
 }
 </style>
 </head>
@@ -504,22 +400,22 @@ body {
   </section>
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-box"></i></div>
-    <a href="" style="color: #000000;">Ver Stock</a>
+    <a href="../productos/22.readproductos.php" style="color: #000000;">Ver Stock</a>
     <p><center>Consulta el stock disponible de productos</center></p>
   </section>
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-clipboard-list"></i></div>
-    <a href="" style="color: #000000;">Ver Pedidos</a>
+    <a href="../pedidos/pedidosclientes.php" style="color: #000000;">Ver Pedidos</a>
     <p><center>Consulta los pedidos realizados por los clientes</center></p>
   </section>
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-arrows-rotate"></i></div>
-    <a href="" style="color: #000000;">Historial de Ventas</a>
+    <a href="../ventas/readventas.php" style="color: #000000;">Historial de Ventas</a>
     <p><center>Consulta el historial de ventas realizadas</center></p>
   </section>
   <section class="accion">
     <div class="icono"><i class="fa-solid fa-chart-column"></i></div>
-    <a href="" style="color: #000000;">Estado de Pedidos </a>
+    <a href="../pedidos/pedidosclientes.php" style="color: #000000;">Estado de Pedidos </a>
     <p><center>Consulta el estado de los pedidos</center></p>
   </section>
 </section>

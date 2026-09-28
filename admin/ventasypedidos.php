@@ -32,36 +32,61 @@ if (!$resultado) {
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
-body {
+/* =========================
+   BASE
+========================== */
+html {
+    overflow-x: hidden;
+}
 
-    display: grid;
+body {
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
-    grid-template-areas:
-        "barra barra barra"
-        "menu contenido contenido";
-
-    gap: 10px;
-    min-height: 100vh;
     background: #ffffff;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
 
-}
-.titulo {
-    text-align: center;
-    margin: 10px 0 35px;
-    color: #ff4f94;
-    font-family: "Playfair Display", serif;
-    font-size: 32px;
+    /* Computadora (1200px o más): menú lateral + contenido */
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    gap: 0;
 }
 
+/* Tablet y celular: el menú sube arriba en horizontal */
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "barra"
+            "menu"
+            "contenido";
+    }
+}
+
+
+/* =========================
+   CONTENIDO
+========================== */
 .contenido {
     grid-area: contenido;
-    padding: 35px 40px;
+    padding: clamp(15px, 3vw, 40px);
     box-sizing: border-box;
     width: 100%;
     min-width: 0;
+}
+
+.titulo {
+    text-align: center;
+    margin: 10px 0 35px;
+    color: #ff5ca8;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(26px, 4vw, 32px);
 }
 
 .contenedorVentas {
@@ -72,7 +97,7 @@ body {
 
 .contenedor { 
     background: #fff; 
-    padding: 25px 30px; 
+    padding: clamp(18px, 3vw, 30px); 
     margin: 0 0 25px; 
     border-radius: 18px; 
     border: 1px solid #f0f0f0; 
@@ -93,9 +118,13 @@ body {
     color: #333;
 }
 
+
+/* =========================
+   DATOS DE LA VENTA (se acomodan solos)
+========================== */
 .informacion {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
@@ -104,6 +133,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0;
 }
 
 .dato strong {
@@ -115,6 +145,7 @@ body {
 .dato span {
     font-size: 16px;
     color: #333;
+    word-break: break-word;
 }
 
 .estado {
@@ -127,79 +158,40 @@ body {
     font-size: 14px !important;
 }
 
+
+
 .acciones {
     margin-top: 25px;
     padding-top: 18px;
     border-top: 1px solid #eee;
     display: flex;
+    flex-wrap: wrap;              
     justify-content: flex-end;
+    gap: 10px;
 }
 
-.btn-ver {
+.btn-ver,
+.btn-editar,
+.btn-eliminar {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 10px 18px;
-    background: #ffdcec;
-    color: #d63f7b;
     text-decoration: none;
     border-radius: 10px;
     font-size: 14px;
     transition: .2s;
+}
+
+.btn-ver {
+    background: #ffdcec;
+    color: #d63f7b;
 }
 
 .btn-ver:hover {
     background: #ffcade;
     transform: translateY(-2px);
-}
-
-.sin-ventas {
-    text-align: center;
-    color: #777;
-}
-.btn i {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 14px;
-    display: inline-block;
-}
-@media (max-width: 800px) {
-
-    body {
-        display: block;
-    }
-
-    .menu {
-        width: auto;
-        margin-top: 0;
-        border-right: none;
-        border-bottom: 1px solid #eee;
-    }
-
-    .contenido {
-        padding: 20px;
-    }
-
-    .informacion {
-        grid-template-columns: 1fr;
-    }
-
-    .contenedor {
-        padding: 20px;
-    }
-}
-
-.btn-editar,
-.btn-eliminar {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 14px;
-    transition: .2s;
-    margin-left: 8px;
 }
 
 .btn-editar {
@@ -222,6 +214,40 @@ body {
     transform: translateY(-2px);
 }
 
+.sin-ventas {
+    text-align: center;
+    color: #777;
+}
+
+
+
+@media (max-width: 600px) {
+
+    .contenedor {
+        border-radius: 14px;
+    }
+
+    .contenedor h3 {
+        font-size: 19px;
+    }
+
+    .informacion {
+        grid-template-columns: 1fr 1fr;  
+        gap: 15px;
+    }
+
+    .acciones {
+        justify-content: stretch;
+    }
+
+    .btn-ver,
+    .btn-editar,
+    .btn-eliminar {
+        flex: 1 1 auto;                  
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
 </style>
 </head>
 
@@ -263,49 +289,50 @@ body {
                             </span>
                         </div>
 
-                        <div class="dato">
-                            <strong>Método de pago</strong>
-                            <span>
-                                <?php echo htmlspecialchars($fila['metodo']); ?>
-                            </span>
-                        </div>
+                       <div class="dato"> 
+    <strong>Método de pago</strong> 
+    <span> 
+        <?php echo htmlspecialchars($fila['metodo']); ?> 
+    </span> 
+</div>
 
-                        <div class="dato">
-                            <strong>Estado</strong>
-                            <span class="estado">
-                                <?php echo htmlspecialchars($fila['estado']); ?>
-                            </span>
-                        </div>
+<div class="dato"> 
+    <strong>Estado</strong> 
+    <span class="estado">
+        <?php echo htmlspecialchars($fila['estado']); ?> 
+    </span> 
+</div>
 
                     </div>
-<div class="acciones">
 
-    <a
-        href="../admin/detallepedido.php?id=<?php echo $fila['pedidos_id']; ?>"
-        class="btn-ver"
-    >
-        <i class="fa-solid fa-eye"></i>
-        Ver pedido
-    </a>
+                    <div class="acciones">
 
-    <a
-        href="../ventas/editarventa.php?id=<?php echo $fila['id']; ?>"
-        class="btn-editar"
-    >
-        <i class="fa-solid fa-pen"></i>
-        Editar
-    </a>
+                        <a
+                            href="../admin/detallepedido.php?id=<?php echo urlencode($fila['pedidos_id']); ?>"
+                            class="btn-ver"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                            Ver pedido
+                        </a>
 
-    <a
-        href="../ventas/deleteventas.php?id=<?php echo $fila['id']; ?>"
-        class="btn-eliminar"
-        onclick="return confirm('¿Estás seguro de eliminar esta venta?');"
-    >
-        <i class="fa-solid fa-trash"></i>
-        Eliminar
-    </a>
+                        <a
+                            href="../ventas/editarventa.php?id=<?php echo urlencode($fila['id']); ?>"
+                            class="btn-editar"
+                        >
+                            <i class="fa-solid fa-pen"></i>
+                            Editar
+                        </a>
 
-</div>
+                        <a
+                            href="../ventas/deleteventas.php?id=<?php echo urlencode($fila['id']); ?>"
+                            class="btn-eliminar"
+                            onclick="return confirm('¿Estás seguro de eliminar esta venta?');"
+                        >
+                            <i class="fa-solid fa-trash"></i>
+                            Eliminar
+                        </a>
+
+                    </div>
 
                 </div>
 

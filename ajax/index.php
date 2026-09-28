@@ -27,13 +27,11 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/estilos.css">
-
-    <!-- jQuery y jQuery Validate (necesarios para la validación del formulario) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
     <style>
-        /* Estilos para el buscador de pedidos */
+  
         .zonaBuscadores {
             display: flex;
             flex-direction: column;

@@ -23,9 +23,6 @@ if(!$datos){
 }
 
 
-/* =========================
-   DATOS DEL CLIENTE
-========================= */
 
 $nombre = $_SESSION['nombre'] ?? "";
 $telefono = $datos["telefono"] ?? "";
@@ -33,9 +30,6 @@ $direccion = $datos["direccion"] ?? "";
 $metodoPago = $datos["metodoPago"] ?? "";
 
 
-/* =========================
-   VALIDAR SESIÓN
-========================= */
 
 if($nombre == ""){
 
@@ -49,9 +43,7 @@ if($nombre == ""){
 }
 
 
-/* =========================
-   VALIDAR DATOS
-========================= */
+
 
 if($telefono == "" || $direccion == "" || $metodoPago == ""){
 
@@ -65,9 +57,7 @@ if($telefono == "" || $direccion == "" || $metodoPago == ""){
 }
 
 
-/* =========================
-   CREAR PEDIDO
-========================= */
+
 
 $sql = "
 INSERT INTO pedidos
@@ -97,7 +87,7 @@ if($conn->query($sql)){
 
     $idPedido = $conn->insert_id;
 
-    /* Guardar el pedido actual */
+  
     $_SESSION["pedido"] = $idPedido;
 
     echo json_encode([

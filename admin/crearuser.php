@@ -1,15 +1,71 @@
+
+<?php
+session_start();
+
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "administrador") {
+    header("Location: ../pagina/login.php");
+    exit();
+}
+
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$baseDeDatos = "shena";
+
+$conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
+
+if ($conn->connect_error) {
+    die("Error de conexión");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $CI = $_POST['CI'];
+    $nombre = $_POST['nombre'];
+    $direccion = $_POST['direccion'];
+    $celular = $_POST['celular'];
+    $rol = $_POST['rol'];
+
+    $sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado, imagen_perfil)
+            VALUES (?, ?, ?, ?, ?, 'activo', 'imgperfil.avif')";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+
+        $stmt->bind_param("issis", $CI, $nombre, $direccion, $celular, $rol);
+
+        if ($stmt->execute()) {
+
+            header("Location: ../usuario/12.readusuarios.php");
+            exit();
+
+        } else {
+            $error = "No se pudo crear el usuario.";
+        }
+
+        $stmt->close();
+
+    } else {
+        $error = "Error al preparar la consulta.";
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title></title> 
+<title>Crear usuario</title>
 
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
@@ -29,10 +85,10 @@ body{
     justify-content:center;
     align-items:center;
     background:#f5f3f2;
-    
 }
 
 .contenedor{
+    position:relative;
     width:500px;
     background:white;
     padding:40px;
@@ -41,31 +97,26 @@ body{
     border:2px solid #f8c6e5;
 }
 
-.menu-registro{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    margin-bottom:40px;
-}
-
-.menu-registro a{
+.btn-volver{
+    position:absolute;
+    top:18px;
+    left:20px;
+    color: #ff5ca8;
     text-decoration:none;
-    color:#777;
-    font-size:18px;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.menu-registro .activo{
-    color:#111;
-    border-bottom:2px solid #111;
-    padding-bottom:8px;
+.btn-volver:hover{
+    color:#f06ac3;
 }
 
 h2{
     text-align:center;
     font-size:42px;
-    font-family:serif;
+    font-family:'Playfair Display', serif;
     color:#222;
-    margin-bottom:10px;
+    margin-bottom:30px;
 }
 
 form{
@@ -73,17 +124,26 @@ form{
     flex-direction:column;
 }
 
-input{
+input,
+select{
     width:100%;
     height:58px;
-    color: #777;
+    color:#777;
     border:1px solid #f5a3d5;
     border-radius:40px;
-    display:flex;
-    align-items:center;
-    padding:20px;
+    padding:0 20px;
     margin-bottom:18px;
     background:#fafafa;
+    outline:none;
+}
+
+select{
+    cursor:pointer;
+}
+
+input:focus,
+select:focus{
+    border-color:#f06ac3;
 }
 
 button{
@@ -100,8 +160,27 @@ button{
 }
 
 button:hover{
-    transform: scale(1.03);
+    transform:scale(1.03);
     background:#f765c6;
+}
+
+label.error{
+    color:#a01045;
+    font-size:13px;
+    margin-bottom:10px;
+    margin-left:15px;
+}
+
+input.error,
+select.error{
+    border:1px solid #a01045;
+}
+
+.error-servidor{
+    color:#a01045;
+    text-align:center;
+    margin-bottom:20px;
+    font-size:14px;
 }
 
 @media(max-width:768px){
@@ -110,64 +189,57 @@ button:hover{
         width:100%;
         max-width:430px;
         padding:30px;
+        margin:20px;
     }
 
     h2{
         font-size:35px;
     }
 
-    input{
+    input,
+    select{
         height:54px;
     }
 
-}
-
-label.error{
-    color:#a01045;
-    font-size:13px;
-   
-    margin-bottom:10px;
-    margin-left:15px;
-}
-
-input.error{
-    border:1px solid #a01045;
-}
-
-select {
-    width:100%;
-    height:58px;
-    color: #777;
-    border:1px solid #f5a3d5;
-    border-radius:40px;
-    display:flex;
-    align-items:center;
-    padding:20px;
-    margin-bottom:18px;
-    background:#fafafa;
 }
 
 </style>
 </head>
 
 <body>
+
 <div class="contenedor">
-    <div class="menu-registro">
-    <a href=" ../usuario/10.formusuario.php" class="activo">Registrarse</a>
-</div>
 
-    <h2>Crear cuenta</h2>
+    <a href="../admin/06.admin.php" class="btn-volver">← Volver</a>
 
-    <form action="../admin/06.admin.php" method="post" id="formusuarios">
+    <h2>Crear usuario</h2>
 
-    <input type="number" name="CI" placeholder="CI" required>
-    <input type="text" name="nombre" placeholder="Nombre" required>
-    <input type="email" name="direccion" placeholder="Correo electronico" required>
-    <input type="number" name="celular" placeholder="Celular" required>
+    <?php if (isset($error)) { ?>
+        <div class="error-servidor">
+            <?php echo $error; ?>
+        </div>
+    <?php } ?>
 
+    <form method="post" id="formusuarios">
 
-    <button type="submit">Registrar</button>
-</form>
+        <input type="number" name="CI" placeholder="CI" required>
+
+        <input type="text" name="nombre" placeholder="Nombre" required>
+
+        <input type="email" name="direccion" placeholder="Correo electrónico" required>
+
+        <input type="number" name="celular" placeholder="Celular" required>
+
+        <select name="rol" required>
+            <option value="">Seleccionar rol</option>
+            <option value="administrador">Administrador</option>
+            <option value="vendedor">Vendedor</option>
+            <option value="usuario">Usuario</option>
+        </select>
+
+        <button type="submit">Crear usuario</button>
+
+    </form>
 
 </div>
 
@@ -184,47 +256,61 @@ $(document).ready(function(){
                 minlength:6,
                 maxlength:12
             },
+
             nombre:{
                 required:true
             },
+
             direccion:{
                 required:true,
                 email:true
             },
+
             celular:{
                 required:true,
                 number:true,
                 minlength:8,
                 maxlength:8
-            }
+            },
 
+            rol:{
+                required:true
+            }
         },
 
         messages:{
             CI:{
-                required:"Por favor, ingresa tu CI",
+                required:"Por favor, ingresa el CI",
                 number:"Solo se aceptan números",
                 minlength:"El CI debe tener al menos 6 números",
                 maxlength:"El CI no puede tener más de 12 números"
             },
+
             nombre:{
                 required:"El nombre es obligatorio"
             },
+
             direccion:{
-                required:"Por favor, ingresa tu correo electrónico",
+                required:"Por favor, ingresa el correo electrónico",
                 email:"Por favor, ingresa un correo electrónico válido"
             },
+
             celular:{
-                required:"Este campo no puede ir vacío",
+                required:"El celular es obligatorio",
                 number:"Solo se aceptan números",
-                minlength:"El celular debe tener al menos 8 números",
-                maxlength:"El celular no puede tener más de 8 números"
+                minlength:"El celular debe tener 8 números",
+                maxlength:"El celular debe tener 8 números"
+            },
+
+            rol:{
+                required:"Por favor, selecciona un rol"
             }
         }
 
     });
 
 });
+
 </script>
 
 </body>

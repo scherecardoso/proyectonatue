@@ -59,15 +59,22 @@ table{
     border-collapse:collapse;
 }
 
-th{
-    background:#f4dbe5;
-    padding:12px;
+th {
+    background: #fff1f7;
+    padding: 16px;
+    font-size: 14px;
+    color: #ff5ca8;
+    text-align: center;
 }
 
-td{
-    padding:12px;
-    border-bottom:1px solid #ddd;
-    text-align:center;
+
+td {
+    background: #ffffff;
+    padding: 16px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
 }
 
 tr:hover{
@@ -102,6 +109,8 @@ button:hover{
     margin: 0;
     flex: 1;
     text-align: center;
+     color: #ff5ca8;
+     font-family: "Playfair Display", serif;
 }
 
 .accionesPedido{

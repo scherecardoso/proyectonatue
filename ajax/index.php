@@ -264,10 +264,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
         </section>
 
     </main>
-    
-
-
-</div>
 <!--================== FONDO OSCURO ==================-->
 
     <div id="fondo"></div>
@@ -316,7 +312,7 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
 
 <!--================== MODAL COMPRA ==================-->
 <form id="valiindex">
-<div  id="modalCompra" class="modal">
+<div id="modalCompra" class="modal">
 
     <div class="modalContenido">
 
@@ -351,8 +347,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
         </div>
 
     </div>
-
-</div>
 
 </div>
 </form>
@@ -440,12 +434,13 @@ $(document).ready(function(){
 
             if (data.ok && data.pedido) {
                 let p = data.pedido;
+                let estado = String(p.estado || 'Pendiente');
 
                 // Determinar clase de estado
                 let estadoClase = "pendiente";
-                if (p.estado.toLowerCase().includes("completado")) {
+                if (estado.toLowerCase().includes("completado")) {
                     estadoClase = "completado";
-                } else if (p.estado.toLowerCase().includes("proceso")) {
+                } else if (estado.toLowerCase().includes("proceso")) {
                     estadoClase = "proceso";
                 }
 
@@ -472,7 +467,7 @@ $(document).ready(function(){
                             <span class="etiqueta">Estado:</span>
                             <span class="valor">
                                 <span class="estadoBadge ${estadoClase}">
-                                    ${p.estado || 'N/A'}
+                                    ${estado}
                                 </span>
                             </span>
                         </div>

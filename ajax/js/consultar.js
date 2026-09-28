@@ -58,7 +58,7 @@ document.getElementById("consultar").addEventListener("click", () => {
             '<div style="color: #d32f2f; padding: 10px; background: #ffebee; border-radius: 4px;">❌ Error en la búsqueda. Intenta nuevamente.</div>';
     })
     .finally(() => {
-        // Re-habilitar botón
+    
         boton.disabled = false;
         boton.textContent = "Consultar Estado";
     });

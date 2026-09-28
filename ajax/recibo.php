@@ -18,8 +18,7 @@ if(!$pedido){
     exit;
 }
 
-$sqlProductos = "
-SELECT p.nombre, c.cantidad, c.costototal
+$sqlProductos = " SELECT p.nombre, c.cantidad, c.costototal
 FROM carrito c
 INNER JOIN productos p ON c.productos_codigo = p.codigo
 WHERE c.pedidos_id = '$id'

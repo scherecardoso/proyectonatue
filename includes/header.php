@@ -299,7 +299,7 @@ nav a.activo::after {
 
       <li>
 
-        <a href="../pagina/02.inicio.php">
+        <a href="../pagina/index.php">
           Inicio
         </a>
 

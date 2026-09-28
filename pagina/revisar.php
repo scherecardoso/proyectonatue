@@ -160,7 +160,7 @@
 
     </div>
 
-    <a href="../pagina/02.inicio.php" class="volver">
+    <a href="../pagina/index.php" class="volver">
         ← Volver a la página principal
     </a>
 

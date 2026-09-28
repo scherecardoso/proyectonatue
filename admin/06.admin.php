@@ -567,7 +567,7 @@ i   { color: black; }
     <div class="circulo"><img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"></div>
 
     <div class="texto">
-      <h2>¡BIENVENIDA, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! 🌸</h2>
+      <h2>¡BIENVENIDA, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! </h2>
       <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
     </div>
   </section>

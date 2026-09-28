@@ -1,14 +1,19 @@
 <?php
-_start();
+session_start();
 require("conexion.php");
 header("Content-Type: application/json");
 
-if(!isset($_["pedido"])){
+if(!isset($_SESSION['id'])){
+    echo json_encode(["ok"=>false,"mensaje"=>"Sesión no válida"]);
+    exit;
+}
+
+if(!isset($_POST["pedido"])){
     echo json_encode(["ok"=>false,"mensaje"=>"No existe pedido"]);
     exit;
 }
 
-$idPedido=$_["pedido"];
+$idPedido=$_POST["pedido"];
 $sql="SELECT c.cantidad,p.nombre,p.stock FROM carrito c INNER JOIN productos p ON c.productos_codigo=p.codigo WHERE c.pedidos_id='$idPedido'";
 $resultado=$conn->query($sql);
 

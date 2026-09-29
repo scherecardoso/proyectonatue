@@ -166,7 +166,7 @@ h3{
         </div>
 
         <div class="tarjeta">
-            <a href="https://maps.app.goo.gl/2hDiP1BoJQG7hdNK6" target="_blank">
+            <a href="https://maps.app.goo.gl/V1DZgcXSaLBdwZGBA?g_st=aw" target="_blank">
                 <i class="fa-solid fa-location-dot"></i>
                 <h3>Ubicación</h3>
                 <p>Ver en Google Maps</p>

@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
     <style>
 
+        * {
+    box-sizing: border-box;
+}
       body {
          display: grid;
          margin: 0;
@@ -158,30 +161,56 @@
             transform: translateY(-2px);
         }
 
-        @media (max-width: 768px) {
+       @media (max-width: 768px) {
 
-            .botonvolver {
-                top: 15px;
-                left: 15px;
-                padding: 12px 22px;
-                font-size: 15px;
-            }
+    .botonvolver {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        margin: 0;
+        padding: 12px 22px;
+        font-size: 15px;
+    }
 
-            .titulo img {
-                width: 65px;
-                height: 65px;
-            }
+    form {
+        width: 90%;
+        max-width: 500px;
+        margin: 80px auto 20px auto;
+        padding: 30px 20px;
+    }
 
-            .titulo h1 {
-                font-size: 25px;
-            }
+    .titulo {
+        flex-direction: column;
+    }
 
-            form {
-                padding: 35px 25px;
-                margin-top: 55px;
-            }
+    .titulo img {
+        width: 65px;
+        height: 65px;
+    }
 
-        }
+    .titulo h1 {
+        font-size: 25px;
+    }
+
+    .descripcion {
+        font-size: 14px;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+    }
+
+    .botones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+        width: 100%;
+    }
+}
 
     </style>
 </head>

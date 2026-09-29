@@ -377,9 +377,6 @@ nav a.activo::after {
   </nav>
 
 
-  <!-- =========================
-       ICONOS
-  ========================== -->
 
   <div class="iconos-barra">
 

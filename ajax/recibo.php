@@ -45,11 +45,15 @@ $total = 0;
 <div class="recibo">
 
 <div class="encabezado">
-  
- 
+
+
 <h1>NATUÉ</h1>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?php echo urlencode("http://localhost/proyectonatue/ajax/recibo.php"); ?>" width="90" height="90" alt="Código QR" style="display:block;margin:0 auto 15px;">
 <p>Productos naturales</p>
+
 <div class="linea"></div>
+
 <h2>RECIBO DE PEDIDO</h2>
 <div class="numeroPedido">
 Pedido #<?php echo $pedido["id"]; ?>
@@ -144,13 +148,9 @@ Bs <?php echo number_format($total, 2); ?>
 
 <div style="text-align:center;margin:20px 0;">
 
-<p>Escanea para ver este recibo</p>
+<p>Escanea para Pagar</p>
+     <img src="../img/QR-NATUE.jpeg" width="200" height="200" alt="Código QR"> 
 
-<img
-src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?php echo urlencode("http://localhost/proyectonatue/ajax/recibo.php"); ?>"
-width="50"
-height="50"
-alt="Código QR">
 
 </div>
 

@@ -106,12 +106,9 @@ try {
         exit();
     }
 
-    if ($rol == 'usuario') {
-        header('Location: ../perfil/perfilusuario.php');
-        exit();
-    }
 
-    if ($rol == 'vendedor') {
+
+    if ($rol == 'usuario') {
         header('Location: ../usuario/perfilUser.php');
         exit();
     }

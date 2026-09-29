@@ -113,6 +113,7 @@ if (!$usuario) {
 <body>
 
 <form action="../usuario/17.actualizarperfil.php" method="post">
+    <input type="hidden" name="redirect" value="../usuario/perfilUser.php">
 
     <h2>Editar mi información</h2>
 

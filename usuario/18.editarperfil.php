@@ -35,6 +35,8 @@ if (!$usuario) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <title>Editar mi información</title>
 
     <style>
@@ -112,8 +114,12 @@ if (!$usuario) {
 
 <body>
 
+<<<<<<< HEAD
 <form action="../usuario/17.actualizarperfil.php" method="post">
     <input type="hidden" name="redirect" value="../usuario/perfilUser.php">
+=======
+<form action="../usuario/17.actualizarperfil.php" method="post" id="valipro">
+>>>>>>> f382410ae9bbbcc21d6fd03c23b597fc3615973b
 
     <h2>Editar mi información</h2>
 
@@ -148,6 +154,37 @@ if (!$usuario) {
 </a>>
 
 </form>
-
+<script >
+    $(document).ready(function(){
+        $("#valipro").validate({
+            rules:{
+                nombre:{
+                    required:true,
+                    minlength:3
+                },
+                direccion:{
+                    required:true,
+                    minlength:5
+                },
+                celular:{
+                    required:true,
+                    digits:true
+                }
+            },
+            messages:{
+                nombre:{
+                    required:"Por favor ingrese su nombre"
+                },
+                direccion:{
+                    required:"Por favor ingrese su dirección"
+                },
+                celular:{
+                    required:"Por favor ingrese su número de celular",
+                    digits:"El número de celular debe contener solo dígitos"
+                }
+            }
+        });
+    })
+</script>
 </body>
 </html>

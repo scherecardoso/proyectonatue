@@ -2,7 +2,6 @@
 
 require("conexion.php");
 
-// Validar que el id exista y no esté vacío
 if (!isset($_POST["id"]) || empty(trim($_POST["id"]))) {
     http_response_code(400);
     echo json_encode([
@@ -14,7 +13,6 @@ if (!isset($_POST["id"]) || empty(trim($_POST["id"]))) {
 
 $id = trim($_POST["id"]);
 
-// Validar que sea un número
 if (!is_numeric($id) || $id <= 0) {
     http_response_code(400);
     echo json_encode([
@@ -24,7 +22,6 @@ if (!is_numeric($id) || $id <= 0) {
     exit;
 }
 
-// Usar prepared statements para evitar SQL Injection
 $sql = "SELECT * FROM pedidos WHERE id = ?";
 $stmt = $conn->prepare($sql);
 

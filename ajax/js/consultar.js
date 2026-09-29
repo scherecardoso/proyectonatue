@@ -2,14 +2,14 @@ document.getElementById("consultar").addEventListener("click", () => {
     
     let id = document.getElementById("numeroPedido").value.trim();
     
-    // Validar que no esté vacío
+
     if (!id) {
         document.getElementById("resultado").innerHTML = 
             '<div style="color: red; padding: 10px; background: #ffebee; border-radius: 4px;">❌ Por favor ingresa un número de pedido</div>';
         return;
     }
     
-    // Deshabilitar botón
+
     const boton = document.getElementById("consultar");
     boton.disabled = true;
     boton.textContent = "Buscando...";
@@ -64,7 +64,6 @@ document.getElementById("consultar").addEventListener("click", () => {
     });
 });
 
-// Permitir buscar presionando Enter
 document.getElementById("numeroPedido").addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         document.getElementById("consultar").click();

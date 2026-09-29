@@ -5,10 +5,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 }); 
  
  
-//============================== 
-// ABRIR FORMULARIO 
-//============================== 
- 
 
 document.getElementById("generarPedido").addEventListener("click",()=>{ 
  
@@ -18,10 +14,7 @@ document.getElementById("generarPedido").addEventListener("click",()=>{
  
 }); 
  
-//============================== 
-// CERRAR FORMULARIO 
-//============================== 
- 
+
 document.getElementById("cancelarCompra").addEventListener("click",()=>{ 
  
     document.getElementById("modalCompra") 
@@ -29,9 +22,7 @@ document.getElementById("cancelarCompra").addEventListener("click",()=>{
  
 }); 
 
-//============================== 
-// CONFIRMAR COMPRA 
-//============================== 
+
 
 document.getElementById("confirmarPedido").addEventListener("click",()=>{ 
        

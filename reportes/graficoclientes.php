@@ -42,9 +42,7 @@ if ($resultado) {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -56,8 +54,6 @@ body {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
-
-    /* Computadora (1200px o más): menú lateral + contenido */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -67,7 +63,7 @@ body {
     gap: 0;
 }
 
-/* Tablet y celular: el menú sube arriba en horizontal */
+
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -80,9 +76,6 @@ body {
 }
 
 
-/* =========================
-   CONTENIDO
-========================== */
 .contenido {
     grid-area: contenido;
     box-sizing: border-box;
@@ -187,9 +180,7 @@ tr:hover td {
 }
 
 
-/* =========================
-   TABLET (900px o menos)
-========================== */
+
 @media (max-width: 900px) {
     .grafico-contenedor {
         height: 380px;
@@ -197,9 +188,6 @@ tr:hover td {
 }
 
 
-/* =========================
-   CELULAR (600px o menos)
-========================== */
 @media (max-width: 600px) {
     .contenido {
         padding: 15px 12px;

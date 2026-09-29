@@ -18,16 +18,11 @@ if ($conn->connect_error) {
 }
 
 
-// ==========================================
-// RECIBIR DATOS
-// ==========================================
-
 $metodo = $_POST['metodo'] ?? "";
 
-// Primero intenta recibirlo por POST
 $pedidos_id = $_POST['pedidos_id'] ?? "";
 
-// Si no viene por POST, usar el pedido de la sesión
+
 if ($pedidos_id == "" && isset($_SESSION["pedido"])) {
     $pedidos_id = $_SESSION["pedido"];
 }

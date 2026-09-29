@@ -1,6 +1,4 @@
-//==============================
-// SWEETALERT ENCIMA DEL CARRITO
-//==============================
+
 const estiloSwal = document.createElement("style");
 
 estiloSwal.innerHTML = `
@@ -9,11 +7,6 @@ estiloSwal.innerHTML = `
 }
 `;
 document.head.appendChild(estiloSwal);
-
-
-//==============================
-// ABRIR CARRITO
-//==============================
 document.getElementById("carritoIcono")
 .addEventListener("click",()=>{
     document.getElementById("sidebar")
@@ -26,9 +19,6 @@ document.getElementById("carritoIcono")
 });
 
 
-//==============================
-// CERRAR
-//==============================
 document.getElementById("cerrarCarrito")
 .addEventListener("click",cerrarSidebar);
 
@@ -44,9 +34,7 @@ function cerrarSidebar(){
 }
 
 
-//==============================
-// ACTUALIZAR CARRITO
-//==============================
+
 function actualizarCarrito(){
 
 fetch("php/carrito.php",{
@@ -118,10 +106,6 @@ fetch("php/carrito.php",{
 
 }
 
-
-//==============================
-// VACIAR CARRITO
-//==============================
 document.getElementById("vaciarCarrito")
 .addEventListener("click",vaciarCarrito);
 
@@ -193,9 +177,7 @@ function vaciarCarrito(){
 }
 
 
-//==============================
-// COMPRAR
-//==============================
+
 document.addEventListener("click",function(e){
 
     if(e.target.id=="comprar"){
@@ -227,9 +209,6 @@ document.addEventListener("click",function(e){
 });
 
 
-//==============================
-// CAMBIAR CANTIDAD
-//==============================
 function cambiarCantidad(codigo,accion){
 
     fetch("php/carrito.php",{

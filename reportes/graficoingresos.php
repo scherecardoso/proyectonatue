@@ -146,9 +146,7 @@ if ($resultadoMetodos) {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -160,8 +158,6 @@ body {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
-
-    /* Computadora (1200px o más): menú lateral + contenido */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -171,7 +167,6 @@ body {
     gap: 0;
 }
 
-/* Tablet y celular: el menú sube arriba en horizontal */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -184,9 +179,7 @@ body {
 }
 
 
-/* =========================
-   CONTENIDO
-========================== */
+
 .contenido {
     grid-area: contenido;
     box-sizing: border-box;
@@ -236,9 +229,7 @@ body {
 }
 
 
-/* =========================
-   TARJETAS RESUMEN (se acomodan solas)
-========================== */
+
 .resumen {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
@@ -283,9 +274,7 @@ body {
 }
 
 
-/* =========================
-   BOTONES DE PERIODO
-========================== */
+
 .botones {
     display: flex;
     justify-content: center;
@@ -320,9 +309,6 @@ body {
 }
 
 
-/* =========================
-   GRÁFICOS
-========================== */
 .grafico-principal,
 .grafico-metodo,
 .informacion,
@@ -364,7 +350,6 @@ body {
     width: 100%;
 }
 
-/* Los dos cuadros de abajo van lado a lado si caben, si no uno debajo del otro */
 .graficos-secundarios {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
@@ -419,9 +404,7 @@ body {
 }
 
 
-/* =========================
-   TABLA
-========================== */
+
 .tabla-titulo {
     margin-bottom: 20px;
 }
@@ -477,10 +460,6 @@ tr:hover td {
     font-weight: 700;
 }
 
-
-/* =========================
-   TABLET (900px o menos)
-========================== */
 @media (max-width: 900px) {
     .grafico {
         height: 350px;
@@ -488,9 +467,7 @@ tr:hover td {
 }
 
 
-/* =========================
-   CELULAR (600px o menos)
-========================== */
+
 @media (max-width: 600px) {
     .contenido {
         padding: 15px 12px;
@@ -510,7 +487,7 @@ tr:hover td {
     }
 
     .botones a {
-        flex: 1 1 40%;                /* los 4 botones se reparten en 2 filas */
+        flex: 1 1 40%;              
         text-align: center;
         padding: 10px 12px;
     }

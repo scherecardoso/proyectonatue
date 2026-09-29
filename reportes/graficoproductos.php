@@ -63,9 +63,7 @@ $mesActual = date("F Y");
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -77,8 +75,6 @@ body {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
-
-    /* Computadora (1200px o más): menú lateral + contenido */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -88,7 +84,6 @@ body {
     gap: 0;
 }
 
-/* Tablet y celular: el menú sube arriba en horizontal */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -101,9 +96,6 @@ body {
 }
 
 
-/* =========================
-   CONTENIDO
-========================== */
 .contenido {
     grid-area: contenido;
     padding: clamp(15px, 3vw, 30px);
@@ -120,7 +112,7 @@ body {
 
 .encabezado {
     display: flex;
-    flex-wrap: wrap;                 /* el mes baja debajo del título si no cabe */
+    flex-wrap: wrap;                 
     justify-content: space-between;
     align-items: center;
     gap: 15px;
@@ -153,9 +145,7 @@ body {
 }
 
 
-/* =========================
-   TARJETAS RESUMEN (se acomodan solas)
-========================== */
+
 .resumen {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
@@ -200,9 +190,6 @@ body {
 }
 
 
-/* =========================
-   GRÁFICO
-========================== */
 .grafico {
     background: #ffffff;
     border: 1px solid #eeeeee;
@@ -240,9 +227,7 @@ body {
 }
 
 
-/* =========================
-   TABLA
-========================== */
+
 .tabla-contenedor {
     background: #ffffff;
     border: 1px solid #eeeeee;
@@ -307,9 +292,7 @@ tr:hover td {
 }
 
 
-/* =========================
-   TABLET (900px o menos)
-========================== */
+
 @media (max-width: 900px) {
     .grafico-contenido {
         height: 420px;
@@ -317,9 +300,7 @@ tr:hover td {
 }
 
 
-/* =========================
-   CELULAR (600px o menos)
-========================== */
+
 @media (max-width: 600px) {
     .contenido {
         padding: 15px 12px;
@@ -341,7 +322,7 @@ tr:hover td {
     }
 
     .grafico-contenido {
-        height: 400px;          /* más alto porque la leyenda pasa abajo */
+        height: 400px;          
     }
 
     th,
@@ -449,7 +430,7 @@ const cantidades = <?php echo json_encode($cantidades); ?>;
 
 const ctx = document.getElementById("graficoProductos");
 
-/* La leyenda va a la derecha en pantallas anchas y abajo en celular */
+
 function posicionLeyenda() {
     return window.innerWidth < 700 ? "bottom" : "right";
 }

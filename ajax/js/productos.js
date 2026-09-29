@@ -2,15 +2,11 @@ let listaProductos = [];
 let pedidoActivo = false;
 
 
-//==================================================
-// INICIAR
-//==================================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
     verificarPedido();
 
-    // BUSCADOR
     const buscador = document.getElementById("buscar");
 
     if (buscador) {
@@ -27,9 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-//==================================================
-// CARGAR PRODUCTOS
-//==================================================
 
 function cargarProductos(){
 
@@ -57,9 +50,6 @@ function cargarProductos(){
 
 
 
-//==================================================
-// BUSCAR PRODUCTOS
-//==================================================
 
 function buscarProductos(texto){
 
@@ -98,10 +88,6 @@ function buscarProductos(texto){
 
 
 
-//==================================================
-// MOSTRAR PRODUCTOS
-//==================================================
-
 function mostrarProductos(productos){
 
     const contenedor = document.getElementById("productos");
@@ -114,7 +100,6 @@ function mostrarProductos(productos){
     let html = "";
 
 
-    // SI NO HAY RESULTADOS
     if(productos.length === 0){
 
         contenedor.innerHTML = `
@@ -136,7 +121,6 @@ function mostrarProductos(productos){
     }
 
 
-    // MOSTRAR PRODUCTOS
     productos.forEach(function(producto){
 
         html += `
@@ -186,16 +170,13 @@ function mostrarProductos(productos){
     contenedor.innerHTML = html;
 
 
-    // VOLVER A ACTIVAR LOS BOTONES
     agregarEventos();
 
 }
 
 
 
-//==================================================
-// EVENTOS BOTONES
-//==================================================
+
 
 function agregarEventos(){
 
@@ -212,10 +193,6 @@ function agregarEventos(){
 }
 
 
-
-//==================================================
-// AGREGAR PRODUCTO
-//==================================================
 
 function agregarProducto(codigo){
 
@@ -268,11 +245,6 @@ function agregarProducto(codigo){
 }
 
 
-
-//==================================================
-// HABILITAR COMPRA
-//==================================================
-
 function habilitarCompra(){
 
     pedidoActivo = true;
@@ -287,10 +259,6 @@ function habilitarCompra(){
 }
 
 
-
-//==================================================
-// VERIFICAR PEDIDO
-//==================================================
 
 function verificarPedido(){
 
@@ -318,8 +286,7 @@ function verificarPedido(){
 
         console.log("Error verificando pedido:", error);
 
-        // Aunque falle verificarPedido,
-        // igual cargamos los productos
+
         cargarProductos();
 
     });

@@ -32,9 +32,7 @@ if (!$resultado) {
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
-/* =========================
-   BASE
-========================== */
+
 html {
     overflow-x: hidden;
 }
@@ -46,8 +44,6 @@ body {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
-
-    /* Computadora (1200px o más): menú lateral + contenido */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -57,7 +53,6 @@ body {
     gap: 0;
 }
 
-/* Tablet y celular: el menú sube arriba en horizontal */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -69,10 +64,6 @@ body {
     }
 }
 
-
-/* =========================
-   CONTENIDO
-========================== */
 .contenido {
     grid-area: contenido;
     padding: clamp(15px, 3vw, 40px);
@@ -119,9 +110,6 @@ body {
 }
 
 
-/* =========================
-   DATOS DE LA VENTA (se acomodan solos)
-========================== */
 .informacion {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

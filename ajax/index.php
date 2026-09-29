@@ -179,11 +179,8 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
 <?php include("../includes/header.php");?>
   
 
-<!--================== ZONA DE TIENDA ==================-->
-
 <div class="zonaTienda">
 
-    <!-- BUSCADOR DE PEDIDOS -->
     <div class="seccionBuscador">
         <h3>
             <i class="fa-solid fa-receipt"></i>
@@ -207,7 +204,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
         <div id="resultadoPedido"></div>
     </div>
 
-    <!-- BUSCADOR DE PRODUCTOS -->
     <div class="seccionBuscador">
         <h3>
             <i class="fa-solid fa-search"></i>
@@ -227,8 +223,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
         </div>
     </div>
 
-
-    <!-- GENERAR PEDIDO -->
     <button id="generarPedido">
 
         <i class="fa-solid fa-file-circle-plus"></i>
@@ -240,8 +234,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
 </div>
 
 
-<!--================== CARRITO FLOTANTE ==================-->
-
 <button id="carritoIcono" title="Abrir carrito">
 
     <i class="fa-solid fa-bag-shopping"></i>
@@ -249,9 +241,7 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
     <span id="cantidadCarrito">0</span>
 
 </button>
-  
 
-    <!--================== PRODUCTOS ==================-->
 
     <main>
 
@@ -264,11 +254,9 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
         </section>
 
     </main>
-<!--================== FONDO OSCURO ==================-->
 
     <div id="fondo"></div>
 
-    <!--================== SIDEBAR ==================-->
 
     <aside id="sidebar">
 
@@ -309,8 +297,6 @@ $telefonoUsuario = $_SESSION['celular'] ?? '';
     </aside>
  
 
-
-<!--================== MODAL COMPRA ==================-->
 <form id="valiindex">
 <div id="modalCompra" class="modal">
 
@@ -391,9 +377,7 @@ $(document).ready(function(){
         }
     });
 
-    // ============================================
-    // CONSULTAR PEDIDO
-    // ============================================
+
     const inputPedido = document.getElementById("numeroPedidoConsulta");
     const btnConsultar = document.getElementById("btnConsultarPedido");
     const divResultado = document.getElementById("resultadoPedido");
@@ -412,7 +396,6 @@ $(document).ready(function(){
             return;
         }
 
-        // Mostrar carga
         btnConsultar.disabled = true;
         divResultado.innerHTML = `
             <div class="alerta alerta-exito">
@@ -516,10 +499,8 @@ $(document).ready(function(){
         });
     }
 
-    // Evento click
     btnConsultar.addEventListener("click", consultarPedido);
 
-    // Evento Enter
     inputPedido.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
             consultarPedido();

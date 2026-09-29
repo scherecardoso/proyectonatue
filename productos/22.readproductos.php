@@ -17,39 +17,37 @@ if ($conn->connect_error) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&family=Tenor+Sans&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
-
+<title>Lista de Productos</title>
 <style>
 
+
+
 body {
-  display: grid; 
-  font-family: Arial, sans-serif;
-  margin: 0;
-  grid-template-areas:
-    "barra barra"
-    "menu-lateral contenido";
-  grid-template-columns: 320px 1fr;
-  grid-template-rows: 70px 1fr 70px;
-  min-height: 100vh;
-  gap: 5px;
+    display: grid;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    grid-template-areas:
+        "barra barra"
+        "menu-lateral contenido";
+    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-rows: 88px 1fr;
+    min-height: 100vh;
+    gap: 5px;
 }
 
-
-
-
-.contenedor{
-    grid-area:contenido;
-    width:90%;
-    max-width:1200px;
-    margin:40px auto;
-    background:white;
-    padding:35px;
-    border-radius:28px;
-    box-shadow:0 10px 35px rgba(0,0,0,0.08);
-    border:1px solid #f3f3f3;
+.contenedor {
+    grid-area: contenido;
+    width: 90%;
+    max-width: 1200px;
+    min-width: 0;
+    margin: 40px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 28px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3f3f3;
 }
 
 .contenedor h1 {
@@ -60,7 +58,13 @@ body {
     font-family: "Playfair Display", serif;
 }
 
-table{
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 12px;
@@ -75,7 +79,6 @@ th {
     text-align: center;
 }
 
-
 td {
     background: #ffffff;
     padding: 16px;
@@ -83,9 +86,8 @@ td {
     text-align: center;
     border-top: 1px solid #f3f3f3;
     border-bottom: 1px solid #f3f3f3;
+    word-break: break-word;
 }
-
-
 
 tr td:first-child {
     border-left: 1px solid #f3f3f3;
@@ -108,6 +110,19 @@ tr:hover td {
     border-radius: 12px;
     border: 1px solid #eee;
 }
+
+.stock {
+    font-weight: bold;
+}
+
+.stock-bajo {
+    color: #ff0000;
+}
+
+.stock-ok {
+    color: #008000;
+}
+
 .acciones {
     display: flex;
     justify-content: center;
@@ -154,39 +169,123 @@ tr:hover td {
     color: #777;
 }
 
-@media (max-width:768px){
+@media (max-width: 1199px) {
+    body {
+        grid-template-areas:
+            "barra"
+            "menu-lateral"
+            "contenido";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        gap: 0;
+    }
 
-body{
-    display:flex;
-    flex-direction:column;
+    .contenedor {
+        width: 95%;
+        padding: 20px;
+        margin: 15px auto;
+    }
 }
 
-.menu{
-    width:100%;
-    border-right:none;
-}
+@media (max-width: 768px) {
+    .contenedor {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
 
-.contenedor{
-    width:95%;
-    padding:15px;
-    margin:20px auto;
-}
+    .contenedor h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 
-table{
-    font-size:12px;
-}
+    .tabla-scroll {
+        overflow-x: visible;
+    }
 
-th,
-td{
-    padding:10px;
-}
+    table,
+    tbody {
+        display: block;
+        width: 100%;
+    }
 
-h1{
-    font-size:28px;
-}
+    tr:has(th) {
+        display: none;
+    }
 
-}
+    tr {
+        display: block;
+        margin-bottom: 16px;
+        background: #ffffff;
+        border: 1px solid #f3d5e2;
+        border-radius: 18px;
+        padding: 8px 14px;
+        box-shadow: 0 4px 14px rgba(255, 92, 168, 0.08);
+    }
 
+    tr:hover td {
+        background: transparent;
+    }
+
+    td,
+    tr td:first-child,
+    tr td:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px dashed #f3d5e2;
+        border-radius: 0;
+        background: transparent;
+        text-align: right;
+        font-size: 14px;
+    }
+
+    td:last-child,
+    tr td:last-child {
+        border-bottom: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ff5ca8;
+        text-align: left;
+        flex-shrink: 0;
+        max-width: 40%;
+    }
+
+    td[data-label="Acciones"] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    td[data-label="Acciones"]::before {
+        display: none;
+    }
+
+    .acciones {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .producto-imagen {
+        width: 80px;
+        height: 80px;
+    }
+}
 </style>
 </head>
 
@@ -194,114 +293,83 @@ h1{
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeVendedor.php"); ?>
 
-
-
 <div class="contenedor">
     <h1>Lista de Productos</h1>
 
 <?php
-
 $sql = "SELECT * FROM productos ORDER BY codigo ASC";
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
 ?>
-    <table>
-    <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Precio</th>
-        <th>Costo</th>
-        <th>Stock</th>
-        <th>Imagen</th>
-        <th>Acciones</th>
-    </tr>
-    
+    <div class="tabla-scroll">
+        <table>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Costo</th>
+                <th>Stock</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+
 <?php
-    while($fila = $result->fetch_assoc()) {
-
-    $codigo = $fila['codigo'];
-    $archivoImagen = "../img/" . $fila['imagen'];
-    $stock = (int)$fila['stock'];
-
-    if ($stock <= 5) {
-        $colorStock = "#ff0000";
-    } else {
-        $colorStock = "#008000";
+    while ($fila = $result->fetch_assoc()) {
+        $codigo = urlencode($fila['codigo']);
+        $archivoImagen = "../img/" . $fila['imagen'];
+        $stock = (int)$fila['stock'];
+        $claseStock = ($stock <= 5) ? "stock-bajo" : "stock-ok";
+?>
+            <tr>
+                <td data-label="Código"><?php echo htmlspecialchars($fila['codigo']); ?></td>
+                <td data-label="Nombre"><?php echo htmlspecialchars($fila['nombre']); ?></td>
+                <td data-label="Descripción"><?php echo htmlspecialchars($fila['descripcion']); ?></td>
+                <td data-label="Precio">Bs <?php echo htmlspecialchars($fila['precio']); ?></td>
+                <td data-label="Costo">Bs <?php echo htmlspecialchars($fila['costo']); ?></td>
+                <td data-label="Stock">
+                    <span class="stock <?php echo $claseStock; ?>"><?php echo $stock; ?></span>
+                </td>
+                <td data-label="Imagen">
+<?php if (!empty($fila['imagen']) && file_exists($archivoImagen)) { ?>
+                    <img
+                        src="<?php echo htmlspecialchars($archivoImagen); ?>"
+                        alt="<?php echo htmlspecialchars($fila['nombre']); ?>"
+                        class="producto-imagen">
+<?php } else { ?>
+                    <span>No imagen</span>
+<?php } ?>
+                </td>
+                <td data-label="Acciones">
+                    <div class="acciones">
+                        <a class="btn editar" href="../productos/18.formeditarproductos.php?codigo=<?php echo $codigo; ?>">
+                            <i class="fa-solid fa-pen"></i>
+                            Editar
+                        </a>
+                        <a class="btn eliminar" href="../productos/20.eliminarproductos.php?codigo=<?php echo $codigo; ?>" onclick="return confirm('¿Está seguro de eliminar este producto?');">
+                            <i class="fa-solid fa-trash"></i>
+                            Eliminar
+                        </a>
+                    </div>
+                </td>
+            </tr>
+<?php
     }
 ?>
-
-        <tr>
-                    <td><?php echo htmlspecialchars($fila['codigo']); ?></td>
-                    <td><?php echo htmlspecialchars($fila['nombre']); ?></td>
-                    <td><?php echo htmlspecialchars($fila['descripcion']); ?></td>
-                    <td>Bs <?php echo htmlspecialchars($fila['precio']); ?></td>
-                    <td>Bs <?php echo htmlspecialchars($fila['costo']); ?></td>
-
-                    <td>
-                        <span style="color:<?php echo $colorStock; ?>; font-weight:bold;">
-                            <?php echo htmlspecialchars($stock); ?>
-                        </span>
-                    </td>
-
-                    <td>
-
-
-<?php if (!empty($fila['imagen']) && file_exists($archivoImagen)) { ?>
-                        <img
-                            src="<?php echo htmlspecialchars($archivoImagen); ?>"
-                            alt="<?php echo htmlspecialchars($fila['nombre']); ?>"
-                            class="producto-imagen">
-<?php } else { ?>
-                        <span>No imagen</span>
-<?php } ?>
-                    </td>
-
-
-                    <td>
-                        <div class="acciones">
-                            <a
-                                class="btn editar"
-                                href="../productos/18.formeditarproductos.php?codigo=<?php echo $codigo; ?>">
-                                <i class="fa-solid fa-pen"></i>
-                                Editar
-                            </a>
-
-                            <a
-                                class="btn eliminar"
-                                href="../productos/20.eliminarproductos.php?codigo=<?php echo $codigo; ?>"
-                                onclick="return confirm('¿Está seguro de eliminar este producto?');">
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar
-                            </a>
-                        </div>
-                    </td>
-        </tr>
- 
-<?php
-}
-?>
-
-            </table>
-
+        </table>
+    </div>
 <?php
 } else {
 ?>
-
-            <p class="sin-datos">No hay productos registrados.</p>
-
+    <p class="sin-datos">No hay productos registrados.</p>
 <?php
 }
 ?>
-
-        </div>
-    </div>
-</main>
+</div>
 
 </body>
 </html>
-
 <?php
 $conn->close();
 ?>

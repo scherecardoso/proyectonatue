@@ -34,17 +34,7 @@ $destacados = $conn->query($sqlDestacados);
 
 <style>
 
-  * {
-  box-sizing: border-box;
-}
 
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  overflow-x: hidden;
-}
 
 
 body {
@@ -62,8 +52,9 @@ body {
     "contenido"
     "coment"
     "pie";
-  gap: 10px;
+  gap: 5px;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 h2 {

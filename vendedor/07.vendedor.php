@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/verificarbloqueo.php");
+
 
 if ($_SESSION['rol'] != "vendedor") {
     echo '
@@ -57,14 +57,11 @@ body {
   grid-template-areas:
     "barra barra"
     "menu-lateral contenido";
-  grid-template-columns: 320px 1fr;
-  grid-template-rows: 70px 1fr 70px;
+  grid-template-columns: 380px 1fr;
+  grid-template-rows: 88px 1fr 70px;
   min-height: 100vh;
   gap: 5px;
 }
-
-
-
 
 
 .menu-lateral a:hover{
@@ -350,8 +347,7 @@ body {
 .btnActualizar:hover{
     background:#666;
 }
-
-/* Mismo breakpoint que el menú */
+/* ========== TABLET Y MENOR (menú pasa arriba) ========== */
 @media (max-width: 1199px) {
   body {
     grid-template-areas:
@@ -360,6 +356,7 @@ body {
       "contenido";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    gap: 0;
   }
 
   .contenedor {
@@ -367,33 +364,138 @@ body {
     margin: 10px auto;
     padding: 12px;
     box-sizing: border-box;
+    min-width: 0;           
   }
 
   .contenido {
     flex-direction: column;
   }
+
+  .pedidos {
+    padding: 20px;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .acceso-rapido {
     width: 100%;
   }
+
   .contenedor-acciones {
     flex-wrap: wrap;
   }
+
   .accion {
     flex: 1 1 30%;
+    border-radius: 25px;     
+  }
+
+  
+  .tabla-pedidos {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabla-pedidos table {
+    min-width: 650px;
   }
 }
 
-/* Solo móvil: aquí va el resto de lo que ya tenías (bienvenida, acciones, tabla) */
+
 @media (max-width: 768px) {
+
+  .bienvenida {
+    height: auto;
+    padding: 15px;
+    border-radius: 25px;
+  }
+
+  .contenido-bienvenida {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-bienvenida {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .icono-bienvenida {
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+  }
+
+  .texto-bienvenida h1 {
+    font-size: 22px;
+  }
+
+  .slider-bienvenida {
+    display: none;          
+  }
+
+ 
+  .acciones {
+    padding: 10px;
+  }
+
+  .acciones h1 {
+    font-size: 24px;
+  }
+
   .contenedor-acciones {
     flex-direction: column;
   }
+
   .accion {
     flex: none;
     width: 100%;
     box-sizing: border-box;
   }
-  /* ...bienvenida, pedidos, tabla, etc. */
+
+  /* Pedidos */
+  .pedidos {
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .encabezado-pedidos h2 {
+    font-size: 22px;
+  }
+
+  .tabla-pedidos th,
+  .tabla-pedidos td {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .btnVerPedido,
+  .btnActualizar {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .estado-entregado,
+  .estado-pendiente {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .texto-bienvenida h1 {
+    font-size: 18px;
+  }
+
+  .accion a {
+    font-size: 17px;
+  }
+
+  .tabla-pedidos table {
+    min-width: 560px;
+  }
 }
 </style>
 </head>

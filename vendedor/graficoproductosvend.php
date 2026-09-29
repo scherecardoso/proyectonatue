@@ -4,7 +4,7 @@ session_start();
 require("../ajax/php/conexion.php");
 
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
-    header("Location: ../usuario/09.register.php");
+    header("Location: ../pagina/login.php");
     exit();
 }
 
@@ -30,25 +30,39 @@ $sql = "SELECT
 
 $resultado = $conn->query($sql);
 
-$nombres = [];
-$cantidades = [];
-
+$productos = [];
+$nombresGrafico = [];
+$cantidadesGrafico = [];
 $productoMasVendido = "Sin ventas";
 $cantidadMayor = 0;
 
-if ($resultado && $resultado->num_rows > 0) {
+if ($resultado) {
     while ($fila = $resultado->fetch_assoc()) {
-        $nombres[] = $fila['nombre'];
-        $cantidades[] = (int)$fila['cantidad_vendida'];
+        $cantidad = (int) $fila['cantidad_vendida'];
+        $productos[] = [
+            'codigo' => $fila['codigo'],
+            'nombre' => $fila['nombre'],
+            'cantidad' => $cantidad
+        ];
 
-        if ((int)$fila['cantidad_vendida'] > $cantidadMayor) {
-            $cantidadMayor = (int)$fila['cantidad_vendida'];
+        if ($cantidad > 0) {
+            $nombresGrafico[] = $fila['nombre'];
+            $cantidadesGrafico[] = $cantidad;
+        }
+
+        if ($cantidad > $cantidadMayor) {
+            $cantidadMayor = $cantidad;
             $productoMasVendido = $fila['nombre'];
         }
     }
 }
 
-$mesActual = date("F Y");
+$meses = [
+    1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril",
+    5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto",
+    9 => "Septiembre", 10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre"
+];
+$mesActual = $meses[(int) date("n")] . " " . date("Y");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,16 +75,17 @@ $mesActual = date("F Y");
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+
 body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
+    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-rows: 88px 1fr;
     grid-template-areas:
-        "barra barra barra"
-        "menu-lateral contenido contenido";
-    gap: 10px;
+        "barra barra"
+        "menu-lateral contenido";
+    gap: 5px;
     min-height: 100vh;
     background: #ffffff;
 }
@@ -78,10 +93,7 @@ body {
 .contenido {
     grid-area: contenido;
     padding: 30px;
-    box-sizing: border-box;
-    width: 80%;
     min-width: 0;
-    margin-left: 10%;
 }
 
 .contenedor {
@@ -94,6 +106,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     margin-bottom: 30px;
 }
 
@@ -120,11 +133,12 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 14px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .resumen {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 25px;
     margin-bottom: 30px;
 }
@@ -135,10 +149,11 @@ body {
     border-radius: 18px;
     padding: 32px;
     min-height: 170px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 0;
 }
 
 .tarjeta .etiqueta {
@@ -154,6 +169,7 @@ body {
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 6px;
+    word-break: break-word;
 }
 
 .tarjeta .numero {
@@ -167,8 +183,9 @@ body {
     border: 1px solid #eeeeee;
     border-radius: 18px;
     padding: 30px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
     margin-bottom: 30px;
+    min-width: 0;
 }
 
 .titulo-grafico {
@@ -180,7 +197,6 @@ body {
     font-family: "Playfair Display", serif;
     font-size: 24px;
     font-weight: 600;
-    
 }
 
 .titulo-grafico p {
@@ -190,15 +206,15 @@ body {
 }
 
 .grafico-contenido {
-    height: 520px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 460px;
 }
 
-.grafico-contenido canvas {
-    max-width: 650px;
-    max-height: 500px;
+.sin-datos {
+    text-align: center;
+    padding: 40px 10px;
+    color: #999999;
 }
 
 .tabla-contenedor {
@@ -206,7 +222,8 @@ body {
     border: 1px solid #eeeeee;
     border-radius: 18px;
     padding: 30px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+    min-width: 0;
 }
 
 .tabla-titulo {
@@ -219,6 +236,12 @@ body {
     font-size: 24px;
     font-weight: 600;
     color: #ff5ca8;
+}
+
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -241,9 +264,10 @@ td {
     border-top: 1px solid #f3f3f3;
     font-size: 14px;
     background: #ffffff;
+    word-break: break-word;
 }
 
-tr:hover td {
+tbody tr:hover td {
     background: #fff8fb;
 }
 
@@ -256,20 +280,119 @@ tr:hover td {
     color: #999999;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1199px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "barra"
+            "menu-lateral"
+            "contenido";
+        gap: 0;
+    }
+
     .contenido {
-        padding: 30px;
+        padding: 25px;
     }
-    .resumen {
-        grid-template-columns: 1fr;
+}
+
+@media (max-width: 768px) {
+    .contenido {
+        padding: 12px;
     }
+
     .encabezado {
-        align-items: flex-start;
-        gap: 15px;
         flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
     }
+
+    .titulo h1 {
+        font-size: 24px;
+    }
+
+    .resumen {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .tarjeta {
+        min-height: 0;
+        padding: 20px;
+    }
+
+    .tarjeta .valor {
+        font-size: 22px;
+    }
+
+    .grafico,
+    .tabla-contenedor {
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .titulo-grafico h2,
+    .tabla-titulo h2 {
+        font-size: 20px;
+    }
+
     .grafico-contenido {
-        height: 450px;
+        height: 380px;
+    }
+
+    .tabla-scroll {
+        overflow-x: visible;
+    }
+
+    table,
+    tbody {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        display: block;
+        margin-bottom: 14px;
+        background: #ffffff;
+        border: 1px solid #f3d5e2;
+        border-radius: 18px;
+        padding: 6px 14px;
+        box-shadow: 0 4px 14px rgba(255, 92, 168, 0.08);
+    }
+
+    tbody tr:hover td {
+        background: transparent;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px dashed #f3d5e2;
+        background: transparent;
+        text-align: right;
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ff5ca8;
+        text-align: left;
+        flex-shrink: 0;
+        max-width: 45%;
     }
 }
 </style>
@@ -278,7 +401,12 @@ tr:hover td {
 
 <?php
 include("../includes/header.php");
-include("../includes/includeVendedor.php");
+
+if ($rol == "administrador") {
+    include("../includes/includeadmin.php");
+} else {
+    include("../includes/includeVendedor.php");
+}
 ?>
 
 <div class="contenido">
@@ -289,11 +417,10 @@ include("../includes/includeVendedor.php");
                 <h1>Productos más vendidos</h1>
                 <p>Productos vendidos durante el mes actual</p>
             </div>
-            <div class="mes"><?php echo $mesActual; ?></div>
+            <div class="mes"><?php echo htmlspecialchars($mesActual); ?></div>
         </div>
 
         <div class="resumen">
-
             <div class="tarjeta">
                 <div class="etiqueta">Producto más vendido</div>
                 <div class="valor"><?php echo htmlspecialchars($productoMasVendido); ?></div>
@@ -302,10 +429,9 @@ include("../includes/includeVendedor.php");
 
             <div class="tarjeta">
                 <div class="etiqueta">Total de productos registrados</div>
-                <div class="valor"><?php echo count($nombres); ?></div>
+                <div class="valor"><?php echo count($productos); ?></div>
                 <div class="numero">Productos en el reporte</div>
             </div>
-
         </div>
 
         <div class="grafico">
@@ -313,9 +439,14 @@ include("../includes/includeVendedor.php");
                 <h2>Ventas por producto</h2>
                 <p>Cantidad de unidades vendidas durante el mes</p>
             </div>
+
+<?php if (count($cantidadesGrafico) > 0) { ?>
             <div class="grafico-contenido">
                 <canvas id="graficoProductos"></canvas>
             </div>
+<?php } else { ?>
+            <div class="sin-datos">Todavía no hay ventas este mes.</div>
+<?php } ?>
         </div>
 
         <div class="tabla-contenedor">
@@ -323,63 +454,64 @@ include("../includes/includeVendedor.php");
                 <h2>Detalle de productos</h2>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Producto</th>
-                        <th>Código</th>
-                        <th>Unidades vendidas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($resultado) {
-                        $resultado->data_seek(0);
-                        $contador = 1;
-
-                        while ($fila = $resultado->fetch_assoc()) {
-                            $cantidad = (int)$fila['cantidad_vendida'];
-
-                            echo "<tr>";
-                            echo "<td>" . $contador . "</td>";
-                            echo "<td>" . htmlspecialchars($fila['nombre']) . "</td>";
-                            echo "<td>" . htmlspecialchars($fila['codigo']) . "</td>";
-
-                            if ($cantidad > 0) {
-                                echo "<td class='numero-tabla'>" . $cantidad . " unidades</td>";
-                            } else {
-                                echo "<td class='sin-ventas'>Sin ventas</td>";
-                            }
-
-                            echo "</tr>";
-                            $contador++;
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
+<?php if (count($productos) > 0) { ?>
+            <div class="tabla-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Producto</th>
+                            <th>Código</th>
+                            <th>Unidades vendidas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<?php foreach ($productos as $indice => $producto) { ?>
+                        <tr>
+                            <td data-label="#"><?php echo $indice + 1; ?></td>
+                            <td data-label="Producto"><?php echo htmlspecialchars($producto['nombre']); ?></td>
+                            <td data-label="Código"><?php echo htmlspecialchars($producto['codigo']); ?></td>
+<?php if ($producto['cantidad'] > 0) { ?>
+                            <td data-label="Unidades vendidas" class="numero-tabla"><?php echo $producto['cantidad']; ?> unidades</td>
+<?php } else { ?>
+                            <td data-label="Unidades vendidas" class="sin-ventas">Sin ventas</td>
+<?php } ?>
+                        </tr>
+<?php } ?>
+                    </tbody>
+                </table>
+            </div>
+<?php } else { ?>
+            <div class="sin-datos">No hay productos registrados.</div>
+<?php } ?>
         </div>
 
     </div>
 </div>
 
+<?php if (count($cantidadesGrafico) > 0) { ?>
 <script>
-const nombres = <?php echo json_encode($nombres); ?>;
-const cantidades = <?php echo json_encode($cantidades); ?>;
+const nombres = <?php echo json_encode($nombresGrafico); ?>;
+const cantidades = <?php echo json_encode($cantidadesGrafico); ?>;
 
-const ctx = document.getElementById("graficoProductos");
+const paleta = [
+    "#ff5ca8", "#ff8fc2", "#ffc0d9", "#f5d6e3",
+    "#fff5f8", "#e8dfe3", "#d9d9d9", "#bdbdbd", "#a5a5a5", "#8d8d8d"
+];
 
-new Chart(ctx, {
+const colores = nombres.map(function(_, i) {
+    return paleta[i % paleta.length];
+});
+
+const esMovil = window.innerWidth <= 768;
+
+new Chart(document.getElementById("graficoProductos"), {
     type: "pie",
     data: {
         labels: nombres,
         datasets: [{
             data: cantidades,
-            backgroundColor: [
-                "#ff5ca8", "#ff8fc2", "#ffc0d9", "#f5d6e3",
-                "#d9d9d9", "#bdbdbd", "#a5a5a5", "#8d8d8d"
-            ],
+            backgroundColor: colores,
             borderColor: "#ffffff",
             borderWidth: 3,
             hoverOffset: 10
@@ -391,12 +523,12 @@ new Chart(ctx, {
         plugins: {
             legend: {
                 display: true,
-                position: "right",
+                position: esMovil ? "bottom" : "right",
                 labels: {
-                    padding: 18,
+                    padding: esMovil ? 10 : 18,
                     usePointStyle: true,
                     font: {
-                        size: 13
+                        size: esMovil ? 11 : 13
                     }
                 }
             },
@@ -411,6 +543,10 @@ new Chart(ctx, {
     }
 });
 </script>
+<?php } ?>
 
 </body>
 </html>
+<?php
+$conn->close();
+?>

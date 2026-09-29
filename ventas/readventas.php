@@ -1,478 +1,218 @@
 <?php
-
 session_start();
 
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'vendedor' && $_SESSION['rol'] != 'administrador')) {
+    header("Location: ../pagina/login.php");
+    exit();
+}
 
-$conexion = new mysqli(
-    "localhost",
-    "root",
-    "",
-    "shena"
-);
-
+$conexion = new mysqli("localhost", "root", "", "shena");
 
 if ($conexion->connect_error) {
-
     die("Error de conexión");
-
 }
 
-
-
-$sql = "
-    SELECT *
-    FROM ventas
-    ORDER BY id DESC
-";
-
-$resultado = $conexion->query($sql);
-
-
+$resultado = $conexion->query("SELECT * FROM ventas ORDER BY id DESC");
 ?>
-
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap"
-    rel="stylesheet"
->
-
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap"
-    rel="stylesheet"
->
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <title>Historial de Ventas</title>
-
-
 <style>
 
+
 body {
-
     display: grid;
-
     font-family: Arial, sans-serif;
-
     margin: 0;
-
     grid-template-areas:
         "barra barra"
-        "menu-lateral contenido"
-        "pie pie";
-
-    grid-template-columns: 320px 1fr;
-
-    grid-template-rows: 70px 1fr 70px;
-
+        "menu-lateral contenido";
+    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-rows: 88px 1fr;
     min-height: 100vh;
-
     gap: 5px;
-
     background: #f8f8f8;
-
 }
-
-
-
 
 .contenido {
-
     grid-area: contenido;
-
+    min-width: 0;
     padding: 40px;
-
 }
-
-
 
 .titulo {
-
     text-align: center;
-
+    margin-top: 0;
     margin-bottom: 30px;
-
     color: #ff5ca8;
-
     font-family: "Playfair Display", serif;
-
 }
-
 
 .contenedorVentas {
-
     width: 100%;
-
     max-width: 900px;
-
     margin: 0 auto;
-
 }
-
-
 
 .contenedor {
-
     background: white;
-
     padding: 25px;
-
     margin: 20px auto;
-
     max-width: 800px;
-
     border-radius: 15px;
-
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-
     transition: .2s;
-
 }
-
 
 .contenedor:hover {
-
     transform: translateY(-2px);
-
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
-
 }
-
-
 
 .contenedor h3 {
-
     margin-top: 0;
-
     padding-bottom: 15px;
-
     border-bottom: 1px solid #eeeeee;
-
 }
-
 
 .informacion {
-
     display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
-
     margin-top: 20px;
-
 }
-
-
 
 .dato {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 6px;
-
+    min-width: 0;
 }
-
 
 .dato strong {
-
     font-size: 13px;
-
     color: #888;
-
     text-transform: uppercase;
-
 }
-
 
 .dato span {
-
     font-size: 16px;
-
     color: #333;
-
+    word-break: break-word;
 }
-
-
 
 .estado {
-
     display: inline-block;
-
     width: fit-content;
-
     padding: 6px 12px;
-
     border-radius: 20px;
-
     background: #f4d6e2;
-
     color: #a33c67;
-
     font-size: 14px !important;
-
 }
 
-
-
-@media (max-width: 700px) {
-
+@media (max-width: 1199px) {
     body {
-
-        display: block;
-
+        grid-template-areas:
+            "barra"
+            "menu-lateral"
+            "contenido";
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        gap: 0;
     }
-
-
-    .menu-lateral {
-
-        width: auto;
-
-        margin-top: 0;
-
-    }
-
 
     .contenido {
-
-        padding: 20px;
-
+        padding: 25px;
     }
-
-
-    .informacion {
-
-        grid-template-columns: 1fr;
-
-    }
-
 }
 
-</style>
+@media (max-width: 700px) {
+    .contenido {
+        padding: 15px;
+    }
 
+    .titulo {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .contenedor {
+        padding: 18px;
+        margin: 14px auto;
+    }
+
+    .informacion {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+}
+</style>
 </head>
 
-
 <body>
-
-
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeVendedor.php"); ?>
 
-
-
-
-
-
 <main class="contenido">
-
-
-    <h1 class="titulo">
-
-        Historial de Ventas
-
-    </h1>
-
+    <h1 class="titulo">Historial de Ventas</h1>
 
     <div class="contenedorVentas">
+<?php
+if ($resultado && $resultado->num_rows > 0) {
+    while ($fila = $resultado->fetch_assoc()) {
+?>
+        <div class="contenedor">
+            <h3>Venta #<?php echo htmlspecialchars($fila['id']); ?></h3>
 
-
-        <?php
-
-        if ($resultado && $resultado->num_rows > 0) {
-
-            while ($fila = $resultado->fetch_assoc()) {
-
-        ?>
-
-
-
-                <div class="contenedor">
-
-
-                    <h3>
-
-                        Venta #
-
-                        <?php echo htmlspecialchars($fila['id']); ?>
-
-                    </h3>
-
-
-                    <div class="informacion">
-
-
-                        <div class="dato">
-
-                            <strong>
-                                Pedido
-                            </strong>
-
-                            <span>
-
-                                #
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['pedidos_id']
-                                );
-                                ?>
-
-                            </span>
-
-                        </div>
-
-
-                        <div class="dato">
-
-                            <strong>
-                                Costo
-                            </strong>
-
-                            <span>
-
-                                Bs
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['costo']
-                                );
-                                ?>
-
-                            </span>
-
-                        </div>
-
-
-                        <div class="dato">
-
-                            <strong>
-                                Método
-                            </strong>
-
-                            <span>
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['metodo']
-                                );
-                                ?>
-
-                            </span>
-
-                        </div>
-
-
-
-
-                        </div>
-                        <div class="dato">
-
-                            <strong>
-                                fecha
-                            </strong>
-
-                            <span class="fecha">
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['fecha']
-                                );
-                                ?>
-
-                            </span>
-
-                        </div>
-
-                        
-                        <div class="dato">
-
-                            <strong>
-                                Estado
-                            </strong>
-
-                            <span class="estado">
-
-                                <?php
-                                echo htmlspecialchars(
-                                    $fila['estado']
-                                );
-                                ?>
-
-                            </span>
-  </div>
-                    </div>
-
-
+            <div class="informacion">
+                <div class="dato">
+                    <strong>Pedido</strong>
+                    <span>#<?php echo htmlspecialchars($fila['pedidos_id']); ?></span>
                 </div>
 
+                <div class="dato">
+                    <strong>Costo</strong>
+                    <span>Bs <?php echo htmlspecialchars($fila['costo']); ?></span>
+                </div>
 
-        <?php
+                <div class="dato">
+                    <strong>Método</strong>
+                    <span><?php echo htmlspecialchars($fila['metodo']); ?></span>
+                </div>
 
-            }
+                <div class="dato">
+                    <strong>Fecha</strong>
+                    <span><?php echo htmlspecialchars($fila['fecha']); ?></span>
+                </div>
 
-        } else {
-
-        ?>
-
-
-            <div class="contenedor">
-
-                <h3>
-                    No hay ventas registradas
-                </h3>
-
-                <p>
-                    Todavía no se han registrado ventas.
-                </p>
-
+                <div class="dato">
+                    <strong>Estado</strong>
+                    <span class="estado"><?php echo htmlspecialchars($fila['estado']); ?></span>
+                </div>
             </div>
-
-
-        <?php
-
-        }
-
-        ?>
-
-
+        </div>
+<?php
+    }
+} else {
+?>
+        <div class="contenedor">
+            <h3>No hay ventas registradas</h3>
+            <p>Todavía no se han registrado ventas.</p>
+        </div>
+<?php
+}
+?>
     </div>
-
-
 </main>
 
-
 </body>
-
 </html>
-
-
 <?php
-
 $conexion->close();
-
 ?>

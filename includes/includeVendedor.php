@@ -6,9 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 
 <style>
-/* =========================
-   MENÚ - COMPUTADORA (1200px o más): lateral izquierdo
-========================== */
+
 .menu-lateral {
     grid-area: menu-lateral;
     display: flex;
@@ -22,8 +20,8 @@
 }
 
 .menu-titulo {
-    font-size: 15px;
-    color: #ff5ca8;
+    font-size: 22px;
+    color: #000000;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
@@ -108,14 +106,12 @@
     padding-left: 17px;
 }
 
-/* =========================
-   MENÚ - TABLET Y CELULAR (menos de 1200px): horizontal arriba
-========================== */
+
 @media (max-width: 1199px) {
 
     .menu-lateral {
         flex-direction: row;
-        flex-wrap: wrap;               /* si no caben, bajan a otra fila (así el submenú no se corta) */
+        flex-wrap: wrap;             
         align-items: center;
         justify-content: center;
         gap: 6px;
@@ -132,7 +128,7 @@
     }
 
     .menu-titulo {
-        display: none;                 /* el título sobra en la barra horizontal */
+        display: none;                 
     }
 
     .menu-lateral > a,
@@ -144,7 +140,7 @@
 
     .menu-lateral > a:hover,
     .boton-reportes:hover {
-        padding-left: 14px;            /* sin desplazamiento lateral en la barra horizontal */
+        padding-left: 14px;            
     }
 
     .menu-lateral i {
@@ -166,7 +162,6 @@
         font-size: 11px;
     }
 
-    /* El submenú se abre como caja flotante hacia abajo */
     .submenu-reportes {
         position: absolute;
         top: 100%;
@@ -193,7 +188,7 @@
     }
 }
 
-/* Celulares pequeños */
+
 @media (max-width: 600px) {
     .menu-lateral {
         gap: 4px;

@@ -1,66 +1,44 @@
-
 <?php
 session_start();
 
 require("../ajax/php/conexion.php");
 
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
-    header("Location: ../usuario/09.register.php");
+    header("Location: ../pagina/login.php");
     exit();
 }
 
 $rol = $_SESSION['rol'];
-$fechaConsulta = '2026-09-19';
 
-$sql = "SELECT v.id, v.pedidos_id, v.costo, v.metodo, v.estado, p.nombre, p.fecha
-        FROM ventas v
-        INNER JOIN pedidos p ON v.pedidos_id = p.id
-        WHERE p.fecha = '$fechaConsulta'
-        AND v.estado = 'Entregado'
-        ORDER BY v.id DESC";
-
-$resultado = $conn->query($sql);
-
-if (!$resultado) {
-    die("Error en la consulta: " . $conn->error);
+$fechaConsulta = date('Y-m-d');
+if (isset($_GET['fecha']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $_GET['fecha']) && strtotime($_GET['fecha'])) {
+    $fechaConsulta = $_GET['fecha'];
 }
 
-$sqlTotal = "SELECT COALESCE(SUM(v.costo), 0) AS total, COUNT(*) AS cantidad
-             FROM ventas v
-             INNER JOIN pedidos p ON v.pedidos_id = p.id
-             WHERE p.fecha = '$fechaConsulta'
-             AND v.estado = 'Entregado'";
+$stmt = $conn->prepare(
+    "SELECT v.id, v.pedidos_id, v.costo, v.metodo, v.estado, p.nombre, p.fecha
+     FROM ventas v
+     INNER JOIN pedidos p ON v.pedidos_id = p.id
+     WHERE p.fecha = ? AND v.estado = 'Entregado'
+     ORDER BY v.id ASC"
+);
+$stmt->bind_param("s", $fechaConsulta);
+$stmt->execute();
+$ventas = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
-$resultadoTotal = $conn->query($sqlTotal);
-
-if (!$resultadoTotal) {
-    die("Error al calcular el total: " . $conn->error);
-}
-
-$datosTotal = $resultadoTotal->fetch_assoc();
-
-$total = $datosTotal['total'];
-$cantidad = $datosTotal['cantidad'];
-
-$ventasGrafico = [];
+$cantidad = count($ventas);
+$total = 0;
+$etiquetasGrafico = [];
 $ingresosGrafico = [];
 
-$sqlGrafico = "SELECT v.id, v.costo
-               FROM ventas v
-               INNER JOIN pedidos p ON v.pedidos_id = p.id
-               WHERE p.fecha = '$fechaConsulta'
-               AND v.estado = 'Entregado'
-               ORDER BY v.id ASC";
-
-$resultadoGrafico = $conn->query($sqlGrafico);
-
-if ($resultadoGrafico) {
-    while ($fila = $resultadoGrafico->fetch_assoc()) {
-        $ventasGrafico[] = "Venta " . $fila['id'];
-        $ingresosGrafico[] = (float) $fila['costo'];
-    }
+foreach ($ventas as $v) {
+    $total += (float) $v['costo'];
+    $etiquetasGrafico[] = "Venta " . $v['id'];
+    $ingresosGrafico[] = (float) $v['costo'];
 }
 
+$ventasTabla = array_reverse($ventas);
 $fechaMostrar = date("d/m/Y", strtotime($fechaConsulta));
 ?>
 <!DOCTYPE html>
@@ -69,42 +47,72 @@ $fechaMostrar = date("d/m/Y", strtotime($fechaConsulta));
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ventas totales del día</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+
+
 body {
     display: grid;
     margin: 0;
     font-family: Arial, sans-serif;
-    grid-template-columns: 198px 1fr 260px;
-    grid-template-rows: 70px 1fr;
+    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-rows: 88px 1fr;
     grid-template-areas:
-        "barra barra barra"
-        "menu-lateral contenido contenido";
-    gap: 10px;
+        "barra barra"
+        "menu-lateral contenido";
+    gap: 5px;
     min-height: 100vh;
     background: #ffffff;
 }
 
 .contenido {
     grid-area: contenido;
-    padding: 40px 40px 40px 200px;
-    box-sizing: border-box;
-    width: 100%;
+    padding: 40px;
     min-width: 0;
 }
 
 .titulo {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     color: #ff5ca8;
 }
 
 .fecha {
     color: #777;
+    margin-bottom: 20px;
+}
+
+.filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
     margin-bottom: 30px;
+}
+
+.filtro input[type="date"] {
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.filtro button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ff5ca8;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.filtro button:hover {
+    background: #e64d96;
 }
 
 .tarjetas {
@@ -119,13 +127,13 @@ body {
     width: 230px;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     transition: 0.3s;
 }
 
 .tarjeta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255,92,168,0.15);
+    box-shadow: 0 5px 15px rgba(255, 92, 168, 0.15);
 }
 
 .tarjeta h3 {
@@ -145,8 +153,9 @@ body {
     background: white;
     padding: 28px;
     border-radius: 18px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
     margin-bottom: 35px;
+    min-width: 0;
 }
 
 .grafico-contenedor h2 {
@@ -157,6 +166,7 @@ body {
 }
 
 .grafico {
+    position: relative;
     width: 100%;
     max-width: 900px;
     height: 350px;
@@ -167,15 +177,20 @@ body {
     background: white;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    overflow-x: auto;
-    
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    min-width: 0;
 }
 
 .tabla-contenedor h2 {
     font-family: 'Playfair Display', serif;
     margin-top: 0;
     color: #ff5ca8;
+}
+
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -198,9 +213,10 @@ td {
     text-align: center;
     border-top: 1px solid #f3f3f3;
     border-bottom: 1px solid #f3f3f3;
+    word-break: break-word;
 }
 
-tr:hover {
+tbody tr:hover td {
     background: #fff8fb;
 }
 
@@ -220,22 +236,106 @@ tr:hover {
     color: #888;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1199px) {
     body {
-        display: block;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "barra"
+            "menu-lateral"
+            "contenido";
+        gap: 0;
     }
 
     .contenido {
-        padding: 20px;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenido {
+        padding: 12px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .tarjetas {
+        gap: 12px;
     }
 
     .tarjeta {
-        flex: 1 1 180px;
+        flex: 1 1 140px;
         width: auto;
+        padding: 18px;
+    }
+
+    .tarjeta p {
+        font-size: 22px;
+    }
+
+    .grafico-contenedor,
+    .tabla-contenedor {
+        padding: 16px;
     }
 
     .grafico {
-        height: 300px;
+        height: 260px;
+    }
+
+    .tabla-scroll {
+        overflow-x: visible;
+    }
+
+    table,
+    tbody {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        display: block;
+        margin-bottom: 16px;
+        background: #ffffff;
+        border: 1px solid #f3d5e2;
+        border-radius: 18px;
+        padding: 8px 14px;
+        box-shadow: 0 4px 14px rgba(255, 92, 168, 0.08);
+    }
+
+    tbody tr:hover td {
+        background: transparent;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px dashed #f3d5e2;
+        background: transparent;
+        text-align: right;
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ff5ca8;
+        text-align: left;
+        flex-shrink: 0;
+        max-width: 45%;
     }
 }
 </style>
@@ -249,17 +349,21 @@ include("../includes/header.php");
 if ($rol == "administrador") {
     include("../includes/includeadmin.php");
 } else {
-    include("../includes/includevendedor.php");
+    include("../includes/includeVendedor.php");
 }
 ?>
 
 <main class="contenido">
 
     <h1 class="titulo">Ventas totales del día</h1>
-    <div class="fecha"><?php echo $fechaMostrar; ?></div>
+    <div class="fecha"><?php echo htmlspecialchars($fechaMostrar); ?></div>
+
+    <form class="filtro" method="get">
+        <input type="date" name="fecha" value="<?php echo htmlspecialchars($fechaConsulta); ?>">
+        <button type="submit">Ver día</button>
+    </form>
 
     <div class="tarjetas">
-
         <div class="tarjeta">
             <h3>Ventas realizadas</h3>
             <p><?php echo $cantidad; ?></p>
@@ -269,12 +373,10 @@ if ($rol == "administrador") {
             <h3>Total vendido</h3>
             <p>Bs <?php echo number_format($total, 2); ?></p>
         </div>
-
     </div>
 
     <div class="grafico-contenedor">
         <h2>Ingresos de las ventas del día</h2>
-
         <div class="grafico">
             <canvas id="graficoVentas"></canvas>
         </div>
@@ -283,70 +385,47 @@ if ($rol == "administrador") {
     <div class="tabla-contenedor">
         <h2>Ventas registradas del día</h2>
 
-        <?php if ($resultado->num_rows > 0) { ?>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID Venta</th>
-                    <th>Pedido</th>
-                    <th>Cliente</th>
-                    <th>Método de pago</th>
-                    <th>Estado del pedido</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php while ($venta = $resultado->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($venta['id']); ?></td>
-
-                    <td>
-                        <?php echo htmlspecialchars($venta['pedidos_id']); ?>
-                    </td>
-
-                    <td>
-                        <?php echo htmlspecialchars($venta['nombre']); ?>
-                    </td>
-
-                    <td>
-                        <?php echo htmlspecialchars($venta['metodo']); ?>
-                    </td>
-
-                    <td>
-                        <span class="estado">
-                            <?php echo htmlspecialchars($venta['estado']); ?>
-                        </span>
-                    </td>
-
-                    <td>
-                        Bs <?php echo number_format((float) $venta['costo'], 2); ?>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
-        <?php } else { ?>
-
-        <div class="sin-ventas">
-            No hay ventas registradas para esta fecha.
+<?php if ($cantidad > 0) { ?>
+        <div class="tabla-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>Pedido</th>
+                        <th>Cliente</th>
+                        <th>Método de pago</th>
+                        <th>Estado del pedido</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+<?php foreach ($ventasTabla as $venta) { ?>
+                    <tr>
+                        <td data-label="ID Venta"><?php echo htmlspecialchars($venta['id']); ?></td>
+                        <td data-label="Pedido"><?php echo htmlspecialchars($venta['pedidos_id']); ?></td>
+                        <td data-label="Cliente"><?php echo htmlspecialchars($venta['nombre']); ?></td>
+                        <td data-label="Método"><?php echo htmlspecialchars($venta['metodo']); ?></td>
+                        <td data-label="Estado">
+                            <span class="estado"><?php echo htmlspecialchars($venta['estado']); ?></span>
+                        </td>
+                        <td data-label="Total">Bs <?php echo number_format((float) $venta['costo'], 2); ?></td>
+                    </tr>
+<?php } ?>
+                </tbody>
+            </table>
         </div>
-
-        <?php } ?>
-
+<?php } else { ?>
+        <div class="sin-ventas">No hay ventas registradas para esta fecha.</div>
+<?php } ?>
     </div>
 
 </main>
 
 <script>
-const ventas = <?php echo json_encode($ventasGrafico); ?>;
+const ventas = <?php echo json_encode($etiquetasGrafico); ?>;
 const ingresos = <?php echo json_encode($ingresosGrafico); ?>;
 
-const contexto = document.getElementById("graficoVentas");
-
-new Chart(contexto, {
+new Chart(document.getElementById("graficoVentas"), {
     type: "line",
     data: {
         labels: ventas,
@@ -369,9 +448,7 @@ new Chart(contexto, {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: {
-                display: false
-            },
+            legend: { display: false },
             tooltip: {
                 backgroundColor: "#333",
                 callbacks: {
@@ -384,22 +461,12 @@ new Chart(contexto, {
         scales: {
             y: {
                 beginAtZero: true,
-                grid: {
-                    color: "rgba(0,0,0,0.06)"
-                },
-                title: {
-                    display: true,
-                    text: "Ingresos en Bs"
-                }
+                grid: { color: "rgba(0,0,0,0.06)" },
+                title: { display: true, text: "Ingresos en Bs" }
             },
             x: {
-                grid: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "Ventas realizadas"
-                }
+                grid: { display: false },
+                title: { display: true, text: "Ventas realizadas" }
             }
         }
     }
@@ -408,7 +475,6 @@ new Chart(contexto, {
 
 </body>
 </html>
-
 <?php
 $conn->close();
 ?>

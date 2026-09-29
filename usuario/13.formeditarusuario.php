@@ -214,6 +214,7 @@ input.error{
         </label>
 
     <button>Actualizar usuario</button>
+     <button type="button" onclick="window.location.href='../usuario/12.readusuarios.php'">Volver</button>
 
     </form>
 </div>

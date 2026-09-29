@@ -10,7 +10,7 @@ if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["vendedor","administ
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Usuario bloqueado</title>
+            <title></title>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
         <body>
@@ -28,7 +28,7 @@ if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["vendedor","administ
             confirmButtonText: "Aceptar"
          }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../admin/detallepedido.php"; 
+                window.location.href = "../admin/06.admin.php"; 
             }
         });
         </script>
@@ -45,7 +45,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Usuario bloqueado</title>
+            <title></title>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
         <body>
@@ -63,7 +63,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
             confirmButtonText: "Aceptar"
          }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../admin/detallepedido.php"; 
+                window.location.href = "../admin/ventasypedidos.php"; 
             }
         });
         </script>
@@ -84,7 +84,7 @@ if(!$resultadoPedido || $resultadoPedido->num_rows == 0){
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Usuario bloqueado</title>
+            <title></title>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
         <body>
@@ -102,7 +102,7 @@ if(!$resultadoPedido || $resultadoPedido->num_rows == 0){
             confirmButtonText: "Aceptar"
          }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../admin/detallepedido.php"; 
+                window.location.href = "../admin/ventasypedido.php"; 
             }
         });
         </script>

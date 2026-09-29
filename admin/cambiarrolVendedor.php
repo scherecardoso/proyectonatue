@@ -20,7 +20,7 @@ if ($conn->query($sql) === TRUE) {
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <title>Usuario bloqueado</title>
+            <title></title>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         </head>
 

@@ -447,7 +447,7 @@ nav a.activo::after {
     </a>
 
 
-    <a href="../fichaaaaaaaaaaaaaaaaaa(1).pdf"
+    <a href="../FICHA AMBIENTAL.pdf"
        class="icono-ambiental"
        title="Ficha ambiental">
 

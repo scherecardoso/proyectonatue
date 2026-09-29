@@ -5,12 +5,72 @@ session_start();
 require("../ajax/php/conexion.php");
 
 if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["vendedor","administrador"])){
-    echo "Acceso denegado";
+     echo '
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Usuario bloqueado</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: "Acceso denegado",
+            text: "Datos o rol incorrectos, revisa para continuar.",
+            imageUrl: "../img/perrito-ojoso.gif",
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "Perrito",
+            background: "#fff1f4",
+            color: "#767c80",
+            confirmButtonColor: "#5e6466",
+            confirmButtonText: "Aceptar"
+         }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../admin/detallepedido.php"; 
+            }
+        });
+        </script>
+
+        </body>
+        </html>
+        ';
     exit();
 }
 
 if(!isset($_GET['id']) || empty($_GET['id'])){
-    echo "No se recibió el número del pedido";
+     echo '
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Usuario bloqueado</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: "Hubo un error",
+            text: "No se recibió el número del pedido.",
+            imageUrl: "../img/perrito-triste.gif",
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "Perrito",
+            background: "#fff1f4",
+            color: "#767c80",
+            confirmButtonColor: "#5e6466",
+            confirmButtonText: "Aceptar"
+         }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../admin/detallepedido.php"; 
+            }
+        });
+        </script>
+
+        </body>
+        </html>
+        ';
     exit();
 }
 
@@ -19,7 +79,37 @@ $sqlPedido = "SELECT * FROM pedidos WHERE id = '$idPedido'";
 $resultadoPedido = $conn->query($sqlPedido);
 
 if(!$resultadoPedido || $resultadoPedido->num_rows == 0){
-    echo "Pedido no encontrado";
+    echo '
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Usuario bloqueado</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: "Hubo un error",
+            text: "Pedido no encontrado.",
+            imageUrl: "../img/perrito-triste.gif",
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "Perrito",
+            background: "#fff1f4",
+            color: "#b13065",
+            confirmButtonColor: "#c54141",
+            confirmButtonText: "Aceptar"
+         }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../admin/detallepedido.php"; 
+            }
+        });
+        </script>
+
+        </body>
+        </html>
+        ';
     exit();
 }
 

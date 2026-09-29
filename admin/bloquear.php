@@ -39,12 +39,12 @@ if (isset($_GET['CI'])) {
             imageHeight: 200,
             imageAlt: "Perrito feliz",
             background: "#fff1f4",
-            color: "#90ceb6",
-            confirmButtonColor: "#75a18b",
+            color: "#767c80",
+            confirmButtonColor: "#5e6466",
             confirmButtonText: "Aceptar"
-        }).then((result) => {
+         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../usuario/12.readusuarios.php";
+                window.location.href = "../usuario/12.readusuarios.php"; 
             }
         });
         </script>
@@ -71,11 +71,11 @@ if (isset($_GET['CI'])) {
             title: "Error",
             text: "No se pudo bloquear el usuario.",
             icon: "error",
-            confirmButtonColor: "#75a18b",
+            confirmButtonColor: "#565a64",
             confirmButtonText: "Aceptar"
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../usuario/12.readusuarios.php";
+                window.location.href = "../usuario/12.readusuarios.php"; 
             }
         });
         </script>
@@ -103,13 +103,13 @@ if (isset($_GET['CI'])) {
         title: "Error",
         text: "No se recibió el CI del usuario.",
         icon: "error",
-        confirmButtonColor: "#75a18b",
+        confirmButtonColor: "#575763",
         confirmButtonText: "Aceptar"
     }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "../usuario/12.readusuarios.php";
-        }
-    });
+            if (result.isConfirmed) {
+                window.location.href = "../usuario/12.readusuarios.php"; 
+            }
+        });
     </script>
 
     </body>

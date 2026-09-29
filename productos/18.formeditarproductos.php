@@ -206,7 +206,6 @@ input.error{
         </label>
 
         <button type="submit">Actualizar producto</button>
-         <button type="button" onclick="window.location.href='../admin/gestionproductos.php'">Volver</button>
 
     </form>
 </div>

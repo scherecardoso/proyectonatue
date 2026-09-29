@@ -3,7 +3,39 @@ session_start();
 include("../includes/verificarbloqueo.php");
 
 if ($_SESSION['rol'] != "vendedor") {
-    echo "Acceso denegado";
+    echo '
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Usuario bloqueado</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </head>
+
+        <body>
+
+        <script>
+        Swal.fire({
+            title: "Acceso denegado",
+            text: "Verifica tus datos correctamente.",
+            imageUrl: "../img/perrito-ojoso.jpg",
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "Perrito",
+            background: "#fff1f4",
+            color: "#767c80",
+            confirmButtonColor: "#5e6466",
+            confirmButtonText: "Aceptar"
+         }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../vendedor/07.vendedor.php"; 
+            }
+        });
+        </script>
+
+        </body>
+        </html>
+        ';
     exit();
 }
 ?>

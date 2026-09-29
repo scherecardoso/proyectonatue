@@ -247,8 +247,6 @@
                 inputPedido.focus();
                 return;
             }
-
-            // Deshabilitar botón y mostrar carga
             botonConsultar.disabled = true;
             divResultado.innerHTML = `
                 <div class="alert alert-success" style="background: #e3f2fd; color: #1565c0;">
@@ -271,7 +269,6 @@
                 if (data.ok && data.pedido) {
                     let p = data.pedido;
 
-                    // Determinar clase de estado
                     let estadoClase = "estado-pendiente";
                     if (p.estado.toLowerCase().includes("completado")) {
                         estadoClase = "estado-completado";
@@ -349,24 +346,19 @@
             });
         }
 
-        // Evento click en botón consultar
         botonConsultar.addEventListener("click", consultarPedido);
 
-        // Evento Enter en input
         inputPedido.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
                 consultarPedido();
             }
         });
-
-        // Botón limpiar
         botonLimpiar.addEventListener("click", () => {
             inputPedido.value = "";
             divResultado.innerHTML = "";
             inputPedido.focus();
         });
 
-        // Focus al cargar
         inputPedido.focus();
     </script>
 </body>

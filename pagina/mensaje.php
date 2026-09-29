@@ -4,37 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comentario enviado</title>
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
 
-    body {
-         display: grid;
-         margin: 0;
-         font-family: Arial, sans-serif;
-         grid-template-columns: 1fr;   
-         grid-template-areas:
-         "barra"
-         "banner"
-         "coment"
-         "pie";
-         gap: 10px;
+        * {
+            box-sizing: border-box;
+        }
 
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f5f2;
+            font-family: 'Open Sans', sans-serif;
+        }
 
         .contenedor {
-            margin-left: 35%;
-            margin-top: 5%;
             width: 500px;
             max-width: 90%;
             background-color: white;
             padding: 50px;
             border-radius: 25px;
             text-align: center;
-            
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         h1 {
@@ -51,7 +47,7 @@
             margin-bottom: 30px;
         }
 
-        .a {
+        a {
             display: inline-block;
             background-color: #222;
             color: white;
@@ -61,7 +57,7 @@
             transition: 0.3s;
         }
 
-        .a:hover {
+        a:hover {
             transform: scale(1.05);
         }
 
@@ -69,7 +65,7 @@
 </head>
 
 <body>
-<?php include("../includes/header.php"); ?>
+
     <div class="contenedor">
 
         <h1>¡Gracias por tu comentario!</h1>

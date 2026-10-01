@@ -126,14 +126,15 @@ h3{
   grid-area: productos;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   gap: 45px;
-  padding: 100px 30px;
+  padding: 60px 30px;
+  box-sizing: border-box;
   background-color: #ffffff;
   position: relative;
-  top: 200px;
-  border-radius: 20%;
+  top: 0;
+  border-radius: 40px;
 }
 
 .titulo-productos {
@@ -143,9 +144,7 @@ h3{
     text-align: center;
     font-family: 'Playfair Display', serif;
     color: #000;
-    margin: 14px 10 65px;
-    left: 0;
-    top: 0;
+    margin: 14px 0 20px;
 }
 
 .titulo-productos h2 {
@@ -161,6 +160,11 @@ h3{
   border-radius: 20px;
   font-family: Tenor Sans, sans-serif;
   font-size: 28px;
+  margin: 0 auto 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .cuadro-grande {
@@ -188,6 +192,11 @@ h3{
   border-radius: 20px;
   font-family: Tenor Sans, sans-serif;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px auto 0;
 }
 
 
@@ -218,6 +227,7 @@ h3{
   width: 550px;
   height: 550px;
   border-radius: 50px;
+  margin-left: 50px;
   }
 
 .img-contenido:hover {
@@ -597,7 +607,7 @@ h3{
 
             <div class="rectangulo-info">
                 <p>
-                    <?php echo htmlspecialchars($producto['descripcion']); ?>
+                    <?php echo htmlspecialchars($producto['descripcion'] ?? ''); ?>
                 </p>
             </div>
 

@@ -177,7 +177,6 @@ function mostrarProductos(productos){
 
 
 
-
 function agregarEventos(){
 
     document.querySelectorAll(".btnAgregar").forEach(function(boton){
@@ -285,7 +284,6 @@ function verificarPedido(){
     .catch(error => {
 
         console.log("Error verificando pedido:", error);
-
 
         cargarProductos();
 

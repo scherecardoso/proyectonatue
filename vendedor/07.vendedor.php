@@ -347,7 +347,7 @@ body {
 .btnActualizar:hover{
     background:#666;
 }
-/* ========== TABLET Y MENOR (menú pasa arriba) ========== */
+
 @media (max-width: 1199px) {
   body {
     grid-template-areas:
@@ -454,7 +454,7 @@ body {
     box-sizing: border-box;
   }
 
-  /* Pedidos */
+   Pedidos */
   .pedidos {
     padding: 15px;
     border-radius: 20px;

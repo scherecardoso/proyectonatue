@@ -116,6 +116,8 @@ switch($accion){
         }
 
         $fila = $resultado->fetch_assoc();
+
+        
         $cantidad = (int)$fila["cantidad"] + 1;
 
         if($cantidad > (int)$fila["stock"]){

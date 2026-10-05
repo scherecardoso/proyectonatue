@@ -203,15 +203,18 @@ h3{
 .contenido {
   grid-area: contenido;
   background-color: rgb(255, 255, 255);
-  height: 900px;
+  min-height: 900px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 50px;
-
+  padding: 60px 40px;
+  box-sizing: border-box;
 }
 
 .texto-contenido {
   width: 50%;
+  max-width: 700px;
   padding-left: 50px;
   margin-top: -78px;
   margin-left: 20px;
@@ -220,15 +223,21 @@ h3{
   font-family:'Open Sans';
   font-weight: 400;
   line-height: 1.7;
-  font-size: 20px;
-}  
+}
+
+.texto-contenido p {
+  margin: 0;
+}
 
 .img-contenido {
-  width: 550px;
-  height: 550px;
+  width: min(550px, 42vw);
+  max-width: 550px;
+  aspect-ratio: 1 / 1;
   border-radius: 50px;
   margin-left: 50px;
-  }
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
 .img-contenido:hover {
   transform: scale(1.05);
@@ -247,7 +256,7 @@ h3{
   justify-content: center;
   gap: 25px;
   text-align: center;
-  margin: auto;
+  margin: 0 auto 80px;
   border: 1px solid #DADADA;
 }
 
@@ -633,7 +642,7 @@ h3{
       personal que también protege el medio ambiente.
       Trabajamos para crear conciencia sobre el impacto de nuestras decisiones diarias
       y fomentar prácticas que contribuyan al bienestar de las personas y del planeta.</p></div>
-    <img src="../img/nos.png" alt="Orgánico y natural" class="img-contenido">
+    <img src="../img/natueeeeimg.png" alt="Orgánico y natural" class="img-contenido">
 </section>
 
 <section class="comentario">

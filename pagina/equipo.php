@@ -35,7 +35,7 @@ h3 {
   flex-direction: column;
   align-items: center;
   gap: 60px;
-  padding: 80px 0;
+  padding: 180px 0;
 }
 
 .contenido h1 {
@@ -155,7 +155,7 @@ h3 {
 .equipo {
   width: 85%;
   text-align: center;
-  margin: 40px auto;
+  margin: 200px auto;
 }
 
 .equipo h2 {

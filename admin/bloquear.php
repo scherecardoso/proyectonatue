@@ -1,22 +1,29 @@
 <?php
 
+// Se configuran los datos para conectarse a la base de datos.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se crea la conexión con la base de datos.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
+// Si la conexión falla, se corta la ejecución del script.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
 
+// Se verifica si se recibió el CI del usuario por medio de la URL.
 if (isset($_GET['CI'])) {
 
+    // Se obtiene el CI enviado en la consulta.
     $CI = $_GET['CI'];
 
+    // Se actualiza el estado del usuario a bloqueado.
     $sql = "UPDATE usuario SET estado='bloqueado' WHERE CI=$CI";
 
+    // Si la actualización se ejecuta correctamente, se muestra una alerta de éxito.
     if ($conn->query($sql) === TRUE) {
 
         echo '
@@ -53,6 +60,7 @@ if (isset($_GET['CI'])) {
         </html>
         ';
 
+    // Si la actualización falla, se muestra una alerta de error.
     } else {
 
         echo '
@@ -85,6 +93,7 @@ if (isset($_GET['CI'])) {
         ';
     }
 
+// Si no se envió el CI, se avisa que faltan datos.
 } else {
 
     echo '
@@ -117,6 +126,7 @@ if (isset($_GET['CI'])) {
     ';
 }
 
+// Se cierra la conexión con la base de datos al finalizar.
 $conn->close();
 
 ?>

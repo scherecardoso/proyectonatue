@@ -1,21 +1,29 @@
 <?php
 
+// Inicia o recupera la sesión para consultar los datos y permisos del usuario actual.
 session_start();
+// Comprueba si la cuenta está bloqueada antes de continuar con la página.
 include("../includes/verificarbloqueo.php");
 
+// Esta vista es exclusiva para cuentas con el rol de usuario.
+// Si no hay una sesión válida o el rol es distinto, se redirige al registro.
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "usuario") {
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
+// Abre una conexión con la base de datos del proyecto.
 $conexion = new mysqli("localhost", "root", "", "shena");
 
+// Detiene la página si no se pudo establecer la conexión.
 if ($conexion->connect_error) {
     die("Error de conexión");
 }
 
+// Guarda el nombre de la cuenta iniciada para reutilizarlo en las consultas.
 $nombre_usuario = $_SESSION['nombre'];
 
+// Obtiene la imagen de perfil del usuario mediante una consulta preparada.
 $sql = "SELECT imagen_perfil FROM usuario WHERE nombre = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $nombre_usuario);
@@ -24,11 +32,13 @@ $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 $stmt->close();
 
+// Si la cuenta no tiene una imagen guardada, utiliza la imagen predeterminada.
 $imagenPerfil = (!empty($datosUsuario['imagen_perfil']))
     ? $datosUsuario['imagen_perfil']
     : 'imgperfil.avif';
 
 
+// Cuenta los pedidos asociados al nombre del usuario para mostrar su total.
 $sqlPedidos = "SELECT COUNT(*) AS total FROM pedidos WHERE nombre = ?";
 $stmtPedidos = $conexion->prepare($sqlPedidos);
 $stmtPedidos->bind_param("s", $nombre_usuario);
@@ -39,6 +49,8 @@ $totalpedido = $filaPedidos['total'];
 $stmtPedidos->close();
 
 
+// Busca los productos favoritos de la cuenta, relacionando favoritos con productos
+// para obtener los datos necesarios para mostrarlos en la página.
 $sqlFavoritos = "
     SELECT productos.codigo, productos.nombre, productos.precio, productos.imagen
     FROM favoritos
@@ -51,6 +63,7 @@ $stmtFavoritos->execute();
 $favoritos = $stmtFavoritos->get_result();
 
 
+// Recupera la lista de pedidos del usuario, mostrando primero los más recientes.
 $sqlListaPedidos = "
     SELECT id, fecha, estado
     FROM pedidos
@@ -63,6 +76,7 @@ $stmtLista->execute();
 $pedidos = $stmtLista->get_result();
 
 
+// Cuenta los pedidos agrupados por mes para preparar los datos de una gráfica.
 $sqlPedidosMes = "
     SELECT MONTH(fecha) AS mes, COUNT(*) AS cantidad
     FROM pedidos
@@ -75,6 +89,7 @@ $stmtPedidosMes->bind_param("s", $nombre_usuario);
 $stmtPedidosMes->execute();
 $resultadoPedidosMes = $stmtPedidosMes->get_result();
 
+// Almacena cada fila de resultados en un arreglo para utilizarlo posteriormente.
 $pedidosMes = [];
 while ($fila = $resultadoPedidosMes->fetch_assoc()) {
     $pedidosMes[] = $fila;

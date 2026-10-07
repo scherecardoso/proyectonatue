@@ -1,20 +1,29 @@
 <?php
+// Se inicia la sesión para validar que el usuario tenga acceso como administrador.
+// Si no existe una sesión o el usuario no es administrador, se redirige al login.
 session_start();
 
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') {
+    // El acceso a esta vista está restringido a administradores.
+    // Si intenta entrar sin permisos, se lo envía al formulario de inicio de sesión.
     header("Location: ../pagina/login.php");
     exit();
 }
 
+// Se crea la conexión a la base de datos del proyecto.
+// Aquí se conecta con la BD "shena" del servidor local.
 $conexion = new mysqli("localhost", "root", "", "shena");
 
+// Si la conexión falla, la ejecución del archivo termina para evitar errores posteriores.
 if ($conexion->connect_error) {
     die("Error de conexión");
 }
 
+// Se consulta la tabla ventas para mostrar el historial ordenado desde la venta más reciente.
 $sql = "SELECT * FROM ventas ORDER BY id DESC";
 $resultado = $conexion->query($sql);
 
+// Si la consulta no se ejecuta correctamente, se muestra el error de MySQL.
 if (!$resultado) {
     die("Error en la consulta: " . $conexion->error);
 }
@@ -26,12 +35,19 @@ if (!$resultado) {
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Se cargan las fuentes tipográficas y iconos para mantener el estilo visual del panel administrativo. -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
+/*
+    Este bloque CSS define el diseño general de la vista.
+    La estructura está organizada como un dashboard con una barra superior,
+    un menú lateral y el contenido principal donde aparecen las ventas.
+*/
 
 html {
     overflow-x: hidden;
@@ -44,6 +60,8 @@ body {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
+
+    /* Se usa grid para repartir el layout general entre barra, menú y contenido. */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -55,6 +73,7 @@ body {
 
 @media (max-width: 1199px) {
     body {
+        /* En pantallas menores el layout pasa a una disposición vertical para mejorar la lectura. */
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto auto 1fr;
         grid-template-areas:
@@ -86,14 +105,14 @@ body {
     margin: 0 auto;
 }
 
-.contenedor { 
-    background: #fff; 
-    padding: clamp(18px, 3vw, 30px); 
-    margin: 0 0 25px; 
-    border-radius: 18px; 
-    border: 1px solid #f0f0f0; 
-    box-shadow: 0 4px 18px rgba(0,0,0,.08); 
-    transition: .2s; 
+.contenedor {
+    background: #fff;
+    padding: clamp(18px, 3vw, 30px);
+    margin: 0 0 25px;
+    border-radius: 18px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    transition: .2s;
 }
 
 .contenedor:hover {
@@ -109,7 +128,10 @@ body {
     color: #333;
 }
 
-
+/*
+    El bloque informacion organiza los datos de cada venta en columnas responsivas.
+    Así se puede mostrar código, costo, método de pago y estado de forma ordenada.
+*/
 .informacion {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -146,14 +168,16 @@ body {
     font-size: 14px !important;
 }
 
-
-
+/*
+    Aquí se definen los estilos de los botones de acción para ver, editar o eliminar ventas.
+    Cada botón tiene un color distinto para diferenciar la acción que realiza.
+*/
 .acciones {
     margin-top: 25px;
     padding-top: 18px;
     border-top: 1px solid #eee;
     display: flex;
-    flex-wrap: wrap;              
+    flex-wrap: wrap;
     justify-content: flex-end;
     gap: 10px;
 }
@@ -207,8 +231,6 @@ body {
     color: #777;
 }
 
-
-
 @media (max-width: 600px) {
 
     .contenedor {
@@ -220,7 +242,7 @@ body {
     }
 
     .informacion {
-        grid-template-columns: 1fr 1fr;  
+        grid-template-columns: 1fr 1fr;
         gap: 15px;
     }
 
@@ -231,7 +253,7 @@ body {
     .btn-ver,
     .btn-editar,
     .btn-eliminar {
-        flex: 1 1 auto;                  
+        flex: 1 1 auto;
         padding: 10px 12px;
         font-size: 13px;
     }
@@ -244,7 +266,10 @@ body {
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeadmin.php"); ?>
 
-
+<!--
+    Este bloque es el contenido principal del panel de administración.
+    Aquí se muestran todas las ventas registradas con sus detalles y botones de navegación.
+-->
 <main class="contenido">
 
     <h1 class="titulo">Historial de Ventas</h1>
@@ -255,6 +280,10 @@ body {
 
             <?php while ($fila = $resultado->fetch_assoc()): ?>
 
+                <!--
+                    Cada tarjeta representa una venta distinta.
+                    Se muestra la información principal y acciones rápidas para verla o gestionarla.
+                -->
                 <div class="contenedor">
 
                     <h3>
@@ -277,24 +306,25 @@ body {
                             </span>
                         </div>
 
-                       <div class="dato"> 
-    <strong>Método de pago</strong> 
-    <span> 
-        <?php echo htmlspecialchars($fila['metodo']); ?> 
-    </span> 
-</div>
+                        <div class="dato">
+                            <strong>Método de pago</strong>
+                            <span>
+                                <?php echo htmlspecialchars($fila['metodo']); ?>
+                            </span>
+                        </div>
 
-<div class="dato"> 
-    <strong>Estado</strong> 
-    <span class="estado">
-        <?php echo htmlspecialchars($fila['estado']); ?> 
-    </span> 
-</div>
+                        <div class="dato">
+                            <strong>Estado</strong>
+                            <span class="estado">
+                                <?php echo htmlspecialchars($fila['estado']); ?>
+                            </span>
+                        </div>
 
                     </div>
 
                     <div class="acciones">
 
+                        <!-- Botón para abrir el detalle completo del pedido asociado a esta venta. -->
                         <a
                             href="../admin/detallepedido.php?id=<?php echo urlencode($fila['pedidos_id']); ?>"
                             class="btn-ver"
@@ -303,6 +333,7 @@ body {
                             Ver pedido
                         </a>
 
+                        <!-- Botón para editar la venta seleccionada. -->
                         <a
                             href="../ventas/editarventa.php?id=<?php echo urlencode($fila['id']); ?>"
                             class="btn-editar"
@@ -311,6 +342,7 @@ body {
                             Editar
                         </a>
 
+                        <!-- Botón para eliminar la venta con confirmación para evitar borrados accidentales. -->
                         <a
                             href="../ventas/deleteventas.php?id=<?php echo urlencode($fila['id']); ?>"
                             class="btn-eliminar"
@@ -328,6 +360,7 @@ body {
 
         <?php else: ?>
 
+            <!-- Se muestra este mensaje cuando todavía no hay ventas registradas en la base de datos. -->
             <div class="contenedor sin-ventas">
                 <h3>No hay ventas registradas</h3>
                 <p>Todavía no se han registrado ventas.</p>
@@ -343,5 +376,6 @@ body {
 </html>
 
 <?php
+// Se cierra la conexión a la base de datos al final del archivo.
 $conexion->close();
 ?>

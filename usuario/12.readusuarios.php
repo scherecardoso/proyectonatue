@@ -1,17 +1,21 @@
 <?php
+// Inicia la sesión para comprobar los permisos del visitante.
 session_start();
+// Esta página está disponible únicamente para usuarios con rol de administrador.
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "administrador") {
   header("Location: ../usuario/09.register.php");
   exit;
 }
 ?>
 <!DOCTYPE html>
+<!-- Página en español que presenta el listado de usuarios. -->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 
 <title>Lista de Usuarios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Fuentes e iconos utilizados por el diseño del sitio. -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -19,10 +23,12 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "administrador") {
 <style>
 
 
+/* Evita que elementos anchos generen desplazamiento horizontal en la página. */
 html {
     overflow-x: hidden;
 }
 
+/* Cuadrícula general para la barra superior, el menú y el contenido. */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -40,6 +46,7 @@ body {
 }
 
 
+/* En pantallas medianas y pequeñas, las secciones se apilan verticalmente. */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -52,6 +59,7 @@ body {
 }
 
 
+/* Panel principal donde se presenta el listado de usuarios. */
 .contenedor {
     grid-area: info;
     justify-self: center;
@@ -67,6 +75,7 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
 
+/* Presentación del título de la sección. */
 h2 {
     text-align: center;
     color: #ff5ca8;
@@ -81,11 +90,13 @@ h3 {
 
 
 
+/* Permite desplazar la tabla horizontalmente cuando no cabe en el espacio disponible. */
 .tabla-scroll {
     width: 100%;
     overflow-x: auto;            
 }
 
+/* Ancho mínimo para conservar la legibilidad de las columnas en escritorio. */
 table {
     width: 100%;
     min-width: 800px;
@@ -93,6 +104,7 @@ table {
     border-spacing: 0 15px;
 }
 
+/* Estilo de los encabezados de las columnas. */
 th {
     background: #fff1f7;
     padding: 16px;
@@ -101,6 +113,7 @@ th {
     text-align: center;
 }
 
+/* Espaciado, alineación y ajuste de texto para las celdas. */
 td {
     padding: 12px;
     text-align: center;
@@ -108,6 +121,7 @@ td {
     word-break: break-word;
 }
 
+/* Estilo base para los enlaces que se muestran como botones. */
 .btn {
     padding: 10px 18px;
     border-radius: 12px;
@@ -119,6 +133,7 @@ td {
     transition: 0.2s;
 }
 
+/* Colores para distinguir las acciones de edición, eliminación y cambio. */
 .editar {
     background: #f8d8e5;
     color: #d63384;
@@ -134,10 +149,12 @@ td {
     color: #E9967A;
 }
 
+/* Efecto visual al pasar el cursor sobre los botones. */
 .btn:hover {
     transform: translateY(-2px);
 }
 
+/* Apariencia del aviso mostrado cuando no hay registros. */
 .sin-datos {
     text-align: center;
     margin-top: 20px;
@@ -146,12 +163,15 @@ td {
 }
 
 
+/* En móviles, cada fila de la tabla se presenta como una tarjeta. */
 @media (max-width: 768px) {
 
+    /* Las tarjetas no requieren desplazamiento horizontal. */
     .tabla-scroll {
         overflow-x: visible;
     }
 
+    /* Tabla, filas y celdas se convierten en bloques apilados. */
     table,
     tbody,
     tr,
@@ -162,10 +182,12 @@ td {
         box-sizing: border-box;
     }
 
+    /* Se ocultan los encabezados; cada celda mostrará su propia etiqueta. */
     thead {
         display: none;             
     }
 
+    /* Aspecto de tarjeta independiente para cada usuario. */
     tr {
         margin-bottom: 18px;
         padding: 8px 14px;
@@ -174,6 +196,7 @@ td {
         background: #fffafc;
     }
 
+    /* Datos alineados frente a su etiqueta en el formato móvil. */
     td {
         display: flex;
         justify-content: space-between;
@@ -185,6 +208,7 @@ td {
         font-size: 15px;
     }
 
+    /* Lee el nombre de columna desde el atributo data-label de cada celda. */
     td::before {
         content: attr(data-label);
         font-weight: bold;
@@ -194,6 +218,7 @@ td {
     }
 
 
+    /* Las acciones ocupan su propio espacio y no necesitan etiqueta repetida. */
     td.acciones {
         display: flex;
         flex-wrap: wrap;
@@ -217,6 +242,7 @@ td {
 </head>
 
 <body>
+<!-- Se incluyen los elementos compartidos de navegación y el menú administrativo. -->
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeadmin.php"); ?>
 <div class="contenedor">
@@ -225,27 +251,33 @@ td {
 
 <?php
 
+// Parámetros de conexión al servidor MySQL local y a la base de datos del proyecto.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se establece la conexión que se utilizará para consultar los usuarios.
 $conn = new mysqli($servidor,$usuario,$contra,$baseDeDatos);
 
+// Si la conexión falla, se detiene la ejecución con un mensaje general.
 if($conn->connect_error){
     die("Error de conexión");
 }
 
+// Solicita todos los registros almacenados en la tabla usuario.
 $sql = "SELECT * FROM usuario";
 $result = $conn->query($sql);
 
 ?>
 
-<?php if($result && $result->num_rows > 0){ ?>
+<?php // La tabla solo se presenta si la consulta fue válida y encontró registros.
+if($result && $result->num_rows > 0){ ?>
 
 <div class="tabla-scroll">
 <table>
 
+    <!-- Encabezados de las columnas que componen el listado. -->
     <thead>
     <tr>
         <th>CI</th>
@@ -259,10 +291,12 @@ $result = $conn->query($sql);
     </thead>
 
     <tbody>
+    <!-- Se recorre cada registro para crear una fila con sus datos. -->
     <?php while($fila = $result->fetch_assoc()){ ?>
 
     <tr>
 
+        <!-- htmlspecialchars muestra los valores como texto y evita interpretar HTML. -->
         <td data-label="CI"><?= htmlspecialchars($fila["CI"]) ?></td>
         <td data-label="Nombre"><?= htmlspecialchars($fila["nombre"]) ?></td>
         <td data-label="Dirección"><?= htmlspecialchars($fila["direccion"]) ?></td>
@@ -272,17 +306,20 @@ $result = $conn->query($sql);
 
         <td class="acciones">
 
+            <!-- Abre el formulario para editar al usuario identificado por su CI. -->
             <a class="btn editar"
                href="../usuario/13.formeditarusuario.php?CI=<?= urlencode($fila['CI']) ?>">
                Editar
             </a>
 
+            <!-- Pide confirmación antes de abrir la acción para eliminar al usuario. -->
             <a class="btn eliminar"
                href="../usuario/15.eliminarusuario.php?CI=<?= urlencode($fila['CI']) ?>"
                onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">
                Eliminar
             </a>
 
+            <!-- El rol disponible para cambiar depende del rol actual del usuario. -->
             <?php if($fila["rol"]=="usuario"){ ?>
 
                 <a class="btn cambiar" href="../admin/cambiarrolVendedor.php?CI=<?= urlencode($fila['CI']) ?>">
@@ -297,6 +334,7 @@ $result = $conn->query($sql);
 
             <?php } ?>
 
+            <!-- Permite bloquear o activar la cuenta según su estado actual. -->
             <?php if($fila["estado"]=="activo"){ ?>
 
                 <a class="btn cambiar" href="../admin/bloquear.php?CI=<?= urlencode($fila['CI']) ?>">
@@ -321,13 +359,14 @@ $result = $conn->query($sql);
 </table>
 </div>
 
-<?php }else{ ?>
+<?php }else{ // Se muestra este aviso cuando no hay usuarios que listar. ?>
 
 <p class="sin-datos">No hay usuarios registrados.</p>
 
 <?php } ?>
 
-<?php $conn->close(); ?>
+<?php // Libera la conexión con la base de datos al terminar de usarla.
+$conn->close(); ?>
 
 </div>
 

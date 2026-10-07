@@ -1,23 +1,28 @@
 <?php
+// Inicia o recupera la sesión para poder consultar los datos del usuario conectado.
 session_start();
+// Ejecuta la verificación de bloqueo antes de mostrar información del panel.
 include("../includes/verificarbloqueo.php");
+// Comprueba el rol guardado en la sesión; los demás usuarios vuelven al registro.
 if ($_SESSION['rol'] != "administrador") {
   header("Location: ../usuario/09.register.php");
   exit;
 }
- 
+// Define los datos necesarios para conectarse a la base de datos del sistema.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
-
+// Abre la conexión que se utilizará para consultar la información del panel.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
-
+// Si no es posible conectar con la base de datos, detiene la ejecución.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
-$nombre_usuario = $_SESSION['nombre'];
 
+// Obtiene de la sesión el nombre del administrador actualmente conectado.
+$nombre_usuario = $_SESSION['nombre'];
+// Prepara una consulta parametrizada para buscar su imagen de perfil.
 $sqlPerfil = "SELECT imagen_perfil FROM usuario WHERE nombre=?";
 $stmtPerfil = $conn->prepare($sqlPerfil);
 $stmtPerfil->bind_param("s", $nombre_usuario);
@@ -25,24 +30,24 @@ $stmtPerfil->execute();
 $resultadoPerfil = $stmtPerfil->get_result();
 $perfil = $resultadoPerfil->fetch_assoc();
 $stmtPerfil->close();
-
+// Si el usuario no tiene una imagen guardada, utiliza la imagen predeterminada.
 $imagenPerfil = !empty($perfil['imagen_perfil']) 
     ? $perfil['imagen_perfil'] 
     : 'imgperfil.avif';
-
+// Cuenta todos los registros de usuario para mostrar el total en el panel.
 $totalUsuarios = $conn->query(
     "SELECT COUNT(*) AS total FROM usuario"
 )->fetch_assoc()['total'];
-
+// Cuenta todos los productos registrados, sin filtrar por estado.
 $totalProductos = $conn->query(
     "SELECT COUNT(*) AS total FROM productos"
 )->fetch_assoc()['total'];
 
-
+// Cuenta todos los pedidos almacenados en la tabla de pedidos.
 $totalPedidos = $conn->query(
     "SELECT COUNT(*) AS total FROM pedidos"
 )->fetch_assoc()['total'];
-
+// Cuenta las ventas entregadas vinculadas a pedidos del mes y año actuales.
 $totalVentasMes = $conn->query(
     "SELECT COUNT(*) AS total
     FROM ventas v
@@ -51,18 +56,19 @@ $totalVentasMes = $conn->query(
     AND YEAR(p.fecha) = YEAR(CURDATE())
     AND v.estado = 'Entregado'
 ")->fetch_assoc()['total'];
+// Cuenta los usuarios cuyo estado actual está marcado como "Activo".
 $totalUsuariosActivos = $conn->query(
     "SELECT COUNT(*) AS total
     FROM usuario
     WHERE estado = 'Activo'
 ")->fetch_assoc()['total'];
-
+// Cuenta los productos cuyo estado actual está marcado como "Activo".
 $totalProductosActivos = $conn->query(
     "SELECT COUNT(*) AS total
     FROM productos
     WHERE estado = 'Activo'
 ")->fetch_assoc()['total'];
-
+// Cuenta los pedidos cuya fecha corresponde al mes y año actuales.
 $totalPedidosMes = $conn->query(
     "SELECT COUNT(*) AS total
     FROM pedidos
@@ -70,6 +76,8 @@ $totalPedidosMes = $conn->query(
     AND YEAR(fecha) = YEAR(CURDATE())
 ")->fetch_assoc()['total'];
 
+// Suma el costo de las ventas entregadas en el mes actual.
+// COALESCE permite obtener cero si la consulta no encuentra ventas.
 $totalIngresosMes = $conn->query(
     "SELECT COALESCE(SUM(v.costo), 0) AS total
     FROM ventas v
@@ -79,10 +87,11 @@ $totalIngresosMes = $conn->query(
     AND v.estado = 'Entregado'
 ")->fetch_assoc()['total'];
 
-
+// Inicializa las listas que contendrán las etiquetas y los importes del gráfico.
 $ventasGrafico = [];
 $ingresosGrafico = [];
 
+// Consulta las ventas entregadas durante el intervalo semanal seleccionado.
 $sqlGrafico = "SELECT v.id, v.costo
                FROM ventas v
                INNER JOIN pedidos p ON v.pedidos_id = p.id
@@ -92,15 +101,18 @@ $sqlGrafico = "SELECT v.id, v.costo
 
 $resultadoGrafico = $conn->query($sqlGrafico);
 
+// Comprueba que la consulta se haya ejecutado correctamente antes de usarla.
 if (!$resultadoGrafico) {
     die("Error en gráfico: " . $conn->error);
 }
 
+// Recorre los resultados y prepara una etiqueta y un importe por cada venta.
 while ($fila = $resultadoGrafico->fetch_assoc()) {
     $ventasGrafico[] = "Venta " . $fila['id'];
     $ingresosGrafico[] = (float)$fila['costo'];
 }
 
+// Cuenta los roles diferentes asignados a los usuarios.
 $totalRoles = $conn->query(
     "SELECT COUNT(DISTINCT rol) AS total FROM usuario"
 )->fetch_assoc()['total'];
@@ -559,15 +571,15 @@ i   { color: black; }
 </style>
 </head>
 <body>
-<?php include("../includes/header.php"); ?>
-<?php include("../includes/includeadmin.php"); ?>
+<?php /* Carga la cabecera compartida del sitio. */ include("../includes/header.php"); ?>
+<?php /* Incluye el menú de navegación específico para el administrador. */ include("../includes/includeadmin.php"); ?>
 
 <main class="info">
   <section class="bienvenida">
-    <div class="circulo"><img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"></div>
+    <div class="circulo"><img src="../img_perfil/<?php /* Escapa el nombre del archivo antes de incluirlo en la ruta mostrada. */ echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil"></div>
 
     <div class="texto">
-      <h2>¡BIENVENIDA, <?php echo htmlspecialchars($_SESSION['nombre']); ?>! </h2>
+    <h2>¡BIENVENIDA, <?php /* Escapa el nombre de sesión antes de imprimirlo como texto HTML. */ echo htmlspecialchars($_SESSION['nombre']); ?>! </h2>
       <p>Desde aquí puedes administrar y supervisar todas las operaciones del sistema</p>
     </div>
   </section>
@@ -576,31 +588,31 @@ i   { color: black; }
   <section class="cards">
     <article class="card">
       <div class="icono"><i class="fa-solid fa-users"></i></div>
-      <h3><?php echo $totalUsuarios; ?></h3>
+    <h3><?php /* Imprime el total de usuarios obtenido en la consulta del panel. */ echo $totalUsuarios; ?></h3>
       <p>Usuarios Registrados</p>
     </article>
 
     <article class="card">
       <div class="icono"><i class="fa-solid fa-shield"></i></div>
-      <h3><?php echo $totalRoles; ?></h3>
+    <h3><?php /* Imprime la cantidad de roles distintos obtenida desde la base de datos. */ echo $totalRoles; ?></h3>
       <p>Roles Activos</p>
     </article>
 
     <article class="card">
       <div class="icono"><i class="fa-solid fa-box"></i></div>
-      <h3><?php echo $totalProductos; ?></h3>
+    <h3><?php /* Imprime el total de productos registrados. */ echo $totalProductos; ?></h3>
       <p>Productos Registrados</p>
     </article>
 
     <article class="card">
       <div class="icono"><i class="fa-solid fa-cart-shopping"></i></div>
-      <h3><?php echo $totalPedidos; ?></h3>
+    <h3><?php /* Imprime el total de pedidos almacenados. */ echo $totalPedidos; ?></h3>
       <p>Pedidos este mes</p>
     </article>
 
     <article class="card">
       <div class="icono"><i class="fa-solid fa-dollar-sign"></i></div>
-      <h3><?php echo $totalVentasMes; ?></h3>
+    <h3><?php /* Imprime el número de ventas entregadas en el mes actual. */ echo $totalVentasMes; ?></h3>
       <p>Ventas este mes</p>
     </article>
   </section>
@@ -619,6 +631,7 @@ i   { color: black; }
       <h3 class="titulo-caja">PEDIDOS RECIENTES</h3>
       <table class="tabla-pedidos">
         <?php
+                // Solicita los cinco pedidos más recientes, ordenados por identificador.
         $pedidos = $conn->query(
           "SELECT *
             FROM pedidos
@@ -626,16 +639,18 @@ i   { color: black; }
             LIMIT 5
         ");
 
+        // Lee cada pedido y muestra sus campos en una fila de la tabla.
         while($pedido = $pedidos->fetch_assoc()){
         ?>
         <tr>
-          <td><?php echo htmlspecialchars($pedido['nombre']); ?></td>
-          <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
-          <td><?php echo htmlspecialchars($pedido['vendedor']); ?></td>
-          <td><?php echo htmlspecialchars($pedido['id']); ?></td>
-          <td><?php echo htmlspecialchars($pedido['fecha']); ?></td>
+          <td><?php /* Escapa y muestra el nombre asociado al pedido. */ echo htmlspecialchars($pedido['nombre']); ?></td>
+          <td><?php /* Escapa y muestra la fecha del pedido. */ echo htmlspecialchars($pedido['fecha']); ?></td>
+          <td><?php /* Escapa y muestra el vendedor que registró el pedido. */ echo htmlspecialchars($pedido['vendedor']); ?></td>
+          <td><?php /* Escapa y muestra el identificador del pedido. */ echo htmlspecialchars($pedido['id']); ?></td>
+          <td><?php /* Escapa y vuelve a mostrar la fecha en esta columna. */ echo htmlspecialchars($pedido['fecha']); ?></td>
           <td>
             <?php
+                        // Normaliza el texto del estado para comparar sin diferencias de mayúsculas.
             $estado = strtolower(trim($pedido['estado']));
 
             if ($estado === 'aceptado') {
@@ -646,8 +661,8 @@ i   { color: black; }
                 $claseEstado = 'estado-pendiente';
             }
             ?>
-            <span class="estado <?php echo $claseEstado; ?>">
-              <?php echo htmlspecialchars($pedido['estado']); ?>
+                        <span class="estado <?php /* Aplica la clase CSS elegida según el estado del pedido. */ echo $claseEstado; ?>">
+                            <?php /* Escapa el estado para presentarlo como texto y no como HTML. */ echo htmlspecialchars($pedido['estado']); ?>
             </span>
           </td>
         </tr>
@@ -674,22 +689,22 @@ i   { color: black; }
       <ul class="lista-sistema">
         <li>
           <span>Usuarios activos</span>
-          <strong><?php echo $totalUsuariosActivos; ?></strong>
+          <strong><?php /* Imprime la cantidad de usuarios marcados como activos. */ echo $totalUsuariosActivos; ?></strong>
         </li>
 
         <li>
           <span>Productos activos</span>
-          <strong><?php echo $totalProductosActivos; ?></strong>
+          <strong><?php /* Imprime la cantidad de productos marcados como activos. */ echo $totalProductosActivos; ?></strong>
         </li>
 
         <li>
           <span>Pedidos este mes</span>
-          <strong><?php echo $totalPedidosMes; ?></strong>
+          <strong><?php /* Imprime el conteo de pedidos correspondiente al mes actual. */ echo $totalPedidosMes; ?></strong>
         </li>
 
         <li>
           <span>Ventas este mes</span>
-          <strong><?php echo number_format($totalIngresosMes, 2); ?></strong>
+          <strong><?php /* Formatea los ingresos del mes para mostrarlos con dos decimales. */ echo number_format($totalIngresosMes, 2); ?></strong>
         </li>
       </ul>
     </section>
@@ -697,8 +712,9 @@ i   { color: black; }
 </main>
 
 <script>
-const ventas = <?php echo json_encode($ventasGrafico); ?>;
-const ingresos = <?php echo json_encode($ingresosGrafico); ?>;
+// Convierte las listas PHP en arreglos JavaScript que recibirá Chart.js.
+const ventas = <?php /* Convierte las etiquetas preparadas en PHP a formato JSON para JavaScript. */ echo json_encode($ventasGrafico); ?>;
+const ingresos = <?php /* Convierte los importes preparados en PHP a formato JSON para JavaScript. */ echo json_encode($ingresosGrafico); ?>;
 
 const contexto = document.getElementById("graficoResumenVentas");
 

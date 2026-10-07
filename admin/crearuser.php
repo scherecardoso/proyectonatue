@@ -1,31 +1,39 @@
 
 <?php
+// Se inicia la sesión para verificar el acceso del usuario a esta vista.
 session_start();
 
+// Se valida que el usuario autenticado sea administrador; en caso contrario, se lo redirige al login.
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != "administrador") {
     header("Location: ../pagina/login.php");
     exit();
 }
 
+// Configuración de la conexión a la base de datos.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se establece la conexión con MySQL.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
+// Si la conexión falla, se detiene la ejecución y se muestra el error.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
 
+// Se procesa el formulario cuando se envía por POST.
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Se reciben los datos enviados desde el formulario.
     $CI = $_POST['CI'];
     $nombre = $_POST['nombre'];
     $direccion = $_POST['direccion'];
     $celular = $_POST['celular'];
     $rol = $_POST['rol'];
 
+    // Consulta preparada para insertar al nuevo usuario con estado activo y una imagen predeterminada.
     $sql = "INSERT INTO usuario (CI, nombre, direccion, celular, rol, estado, imagen_perfil)
             VALUES (?, ?, ?, ?, ?, 'activo', 'imgperfil.avif')";
 
@@ -33,10 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt) {
 
+        // Se enlazan los valores para evitar inyección SQL.
         $stmt->bind_param("issis", $CI, $nombre, $direccion, $celular, $rol);
 
         if ($stmt->execute()) {
 
+            // Si el registro fue exitoso, se redirige a la vista de usuarios.
             header("Location: ../usuario/12.readusuarios.php");
             exit();
 
@@ -51,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Cierre de la conexión al finalizar el proceso.
 $conn->close();
 ?>
 
@@ -208,10 +219,13 @@ select.error{
 
 <body>
 
+<!-- Contenedor principal de la vista para crear usuarios. -->
 <div class="contenedor">
 
+    <!-- Botón para volver a la vista del administrador. -->
     <a href="../admin/06.admin.php" class="btn-volver">← Volver</a>
 
+    <!-- Título de la sección. -->
     <h2>Crear usuario</h2>
 
     <?php if (isset($error)) { ?>
@@ -220,6 +234,7 @@ select.error{
         </div>
     <?php } ?>
 
+    <!-- Formulario para registrar un nuevo usuario. -->
     <form method="post" id="formusuarios">
 
         <input type="number" name="CI" placeholder="CI" required>
@@ -245,6 +260,7 @@ select.error{
 
 <script>
 
+// Se inicializa la validación del formulario con jQuery Validate.
 $(document).ready(function(){
 
     $("#formusuarios").validate({

@@ -35,7 +35,7 @@ h3 {
   flex-direction: column;
   align-items: center;
   gap: 60px;
-  padding: 80px 0;
+  padding: 200px 0;
 }
 
 .contenido h1 {
@@ -117,7 +117,7 @@ h3 {
 .valores {
   width: 85%;
   margin: 0 auto;
-  padding: 50px;
+  padding: 200px  50px;
   border-radius: 25px;
   background: white;
   text-align: center;

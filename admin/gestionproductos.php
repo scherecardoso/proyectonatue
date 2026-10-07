@@ -1,13 +1,19 @@
 <?php
+// Se inicia la sesión para verificar que el usuario actual tenga acceso autorizado.
+// Si no existe una sesión o el rol no es administrador, se le redirige al login.
 session_start();
 
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'administrador') {
+    // Si el usuario no es administrador, no puede entrar a esta vista.
     header("Location: ../pagina/login.php");
     exit();
 }
 
+// Se crea la conexión a la base de datos local.
+// Los datos corresponden a la BD "shena" del proyecto.
 $conn = new mysqli("localhost", "root", "", "shena");
 
+// Si la conexión falla, se corta la ejecución para evitar errores en la página.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
@@ -19,6 +25,7 @@ if ($conn->connect_error) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Se cargan fuentes tipográficas para lograr el estilo visual del sitio. -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -26,6 +33,10 @@ if ($conn->connect_error) {
 
 <style>
 
+/*
+    Este bloque CSS define el diseño general de la vista de administración.
+    Se usa una estructura tipo dashboard con una barra superior y un contenido principal.
+*/
 
 html {
     overflow-x: hidden;
@@ -39,7 +50,7 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 
- 
+    /* El layout general divide el espacio entre el menú lateral y el contenido. */
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
@@ -51,6 +62,7 @@ body {
 
 @media (max-width: 1199px) {
     body {
+        /* En pantallas medianas y pequeñas, la estructura se vuelve vertical. */
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto auto 1fr;
         grid-template-areas:
@@ -60,16 +72,15 @@ body {
     }
 }
 
-
-
+/* Contenedor principal donde se muestra el listado de productos. */
 .contenido {
     grid-area: contenido;
-    padding: clamp(12px, 3vw, 30px);
-    box-sizing: border-box;
+    padding: clamp(12px, 3vw, 30px);\n    box-sizing: border-box;
     width: 100%;
     min-width: 0;
 }
 
+/* Caja blanca que contiene la tabla y el título de la sección. */
 .contenedor {
     width: 100%;
     max-width: 1200px;
@@ -91,13 +102,16 @@ body {
     font-size: clamp(26px, 4vw, 35px);
 }
 
-
-
+/* Contenedor con desplazamiento horizontal para la tabla en distintos tamaños. */
 .tabla-contenedor {
     width: 100%;
-    overflow-x: auto;              
+    overflow-x: auto;
 }
 
+/*
+    Estilos base de la tabla.
+    Se usa un diseño elegante con bordes redondeados y separación visual entre filas.
+*/
 table {
     width: 100%;
     min-width: 900px;
@@ -137,6 +151,7 @@ tr:hover td {
     background: #fff8fb;
 }
 
+/* Ajusta las imágenes de cada producto dentro de la tabla. */
 .producto-imagen {
     width: 90px;
     height: 90px;
@@ -145,6 +160,7 @@ tr:hover td {
     border: 1px solid #eee;
 }
 
+/* Área con los botones de edición y eliminación. */
 .acciones {
     display: flex;
     justify-content: center;
@@ -152,6 +168,7 @@ tr:hover td {
     flex-wrap: wrap;
 }
 
+/* Estilo general para los botones. */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -185,14 +202,17 @@ tr:hover td {
     transform: translateY(-2px);
 }
 
+/* Mensaje que se muestra cuando la base de datos no tiene resultados. */
 .sin-datos {
     text-align: center;
     margin: 30px 0;
     color: #777;
 }
 
-
-
+/*
+    En pantallas pequeñas se transforma la tabla en tarjetas para mejorar legibilidad.
+    Esto se logra ocultando los encabezados y mostrando etiquetas en cada fila.
+*/
 @media (max-width: 768px) {
 
     .tabla-contenedor {
@@ -210,7 +230,7 @@ tr:hover td {
     }
 
     thead {
-        display: none;             
+        display: none;
     }
 
     tr {
@@ -250,7 +270,6 @@ tr:hover td {
         flex-shrink: 0;
     }
 
-   
     td.celda-acciones,
     tr td.celda-acciones:last-child {
         display: block;
@@ -275,6 +294,7 @@ tr:hover td {
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeadmin.php"); ?>
 
+<!-- Se muestra la vista principal del administrador con el listado de productos. -->
 <main class="contenido">
     <div class="contenedor">
         <h1>Lista de Productos</h1>
@@ -282,9 +302,11 @@ tr:hover td {
         <div class="tabla-contenedor">
 
 <?php
+// Consulta para traer todos los productos ordenados por código.
 $sql = "SELECT * FROM productos ORDER BY codigo ASC";
 $result = $conn->query($sql);
 
+// Si la consulta devolvió filas, se imprimen en una tabla; de lo contrario se muestra un aviso.
 if ($result && $result->num_rows > 0) {
 ?>
 
@@ -304,11 +326,14 @@ if ($result && $result->num_rows > 0) {
 
                 <tbody>
 <?php
+// Recorre cada producto para crear una fila en la tabla.
 while ($fila = $result->fetch_assoc()) {
+    // Se extraen los valores principales de cada producto.
     $codigo = $fila['codigo'];
     $archivoImagen = "../img/" . $fila['imagen'];
     $stock = (int)$fila['stock'];
 
+    // Si el stock es bajo, se resalta en rojo para avisar que queda poco inventario.
     if ($stock <= 5) {
         $colorStock = "#ff0000";
     } else {
@@ -331,17 +356,20 @@ while ($fila = $result->fetch_assoc()) {
 
                     <td data-label="Imagen">
 <?php if (!empty($fila['imagen']) && file_exists($archivoImagen)) { ?>
+                        <!-- Si existe la imagen del producto, se muestra en la tabla. -->
                         <img
                             src="<?php echo htmlspecialchars($archivoImagen); ?>"
                             alt="<?php echo htmlspecialchars($fila['nombre']); ?>"
                             class="producto-imagen">
 <?php } else { ?>
+                        <!-- Si la imagen no existe, se muestra un texto alternativo. -->
                         <span>No imagen</span>
 <?php } ?>
                     </td>
 
                     <td class="celda-acciones">
                         <div class="acciones">
+                            <!-- Enlace para abrir el formulario de edición del producto. -->
                             <a
                                 class="btn editar"
                                 href="../productos/18.formeditarproductos.php?codigo=<?php echo urlencode($codigo); ?>">
@@ -349,6 +377,7 @@ while ($fila = $result->fetch_assoc()) {
                                 Editar
                             </a>
 
+                            <!-- Enlace para eliminar el producto con confirmación antes de borrar. -->
                             <a
                                 class="btn eliminar"
                                 href="../productos/20.eliminarproductos.php?codigo=<?php echo urlencode($codigo); ?>"
@@ -368,6 +397,7 @@ while ($fila = $result->fetch_assoc()) {
 
 <?php
 } else {
+    // Si no hay productos registrados, se muestra un mensaje amigable.
 ?>
 
             <p class="sin-datos">No hay productos registrados.</p>
@@ -384,5 +414,6 @@ while ($fila = $result->fetch_assoc()) {
 </html>
 
 <?php
+// Se cierran los recursos de la conexión a la base de datos.
 $conn->close();
 ?>

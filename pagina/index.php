@@ -1,24 +1,39 @@
 <?php
+// Inicia o recupera la sesión actual para que la página pueda acceder a los datos del usuario.
 session_start();
+
+// Carga la conexión compartida con la base de datos.
 require("../ajax/php/conexion.php");
 
+// Consulta los cuatro productos más vendidos durante el mes y el año actuales.
+// Se obtiene el código, nombre, descripción e imagen para poder mostrar cada producto en la página.
 $sqlDestacados = "SELECT
                     p.codigo,
                     p.nombre,
                     p.descripcion,
                     p.imagen,
+          // Suma las unidades vendidas de cada producto y asigna el resultado a esta columna.
                     SUM(c.cantidad) AS cantidad_vendida
                 FROM carrito c
+        // Relaciona los artículos del carrito con la información de sus productos.
                 INNER JOIN productos p ON c.productos_codigo = p.codigo
+        // Vincula los artículos con las ventas realizadas.
                 INNER JOIN ventas v ON c.pedidos_id = v.pedidos_id
+        // Une cada venta con su pedido para poder filtrar usando la fecha del pedido.
                 INNER JOIN pedidos pe ON v.pedidos_id = pe.id
+        // Incluye únicamente los pedidos del mes y año actuales.
                 WHERE MONTH(pe.fecha) = MONTH(CURDATE())
                 AND YEAR(pe.fecha) = YEAR(CURDATE())
+        // Agrupa los registros por producto para calcular el total vendido de cada uno.
                 GROUP BY p.codigo, p.nombre, p.descripcion, p.imagen
+        // Omite cualquier producto cuyo total vendido sea cero o menor.
                 HAVING cantidad_vendida > 0
+        // Ordena desde el producto con más unidades vendidas hasta el de menos ventas.
                 ORDER BY cantidad_vendida DESC
+        // Limita el resultado a cuatro productos destacados.
                 LIMIT 4";
 
+// Ejecuta la consulta y guarda el resultado para mostrar los productos destacados en la página.
 $destacados = $conn->query($sqlDestacados);
 ?>
 

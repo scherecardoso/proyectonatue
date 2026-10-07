@@ -1,22 +1,32 @@
 <?php
 
+// Datos de acceso a la base de datos local del proyecto.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se establece la conexión con MySQL usando la extensión MySQLi.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
+// Si no se pudo conectar, se detiene la página y se informa el motivo del error.
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
+// Se obtiene desde la URL el CI del usuario que se desea editar.
+// Este valor también se usa más abajo para identificar al usuario en la consulta.
 $CI = $_GET['CI'];
 
+// Se consulta la tabla usuario para buscar el registro cuyo CI coincide con el recibido.
+// Nota: aquí el valor de CI se inserta directamente en la consulta SQL.
 $sql = "SELECT * FROM usuario WHERE CI = $CI";
 $resultado = $conn->query($sql);
 
+// Si la consulta encontró al menos un registro, se leen sus datos.
 if ($resultado->num_rows > 0) {
+    // Se recorren las filas devueltas y se guardan los campos necesarios
+    // en variables que se mostrarán después en el formulario de edición.
     while ($fila = $resultado->fetch_assoc()) {
         $nombre = $fila['nombre'];
         $direccion = $fila['direccion'];
@@ -25,6 +35,7 @@ if ($resultado->num_rows > 0) {
         $estado = $fila['estado'];
     }
 } else {
+    // Se muestra este mensaje si no existe un usuario con el CI solicitado.
     echo "Usuario no encontrado";
 }
 

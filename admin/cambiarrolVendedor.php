@@ -1,19 +1,26 @@
 <?php
 
+// Datos de conexión a la base de datos.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se crea la conexión con la base de datos.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
+// Si la conexión falla, se corta la ejecución del script.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
+
+// Se obtiene la cédula del usuario a modificar desde la URL.
 $CI = $_GET['CI'];
 
+// Consulta para cambiar el rol del usuario a vendedor.
 $sql = "UPDATE usuario SET rol='vendedor' WHERE CI=$CI";
 
+// Si la actualización se ejecuta correctamente, muestra un mensaje de éxito.
 if ($conn->query($sql) === TRUE) {
     echo'
         <!DOCTYPE html>
@@ -50,8 +57,11 @@ if ($conn->query($sql) === TRUE) {
         </html>
         ';
 } else {
+    // Si ocurre un error en la actualización, se muestra el detalle.
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+// Se cierra la conexión con la base de datos.
 $conn->close();
 
 ?>

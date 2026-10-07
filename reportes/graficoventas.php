@@ -1,17 +1,28 @@
 
 <?php
+// Se inicia la sesión para verificar que el usuario haya ingresado correctamente al sistema.
 session_start();
 
+// Se incluye la conexión a la base de datos central del proyecto.
 require("../ajax/php/conexion.php");
 
+// Se valida que el usuario tenga acceso autorizado a esta vista.
+// Solo pueden entrar administradores y vendedores.
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
+    // Si no tiene permisos, se redirige a la pantalla de registro o login.
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
+// Se guarda el rol del usuario para decidir qué menú lateral mostrar más adelante.
 $rol = $_SESSION['rol'];
+
+// Se fija una fecha específica para consultar las ventas del día.
+// En un sistema final esto normalmente vendría desde un filtro por formulario.
 $fechaConsulta = '2026-09-19';
 
+// Consulta principal para traer todas las ventas entregadas de la fecha indicada.
+// Se une la tabla ventas con pedidos para obtener el nombre del cliente y la fecha.
 $sql = "SELECT v.id, v.pedidos_id, v.costo, v.metodo, v.estado, p.nombre, p.fecha
         FROM ventas v
         INNER JOIN pedidos p ON v.pedidos_id = p.id
@@ -19,32 +30,42 @@ $sql = "SELECT v.id, v.pedidos_id, v.costo, v.metodo, v.estado, p.nombre, p.fech
         AND v.estado = 'Entregado'
         ORDER BY v.id DESC";
 
+// Se ejecuta la consulta principal.
 $resultado = $conn->query($sql);
 
+// Si la consulta falla, se corta la ejecución y se muestra el error de MySQL.
 if (!$resultado) {
     die("Error en la consulta: " . $conn->error);
 }
 
+// Consulta para calcular el total de ventas y la cantidad de registros entregados.
 $sqlTotal = "SELECT COALESCE(SUM(v.costo), 0) AS total, COUNT(*) AS cantidad
              FROM ventas v
              INNER JOIN pedidos p ON v.pedidos_id = p.id
              WHERE p.fecha = '$fechaConsulta'
              AND v.estado = 'Entregado'";
 
+// Se ejecuta la consulta del resumen total del día.
 $resultadoTotal = $conn->query($sqlTotal);
 
+// Si ocurre un error al calcular el total, se detiene la página.
 if (!$resultadoTotal) {
     die("Error al calcular el total: " . $conn->error);
 }
 
+// Se obtiene la fila con el resumen del total.
 $datosTotal = $resultadoTotal->fetch_assoc();
 
+// Se guardan los valores para mostrarlos en las tarjetas de resumen.
 $total = $datosTotal['total'];
 $cantidad = $datosTotal['cantidad'];
 
+// Se crean dos arreglos vacíos para preparar los datos del gráfico.
+// Uno guarda los nombres de cada venta y el otro sus ingresos.
 $ventasGrafico = [];
 $ingresosGrafico = [];
 
+// Consulta que trae el ID y el costo de cada venta entregada para el gráfico.
 $sqlGrafico = "SELECT v.id, v.costo
                FROM ventas v
                INNER JOIN pedidos p ON v.pedidos_id = p.id
@@ -52,15 +73,21 @@ $sqlGrafico = "SELECT v.id, v.costo
                AND v.estado = 'Entregado'
                ORDER BY v.id ASC";
 
+// Se ejecuta la consulta del gráfico.
 $resultadoGrafico = $conn->query($sqlGrafico);
 
+// Si la consulta tuvo resultados, se llenan los arreglos para Chart.js.
 if ($resultadoGrafico) {
     while ($fila = $resultadoGrafico->fetch_assoc()) {
+        // Se guarda el texto "Venta X" para mostrar en el eje X del gráfico.
         $ventasGrafico[] = "Venta " . $fila['id'];
+
+        // Se guarda el costo como número decimal para graficar en el eje Y.
         $ingresosGrafico[] = (float) $fila['costo'];
     }
 }
 
+// Se convierte la fecha de formato YYYY-MM-DD a un formato legible para mostrarla en pantalla.
 $fechaMostrar = date("d/m/Y", strtotime($fechaConsulta));
 ?>
 

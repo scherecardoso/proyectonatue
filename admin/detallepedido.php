@@ -1,9 +1,12 @@
 <?php
 
+// Se inicia la sesión para validar el acceso del usuario.
 session_start();
 
+// Se incluye la conexión a la base de datos.
 require("../ajax/php/conexion.php");
 
+// Se valida que el usuario tenga un rol permitido para consultar pedidos.
 if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["vendedor","administrador"])){
      echo '
         <!DOCTYPE html>
@@ -39,6 +42,7 @@ if(!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["vendedor","administ
     exit();
 }
 
+// Se comprueba que el identificador del pedido haya sido enviado en la URL.
 if(!isset($_GET['id']) || empty($_GET['id'])){
      echo '
         <!DOCTYPE html>
@@ -74,10 +78,14 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
     exit();
 }
 
+// Se convierte el ID a entero para consultar el pedido de forma segura.
 $idPedido = intval($_GET['id']);
+
+// Se obtiene la información principal del pedido seleccionado.
 $sqlPedido = "SELECT * FROM pedidos WHERE id = '$idPedido'";
 $resultadoPedido = $conn->query($sqlPedido);
 
+// Si no existe el pedido, se muestra un aviso y se redirige.
 if(!$resultadoPedido || $resultadoPedido->num_rows == 0){
     echo '
         <!DOCTYPE html>
@@ -113,9 +121,10 @@ if(!$resultadoPedido || $resultadoPedido->num_rows == 0){
     exit();
 }
 
+// Se guarda el pedido encontrado para mostrarlo en la vista.
 $pedido = $resultadoPedido->fetch_assoc();
 
-
+// Se consulta la lista de productos relacionados con este pedido.
 $sqlProductos = "SELECT
     p.codigo,
     p.nombre,
@@ -325,8 +334,10 @@ $total = 0;
 
 <body>
 
+<!-- Contenedor principal del detalle del pedido -->
 <div class="detalle">
 
+    <!-- Cabecera con el título y el número del pedido -->
     <div class="cabecera">
 
         <h1>Detalle del pedido</h1>
@@ -337,7 +348,7 @@ $total = 0;
 
     </div>
 
-
+    <!-- Información general del cliente y del pedido -->
     <div class="informacion">
 
         <p>
@@ -367,7 +378,7 @@ $total = 0;
 
     </div>
 
-
+    <!-- Sección donde se listan los productos del pedido -->
     <div class="productos">
 
         <h2>Productos</h2>
@@ -450,7 +461,7 @@ $total = 0;
 
         </table>
 
-
+        <!-- Muestra el total acumulado del pedido -->
         <div class="total">
 
             <span>Total:</span>
@@ -461,7 +472,7 @@ $total = 0;
 
     </div>
 
-
+    <!-- Botón para regresar a la vista de pedidos -->
     <div class="acciones">
 
         <a

@@ -1,8 +1,12 @@
 <?php
+// Inicia o recupera la sesión para consultar el rol y el nombre del usuario.
 session_start();
 
 
+// Esta página está reservada para usuarios con el rol de vendedor.
+// Si la sesión no tiene ese rol, se muestra un aviso y se interrumpe la carga.
 if ($_SESSION['rol'] != "vendedor") {
+  // Se genera una página mínima con SweetAlert para informar que el acceso fue denegado.
     echo '
         <!DOCTYPE html>
         <html lang="es">
@@ -15,6 +19,7 @@ if ($_SESSION['rol'] != "vendedor") {
         <body>
 
         <script>
+          // Al confirmar el aviso se vuelve a la página de vendedor.
         Swal.fire({
             title: "Acceso denegado",
             text: "Verifica tus datos correctamente.",
@@ -42,6 +47,7 @@ if ($_SESSION['rol'] != "vendedor") {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Metadatos, tipografías e iconos usados por el panel. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -50,6 +56,7 @@ if ($_SESSION['rol'] != "vendedor") {
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <title>Vendedor</title>
 <style>
+/* Diseño general del panel: barra superior, menú lateral y área de contenido. */
 body {
   display: grid; 
   font-family: Arial, sans-serif;
@@ -63,13 +70,14 @@ body {
   gap: 5px;
 }
 
-
+/* Efecto visual al pasar el cursor por los enlaces del menú lateral. */
 .menu-lateral a:hover{
   background: #ffdcec;
   color: #ff5ca8;
   padding-left: 22px;
 }
 
+/* Contenedor que agrupa el contenido principal del dashboard. */
 .contenedor{
     grid-area:contenido;
     width:99%;
@@ -79,6 +87,8 @@ body {
     padding:8px;
   
 }
+
+/* Tarjeta de bienvenida y distribución de su texto, icono e imágenes. */
 .bienvenida {
   height: 140px;
   padding: 20px;
@@ -132,6 +142,8 @@ body {
 .imagen-slide:nth-child(2){
     animation-delay: 3s;
 }
+
+/* Accesos directos a tareas frecuentes del vendedor. */
 .acciones {
   padding: 20px;
   border-radius: 20%;
@@ -178,6 +190,8 @@ body {
     color: #fa7ebc;
     font-size: 20px;
 }
+
+/* Distribución de la lista de pedidos y el bloque de acceso rápido. */
 .contenido {
   display: flex;
   gap: 10px;
@@ -253,6 +267,8 @@ body {
     font-weight:bold;
     display:inline-block;
 }
+
+/* Estilos del acceso rápido al catálogo. */
 .acceso-rapido {
   flex: 1;
 }
@@ -284,6 +300,7 @@ body {
   font-weight: bold;
 }
 
+/* Distribución de controles para consultar y actualizar cada pedido. */
 .accionesPedido{
     display:flex;
     align-items:center;
@@ -348,6 +365,7 @@ body {
     background:#666;
 }
 
+/* En pantallas medianas, el dashboard se apila y la tabla puede desplazarse. */
 @media (max-width: 1199px) {
   body {
     grid-template-areas:
@@ -403,6 +421,7 @@ body {
 }
 
 
+/* Ajustes para teléfonos: bienvenida compacta, acciones en columna y texto menor. */
 @media (max-width: 768px) {
 
   .bienvenida {
@@ -454,7 +473,7 @@ body {
     box-sizing: border-box;
   }
 
-   Pedidos */
+  /* Reduce el espacio de la sección de pedidos en pantallas pequeñas. */
   .pedidos {
     padding: 15px;
     border-radius: 20px;
@@ -484,6 +503,7 @@ body {
 }
 
 
+/* Ajustes adicionales para teléfonos estrechos. */
 @media (max-width: 480px) {
   .texto-bienvenida h1 {
     font-size: 18px;
@@ -500,11 +520,14 @@ body {
 </style>
 </head>
 <body>
+<!-- Elementos compartidos del sitio: encabezado y menú del vendedor. -->
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeVendedor.php"); ?>
 
+<!-- Panel principal con saludo, tareas frecuentes y pedidos recientes. -->
 <div class="contenedor">
 <main class="principal">
+  <!-- Saludo personalizado y carrusel de imágenes promocionales. -->
     <section class="bienvenida">
     <section class="contenido-bienvenida">
       <section class="info-bienvenida">
@@ -524,6 +547,7 @@ body {
 </section>
     </section>
  </section>
+  <!-- Enlaces directos a las funciones habituales del vendedor. -->
   <section class="acciones">
     <h1>Acciones Rapidas</h1>
     <section class="contenedor-acciones">
@@ -555,6 +579,7 @@ body {
 </section>
   </section>
 </section>
+<!-- Tabla de los últimos pedidos y enlace al catálogo. -->
 <section class="contenido">
   <section class="pedidos">
     <section class="encabezado-pedidos">
@@ -574,6 +599,7 @@ body {
 
 <?php
 
+// Configuración y apertura de la conexión con la base de datos del proyecto.
 $servidor = "localhost";
 $usuario = "root";
 $contrasena = "";
@@ -582,12 +608,15 @@ $bd = "shena";
 $conn = new mysqli($servidor, $usuario, $contrasena, $bd);
 
 if ($conn->connect_error) {
+  // Detiene la página si no se pudo establecer la conexión.
     die("Error de conexión: " . $conn->connect_error);
 }
 
+// Recupera los cinco pedidos más recientes para mostrarlos en el dashboard.
 $sql = "SELECT * FROM pedidos ORDER BY id DESC LIMIT 5";
 $resultado = $conn->query($sql);
 
+// Si hay pedidos, genera una fila por pedido con sus datos y acciones disponibles.
 if ($resultado && $resultado->num_rows > 0) {
     while ($pedido = $resultado->fetch_assoc()) {
         echo "<tr>";
@@ -597,6 +626,7 @@ if ($resultado && $resultado->num_rows > 0) {
         echo "<td>" . $pedido['estado'] . "</td>";
    echo "<td class='accionesPedido'>";
 
+  // Enlace para abrir el detalle del pedido seleccionado.
 echo "<a 
         href='../pedidos/detallepedido.php?id=" . $pedido['id'] . "' 
         class='btnVerPedido'>
@@ -604,8 +634,10 @@ echo "<a
         
       </a>";
 
+// Solo los pedidos pendientes pueden aceptarse o rechazarse desde esta lista.
 if($pedido['estado'] == 'Pendiente'){
 
+    // Los formularios envían el identificador y el nuevo estado al procesador.
     echo "<form action='../pedidos/Actualizar_estado_pedido.php' method='post' class='formEstado'>";
     echo "<input type='hidden' name='pedido_id' value='" . $pedido['id'] . "'>";
     echo "<input type='hidden' name='estado' value='Aceptado'>";
@@ -623,9 +655,11 @@ if($pedido['estado'] == 'Pendiente'){
 echo "</td>";
     }
 } else {
+      // Mensaje alternativo cuando la consulta no devuelve pedidos.
     echo "<tr><td colspan='5'>No hay pedidos</td></tr>";
 }
 
+    // Cierra la conexión una vez que los pedidos se han procesado.
 $conn->close();
 
 ?>
@@ -643,6 +677,7 @@ $conn->close();
   </section>
 </section>
 </main>
+<!-- Pie compartido del sitio. -->
 <?php include("../includes/footer.php"); ?>
 </body>
 </html>

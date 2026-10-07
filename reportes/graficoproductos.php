@@ -1,15 +1,23 @@
 <?php
+// Inicia o recupera la sesión para identificar al usuario que solicita el reporte.
 session_start();
 
+// Incluye el archivo compartido que establece la conexión con la base de datos.
 require("../ajax/php/conexion.php");
 
+// Comprueba que exista una sesión válida y que el usuario tenga un rol autorizado.
+// Los administradores y vendedores pueden consultar este reporte.
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
+    // Redirige a los usuarios no autorizados y detiene la ejecución de esta página.
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
+// Conserva el rol de la sesión por si se necesita para mostrar contenido de la página.
 $rol = $_SESSION['rol'];
 
+// Consulta los productos y calcula cuántas unidades se vendieron durante el mes actual.
+// El LEFT JOIN permite incluir también los productos que todavía no registran ventas.
 $sql = "SELECT
             p.codigo,
             p.nombre,
@@ -28,19 +36,26 @@ $sql = "SELECT
         ) vm ON p.codigo = vm.productos_codigo
         ORDER BY cantidad_vendida DESC, p.nombre ASC";
 
+// Envía la consulta a la base de datos y guarda el conjunto de resultados.
 $resultado = $conn->query($sql);
 
+// Arreglos con los datos que se utilizarán posteriormente para generar el gráfico.
 $nombres = [];
 $cantidades = [];
 
+// Valores iniciales del resumen; se mantienen así si no se encuentran ventas.
 $productoMasVendido = "Sin ventas";
 $cantidadMayor = 0;
 
+// Solo procesa los resultados cuando la consulta tuvo éxito y devolvió productos.
 if ($resultado && $resultado->num_rows > 0) {
+    // Lee las filas una por una para preparar los datos del gráfico y el resumen.
     while ($fila = $resultado->fetch_assoc()) {
+        // Guarda el nombre y la cantidad vendida de cada producto en sus arreglos.
         $nombres[] = $fila['nombre'];
         $cantidades[] = (int)$fila['cantidad_vendida'];
 
+        // Actualiza el producto más vendido cuando encuentra una cantidad mayor.
         if ((int)$fila['cantidad_vendida'] > $cantidadMayor) {
             $cantidadMayor = (int)$fila['cantidad_vendida'];
             $productoMasVendido = $fila['nombre'];
@@ -48,6 +63,7 @@ if ($resultado && $resultado->num_rows > 0) {
     }
 }
 
+// Prepara el nombre del mes y el año actuales para identificarlos en el reporte.
 $mesActual = date("F Y");
 ?>
 <!DOCTYPE html>

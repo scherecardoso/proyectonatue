@@ -1,19 +1,26 @@
 <?php
 
+// Configuración de la conexión a la base de datos.
 $servidor = "localhost";
 $usuario = "root";
 $contra = "";
 $baseDeDatos = "shena";
 
+// Se crea la conexión con la base de datos.
 $conn = new mysqli($servidor, $usuario, $contra, $baseDeDatos);
 
+// Verifica si ocurrió un error al conectar.
 if ($conn->connect_error) {
     die("Error de conexión");
 }
+
+// Se obtiene la cédula del usuario que se va a modificar.
 $CI = $_GET['CI'];
 
+// Consulta para cambiar el rol del usuario a "usuario".
 $sql = "UPDATE usuario SET rol='usuario' WHERE CI=$CI";
 
+// Si la actualización fue exitosa, muestra un mensaje con SweetAlert.
 if ($conn->query($sql) === TRUE) {
     echo'
         <!DOCTYPE html>
@@ -50,8 +57,11 @@ if ($conn->query($sql) === TRUE) {
         </html>
         ';
 } else {
+    // Si hubo un error en la actualización, se muestra el mensaje de error.
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+// Cierra la conexión con la base de datos.
 $conn->close();
 
 ?>

@@ -1,40 +1,53 @@
 <?php
+// Inicia o recupera la sesión para validar el acceso a esta página.
 session_start();
 
+// Permite el acceso únicamente a los roles reconocidos por el sistema.
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor", "usuario"])) {
+    // Los usuarios sin permiso deben iniciar sesión.
     header("Location: ../pagina/login.php");
     exit();
 }
 
+// Conecta con la base de datos que contiene la información de los usuarios.
 $conexion = new mysqli("localhost", "root", "", "shena");
 
+// Interrumpe la ejecución si la conexión con la base de datos falla.
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
+// Recupera el CI guardado en la sesión para identificar la cuenta activa.
 $ci_usuario = $_SESSION['CI'] ?? '';
 
+// Sin un CI no se puede consultar el perfil, así que se redirige al login.
 if ($ci_usuario === '') {
     header("Location: ../pagina/login.php");
     exit();
 }
 
+// Selecciona solo los campos que se mostrarán en la página del perfil.
 $sql = "SELECT CI, nombre, direccion, celular, rol, imagen_perfil FROM usuario WHERE CI = ?";
 
+// La consulta preparada enlaza el CI como parámetro en lugar de concatenarlo al SQL.
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $ci_usuario);
 $stmt->execute();
 
+// Obtiene la fila del usuario en formato de arreglo asociativo.
 $resultado = $stmt->get_result();
 $datosUsuario = $resultado->fetch_assoc();
 
+// Libera la consulta y cierra la conexión una vez recuperados los datos.
 $stmt->close();
 $conexion->close();
 
+// Informa si no existe un registro para el CI de la sesión.
 if (!$datosUsuario) {
     die("Usuario no encontrado");
 }
 
+// Usa la imagen guardada o la imagen predeterminada si el usuario aún no tiene una.
 $imagenPerfil = !empty($datosUsuario['imagen_perfil'])
     ? $datosUsuario['imagen_perfil']
     : 'imgperfil.avif';
@@ -44,12 +57,14 @@ $imagenPerfil = !empty($datosUsuario['imagen_perfil'])
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Carga las fuentes decorativas y los iconos usados en el diseño del perfil. -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 
+/* Diseño general: cuadrícula para la barra superior, el menú y el contenido. */
 body {
     display: grid;
     margin: 0;
@@ -66,6 +81,7 @@ body {
 }
 
 
+/* Contenedor del contenido del perfil dentro del área principal de la cuadrícula. */
 .perfil-contenedor {
     grid-area: info;
     width: 100%;
@@ -74,6 +90,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Tarjeta que reúne la sección de foto y la información personal. */
 .perfil-principal {
     width: 100%;
     max-width: 950px;
@@ -90,6 +107,7 @@ body {
     position: relative;
 }
 
+/* Botón superpuesto en la tarjeta para ir a la edición de datos personales. */
 .btn-editar-lateral {
     position: absolute;
     top: 25px;
@@ -109,6 +127,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Columna que centra la foto, el nombre y el botón para cambiar la imagen. */
 .perfil-foto-seccion {
     flex: 1 1 250px;
     min-width: 0;
@@ -118,6 +137,7 @@ body {
     justify-content: center;
 }
 
+/* Marco circular que contiene y recorta la foto del usuario. */
 .foto-perfil {
     width: 100%;
     max-width: 230px;
@@ -134,12 +154,14 @@ body {
     position: relative;
 }
 
+/* La imagen llena el marco sin perder sus proporciones. */
 .foto-perfil img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* Presentación del nombre debajo de la fotografía. */
 .nombre-perfil {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
@@ -149,6 +171,7 @@ body {
     word-break: break-word;
 }
 
+/* Botón que abre el formulario para subir una nueva foto. */
 .btn-editar-perfil {
     padding: 10px 20px;
     background: #fb7cb7;
@@ -165,12 +188,14 @@ body {
     transform: scale(1.05);
 }
 
+/* Columna que contiene los datos de la cuenta. */
 .info-card {
     flex: 1 1 340px;
     min-width: 0;
     box-sizing: border-box;
 }
 
+/* Título de la sección de información personal. */
 .info-titulo {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
@@ -178,6 +203,7 @@ body {
     color: #ff5ca8;
 }
 
+/* Cada fila agrupa un icono, una etiqueta y el valor de un dato. */
 .info-dato {
     display: flex;
     align-items: center;
@@ -192,6 +218,7 @@ body {
     background: #fff7fa;
 }
 
+/* Tamaño y alineación común para los iconos de los datos. */
 .info-dato i {
     width: 45px;
     min-width: 45px;
@@ -204,6 +231,7 @@ body {
     min-width: 0;
 }
 
+/* Estilo de la etiqueta que indica qué dato se muestra. */
 .info-dato .etiqueta {
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
@@ -211,6 +239,7 @@ body {
     display: block;
 }
 
+/* Estilo del valor; los textos largos pueden ajustarse a varias líneas. */
 .info-dato .valor {
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
@@ -220,6 +249,7 @@ body {
     word-break: break-word;
 }
 
+/* Capa oscura que cubre la página mientras se cambia la foto. */
 .modal {
     display: none;
     position: fixed;
@@ -231,6 +261,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Panel del cuadro de diálogo con el formulario de carga. */
 .modal-content {
     background-color: #fefefe;
     margin: 15vh auto;
@@ -243,6 +274,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Control para cerrar el cuadro de diálogo. */
 .close {
     color: #aaa;
     float: right;
@@ -262,6 +294,7 @@ body {
     font-family: 'Playfair Display', serif;
 }
 
+/* Presentación del selector de archivos de imagen. */
 .modal-content input[type="file"] {
     width: 100%;
     margin: 15px 0;
@@ -271,6 +304,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Estilo del botón que envía la imagen seleccionada. */
 .modal-content button {
     width: 100%;
     padding: 12px;
@@ -289,6 +323,7 @@ body {
 }
 
 
+/* En pantallas medianas, apila las áreas del menú y el contenido. */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -306,6 +341,7 @@ body {
 }
 
 
+/* En pantallas más estrechas, coloca la foto encima de la información. */
 @media (max-width: 850px) {
     .perfil-principal {
         flex-direction: column;
@@ -333,6 +369,7 @@ body {
 }
 
 
+/* Reduce márgenes, espacios y tamaños para facilitar el uso en móviles. */
 @media (max-width: 600px) {
     .perfil-contenedor {
         padding: 15px 10px 30px;
@@ -388,6 +425,7 @@ body {
 }
 
 
+/* Ajustes adicionales para teléfonos de ancho muy reducido. */
 @media (max-width: 400px) {
     .foto-perfil {
         max-width: 140px;
@@ -405,18 +443,23 @@ body {
 </head>
 <body>
 
+<!-- Incluye la barra superior y el menú de navegación para la cuenta activa. -->
 <?php include("../includes/header.php"); ?>
 <?php include("../includes/includeuser.php"); ?>
 
+<!-- Tarjeta principal del perfil con accesos de edición, foto y datos. -->
 <div class="perfil-contenedor">
     <div class="perfil-principal">
+        <!-- Abre la página de edición de los datos personales. -->
         <button type="button" class="btn-editar-lateral" onclick="window.location.href='../usuario/18.editarperfil.php'">
             <i class="fa-solid fa-pen-to-square"></i>
             Editar
         </button>
 
+        <!-- Muestra la foto actual, el nombre y la acción para cambiar la foto. -->
         <div class="perfil-foto-seccion">
             <div class="foto-perfil">
+                <!-- Escapa el nombre de archivo antes de incluirlo en el atributo HTML. -->
                 <img src="../img_perfil/<?php echo htmlspecialchars($imagenPerfil); ?>" alt="Foto de perfil">
             </div>
 
@@ -430,6 +473,7 @@ body {
             </button>
         </div>
 
+        <!-- Presenta los datos recuperados de la cuenta en filas fáciles de leer. -->
         <div class="info-card">
             <h2 class="info-titulo">Información personal</h2>
 
@@ -476,12 +520,14 @@ body {
     </div>
 </div>
 
+<!-- Cuadro de diálogo oculto inicialmente para seleccionar y subir una foto. -->
 <div id="modalImagen" class="modal">
     <div class="modal-content">
         <span class="close" onclick="cerrarModal()">&times;</span>
 
         <h3>Cambiar foto de perfil</h3>
 
+        <!-- Envía el archivo al proceso que actualiza la imagen del perfil. -->
         <form action="../perfil/actualizarimgperfil.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="imagen" accept="image/*" required>
             <button type="submit">Subir imagen</button>
@@ -490,14 +536,17 @@ body {
 </div>
 
 <script>
+// Muestra el cuadro de diálogo al pulsar el botón para cambiar la foto.
 function abrirModal() {
     document.getElementById("modalImagen").style.display = "block";
 }
 
+// Oculta el cuadro de diálogo al pulsar su control de cierre.
 function cerrarModal() {
     document.getElementById("modalImagen").style.display = "none";
 }
 
+// También permite cerrar el cuadro al pulsar en el fondo fuera del panel.
 window.onclick = function(event) {
     const modal = document.getElementById("modalImagen");
     if (event.target == modal) {

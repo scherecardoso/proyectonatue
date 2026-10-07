@@ -1,21 +1,30 @@
 <?php
+// Inicia o recupera la sesión para validar el acceso antes de mostrar el reporte.
 session_start();
 
+// Solo los usuarios con rol de administrador o vendedor pueden consultar esta página.
 if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], ["administrador", "vendedor"])) {
+    // Si el usuario no tiene un rol autorizado, se redirige al registro y se detiene la ejecución.
     header("Location: ../usuario/09.register.php");
     exit();
 }
 
+// Conserva el rol para decidir más adelante qué menú incluir.
 $rol = $_SESSION['rol'];
 
+// Carga la conexión a la base de datos utilizada por las consultas del reporte.
 require("../ajax/php/conexion.php");
 
+// El periodo se recibe por la URL; por defecto se muestran los ingresos agrupados por día.
 $periodo = $_GET['periodo'] ?? 'dia';
 
+// Estos arreglos mantienen las etiquetas y los importes en posiciones correspondientes.
 $periodos = [];
 $ingresos = [];
+// El título se reutiliza en el encabezado, el resumen y las etiquetas del gráfico.
 $titulo = "";
 
+// Consulta y organiza los ingresos por fecha.
 if ($periodo == "dia") {
     $titulo = "Ingresos por día";
 
@@ -26,6 +35,7 @@ if ($periodo == "dia") {
             GROUP BY p.fecha
             ORDER BY p.fecha ASC";
 
+    // Ejecuta la consulta diaria y transforma las fechas para que sean legibles en pantalla.
     $resultado = $conn->query($sql);
 
     if ($resultado) {
@@ -35,6 +45,7 @@ if ($periodo == "dia") {
         }
     }
 
+// Para la vista semanal se agrupa usando el año y la semana ISO (la semana comienza el lunes).
 } elseif ($periodo == "semana") {
     $titulo = "Ingresos por semana";
 
@@ -54,6 +65,7 @@ if ($periodo == "dia") {
         }
     }
 
+// Para la vista mensual se agrupan los registros por año y número de mes.
 } elseif ($periodo == "mes") {
     $titulo = "Ingresos por mes";
 
@@ -66,6 +78,7 @@ if ($periodo == "dia") {
 
     $resultado = $conn->query($sql);
 
+    // Traduce los números de mes devueltos por SQL a nombres en español.
     $meses = [
         1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril",
         5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto",
@@ -79,6 +92,7 @@ if ($periodo == "dia") {
         }
     }
 
+// Para la vista anual se suman los importes de cada año.
 } elseif ($periodo == "anio") {
     $titulo = "Ingresos por año";
 
@@ -98,16 +112,19 @@ if ($periodo == "dia") {
         }
     }
 
+// Si llega un valor no reconocido por la URL, se vuelve a la vista diaria predeterminada.
 } else {
     $periodo = "dia";
     $titulo = "Ingresos por día";
 }
 
+// Obtiene el total general de ventas con una fecha asociada, sin depender del periodo elegido.
 $sqlTotal = "SELECT SUM(v.costo) AS total
              FROM ventas v
              INNER JOIN pedidos p ON v.pedidos_id = p.id
              WHERE p.fecha IS NOT NULL";
 
+// Si no hay resultados, el total queda en cero para poder mostrarlo sin errores.
 $resultadoTotal = $conn->query($sqlTotal);
 $totalIngresos = 0;
 
@@ -116,6 +133,7 @@ if ($resultadoTotal) {
     $totalIngresos = (float)($filaTotal["total"] ?? 0);
 }
 
+// Calcula por separado la suma de ingresos correspondiente a cada método de pago.
 $sqlMetodos = "SELECT v.metodo, SUM(v.costo) AS total
                FROM ventas v
                INNER JOIN pedidos p ON v.pedidos_id = p.id
@@ -125,6 +143,7 @@ $sqlMetodos = "SELECT v.metodo, SUM(v.costo) AS total
 
 $resultadoMetodos = $conn->query($sqlMetodos);
 
+// Estos arreglos alimentan las etiquetas y los segmentos del gráfico circular.
 $metodos = [];
 $totalesMetodos = [];
 
@@ -134,6 +153,8 @@ if ($resultadoMetodos) {
         $totalesMetodos[] = (float)$fila["total"];
     }
 }
+?>
+// Comienza la estructura HTML de la página del reporte.
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -146,11 +167,13 @@ if ($resultadoMetodos) {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
+/* Estilos del diseño general, las tarjetas de resumen, los gráficos y la tabla. */
 
 html {
     overflow-x: hidden;
 }
 
+/* El grid reserva espacio para la barra superior, el menú y el contenido principal. */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -167,6 +190,7 @@ body {
     gap: 0;
 }
 
+/* En pantallas estrechas, las regiones se apilan en una sola columna. */
 @media (max-width: 1199px) {
     body {
         grid-template-columns: minmax(0, 1fr);
@@ -180,6 +204,7 @@ body {
 
 
 
+/* Área principal: evita desbordamientos y adapta el espacio interior al ancho disponible. */
 .contenido {
     grid-area: contenido;
     box-sizing: border-box;
@@ -188,12 +213,14 @@ body {
     padding: clamp(15px, 3vw, 30px);
 }
 
+/* Centra y limita el ancho del contenido para facilitar su lectura en pantallas grandes. */
 .contenedor {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Encabezado flexible con el título del reporte y su distintivo. */
 .encabezado {
     display: flex;
     flex-wrap: wrap;
@@ -230,6 +257,7 @@ body {
 
 
 
+/* Distribuye las tarjetas de resumen en columnas que se ajustan al espacio disponible. */
 .resumen {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
@@ -237,6 +265,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* Apariencia común de las tarjetas con indicadores principales. */
 .tarjeta {
     min-width: 0;
     box-sizing: border-box;
@@ -275,6 +304,7 @@ body {
 
 
 
+/* Selector de periodo: los enlaces actualizan el parámetro de la URL. */
 .botones {
     display: flex;
     justify-content: center;
@@ -302,6 +332,7 @@ body {
     border-color: #ff90ba;
 }
 
+/* Diferencia visualmente el periodo actualmente seleccionado. */
 .botones a.activo {
     background: #ff5ca8;
     color: white;
@@ -309,6 +340,7 @@ body {
 }
 
 
+/* Apariencia compartida por los paneles de gráficos, resumen y tabla. */
 .grafico-principal,
 .grafico-metodo,
 .informacion,
@@ -344,12 +376,14 @@ body {
     font-size: 14px;
 }
 
+/* La altura fija del contenedor permite que Chart.js ajuste el canvas correctamente. */
 .grafico {
     position: relative;
     height: 390px;
     width: 100%;
 }
 
+/* Coloca el gráfico de métodos y el resumen uno junto al otro cuando hay espacio. */
 .graficos-secundarios {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
@@ -371,6 +405,7 @@ body {
     margin: 7px 0 20px;
 }
 
+/* Contenedor del gráfico circular de métodos de pago. */
 .grafico-dona {
     position: relative;
     height: 330px;
@@ -423,6 +458,7 @@ body {
     font-size: 14px;
 }
 
+/* Permite desplazar la tabla horizontalmente si no cabe en pantallas pequeñas. */
 .tabla-scroll {
     width: 100%;
     overflow-x: auto;
@@ -460,6 +496,7 @@ tr:hover td {
     font-weight: 700;
 }
 
+/* Reduce la altura del gráfico en dispositivos de tamaño mediano. */
 @media (max-width: 900px) {
     .grafico {
         height: 350px;
@@ -468,6 +505,7 @@ tr:hover td {
 
 
 
+/* Ajustes de espaciado y altura específicos para teléfonos. */
 @media (max-width: 600px) {
     .contenido {
         padding: 15px 12px;
@@ -516,9 +554,11 @@ tr:hover td {
 </head>
 <body>
 
+<!-- La cabecera compartida del sitio se muestra sobre el área de navegación. -->
 <?php include("../includes/header.php"); ?>
 
 <?php
+// El menú lateral cambia según el rol autorizado que inició sesión.
 if ($rol == "administrador") {
     include("../includes/includeadmin.php");
 } else {
@@ -526,6 +566,7 @@ if ($rol == "administrador") {
 }
 ?>
 
+<!-- Contenido propio del reporte de ingresos. -->
 <main class="contenido">
 <div class="contenedor">
 
@@ -537,6 +578,7 @@ if ($rol == "administrador") {
     <div class="badge">Reporte de ventas</div>
 </div>
 
+<!-- Indicadores generales: total histórico de ingresos y cantidad de periodos consultados. -->
 <div class="resumen">
 
     <div class="tarjeta">
@@ -553,6 +595,7 @@ if ($rol == "administrador") {
 
 </div>
 
+<!-- Cada enlace solicita nuevamente la página usando el periodo correspondiente. -->
 <div class="botones">
     <a href="?periodo=dia" class="<?php echo ($periodo == 'dia') ? 'activo' : ''; ?>">Día</a>
     <a href="?periodo=semana" class="<?php echo ($periodo == 'semana') ? 'activo' : ''; ?>">Semana</a>
@@ -560,6 +603,7 @@ if ($rol == "administrador") {
     <a href="?periodo=anio" class="<?php echo ($periodo == 'anio') ? 'activo' : ''; ?>">Año</a>
 </div>
 
+<!-- Gráfico de línea que muestra la evolución de ingresos para el periodo elegido. -->
 <div class="grafico-principal">
     <div class="grafico-titulo">
         <h2><?php echo $titulo; ?></h2>
@@ -570,8 +614,10 @@ if ($rol == "administrador") {
     </div>
 </div>
 
+<!-- Sección secundaria con la distribución por método de pago y un resumen estadístico. -->
 <div class="graficos-secundarios">
 
+    <!-- Gráfico circular: cada segmento representa los ingresos de un método de pago. -->
     <div class="grafico-metodo">
         <h2>Ingresos por método de pago</h2>
         <p>Distribución de los ingresos según el método utilizado</p>
@@ -580,6 +626,7 @@ if ($rol == "administrador") {
         </div>
     </div>
 
+    <!-- Calcula el mayor ingreso y su posición solo cuando existen datos para mostrar. -->
     <div class="informacion">
         <h2>Resumen del reporte</h2>
 
@@ -624,6 +671,7 @@ if ($rol == "administrador") {
     </div>
 </div>
 
+<!-- Tabla accesible con el detalle numérico que acompaña al gráfico principal. -->
 <div class="tabla-contenedor">
     <div class="tabla-titulo">
         <h2>Detalle de ingresos</h2>
@@ -640,7 +688,8 @@ if ($rol == "administrador") {
         </thead>
 
         <tbody>
-        <?php if (count($periodos) > 0) { ?>
+        <?php // Muestra una fila por cada periodo; si no hay datos, presenta un mensaje informativo.
+        if (count($periodos) > 0) { ?>
             <?php for ($i = 0; $i < count($periodos); $i++) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($periodos[$i]); ?></td>
@@ -661,12 +710,14 @@ if ($rol == "administrador") {
 </main>
 
 <script>
+// Los datos preparados en PHP se transfieren a JavaScript para construir los gráficos.
 const periodos = <?php echo json_encode($periodos); ?>;
 const ingresos = <?php echo json_encode($ingresos); ?>;
 const metodos = <?php echo json_encode($metodos); ?>;
 const totalesMetodos = <?php echo json_encode($totalesMetodos); ?>;
 const tituloPeriodo = <?php echo json_encode($titulo); ?>;
 
+// Obtiene el canvas del gráfico principal y configura una línea con relleno y marcadores.
 const contextoIngresos = document.getElementById("graficoIngresos");
 
 new Chart(contextoIngresos, {
@@ -695,6 +746,7 @@ new Chart(contextoIngresos, {
             intersect: false,
             mode: "index"
         },
+        // Configura la leyenda y el formato monetario de las ayudas emergentes.
         plugins: {
             legend: {
                 display: true
@@ -725,6 +777,7 @@ new Chart(contextoIngresos, {
     }
 });
 
+// Obtiene el canvas secundario para comparar visualmente los métodos de pago.
 const contextoMetodos = document.getElementById("graficoMetodos");
 
 new Chart(contextoMetodos, {
@@ -743,6 +796,7 @@ new Chart(contextoMetodos, {
         responsive: true,
         maintainAspectRatio: false,
         cutout: "58%",
+        // La leyenda se ubica debajo de la dona y el tooltip muestra el importe en bolivianos.
         plugins: {
             legend: {
                 position: "bottom",
